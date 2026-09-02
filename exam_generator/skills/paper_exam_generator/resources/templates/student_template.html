@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>{{EXAM_TITLE}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #fafaf9;
+      --card-bg: #ffffff;
+      --text-color: #1c1917;
+      --primary-color: #3b82f6;
+      --border-color: #e7e5e4;
+      --toolbar-bg: rgba(255, 255, 255, 0.85);
+      --highlight-bg: #fef08a;
+      --font-size: 14pt;
+    }
+    
+    [data-theme="dark"] {
+      --bg-color: #1c1917;
+      --card-bg: #292524;
+      --text-color: #f5f5f4;
+      --primary-color: #60a5fa;
+      --border-color: #44403c;
+      --toolbar-bg: rgba(41, 37, 36, 0.85);
+      --highlight-bg: #a16207;
+    }
+    
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s;
+      font-size: var(--font-size);
+      line-height: 1.6;
+    }
+    
+    .toolbar {
+      position: sticky;
+      top: 0;
+      background: var(--toolbar-bg);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+    
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .btn {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11pt;
+      transition: all 0.2s;
+    }
+    
+    .btn:hover {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      border-color: var(--primary-color);
+    }
+    
+    .btn-active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      border-color: var(--primary-color);
+    }
+    
+    select, input[type="range"] {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 5px;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .paper-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .student-info-bar {
+      display: flex;
+      justify-content: space-around;
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      border-radius: 8px;
+      background-color: var(--card-bg);
+      margin-bottom: 30px;
+    }
+    
+    .section-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    
+    .read-sentence {
+      cursor: pointer;
+      border-bottom: 1.5px dashed transparent;
+      transition: all 0.2s;
+      display: inline;
+    }
+    
+    .read-sentence:hover {
+      border-bottom-color: var(--primary-color);
+      background-color: rgba(59, 130, 246, 0.1);
+    }
+    
+    .speaking-highlight {
+      background-color: var(--highlight-bg) !important;
+      color: #000000 !important;
+      border-radius: 4px;
+    }
+    
+    .question-card {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .question-card:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .options-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+    
+    .option-item {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .option-item input[type="radio"] {
+      margin: 0;
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+    
+    .speaker-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14pt;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    
+    .speaker-btn:hover {
+      opacity: 1;
+    }
+    
+    @media print {
+      .toolbar, .speaker-btn, input[type="radio"] {
+        display: none !important;
+      }
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: var(--font-size) !important;
+      }
+      .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .section-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-bottom: 30px !important;
+        page-break-inside: auto !important;
+      }
+      .question-card {
+        page-break-inside: avoid !important;
+      }
+      .read-sentence {
+        border-bottom: none !important;
+        cursor: default !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <button class="btn" onclick="toggleTheme()">🌓 切換主題</button>
+      <button class="btn" onclick="window.print()">🖨️ 列印考卷</button>
+    </div>
+    <div class="toolbar-group">
+      <label for="font-size-select">🔤 字型大小：</label>
+      <select id="font-size-select" onchange="changeFontSize(this.value)">
+        <option value="12pt">標準 12pt</option>
+        <option value="14pt" selected>中大 14pt</option>
+        <option value="16pt">大字 16pt</option>
+        <option value="18pt">特大 18pt</option>
+        <option value="20pt">超大 20pt</option>
+      </select>
+    </div>
+    <div class="toolbar-group">
+      <label for="speech-voice">🗣️ 語音角色：</label>
+      <select id="speech-voice" style="max-width: 150px;"></select>
+      
+      <label for="speech-rate">⚡ 語速：</label>
+      <select id="speech-rate">
+        <option value="0.5">0.5x</option>
+        <option value="0.75">0.75x</option>
+        <option value="1.0" selected>1.0x</option>
+        <option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option>
+        <option value="2.0">2.0x</option>
+      </select>
+      <button class="btn" onclick="stopSpeech()">🛑 停止播放</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="paper-header">
+      <h1>{{EXAM_TITLE}}</h1>
+      <p>班級：___________ 座號：______ 姓名：___________ 得分：___________</p>
+    </div>
+
+    <div class="student-info-bar">
+      <span>單元主題：{{TOPIC}}</span>
+      <span>題數：{{QUESTIONS_COUNT}} 題</span>
+      <span>配分：每題 5 分，總分 100 分</span>
+    </div>
+
+    <div class="section-card">
+      <h2>✍️ 線上練習與點讀區 (共 {{QUESTIONS_COUNT}} 題)</h2>
+      <div id="questions-container">
+        {{QUESTIONS_HTML}}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+    
+    // Load local storage theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // Font size change
+    function changeFontSize(size) {
+      document.documentElement.style.setProperty('--font-size', size);
+    }
+    
+    // Load voices
+    let voices = [];
+    function populateVoices() {
+      voices = window.speechSynthesis.getVoices();
+      const voiceSelect = document.getElementById('speech-voice');
+      voiceSelect.innerHTML = '';
+      
+      const filtered = voices.filter(v => v.lang.includes('zh') || v.lang.includes('en'));
+      
+      filtered.forEach(v => {
+        const option = document.createElement('option');
+        option.textContent = `${v.name} (${v.lang})`;
+        option.value = v.name;
+        if (v.lang === 'zh-TW') {
+          option.selected = true;
+        }
+        voiceSelect.appendChild(option);
+      });
+      
+      if(voiceSelect.children.length === 0) {
+        voices.forEach(v => {
+          const option = document.createElement('option');
+          option.textContent = `${v.name} (${v.lang})`;
+          option.value = v.name;
+          voiceSelect.appendChild(option);
+        });
+      }
+    }
+    
+    populateVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = populateVoices;
+    }
+    
+    // Speak sentence
+    function speakSentence(element, event) {
+      if (event) event.stopPropagation();
+      window.speechSynthesis.cancel();
+      
+      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+      
+      const text = element.getAttribute('data-read-text') || element.innerText || element.textContent;
+      let cleanText = text.replace(/[_＿]+/g, ' ').replace(/\\(\\s*\\)/g, ' ');
+      
+      const speed = parseFloat(document.getElementById('speech-rate').value) || 1.0;
+      const voiceName = document.getElementById('speech-voice').value;
+      
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = speed;
+      
+      if (voiceName) {
+        const voice = voices.find(v => v.name === voiceName);
+        if (voice) utterance.voice = voice;
+      }
+      
+      utterance.onstart = () => {
+        element.classList.add('speaking-highlight');
+      };
+      
+      utterance.onend = () => {
+        element.classList.remove('speaking-highlight');
+      };
+      
+      utterance.onerror = () => {
+        element.classList.remove('speaking-highlight');
+      };
+      
+      window.speechSynthesis.speak(utterance);
+    }
+    
+    // Stop Speech
+    function stopSpeech() {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+    }
+    
+    // Speak question queue
+    function speakQuestion(btn, questionId) {
+      window.speechSynthesis.cancel();
+      const qEl = document.getElementById(questionId);
+      if (!qEl) return;
+      
+      const sentences = Array.from(qEl.querySelectorAll('.read-sentence'));
+      let index = 0;
+      
+      function speakNext() {
+        if (index >= sentences.length) return;
+        const el = sentences[index];
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        const text = el.getAttribute('data-read-text') || el.innerText || el.textContent;
+        let cleanText = text.replace(/[_＿]+/g, ' ').replace(/\\(\\s*\\)/g, ' ');
+        
+        const speed = parseFloat(document.getElementById('speech-rate').value) || 1.0;
+        const voiceName = document.getElementById('speech-voice').value;
+        
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.rate = speed;
+        
+        if (voiceName) {
+          const voice = voices.find(v => v.name === voiceName);
+          if (voice) utterance.voice = voice;
+        }
+        
+        document.querySelectorAll('.speaking-highlight').forEach(e => e.classList.remove('speaking-highlight'));
+        
+        utterance.onstart = () => {
+          el.classList.add('speaking-highlight');
+        };
+        
+        utterance.onend = () => {
+          el.classList.remove('speaking-highlight');
+          index++;
+          speakNext();
+        };
+        
+        utterance.onerror = () => {
+          el.classList.remove('speaking-highlight');
+          index++;
+          speakNext();
+        };
+        
+        window.speechSynthesis.speak(utterance);
+      }
+      
+      speakNext();
+    }
+  </script>
+</body>
+</html>

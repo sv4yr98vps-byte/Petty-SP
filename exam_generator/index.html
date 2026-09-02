@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎓 教學媒材與有聲點讀題庫入口網</title>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+  <!-- QRCode.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --border: #e2e8f0;
+      --accent-green: #10b981;
+      --accent-purple: #8b5cf6;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-hover: #3b82f6;
+      --border: #334155;
+    }
+
+    body {
+      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      color: white;
+      padding: 40px 20px 30px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      background-color: var(--card-bg);
+      padding: 15px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    input[type="text"], select {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .exam-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .exam-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      border-color: var(--primary);
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .badge-english { background: #dbeafe; color: #1e40af; }
+    .badge-chinese { background: #fef3c7; color: #92400e; }
+    .badge-science { background: #dcfce7; color: #166534; }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid var(--border);
+      padding-top: 15px;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-row .btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    /* QR Code Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+      animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .qr-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 15px 0;
+      box-shadow: inset 0 0 0 1px #e2e8f0;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎓 教學題庫與有聲點讀教材網</h1>
+    <p>平板掃描 QR Code 即可直接進入學生點讀練習與課堂投影片</p>
+  </header>
+
+  <div class="container">
+    <div class="controls-bar">
+      <div class="filter-group">
+        <input type="text" id="search-input" placeholder="🔍 搜尋課文、科目或單元..." oninput="filterCards()">
+        <select id="subject-filter" onchange="filterCards()">
+          <option value="all">全部科目</option>
+          <option value="english">國中英語</option>
+          <option value="chinese">國語文</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary" onclick="toggleTheme()">🌓 切換深淺主題</button>
+    </div>
+
+    <div class="grid" id="exam-grid">
+      
+      <!-- Card 1: 國中英語南一七上 L1 -->
+      <div class="exam-card" data-subject="english" data-title="國中英語 南一版 七上 第一單元 單字評量">
+        <div>
+          <span class="card-badge badge-english">國中英語 · 七上 L1</span>
+          <h2 class="card-title">國中英語 (南一版七上) 第一單元 單字評量</h2>
+          <div class="card-meta">
+            <div>📝 題數：10 題文意字彙 (16pt 大字)</div>
+            <div>🔊 特色：句子點讀、語速調整、單字發音</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="action-row">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html" class="btn" target="_blank">
+              🎧 學生點讀版
+            </a>
+            <button class="btn btn-secondary" onclick="showQrModal('國中英語七上 L1 學生點讀', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
+              📱 QR Code
+            </button>
+          </div>
+          <div class="action-row">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_教師簡報.html" class="btn btn-secondary" target="_blank">
+              👨‍🏫 教師簡報
+            </a>
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_練習卷.pdf" class="btn btn-secondary" target="_blank">
+              📄 考卷 PDF
+            </a>
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_解析.pdf" class="btn btn-secondary" target="_blank">
+              🔍 解析 PDF
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QR Code Modal -->
+  <div class="modal-backdrop" id="qr-modal" onclick="closeQrModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-title" id="modal-exam-title">掃描開啟教材</div>
+      <div class="modal-subtitle" id="modal-exam-url"></div>
+      <div class="qr-container">
+        <div id="qrcode"></div>
+      </div>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">請使用平板相機或掃描器對準 QR Code 即可載入</p>
+      <button class="btn btn-secondary close-btn" onclick="closeQrModal()">關閉</button>
+    </div>
+  </div>
+
+  <script>
+    let qrcodeObj = null;
+
+    function showQrModal(title, relativeUrl) {
+      const fullUrl = new URL(relativeUrl, window.location.href).href;
+      document.getElementById('modal-exam-title').textContent = title;
+      document.getElementById('modal-exam-url').textContent = fullUrl;
+      
+      const qrEl = document.getElementById('qrcode');
+      qrEl.innerHTML = '';
+      qrcodeObj = new QRCode(qrEl, {
+        text: fullUrl,
+        width: 200,
+        height: 200,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.M
+      });
+
+      document.getElementById('qr-modal').classList.add('active');
+    }
+
+    function closeQrModal() {
+      document.getElementById('qr-modal').classList.remove('active');
+    }
+
+    function filterCards() {
+      const keyword = document.getElementById('search-input').value.toLowerCase();
+      const subject = document.getElementById('subject-filter').value;
+      const cards = document.querySelectorAll('.exam-card');
+
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        const cardSubject = card.getAttribute('data-subject');
+        const matchKeyword = title.includes(keyword);
+        const matchSubject = (subject === 'all' || cardSubject === subject);
+
+        if (matchKeyword && matchSubject) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('portal-theme', newTheme);
+    }
+
+    const savedTheme = localStorage.getItem('portal-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>

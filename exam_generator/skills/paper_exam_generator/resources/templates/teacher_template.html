@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>教師講解簡報——《視力與偏見》</title>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+  <!-- Load KaTeX for standard math equation rendering (requested by skill.md) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #1c1917;
+      --card-bg: #f5f5f4;
+      --border-color: #e7e5e4;
+      --primary-color: #ef4444; /* default red brush */
+      --active-text: #3b82f6;
+      --text-scale: 1.0;
+    }
+    
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #f5f5f4;
+      --card-bg: #1e1e1e;
+      --border-color: #333333;
+    }
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    .deck-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    .presentation-header {
+      height: 60px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-sizing: border-box;
+      background-color: var(--card-bg);
+      z-index: 100;
+    }
+    
+    .header-title {
+      font-size: 16pt;
+      font-weight: bold;
+    }
+    
+    .toolbar-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .btn {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11pt;
+      transition: all 0.2s;
+    }
+    
+    .btn:hover {
+      background-color: #3b82f6;
+      color: #ffffff;
+      border-color: #3b82f6;
+    }
+    
+    .btn-active {
+      background-color: #3b82f6 !important;
+      color: #ffffff !important;
+    }
+    
+    select, input[type="range"] {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 5px;
+      border-radius: 6px;
+    }
+    
+    .slide-body {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+    
+    .slide-content-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 10;
+      pointer-events: none; /* Let clicks pass to canvas when in draw mode */
+    }
+    
+    .interactive-element {
+      pointer-events: auto; /* Re-enable clicks for buttons/options */
+    }
+    
+    .slide-question-text {
+      font-size: calc(24pt * var(--text-scale));
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .slide-options {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .slide-option-item {
+      font-size: calc(18pt * var(--text-scale));
+      padding: 15px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .slide-option-item:hover {
+      background-color: rgba(59, 130, 246, 0.1);
+    }
+    
+    .explanation-box {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: rgba(16, 185, 129, 0.1);
+      border-left: 5px solid #10b981;
+      border-radius: 0 8px 8px 0;
+      display: none;
+      font-size: calc(16pt * var(--text-scale));
+    }
+    
+    .answer-tag {
+      color: #ef4444;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    /* Whiteboard overlay canvas */
+    #whiteboard-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 50;
+      pointer-events: none;
+    }
+    
+    #whiteboard-canvas.draw-active {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+    
+    .color-btn {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px var(--border-color);
+      cursor: pointer;
+      padding: 0;
+    }
+    
+    .color-btn.selected {
+      box-shadow: 0 0 0 2px #3b82f6;
+    }
+    
+    .presentation-footer {
+      height: 60px;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-sizing: border-box;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+    <div class="presentation-header">
+      <div class="header-title">👨‍🏫 《{{TOPIC}}》講解簡報</div>
+      <div class="toolbar-controls">
+        <button class="btn interactive-element" onclick="toggleTheme()">🌓 切換主題</button>
+        <button class="btn interactive-element" onclick="changeScale(0.1)">➕ 放大字型</button>
+        <button class="btn interactive-element" onclick="changeScale(-0.1)">➖ 縮小字型</button>
+        
+        <label class="interactive-element">🗣️ 語速：</label>
+        <select id="speech-rate" class="interactive-element">
+          <option value="0.5">0.5x</option>
+          <option value="0.75">0.75x</option>
+          <option value="1.0" selected>1.0x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2.0">2.0x</option>
+        </select>
+        <select id="speech-voice" class="interactive-element" style="max-width: 120px;"></select>
+        <button class="btn interactive-element" onclick="speakCurrentQuestion()">🔊 朗讀此題</button>
+        <button class="btn interactive-element" onclick="stopSpeech()">🛑 停止</button>
+      </div>
+    </div>
+
+    <div class="slide-body" id="slide-body-container">
+      <canvas id="whiteboard-canvas"></canvas>
+      
+      <div class="slide-content-container">
+        <div class="slide-question-text" id="question-text">題目載入中...</div>
+        <div class="slide-options" id="options-container"></div>
+        
+        <button class="btn interactive-element" id="toggle-answer-btn" onclick="toggleAnswer()" style="width: fit-content; margin-top:20px;">👁️ 顯示/隱藏答案與解析</button>
+        
+        <div class="explanation-box interactive-element" id="explanation-box">
+          <div class="answer-tag" id="correct-answer">正確答案：</div>
+          <div id="explanation-text">詳細解析...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="presentation-footer">
+      <div class="toolbar-controls">
+        <button class="btn interactive-element" id="draw-mode-btn" onclick="toggleDrawMode()">✏️ 手寫畫筆 (已關閉)</button>
+        <div class="interactive-element" style="display:flex; gap:5px; align-items:center;">
+          <button class="color-btn selected" style="background-color: #ef4444;" onclick="setBrushColor('#ef4444', this)"></button>
+          <button class="color-btn" style="background-color: #3b82f6;" onclick="setBrushColor('#3b82f6', this)"></button>
+          <button class="color-btn" style="background-color: #10b981;" onclick="setBrushColor('#10b981', this)"></button>
+          <button class="color-btn" style="background-color: #f59e0b;" onclick="setBrushColor('#f59e0b', this)"></button>
+          <button class="color-btn" style="background-color: #000000;" id="dark-brush-btn" onclick="setBrushColor('#000000', this)"></button>
+        </div>
+        <button class="btn interactive-element" id="eraser-btn" onclick="toggleEraser()">🧽 橡皮擦 (關)</button>
+        <button class="btn interactive-element" onclick="clearWhiteboard()">🗑️ 清空白板</button>
+      </div>
+      
+      <div class="toolbar-controls">
+        <button class="btn interactive-element" onclick="prevSlide()">◀️ 上一題 (←)</button>
+        <span id="slide-indicator">第 1 / 20 題</span>
+        <button class="btn interactive-element" onclick="nextSlide()">下一題 (→) ▶️</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = {{QUESTIONS_JSON}};
+    let currentSlide = 0;
+    let drawEnabled = false;
+    let isEraser = false;
+    let brushColor = '#ef4444';
+    let brushSize = 3;
+    
+    // Stroke memory structure: slideIndex -> list of strokes
+    // stroke: { color, size, isEraser, points: [ {x, y}, ... ] }
+    const strokes = {};
+    let isDrawing = false;
+    let currentStroke = null;
+    
+    const canvas = document.getElementById('whiteboard-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Theme toggle
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('teacher-theme', newTheme);
+      
+      const darkBrush = document.getElementById('dark-brush-btn');
+      if (newTheme === 'dark') {
+        darkBrush.style.backgroundColor = '#ffffff';
+      } else {
+        darkBrush.style.backgroundColor = '#000000';
+      }
+    }
+    
+    // Load local storage theme
+    const savedTheme = localStorage.getItem('teacher-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if(savedTheme === 'dark') {
+      document.getElementById('dark-brush-btn').style.backgroundColor = '#ffffff';
+    }
+    
+    // Scale adjustment
+    let currentScale = 1.0;
+    function changeScale(amount) {
+      currentScale = Math.max(0.7, Math.min(2.0, currentScale + amount));
+      document.documentElement.style.setProperty('--text-scale', currentScale);
+      resizeCanvas(); // Resize canvas to fit new sizes and redraw
+    }
+    
+    // Canvas operations
+    function resizeCanvas() {
+      const container = document.getElementById('slide-body-container');
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      redrawCanvas();
+    }
+    
+    function redrawCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const list = strokes[currentSlide] || [];
+      list.forEach(stroke => {
+        ctx.beginPath();
+        if (stroke.isEraser) {
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.lineWidth = stroke.size * 5;
+        } else {
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.strokeStyle = stroke.color === '#000000' && document.documentElement.getAttribute('data-theme') === 'dark' ? '#ffffff' : stroke.color;
+          ctx.lineWidth = stroke.size;
+        }
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        stroke.points.forEach((pt, i) => {
+          const x = pt.x * canvas.width;
+          const y = pt.y * canvas.height;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      });
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    
+    function toggleDrawMode() {
+      drawEnabled = !drawEnabled;
+      const btn = document.getElementById('draw-mode-btn');
+      if (drawEnabled) {
+        btn.textContent = '✏️ 手寫畫筆 (已開啟)';
+        btn.classList.add('btn-active');
+        canvas.classList.add('draw-active');
+      } else {
+        btn.textContent = '✏️ 手寫畫筆 (已關閉)';
+        btn.classList.remove('btn-active');
+        canvas.classList.remove('draw-active');
+        isDrawing = false;
+      }
+    }
+    
+    function setBrushColor(color, btn) {
+      brushColor = color;
+      isEraser = false;
+      document.getElementById('eraser-btn').classList.remove('btn-active');
+      document.getElementById('eraser-btn').textContent = '🧽 橡皮擦 (關)';
+      
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+    
+    function toggleEraser() {
+      isEraser = !isEraser;
+      const btn = document.getElementById('eraser-btn');
+      if (isEraser) {
+        btn.textContent = '🧽 橡皮擦 (開)';
+        btn.classList.add('btn-active');
+      } else {
+        btn.textContent = '🧽 橡皮擦 (關)';
+        btn.classList.remove('btn-active');
+      }
+    }
+    
+    function clearWhiteboard() {
+      strokes[currentSlide] = [];
+      redrawCanvas();
+    }
+    
+    // Canvas Mouse events
+    function getMousePos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: (clientX - rect.left) / canvas.width,
+        y: (clientY - rect.top) / canvas.height
+      };
+    }
+    
+    function startDrawing(e) {
+      if (!drawEnabled) return;
+      isDrawing = true;
+      const pos = getMousePos(e);
+      currentStroke = {
+        color: brushColor,
+        size: brushSize,
+        isEraser: isEraser,
+        points: [pos]
+      };
+      if (!strokes[currentSlide]) strokes[currentSlide] = [];
+      strokes[currentSlide].push(currentStroke);
+      
+      ctx.beginPath();
+      if (isEraser) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = brushSize * 5;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = brushColor === '#000000' && document.documentElement.getAttribute('data-theme') === 'dark' ? '#ffffff' : brushColor;
+        ctx.lineWidth = brushSize;
+      }
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.moveTo(pos.x * canvas.width, pos.y * canvas.height);
+    }
+    
+    // Touch drawing
+    function draw(e) {
+      if (!isDrawing) return;
+      const pos = getMousePos(e);
+      currentStroke.points.push(pos);
+      
+      ctx.lineTo(pos.x * canvas.width, pos.y * canvas.height);
+      ctx.stroke();
+    }
+    
+    function stopDrawing() {
+      isDrawing = false;
+      currentStroke = null;
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseleave', stopDrawing);
+    
+    canvas.addEventListener('touchstart', (e) => {
+      startDrawing(e);
+    });
+    canvas.addEventListener('touchmove', (e) => {
+      draw(e);
+    });
+    canvas.addEventListener('touchend', stopDrawing);
+    
+    // Slide operations
+    function renderQuestion() {
+      const q = questions[currentSlide];
+      document.getElementById('question-text').innerHTML = `第 ${currentSlide + 1} 題. ${q.question}`;
+      
+      const optsContainer = document.getElementById('options-container');
+      optsContainer.innerHTML = '';
+      
+      q.options.forEach((opt, index) => {
+        const item = document.createElement('div');
+        item.className = 'slide-option-item interactive-element';
+        item.innerHTML = opt;
+        item.onclick = () => alert(`選取了選項: ${opt[1]}`);
+        optsContainer.appendChild(item);
+      });
+      
+      // Update answers and explanations
+      document.getElementById('correct-answer').textContent = `正確答案：${q.answer}`;
+      document.getElementById('explanation-text').innerHTML = `解析：${q.explanation}`;
+      
+      // Hide answers initially
+      document.getElementById('explanation-box').style.display = 'none';
+      document.getElementById('toggle-answer-btn').classList.remove('btn-active');
+      
+      // Update Slide indicators
+      document.getElementById('slide-indicator').textContent = `第 ${currentSlide + 1} / ${questions.length} 題`;
+      
+      // Redraw canvas whiteboard
+      redrawCanvas();
+      
+      // Dynamic KaTeX rendering on slide change
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById('slide-body-container'));
+      }
+    }
+    
+    function toggleAnswer() {
+      const box = document.getElementById('explanation-box');
+      const btn = document.getElementById('toggle-answer-btn');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        btn.classList.add('btn-active');
+      } else {
+        box.style.display = 'none';
+        btn.classList.remove('btn-active');
+      }
+    }
+    
+    function prevSlide() {
+      if (currentSlide > 0) {
+        stopSpeech();
+        currentSlide--;
+        renderQuestion();
+      }
+    }
+    
+    function nextSlide() {
+      if (currentSlide < questions.length - 1) {
+        stopSpeech();
+        currentSlide++;
+        renderQuestion();
+      }
+    }
+    
+    // TTS Implementation
+    let voices = [];
+    function populateVoices() {
+      voices = window.speechSynthesis.getVoices();
+      const voiceSelect = document.getElementById('speech-voice');
+      voiceSelect.innerHTML = '';
+      const filtered = voices.filter(v => v.lang.includes('zh') || v.lang.includes('en'));
+      filtered.forEach(v => {
+        const option = document.createElement('option');
+        option.textContent = `${v.name} (${v.lang})`;
+        option.value = v.name;
+        if (v.lang === 'zh-TW') option.selected = true;
+        voiceSelect.appendChild(option);
+      });
+    }
+    populateVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = populateVoices;
+    }
+    
+    function speakCurrentQuestion() {
+      window.speechSynthesis.cancel();
+      const q = questions[currentSlide];
+      
+      let textToSpeak = `第 ${currentSlide + 1} 題. ${q.question}. `;
+      
+      q.options.forEach(opt => {
+        textToSpeak += `${opt}. `;
+      });
+      
+      const isAnswerShown = document.getElementById('explanation-box').style.display === 'block';
+      if (isAnswerShown) {
+        textToSpeak += `正確答案是 ${q.answer}. 解析為 ${q.explanation}`;
+      }
+      
+      let cleanText = textToSpeak.replace(/[_＿]+/g, ' ').replace(/\(\s*\)/g, ' ');
+      
+      const speed = parseFloat(document.getElementById('speech-rate').value) || 1.0;
+      const voiceName = document.getElementById('speech-voice').value;
+      
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = speed;
+      
+      if (voiceName) {
+        const voice = voices.find(v => v.name === voiceName);
+        if (voice) utterance.voice = voice;
+      }
+      
+      window.speechSynthesis.speak(utterance);
+    }
+    
+    // Stop playing
+    function stopSpeech() {
+      window.speechSynthesis.cancel();
+    }
+    
+    // Keyboard Hotkeys
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+      
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === ' ') {
+        e.preventDefault();
+        toggleAnswer();
+      } else if (e.key === '+') {
+        changeScale(0.1);
+      } else if (e.key === '-') {
+        changeScale(-0.1);
+      } else if (e.key.toLowerCase() === 'w') {
+        toggleDrawMode();
+      }
+    });
+    
+    window.onload = () => {
+      renderQuestion();
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+    };
+  </script>
+</body>
+</html>
