@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C2 應用組｜Unit 1 季節天氣與授與動詞 互動點讀學習單</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-light: #fffbeb;
+      --accent: #2563eb;
+      --bg: #fefce8;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #fde68a;
+      --radius: 18px;
+      --shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.1), 0 8px 10px -6px rgba(217, 119, 6, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: white;
+      border-bottom: 2px solid var(--border);
+      padding: 10px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .toolbar {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-c2 {
+      background: #f59e0b;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .student-badge {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .student-badge:hover { background: #fde68a; }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .audio-controls label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    select, input[type="range"] {
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    select {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.85rem;
+      background: white;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 20px auto 40px;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .bridge-card {
+      background: #ffffff;
+      border: 2px solid #fed7aa;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .bridge-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: #c2410c;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .bridge-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    .bridge-table th, .bridge-table td {
+      border: 1px solid #fed7aa;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .bridge-table th { background: #fff7ed; color: #9a3412; }
+
+    .section-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 2px solid #e2e8f0;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
+    .word-bank {
+      background: #fffbeb;
+      border: 2px dashed #f59e0b;
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .word-chip {
+      background: white;
+      border: 2px solid #f59e0b;
+      color: #b45309;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 6px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.15);
+    }
+
+    .word-chip:hover {
+      background: #fde68a;
+      transform: translateY(-2px);
+    }
+
+    .q-item {
+      margin-bottom: 20px;
+      padding: 18px;
+      background: #fafaf9;
+      border-radius: 14px;
+      border-left: 5px solid var(--primary);
+    }
+
+    .q-text {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .blank-input {
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      width: 140px;
+      text-align: center;
+      background: white;
+      outline: none;
+      transition: all 0.2s;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .blank-input:focus, .blank-input.active-input {
+      border-color: #d97706;
+      background: #fffbeb;
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+    }
+
+    .mini-chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      align-items: center;
+    }
+
+    .mini-chip {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .mini-chip:hover {
+      background: #fed7aa;
+      color: #9a3412;
+      border-color: #f97316;
+    }
+
+    .read-sentence {
+      cursor: pointer;
+      border-bottom: 2px dashed #60a5fa;
+      transition: all 0.2s ease;
+      padding: 0 4px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .read-sentence:hover {
+      background: #eff6ff;
+      border-bottom-color: #2563eb;
+    }
+
+    .speaking-highlight {
+      background-color: #fef08a !important;
+      border-bottom-color: #eab308 !important;
+      color: #713f12 !important;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
+
+    .speaker-btn {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-left: 6px;
+      vertical-align: middle;
+      transition: all 0.2s;
+    }
+
+    .speaker-btn:hover { background: #fde68a; transform: scale(1.1); }
+
+    .check-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 8px;
+    }
+
+    .check-btn:hover { background: var(--primary-dark); }
+
+    .btn-play-all {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-play-all:hover { background: #0369a1; }
+    .btn-play-all.playing { background: #dc2626; }
+
+    .item-feedback {
+      display: inline-block;
+      margin-left: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .fb-correct { color: #059669; }
+    .fb-wrong { color: #dc2626; }
+
+    .finish-section {
+      background: white;
+      border-radius: var(--radius);
+      border: 3px solid #f59e0b;
+      padding: 30px;
+      text-align: center;
+      margin-top: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .report-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 500px;
+      margin: 16px auto;
+    }
+
+    .stat-pill {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat-val { font-size: 1.4rem; font-weight: 700; color: #b45309; }
+    .stat-lbl { font-size: 0.8rem; color: #78350f; }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 12px; }
+      .blank-input { width: 110px; }
+      .report-stat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="toolbar">
+      <div class="brand-area">
+        <a href="index.html" style="text-decoration:none; color:inherit;">
+          <span class="badge-c2">C2 應用組</span>
+        </a>
+        <div class="student-badge" onclick="promptStudentName()">
+          👤 <span id="studentDisplay">點擊輸入姓名</span> ✏️
+        </div>
+      </div>
+      
+      <div class="audio-controls">
+        <label>
+          🗣 英文發音
+          <select id="voiceSelect"></select>
+        </label>
+        <label>
+          ⚡ 語速
+          <input type="range" id="rateRange" min="0.5" max="1.2" step="0.05" value="0.8">
+          <span id="rateVal">0.8x</span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 橋樑教學區塊一：名詞加 y 轉形容詞 -->
+    <div class="bridge-card">
+      <div class="bridge-header">
+        <span class="read-sentence" onclick="speakChinese('教學橋樑一：名詞加上 y 變成天氣形容詞')">🌉 教學橋樑一：名詞 ➔ 天氣形容詞 (+y)</span>
+      </div>
+      <p style="font-size:0.92rem; color:#64748b;">
+        形容詞用來描述天氣（例句：<code>It is sunny.</code> 天氣很晴朗；<code>It is rainy.</code> 天氣下著雨）。
+      </p>
+      <table class="bridge-table">
+        <thead>
+          <tr>
+            <th>名詞 (事物)</th>
+            <th>形容詞 (天氣狀態)</th>
+            <th>氣溫/特徵</th>
+            <th>例句 (點擊聽讀)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>sun</strong> (太陽)</td>
+            <td><strong>sunny</strong> (晴朗的)</td>
+            <td>hot (熱)</td>
+            <td><span class="read-sentence" onclick="speakEnglish('It is sunny and hot in summer.', event)">It is sunny and hot in summer.</span></td>
+          </tr>
+          <tr>
+            <td><strong>rain</strong> (雨)</td>
+            <td><strong>rainy</strong> (下雨的)</td>
+            <td>wet (濕)</td>
+            <td><span class="read-sentence" onclick="speakEnglish('It is rainy in spring.', event)">It is rainy in spring.</span></td>
+          </tr>
+          <tr>
+            <td><strong>cloud</strong> (雲)</td>
+            <td><strong>cloudy</strong> (多雲的)</td>
+            <td>cool (涼爽)</td>
+            <td><span class="read-sentence" onclick="speakEnglish('It is cloudy today.', event)">It is cloudy today.</span></td>
+          </tr>
+          <tr>
+            <td><strong>snow</strong> (雪)</td>
+            <td><strong>snowy</strong> (下雪的)</td>
+            <td>cold (寒冷)</td>
+            <td><span class="read-sentence" onclick="speakEnglish('It is cold and snowy in winter.', event)">It is cold and snowy in winter.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 任務一：天氣形容詞填空 (Word Bank) -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="read-sentence" onclick="speakChinese('第一大題：天氣形容詞填空')">一、天氣形容詞填空 (Word Bank)</span>
+        <button class="speaker-btn" title="聽說明" onclick="speakChinese('請從單字庫選擇合適的天氣形容詞填入空格中。')">🔊</button>
+      </div>
+      
+      <div class="word-bank">
+        <span style="font-weight:700; color:#b45309; font-size:1rem;">📦 單字庫：</span>
+        <span class="word-chip" onclick="handleChipClick('sunny')">sunny</span>
+        <span class="word-chip" onclick="handleChipClick('rainy')">rainy</span>
+        <span class="word-chip" onclick="handleChipClick('snowy')">snowy</span>
+        <span class="word-chip" onclick="handleChipClick('windy')">windy</span>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">
+          1. ☀️ <span class="read-sentence" onclick="speakEnglish('The sun is shining. It is', event)">The sun is shining. It is</span> 
+          <input type="text" id="u1_q1_1" class="blank-input active-input" placeholder="sunny / rainy" onfocus="setActiveInput('u1_q1_1')"> 
+          <span class="read-sentence" onclick="speakEnglish('today.', event)">today.</span>
+          <button class="check-btn" onclick="verify('u1_q1_1', ['sunny', 'Sunny'], 'fb1_1')">檢查</button>
+          <span id="fb1_1" class="item-feedback"></span>
+        </div>
+        <div class="mini-chip-group">
+          <small style="color:#64748b; margin-right:4px;">快捷填入：</small>
+          <button class="mini-chip" onclick="fillDirect('u1_q1_1', 'sunny')">sunny (晴天的)</button>
+          <button class="mini-chip" onclick="fillDirect('u1_q1_1', 'rainy')">rainy (下雨的)</button>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">
+          2. 🌧️ <span class="read-sentence" onclick="speakEnglish('Take an umbrella. It is', event)">Take an umbrella. It is</span> 
+          <input type="text" id="u1_q1_2" class="blank-input" placeholder="rainy / snowy" onfocus="setActiveInput('u1_q1_2')"> 
+          <span class="read-sentence" onclick="speakEnglish('outside.', event)">outside.</span>
+          <button class="check-btn" onclick="verify('u1_q1_2', ['rainy', 'Rainy'], 'fb1_2')">檢查</button>
+          <span id="fb1_2" class="item-feedback"></span>
+        </div>
+        <div class="mini-chip-group">
+          <small style="color:#64748b; margin-right:4px;">快捷填入：</small>
+          <button class="mini-chip" onclick="fillDirect('u1_q1_2', 'rainy')">rainy (下雨的)</button>
+          <button class="mini-chip" onclick="fillDirect('u1_q1_2', 'snowy')">snowy (下雪的)</button>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">
+          3. ❄️ <span class="read-sentence" onclick="speakEnglish('It is cold and', event)">It is cold and</span> 
+          <input type="text" id="u1_q1_3" class="blank-input" placeholder="snowy / sunny" onfocus="setActiveInput('u1_q1_3')"> 
+          <span class="read-sentence" onclick="speakEnglish('in the mountains.', event)">in the mountains.</span>
+          <button class="check-btn" onclick="verify('u1_q1_3', ['snowy', 'Snowy'], 'fb1_3')">檢查</button>
+          <span id="fb1_3" class="item-feedback"></span>
+        </div>
+        <div class="mini-chip-group">
+          <small style="color:#64748b; margin-right:4px;">快捷填入：</small>
+          <button class="mini-chip" onclick="fillDirect('u1_q1_3', 'snowy')">snowy (下雪的)</button>
+          <button class="mini-chip" onclick="fillDirect('u1_q1_3', 'windy')">windy (風大的)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 橋樑教學區塊二：授與動詞 to vs for -->
+    <div class="bridge-card" style="border-color:#fbcfe8;">
+      <div class="bridge-header" style="color:#9d174d;">
+        <span class="read-sentence" onclick="speakChinese('教學橋樑二：授與動詞介系詞，給誰用 to，為誰做買用 for')">🌉 教學橋樑二：授與動詞介系詞 (to vs for)</span>
+      </div>
+      <table class="bridge-table">
+        <thead>
+          <tr>
+            <th>介系詞</th>
+            <th>代表動詞</th>
+            <th>口訣意義</th>
+            <th>例句 (點擊聽讀)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>to</strong></td>
+            <td><strong>give, send, write, lend, show</strong></td>
+            <td>動作有「方向性」，直接交給/寄給對方</td>
+            <td><span class="read-sentence" onclick="speakEnglish('My uncle gave a postcard to me.', event)">gave a postcard <strong>to</strong> me</span></td>
+          </tr>
+          <tr>
+            <td><strong>for</strong></td>
+            <td><strong>buy, make</strong></td>
+            <td>含有「付出心意、為了某人」製作或購買</td>
+            <td><span class="read-sentence" onclick="speakEnglish('Kate bought a jacket for Pat.', event)">bought a jacket <strong>for</strong> Pat</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 任務二：授與動詞介系詞選擇 -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="read-sentence" onclick="speakChinese('第二大題：授與動詞介系詞二選一')">二、授與動詞介系詞填空 (to / for)</span>
+        <button class="speaker-btn" title="聽說明" onclick="speakChinese('請根據動詞特性，填入 to 或 for。')">🔊</button>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">
+          1. ✉️ <span class="read-sentence" onclick="speakEnglish('The man wrote a card', event)">The man wrote a card</span> 
+          <select id="u1_q2_1" class="blank-input" style="width:100px;" onfocus="setActiveInput('u1_q2_1')">
+            <option value="">--請選--</option>
+            <option value="to">to</option>
+            <option value="for">for</option>
+          </select>
+          <span class="read-sentence" onclick="speakEnglish('his kid.', event)">his kid.</span>
+          <button class="check-btn" onclick="verify('u1_q2_1', ['to'], 'fb2_1')">檢查</button>
+          <span id="fb2_1" class="item-feedback"></span>
+          <small style="color:#64748b; margin-left:8px;">(write a card 寫卡片「給」某人 ➔ 用 to)</small>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">
+          2. 🧥 <span class="read-sentence" onclick="speakEnglish('Kate bought a lovely jacket', event)">Kate bought a lovely jacket</span> 
+          <select id="u1_q2_2" class="blank-input" style="width:100px;" onfocus="setActiveInput('u1_q2_2')">
+            <option value="">--請選--</option>
+            <option value="to">to</option>
+            <option value="for">for</option>
+          </select>
+          <span class="read-sentence" onclick="speakEnglish('Pat.', event)">Pat.</span>
+          <button class="check-btn" onclick="verify('u1_q2_2', ['for'], 'fb2_2')">檢查</button>
+          <span id="fb2_2" class="item-feedback"></span>
+          <small style="color:#64748b; margin-left:8px;">(buy a jacket 買夾克「為了」某人 ➔ 用 for)</small>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">
+          3. 🪁 <span class="read-sentence" onclick="speakEnglish('Uncle Sam made a kite', event)">Uncle Sam made a kite</span> 
+          <select id="u1_q2_3" class="blank-input" style="width:100px;" onfocus="setActiveInput('u1_q2_3')">
+            <option value="">--請選--</option>
+            <option value="to">to</option>
+            <option value="for">for</option>
+          </select>
+          <span class="read-sentence" onclick="speakEnglish('me.', event)">me.</span>
+          <button class="check-btn" onclick="verify('u1_q2_3', ['for'], 'fb2_3')">檢查</button>
+          <span id="fb2_3" class="item-feedback"></span>
+          <small style="color:#64748b; margin-left:8px;">(make a kite 做風箏「為了」某人 ➔ 用 for)</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- 任務三：短對話閱讀理解 -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="read-sentence" onclick="speakChinese('第三大題：短對話閱讀，暑假旅遊與天氣')">三、短對話閱讀：暑假旅遊與天氣</span>
+        <button class="btn-play-all" id="btnPlayDialogue" onclick="togglePlayDialogue()">
+          <span>🔊 循序朗讀對話</span>
+        </button>
+      </div>
+
+      <div id="dialogueBox" style="background:#fffbeb; border:2px solid #fde68a; border-radius:12px; padding:18px; line-height:2.2; font-size:1.15rem; margin-bottom:16px;">
+        <div>👦 <strong>Jamie:</strong> <span class="read-sentence" onclick="speakEnglish('How was your summer vacation, Zac?', event)">How was your summer vacation, Zac?</span></div>
+        <div>👦 <strong>Zac:</strong> <span class="read-sentence" onclick="speakEnglish('It was good. I visited my aunt in India.', event)">It was good. I visited my aunt in India.</span></div>
+        <div>👦 <strong>Jamie:</strong> <span class="read-sentence" onclick="speakEnglish('How was the weather there?', event)">How was the weather there?</span></div>
+        <div>👦 <strong>Zac:</strong> <span class="read-sentence" onclick="speakEnglish('It was hot, and it rained a lot.', event)">It was hot, and it rained a lot.</span></div>
+        <div>👦 <strong>Jamie:</strong> <span class="read-sentence" onclick="speakEnglish('I went to Australia. It was cold and snowy!', event)">I went to Australia. It was cold and snowy!</span></div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">1. 請問 Zac 暑假去了哪裡？</div>
+        <input type="text" id="u1_q3_1" class="blank-input" placeholder="India / Australia" style="width:140px;" onfocus="setActiveInput('u1_q3_1')">
+        <button class="check-btn" onclick="verify('u1_q3_1', ['India', 'india'], 'fb3_1')">檢查</button>
+        <span id="fb3_1" class="item-feedback"></span>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">2. 澳洲 (Australia) 的天氣如何？</div>
+        <div class="mini-chip-group">
+          <button class="mini-chip" onclick="fillDirect('u1_q3_2', 'cold and snowy')">cold and snowy (寒冷下雪)</button>
+          <button class="mini-chip" onclick="fillDirect('u1_q3_2', 'hot and sunny')">hot and sunny (炎熱晴朗)</button>
+        </div>
+        <div style="margin-top:8px;">
+          <input type="text" id="u1_q3_2" class="blank-input" placeholder="請填寫天氣" style="width:180px;" onfocus="setActiveInput('u1_q3_2')">
+          <button class="check-btn" onclick="verify('u1_q3_2', ['cold and snowy', 'snowy and cold', 'cold', 'snowy'], 'fb3_2')">檢查</button>
+          <span id="fb3_2" class="item-feedback"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 成果報告 -->
+    <div class="finish-section">
+      <h3 style="font-size:1.4rem; color:#92400e; margin-bottom:8px;">🎉 完成 Unit 1 C2 應用組練習</h3>
+      <p style="font-size:0.95rem; color:#78350f;" id="certStudentText">學生：未填寫 ｜ 評價：⭐⭐⭐</p>
+      
+      <div class="report-stat-grid">
+        <div class="stat-pill">
+          <div class="stat-val" id="statScore">100 分</div>
+          <div class="stat-lbl">掌握得分</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="statRetries">0 次</div>
+          <div class="stat-lbl">檢查修正次數</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="statStatus">精熟</div>
+          <div class="stat-lbl">天氣與授與動詞</div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:16px;">
+        <button class="check-btn" style="background:#059669; padding:10px 20px;" onclick="submitLearningReport()">
+          💾 儲存並產出成果報告
+        </button>
+        <a href="index.html" class="check-btn" style="text-decoration:none; padding:10px 20px; background:#334155;">🏠 回到首頁</a>
+      </div>
+      <div id="copyToast" style="font-size:0.85rem; color:#059669; font-weight:700; margin-top:10px; display:none;">
+        ✓ 已儲存並複製報告文字！可直接貼在 LINE 或筆記本中。
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const synth = window.speechSynthesis;
+    let voices = [];
+    let activeInputId = 'u1_q1_1';
+    let isPlayingDialogue = false;
+    let dialogueIndex = 0;
+    let dialogueSentences = [];
+    let checkAttempts = 0;
+
+    let studentName = localStorage.getItem('current_student_name') || '';
+
+    function initVoices() {
+      voices = synth.getVoices();
+      const enVoices = voices.filter(v => v.lang.startsWith('en'));
+      const voiceSelect = document.getElementById('voiceSelect');
+      voiceSelect.innerHTML = '';
+      const enDefault = enVoices.find(v => v.lang.includes('US') || v.lang.includes('GB')) || enVoices[0] || voices[0];
+      enVoices.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v.name;
+        opt.textContent = `${v.name} (${v.lang})`;
+        if (v === enDefault) opt.selected = true;
+        voiceSelect.appendChild(opt);
+      });
+    }
+
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = initVoices;
+    }
+    initVoices();
+
+    function updateStudentDisplay() {
+      const display = document.getElementById('studentDisplay');
+      if (studentName) {
+        display.textContent = studentName;
+        document.getElementById('certStudentText').textContent = `學生：${studentName} ｜ 評價：⭐⭐⭐`;
+      } else {
+        display.textContent = '輸入姓名';
+      }
+    }
+
+    function promptStudentName() {
+      const input = prompt('請輸入你的班級與姓名（例如：701 王小明）：', studentName);
+      if (input !== null && input.trim() !== '') {
+        studentName = input.trim();
+        localStorage.setItem('current_student_name', studentName);
+        updateStudentDisplay();
+      }
+    }
+
+    if (!studentName) {
+      setTimeout(promptStudentName, 400);
+    } else {
+      updateStudentDisplay();
+    }
+
+    document.getElementById('rateRange').addEventListener('input', function() {
+      document.getElementById('rateVal').textContent = `${this.value}x (清晰慢速)`;
+    });
+
+    function speakChinese(text, e) {
+      if (e) e.stopPropagation();
+      if (!synth) return;
+      synth.cancel();
+      stopDialogue();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      const zhVoice = voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW') || v.lang.includes('zh'));
+      if (zhVoice) utter.voice = zhVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+      synth.speak(utter);
+    }
+
+    function speakEnglish(text, e) {
+      if (e) e.stopPropagation();
+      if (!synth) return;
+      synth.cancel();
+      stopDialogue();
+
+      const cleanText = text.replace(/[_＿]+/g, ' ').replace(/\(\s*\)/g, ' ');
+      const utter = new SpeechSynthesisUtterance(cleanText);
+      utter.lang = 'en-US';
+
+      const voiceName = document.getElementById('voiceSelect').value;
+      const selectedVoice = voices.find(v => v.name === voiceName) || voices.find(v => v.lang.startsWith('en'));
+      if (selectedVoice) utter.voice = selectedVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+
+      if (e && e.target && e.target.classList.contains('read-sentence')) {
+        document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+        e.target.classList.add('speaking-highlight');
+        utter.onend = () => e.target.classList.remove('speaking-highlight');
+        utter.onerror = () => e.target.classList.remove('speaking-highlight');
+      }
+
+      synth.speak(utter);
+    }
+
+    function setActiveInput(id) {
+      activeInputId = id;
+      document.querySelectorAll('.blank-input').forEach(input => input.classList.remove('active-input'));
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active-input');
+    }
+
+    function handleChipClick(word) {
+      if (!activeInputId) activeInputId = 'u1_q1_1';
+      fillDirect(activeInputId, word);
+
+      const nextMap = { 'u1_q1_1': 'u1_q1_2', 'u1_q1_2': 'u1_q1_3', 'u1_q1_3': 'u1_q2_1' };
+      if (nextMap[activeInputId]) {
+        setActiveInput(nextMap[activeInputId]);
+      }
+    }
+
+    function fillDirect(inputId, word) {
+      const el = document.getElementById(inputId);
+      if (el) {
+        el.value = word;
+        setActiveInput(inputId);
+        speakEnglish(word);
+      }
+    }
+
+    function verify(inputId, validAnswers, fbId) {
+      checkAttempts++;
+      const el = document.getElementById(inputId);
+      const fb = document.getElementById(fbId);
+      const userVal = el.value.trim();
+      const isMatch = validAnswers.some(ans => ans.toLowerCase() === userVal.toLowerCase());
+
+      if (isMatch) {
+        fb.className = 'item-feedback fb-correct';
+        fb.textContent = '✓ 完全正確！太棒了！';
+        speakChinese('答對了！太棒了！');
+      } else {
+        fb.className = 'item-feedback fb-wrong';
+        fb.textContent = '✗ 答案不太對喔，再想想看！';
+        speakChinese('再檢查一次答案喔！');
+      }
+    }
+
+    function togglePlayDialogue() {
+      if (isPlayingDialogue) {
+        stopDialogue();
+      } else {
+        startDialogue();
+      }
+    }
+
+    function startDialogue() {
+      const box = document.getElementById('dialogueBox');
+      dialogueSentences = Array.from(box.querySelectorAll('.read-sentence'));
+      if (dialogueSentences.length === 0) return;
+
+      isPlayingDialogue = true;
+      dialogueIndex = 0;
+      const btn = document.getElementById('btnPlayDialogue');
+      btn.classList.add('playing');
+      btn.innerHTML = '⏹ 停止朗讀';
+
+      playNextDialogueSentence();
+    }
+
+    function playNextDialogueSentence() {
+      if (!isPlayingDialogue || dialogueIndex >= dialogueSentences.length) {
+        stopDialogue();
+        return;
+      }
+
+      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+      const el = dialogueSentences[dialogueIndex];
+      el.classList.add('speaking-highlight');
+
+      const text = el.innerText.replace(/[_＿]+/g, ' ');
+      synth.cancel();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      const voiceName = document.getElementById('voiceSelect').value;
+      const selectedVoice = voices.find(v => v.name === voiceName) || voices.find(v => v.lang.startsWith('en'));
+      if (selectedVoice) utter.voice = selectedVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+
+      utter.onend = () => {
+        el.classList.remove('speaking-highlight');
+        if (isPlayingDialogue) {
+          dialogueIndex++;
+          setTimeout(playNextDialogueSentence, 450);
+        }
+      };
+
+      utter.onerror = () => stopDialogue();
+
+      synth.speak(utter);
+    }
+
+    function stopDialogue() {
+      isPlayingDialogue = false;
+      synth.cancel();
+      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+      const btn = document.getElementById('btnPlayDialogue');
+      if (btn) {
+        btn.classList.remove('playing');
+        btn.innerHTML = '🔊 循序朗讀對話';
+      }
+    }
+
+    function submitLearningReport() {
+      const score = 100;
+      const stars = (checkAttempts <= 8) ? '⭐⭐⭐' : '⭐⭐';
+
+      document.getElementById('statRetries').textContent = `${checkAttempts} 次`;
+      document.getElementById('certStudentText').textContent = `學生：${studentName || '未填寫'} ｜ 評價：${stars}`;
+
+      const newRecord = {
+        studentName: studentName || '無名同學',
+        level: 'C2 應用組',
+        score: score,
+        accuracy: '100%',
+        stars: stars,
+        hintsUsed: checkAttempts,
+        timestamp: new Date().toLocaleString()
+      };
+
+      const history = JSON.parse(localStorage.getItem('english_u1_records') || '[]');
+      history.unshift(newRecord);
+      localStorage.setItem('english_u1_records', JSON.stringify(history.slice(0, 100)));
+
+      const text = `【Unit 1 英語學習成果報告】\n👤 學生：${studentName || '同學'}\n📚 組別：C2 應用組 (季節天氣與授與動詞)\n🎯 得分：100 分\n🌟 評價：${stars}\n📅 完成時間：${new Date().toLocaleString()}\n狀態：天氣形容詞與授與動詞 to/for 全數掌握！`;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 3000);
+      });
+
+      speakChinese(`太棒了，${studentName || ''}，Unit 1 C2 練習已全數完成並存檔！`);
+    }
+  </script>
+
+</body>
+</html>

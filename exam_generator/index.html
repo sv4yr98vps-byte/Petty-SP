@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎓 教學媒材與有聲點讀題庫入口網</title>
+  <title>🎓 英語有聲點讀教材與題庫專屬入口網</title>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
   <!-- QRCode.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -13,11 +13,12 @@
       --card-bg: #ffffff;
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --primary: #3b82f6;
-      --primary-hover: #2563eb;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
       --border: #e2e8f0;
-      --accent-green: #10b981;
-      --accent-purple: #8b5cf6;
+      --accent-green: #059669;
+      --accent-orange: #d97706;
+      --accent-purple: #7c3aed;
     }
 
     [data-theme="dark"] {
@@ -41,7 +42,7 @@
     }
 
     header {
-      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
       color: white;
       padding: 40px 20px 30px;
       text-align: center;
@@ -50,19 +51,19 @@
 
     header h1 {
       margin: 0 0 10px;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
       letter-spacing: 1px;
     }
 
     header p {
       margin: 0;
-      font-size: 1.1rem;
-      opacity: 0.9;
+      font-size: 1.15rem;
+      opacity: 0.92;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 30px auto;
       padding: 0 20px;
     }
@@ -76,22 +77,23 @@
       margin-bottom: 25px;
       background-color: var(--card-bg);
       padding: 15px 20px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid var(--border);
       box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
     .filter-group {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     input[type="text"], select {
       background-color: var(--bg-color);
       color: var(--text-main);
       border: 1px solid var(--border);
-      padding: 8px 14px;
+      padding: 9px 15px;
       border-radius: 8px;
       font-family: inherit;
       font-size: 1rem;
@@ -101,7 +103,7 @@
       background-color: var(--primary);
       color: white;
       border: none;
-      padding: 8px 16px;
+      padding: 8px 14px;
       border-radius: 8px;
       font-family: inherit;
       font-size: 0.95rem;
@@ -111,6 +113,7 @@
       gap: 6px;
       transition: all 0.2s;
       text-decoration: none;
+      box-sizing: border-box;
     }
 
     .btn:hover {
@@ -129,18 +132,27 @@
       color: var(--text-main);
     }
 
+    .btn-green { background-color: #059669; }
+    .btn-green:hover { background-color: #047857; }
+
+    .btn-orange { background-color: #d97706; }
+    .btn-orange:hover { background-color: #b45309; }
+
+    .btn-purple { background-color: #7c3aed; }
+    .btn-purple:hover { background-color: #6d28d9; }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 25px;
     }
 
     .exam-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
       transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
@@ -149,42 +161,42 @@
 
     .exam-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
       border-color: var(--primary);
     }
 
     .card-badge {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: bold;
       margin-bottom: 12px;
     }
 
-    .badge-english { background: #dbeafe; color: #1e40af; }
-    .badge-chinese { background: #fef3c7; color: #92400e; }
-    .badge-science { background: #dcfce7; color: #166534; }
+    .badge-quiz { background: #dbeafe; color: #1e40af; }
+    .badge-diff { background: #fef3c7; color: #92400e; }
 
     .card-title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       line-height: 1.4;
     }
 
     .card-meta {
       font-size: 0.95rem;
       color: var(--text-muted);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      line-height: 1.5;
     }
 
     .card-actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       border-top: 1px solid var(--border);
-      padding-top: 15px;
+      padding-top: 16px;
     }
 
     .action-row {
@@ -195,6 +207,14 @@
     .action-row .btn {
       flex: 1;
       justify-content: center;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--text-muted);
+      margin-bottom: 4px;
     }
 
     /* QR Code Modal */
@@ -205,7 +225,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(4px);
       z-index: 999;
       justify-content: center;
@@ -222,9 +242,9 @@
       padding: 30px;
       border-radius: 20px;
       text-align: center;
-      max-width: 380px;
+      max-width: 400px;
       width: 90%;
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
       animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -243,7 +263,7 @@
     }
 
     .modal-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: bold;
       margin-bottom: 6px;
     }
@@ -264,18 +284,18 @@
 <body>
 
   <header>
-    <h1>🎓 教學題庫與有聲點讀教材網</h1>
-    <p>平板掃描 QR Code 即可直接進入學生點讀練習與課堂投影片</p>
+    <h1>🎓 英語教學題庫與有聲點讀教材網</h1>
+    <p>平板相機掃描 QR Code 即可直接開啟點讀練習卷與課堂講解簡報</p>
   </header>
 
   <div class="container">
     <div class="controls-bar">
       <div class="filter-group">
-        <input type="text" id="search-input" placeholder="🔍 搜尋課文、科目或單元..." oninput="filterCards()">
-        <select id="subject-filter" onchange="filterCards()">
-          <option value="all">全部科目</option>
-          <option value="english">國中英語</option>
-          <option value="chinese">國語文</option>
+        <input type="text" id="search-input" placeholder="🔍 搜尋課文、單元或關鍵字..." oninput="filterCards()">
+        <select id="type-filter" onchange="filterCards()">
+          <option value="all">全部教材類型</option>
+          <option value="quiz">四合一練習卷</option>
+          <option value="diff">差異化學習單 (C1/C2/C3)</option>
         </select>
       </div>
       <button class="btn btn-secondary" onclick="toggleTheme()">🌓 切換深淺主題</button>
@@ -283,25 +303,27 @@
 
     <div class="grid" id="exam-grid">
       
-      <!-- Card 1: 國中英語南一七上 L1 -->
-      <div class="exam-card" data-subject="english" data-title="國中英語 南一版 七上 第一單元 單字評量">
+      <!-- Card 1: 國中英語南一七上 L1 單字練習卷 (四合一) -->
+      <div class="exam-card" data-type="quiz" data-title="國中英語 南一版 七上 第一單元 單字評量 練習卷">
         <div>
-          <span class="card-badge badge-english">國中英語 · 七上 L1</span>
-          <h2 class="card-title">國中英語 (南一版七上) 第一單元 單字評量</h2>
+          <span class="card-badge badge-quiz">📝 四合一考卷 · 七上 L1</span>
+          <h2 class="card-title">國中英語 (南一版七上) 第一單元 單字評量練習卷</h2>
           <div class="card-meta">
-            <div>📝 題數：10 題文意字彙 (16pt 大字)</div>
-            <div>🔊 特色：句子點讀、語速調整、單字發音</div>
+            <div>📌 題數：10 題文意字彙 (16pt 大字)</div>
+            <div>🔊 特色：句子分段點讀、底線停頓、發音朗讀</div>
           </div>
         </div>
         <div class="card-actions">
+          <div class="section-label">📱 學生線上點讀與平板 QR Code</div>
           <div class="action-row">
             <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html" class="btn" target="_blank">
               🎧 學生點讀版
             </a>
-            <button class="btn btn-secondary" onclick="showQrModal('國中英語七上 L1 學生點讀', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
+            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 單字 學生點讀', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
               📱 QR Code
             </button>
           </div>
+          <div class="section-label">👨‍🏫 教師教學與文件下載</div>
           <div class="action-row">
             <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_教師簡報.html" class="btn btn-secondary" target="_blank">
               👨‍🏫 教師簡報
@@ -312,6 +334,96 @@
             <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_解析.pdf" class="btn btn-secondary" target="_blank">
               🔍 解析 PDF
             </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Starter 英語差異化學習單 C1/C2/C3 -->
+      <div class="exam-card" data-type="diff" data-title="國中英語 Starter 英語問候與代名詞 差異化學習單 C1 C2 C3">
+        <div>
+          <span class="card-badge badge-diff">🎯 差異化學習單 · Starter</span>
+          <h2 class="card-title">國中英語 Starter 問候、自我介紹與代名詞</h2>
+          <div class="card-meta">
+            <div>📌 分層：C1 基礎 / C2 應用 / C3 表達</div>
+            <div>🔊 特色：三層分流點讀、有聲互動、A4 排版</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎧 三層次學生點讀版 (平板掃描)</div>
+          <div class="action-row">
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C1 基礎', 'Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C2 應用', 'Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C3 表達', 'Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="action-row">
+            <a href="Starter_英語差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Unit 1 天氣與授與動詞 差異化學習單 -->
+      <div class="exam-card" data-type="diff" data-title="國中英語 Unit 1 天氣與授與動詞 差異化學習單 C1 C2 C3">
+        <div>
+          <span class="card-badge badge-diff">🎯 差異化學習單 · Unit 1</span>
+          <h2 class="card-title">國中英語 Unit 1 天氣表達與授與動詞</h2>
+          <div class="card-meta">
+            <div>📌 分層：C1 基礎 / C2 應用 / C3 表達</div>
+            <div>🔊 特色：情境對話點讀、文法鷹架、完整講解</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎧 三層次學生點讀版 (平板掃描)</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C1 基礎', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C2 應用', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C3 表達', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: L1 現在完成式與飲食文化 差異化學習單 -->
+      <div class="exam-card" data-type="diff" data-title="國中英語 L1 現在完成式與飲食文化 差異化學習單 C1 C2 C3">
+        <div>
+          <span class="card-badge badge-diff">🎯 差異化學習單 · 國三 L1</span>
+          <h2 class="card-title">國中英語 L1 現在完成式與多元飲食文化</h2>
+          <div class="card-meta">
+            <div>📌 分層：C1 基礎 / C2 應用 / C3 表達</div>
+            <div>🔊 特色：閱讀篇章點讀、現在完成式句型剖析</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎧 三層次學生點讀版 (平板掃描)</div>
+          <div class="action-row">
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C1 基礎', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C2 應用', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C3 表達', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="action-row">
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
           </div>
         </div>
       </div>
@@ -344,8 +456,8 @@
       qrEl.innerHTML = '';
       qrcodeObj = new QRCode(qrEl, {
         text: fullUrl,
-        width: 200,
-        height: 200,
+        width: 220,
+        height: 220,
         colorDark : "#000000",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.M
@@ -360,16 +472,16 @@
 
     function filterCards() {
       const keyword = document.getElementById('search-input').value.toLowerCase();
-      const subject = document.getElementById('subject-filter').value;
+      const type = document.getElementById('type-filter').value;
       const cards = document.querySelectorAll('.exam-card');
 
       cards.forEach(card => {
         const title = card.getAttribute('data-title').toLowerCase();
-        const cardSubject = card.getAttribute('data-subject');
+        const cardType = card.getAttribute('data-type');
         const matchKeyword = title.includes(keyword);
-        const matchSubject = (subject === 'all' || cardSubject === subject);
+        const matchType = (type === 'all' || cardType === type);
 
-        if (matchKeyword && matchSubject) {
+        if (matchKeyword && matchType) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
