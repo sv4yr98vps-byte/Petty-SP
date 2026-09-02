@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C3 表達組｜Starter 英語互動點讀學習單</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #dc2626;
+      --primary-dark: #b91c1c;
+      --primary-light: #fef2f2;
+      --accent: #4f46e5;
+      --bg: #fff5f5;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #fecaca;
+      --radius: 18px;
+      --shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.1), 0 8px 10px -6px rgba(220, 38, 38, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: white;
+      border-bottom: 2px solid var(--border);
+      padding: 10px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .toolbar {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-c3 {
+      background: #ef4444;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .student-badge {
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .student-badge:hover { background: #fecaca; }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .audio-controls label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    select, input[type="range"] {
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    select {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.85rem;
+      background: white;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 20px auto 40px;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 2px solid #e2e8f0;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px;
+      font-size: 0.95rem;
+    }
+
+    .matrix-table th, .matrix-table td {
+      border: 1px solid #fecaca;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .matrix-table th {
+      background: #fef2f2;
+      color: #991b1b;
+      font-weight: 700;
+    }
+
+    .blank-input {
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      width: 100%;
+      max-width: 130px;
+      text-align: center;
+      background: white;
+      outline: none;
+      transition: all 0.2s;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .blank-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+      background: #fff5f5;
+    }
+
+    .q-item {
+      margin-bottom: 20px;
+      padding: 18px;
+      background: #fafaf9;
+      border-radius: 14px;
+      border-left: 5px solid var(--primary);
+    }
+
+    .q-text {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .read-sentence {
+      cursor: pointer;
+      border-bottom: 2px dashed #60a5fa;
+      transition: all 0.2s ease;
+      padding: 2px 4px;
+      border-radius: 4px;
+      display: inline;
+    }
+
+    .read-sentence:hover {
+      background: #eff6ff;
+      border-bottom-color: #2563eb;
+    }
+
+    .speaking-highlight {
+      background-color: #fef08a !important;
+      border-bottom: 2px solid #eab308 !important;
+      color: #713f12 !important;
+      font-weight: 700 !important;
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+      animation: pulseHighlight 1.5s infinite;
+    }
+
+    @keyframes pulseHighlight {
+      0%, 100% { background-color: #fef08a; }
+      50% { background-color: #fde047; }
+    }
+
+    .speaker-btn {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-left: 6px;
+      vertical-align: middle;
+      transition: all 0.2s;
+    }
+
+    .speaker-btn:hover {
+      background: #fca5a5;
+      transform: scale(1.1);
+    }
+
+    .btn-play-all {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+    }
+
+    .btn-play-all:hover { background: #b91c1c; }
+    .btn-play-all.playing { background: #475569; }
+
+    .check-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 8px;
+    }
+
+    .check-btn:hover { background: var(--primary-dark); }
+
+    .item-feedback {
+      display: inline-block;
+      margin-left: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .fb-correct { color: #059669; }
+    .fb-wrong { color: #dc2626; }
+
+    .passage-box {
+      background: #fdf4ff;
+      border: 2px solid #f0abfc;
+      border-radius: 14px;
+      padding: 24px;
+      font-size: 1.2rem;
+      line-height: 2.2;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(240, 171, 252, 0.15);
+    }
+
+    .reading-tracker-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fae8ff;
+      border-radius: 8px;
+      padding: 6px 12px;
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+      color: #86198f;
+      font-weight: 600;
+    }
+
+    .finish-section {
+      background: white;
+      border-radius: var(--radius);
+      border: 3px solid #dc2626;
+      padding: 30px;
+      text-align: center;
+      margin-top: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .report-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 500px;
+      margin: 16px auto;
+    }
+
+    .stat-pill {
+      background: #fff5f5;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat-val { font-size: 1.4rem; font-weight: 700; color: #dc2626; }
+    .stat-lbl { font-size: 0.8rem; color: #7f1d1d; }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 12px; }
+      .matrix-table { font-size: 0.85rem; }
+      .blank-input { max-width: 90px; padding: 4px 6px; }
+      .report-stat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="toolbar">
+      <div class="brand-area">
+        <a href="index.html" style="text-decoration:none; color:inherit;">
+          <span class="badge-c3">C3 表達組</span>
+        </a>
+        <div class="student-badge" onclick="promptStudentName()">
+          👤 <span id="studentDisplay">點擊輸入姓名</span> ✏️
+        </div>
+      </div>
+      
+      <div class="audio-controls">
+        <label>
+          🗣 英文發音
+          <select id="voiceSelect"></select>
+        </label>
+        <label>
+          ⚡ 語速
+          <input type="range" id="rateRange" min="0.5" max="1.2" step="0.05" value="0.8">
+          <span id="rateVal">0.8x</span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 任務一：代名詞三格矩陣快填 -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="read-sentence" onclick="speakChinese('第一大題：代名詞三格矩陣快填')">一、代名詞三格矩陣 (Subject / Possessive / Object)</span>
+        <button class="speaker-btn" title="聽大題說明" onclick="speakChinese('請依據語法規則，完成代名詞三格表格填空。')">🔊</button>
+      </div>
+      <p style="font-size:0.92rem; color:#64748b; margin-bottom:10px;">
+        請依據語法規則，完成代名詞三格表格填空（點擊文字可聽發音）：
+      </p>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>中文</th>
+            <th>主格 (動作發出者)</th>
+            <th>所有格 (...的)</th>
+            <th>受格 (接受者/for後面)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>我</td>
+            <td><strong class="read-sentence" onclick="speakEnglish('I', event)">I</strong></td>
+            <td><strong class="read-sentence" onclick="speakEnglish('my', event)">my</strong></td>
+            <td>
+              <input type="text" id="m1" class="blank-input" placeholder="受格">
+            </td>
+          </tr>
+          <tr>
+            <td>你</td>
+            <td><strong class="read-sentence" onclick="speakEnglish('you', event)">you</strong></td>
+            <td>
+              <input type="text" id="m2" class="blank-input" placeholder="所有格">
+            </td>
+            <td><strong class="read-sentence" onclick="speakEnglish('you', event)">you</strong></td>
+          </tr>
+          <tr>
+            <td>他 (男)</td>
+            <td><strong class="read-sentence" onclick="speakEnglish('he', event)">he</strong></td>
+            <td><strong class="read-sentence" onclick="speakEnglish('his', event)">his</strong></td>
+            <td>
+              <input type="text" id="m3" class="blank-input" placeholder="受格">
+            </td>
+          </tr>
+          <tr>
+            <td>她 (女)</td>
+            <td><strong class="read-sentence" onclick="speakEnglish('she', event)">she</strong></td>
+            <td>
+              <input type="text" id="m4" class="blank-input" placeholder="所有格">
+            </td>
+            <td><strong class="read-sentence" onclick="speakEnglish('her', event)">her</strong></td>
+          </tr>
+          <tr>
+            <td>他們</td>
+            <td><strong class="read-sentence" onclick="speakEnglish('they', event)">they</strong></td>
+            <td><strong class="read-sentence" onclick="speakEnglish('their', event)">their</strong></td>
+            <td>
+              <input type="text" id="m5" class="blank-input" placeholder="受格">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align:right;">
+        <button class="check-btn" onclick="verifyMatrix()">一鍵檢查表格</button>
+        <span id="fb_matrix" class="item-feedback"></span>
+      </div>
+    </div>
+
+    <!-- 任務二：情境短文閱讀理解（含即時逐句高亮追蹤） -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="read-sentence" onclick="speakChinese('第二大題：情境短文閱讀，國中開學第一天')">二、情境短文閱讀：國中開學第一天</span>
+        <button class="btn-play-all" id="btnPlayPassage" onclick="togglePlayPassage()">
+          <span>🔊 循序朗讀短文（有追蹤提示）</span>
+        </button>
+      </div>
+
+      <div class="reading-tracker-bar">
+        <span>📖 點擊任一句子單獨聽讀，或點上方按鈕自動循序朗讀（黃色光條跟隨）</span>
+        <span id="readingStatusText"></span>
+      </div>
+
+      <div class="passage-box" id="c3PassageBox">
+        <p>
+          <span class="read-sentence" onclick="speakEnglish('Today is the first day of junior high school.', event)">Today is the first day of junior high school.</span> 
+          <span class="read-sentence" onclick="speakEnglish('Mike meets Tina in the classroom.', event)">Mike meets Tina in the classroom.</span>
+        </p>
+        <p>
+          <strong>Mike:</strong> 
+          <span class="read-sentence" onclick="speakEnglish('Hello! I am Mike. What is your name?', event)">"Hello! I am Mike. What is your name?"</span>
+        </p>
+        <p>
+          <strong>Tina:</strong> 
+          <span class="read-sentence" onclick="speakEnglish('Hi, Mike! My name is Tina. This is my dog. Its name is Rocky.', event)">"Hi, Mike! My name is Tina. This is my dog. Its name is Rocky."</span>
+        </p>
+        <p>
+          <strong>Mike:</strong> 
+          <span class="read-sentence" onclick="speakEnglish('Nice to meet you, Tina! Rocky is so cute. The ball is for it.', event)">"Nice to meet you, Tina! Rocky is so cute. The ball is for it."</span>
+        </p>
+        <p>
+          <strong>Tina:</strong> 
+          <span class="read-sentence" onclick="speakEnglish('Thank you! What is your phone number?', event)">"Thank you! What's your phone number?"</span>
+        </p>
+        <p>
+          <strong>Mike:</strong> 
+          <span class="read-sentence" onclick="speakEnglish('It is 2345-0189. Let us practice English together!', event)">"It is 2345-0189. Let's practice English together!"</span>
+        </p>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">1. Who is Rocky? (Rocky 是誰？)</div>
+        <input type="text" id="c3_q1" class="blank-input" style="width:300px; text-align:left;" placeholder="It is Tina's dog.">
+        <button class="check-btn" onclick="verifyKeyword('c3_q1', ['dog', 'tina\'s dog', 'tina dog'], 'fb_c3_1')">檢查</button>
+        <span id="fb_c3_1" class="item-feedback"></span>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">2. What is the ball for? (這顆球是給誰的？)</div>
+        <input type="text" id="c3_q2" class="blank-input" style="width:300px; text-align:left;" placeholder="The ball is for Rocky / it.">
+        <button class="check-btn" onclick="verifyKeyword('c3_q2', ['rocky', 'dog', 'it'], 'fb_c3_2')">檢查</button>
+        <span id="fb_c3_2" class="item-feedback"></span>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">3. What is Mike's phone number? (Mike 的電話號碼是？)</div>
+        <input type="text" id="c3_q3" class="blank-input" style="width:200px;" placeholder="2345-0189">
+        <button class="check-btn" onclick="verifyKeyword('c3_q3', ['2345-0189', '23450189'], 'fb_c3_3')">檢查</button>
+        <span id="fb_c3_3" class="item-feedback"></span>
+      </div>
+    </div>
+
+    <!-- 任務三：專業書寫校對員 -->
+    <div class="section-card">
+      <div class="section-title">
+        <span class="read-sentence" onclick="speakChinese('第三大題：專業英文書寫校對員')">三、專業英文書寫校對員 (Proofreading)</span>
+        <button class="speaker-btn" title="聽大題說明" onclick="speakChinese('請找出句子中的所有格式錯誤，包含大小寫與標點符號，並寫出正確句子。')">🔊</button>
+      </div>
+      <p style="font-size:0.92rem; color:#64748b; margin-bottom:14px;">
+        請修正句子中的所有格式錯誤（句首大寫、人名大寫、代名詞 I 大寫、標點符號與空格）：
+      </p>
+
+      <div class="q-item">
+        <div class="q-text">1. <code>how are you? i am fine.thank you</code> (有 4 處錯誤)</div>
+        <input type="text" id="proof_1" class="blank-input" style="width:100%; max-width:520px; text-align:left;" placeholder="輸入修正後的完整句子">
+        <div style="margin-top:8px;">
+          <button class="check-btn" onclick="verifyProof('proof_1', 'How are you? I am fine. Thank you.', 'fb_p1')">校對檢查</button>
+          <span id="fb_p1" class="item-feedback"></span>
+        </div>
+        <small style="color:#64748b;">標準答案：<code>How are you? I am fine. Thank you.</code></small>
+      </div>
+
+      <div class="q-item">
+        <div class="q-text">2. <code>what is your name hi,my name is Rose.</code> (有 3 處錯誤)</div>
+        <input type="text" id="proof_2" class="blank-input" style="width:100%; max-width:520px; text-align:left;" placeholder="輸入修正後的完整句子">
+        <div style="margin-top:8px;">
+          <button class="check-btn" onclick="verifyProof('proof_2', 'What is your name? Hi, my name is Rose.', 'fb_p2')">校對檢查</button>
+          <span id="fb_p2" class="item-feedback"></span>
+        </div>
+        <small style="color:#64748b;">標準答案：<code>What is your name? Hi, my name is Rose.</code></small>
+      </div>
+    </div>
+
+    <!-- 成果結算區 -->
+    <div class="finish-section">
+      <h3 style="font-size:1.4rem; color:#dc2626; margin-bottom:8px;">🎉 完成 C3 表達組挑戰</h3>
+      <p style="font-size:0.95rem; color:#7f1d1d;" id="certStudentText">學生：未填寫 ｜ 評價：⭐⭐⭐</p>
+      
+      <div class="report-stat-grid">
+        <div class="stat-pill">
+          <div class="stat-val" id="statScore">100 分</div>
+          <div class="stat-lbl">進階掌握度</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="statAttempts">0 次</div>
+          <div class="stat-lbl">校對重試次數</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="statStatus">優秀</div>
+          <div class="stat-lbl">自主表達表現</div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:16px;">
+        <button class="check-btn" style="background:#059669; padding:10px 20px;" onclick="submitLearningReport()">
+          💾 儲存並產出成果報告
+        </button>
+        <a href="index.html" class="check-btn" style="text-decoration:none; padding:10px 20px; background:#334155;">🏠 回到首頁</a>
+      </div>
+      <div id="copyToast" style="font-size:0.85rem; color:#059669; font-weight:700; margin-top:10px; display:none;">
+        ✓ 已儲存並複製報告文字！可直接貼在 LINE 或筆記本中。
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const synth = window.speechSynthesis;
+    let voices = [];
+    let isPlayingPassage = false;
+    let passageSentenceIndex = 0;
+    let passageSentences = [];
+    let checkAttempts = 0;
+
+    let studentName = localStorage.getItem('current_student_name') || '';
+
+    function initVoices() {
+      voices = synth.getVoices();
+      const enVoices = voices.filter(v => v.lang.startsWith('en'));
+      const voiceSelect = document.getElementById('voiceSelect');
+      voiceSelect.innerHTML = '';
+      const enDefault = enVoices.find(v => v.lang.includes('US') || v.lang.includes('GB')) || enVoices[0] || voices[0];
+      enVoices.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v.name;
+        opt.textContent = `${v.name} (${v.lang})`;
+        if (v === enDefault) opt.selected = true;
+        voiceSelect.appendChild(opt);
+      });
+    }
+
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = initVoices;
+    }
+    initVoices();
+
+    function updateStudentDisplay() {
+      const display = document.getElementById('studentDisplay');
+      if (studentName) {
+        display.textContent = studentName;
+        document.getElementById('certStudentText').textContent = `學生：${studentName} ｜ 評價：⭐⭐⭐`;
+      } else {
+        display.textContent = '輸入姓名';
+      }
+    }
+
+    function promptStudentName() {
+      const input = prompt('請輸入你的班級與姓名（例如：701 王小明）：', studentName);
+      if (input !== null && input.trim() !== '') {
+        studentName = input.trim();
+        localStorage.setItem('current_student_name', studentName);
+        updateStudentDisplay();
+      }
+    }
+
+    if (!studentName) {
+      setTimeout(promptStudentName, 400);
+    } else {
+      updateStudentDisplay();
+    }
+
+    document.getElementById('rateRange').addEventListener('input', function() {
+      document.getElementById('rateVal').textContent = `${this.value}x (清晰慢速)`;
+    });
+
+    function speakChinese(text, e) {
+      if (e) e.stopPropagation();
+      if (!synth) return;
+      synth.cancel();
+      stopPassage();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      const zhVoice = voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW') || v.lang.includes('zh'));
+      if (zhVoice) utter.voice = zhVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+      synth.speak(utter);
+    }
+
+    function speakEnglish(text, e) {
+      if (e) e.stopPropagation();
+      if (!synth) return;
+      synth.cancel();
+      stopPassage();
+
+      const cleanText = text.replace(/[_＿]+/g, ' ').replace(/\(\s*\)/g, ' ');
+      const utter = new SpeechSynthesisUtterance(cleanText);
+      utter.lang = 'en-US';
+
+      const voiceName = document.getElementById('voiceSelect').value;
+      const selectedVoice = voices.find(v => v.name === voiceName) || voices.find(v => v.lang.startsWith('en'));
+      if (selectedVoice) utter.voice = selectedVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+
+      if (e && e.target && e.target.classList.contains('read-sentence')) {
+        document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+        e.target.classList.add('speaking-highlight');
+        utter.onend = () => e.target.classList.remove('speaking-highlight');
+        utter.onerror = () => e.target.classList.remove('speaking-highlight');
+      }
+
+      synth.speak(utter);
+    }
+
+    function togglePlayPassage() {
+      if (isPlayingPassage) {
+        stopPassage();
+      } else {
+        startPassage();
+      }
+    }
+
+    function startPassage() {
+      const box = document.getElementById('c3PassageBox');
+      passageSentences = Array.from(box.querySelectorAll('.read-sentence'));
+      if (passageSentences.length === 0) return;
+
+      isPlayingPassage = true;
+      passageSentenceIndex = 0;
+      const btn = document.getElementById('btnPlayPassage');
+      btn.classList.add('playing');
+      btn.innerHTML = '⏹ 停止朗讀';
+      document.getElementById('readingStatusText').textContent = '🔊 正在循序朗讀中...';
+
+      playNextPassageSentence();
+    }
+
+    function playNextPassageSentence() {
+      if (!isPlayingPassage || passageSentenceIndex >= passageSentences.length) {
+        stopPassage();
+        return;
+      }
+
+      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+      const el = passageSentences[passageSentenceIndex];
+      el.classList.add('speaking-highlight');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      const text = el.innerText.replace(/[_＿]+/g, ' ');
+      synth.cancel();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      const voiceName = document.getElementById('voiceSelect').value;
+      const selectedVoice = voices.find(v => v.name === voiceName) || voices.find(v => v.lang.startsWith('en'));
+      if (selectedVoice) utter.voice = selectedVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+
+      utter.onend = () => {
+        el.classList.remove('speaking-highlight');
+        if (isPlayingPassage) {
+          passageSentenceIndex++;
+          setTimeout(playNextPassageSentence, 450);
+        }
+      };
+
+      utter.onerror = () => stopPassage();
+
+      synth.speak(utter);
+    }
+
+    function stopPassage() {
+      isPlayingPassage = false;
+      synth.cancel();
+      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+      const btn = document.getElementById('btnPlayPassage');
+      if (btn) {
+        btn.classList.remove('playing');
+        btn.innerHTML = '🔊 循序朗讀短文（有追蹤提示）';
+      }
+      const st = document.getElementById('readingStatusText');
+      if (st) st.textContent = '';
+    }
+
+    function verifyMatrix() {
+      checkAttempts++;
+      const answers = {
+        m1: ['me'],
+        m2: ['your'],
+        m3: ['him'],
+        m4: ['her'],
+        m5: ['them']
+      };
+      let allCorrect = true;
+      for (const id in answers) {
+        const val = document.getElementById(id).value.trim().toLowerCase();
+        if (!answers[id].includes(val)) {
+          allCorrect = false;
+        }
+      }
+      const fb = document.getElementById('fb_matrix');
+      if (allCorrect) {
+        fb.className = 'item-feedback fb-correct';
+        fb.textContent = '✓ 太強了！代名詞三格完全正確！';
+        speakChinese('太強了！代名詞三格完全正確！');
+      } else {
+        fb.className = 'item-feedback fb-wrong';
+        fb.textContent = '✗ 表格中有部分錯誤，請再檢查一次喔！(答案：me, your, him, her, them)';
+        speakChinese('表格中有部分錯誤，請再檢查一次喔！');
+      }
+    }
+
+    function verifyKeyword(inputId, validKeywords, fbId) {
+      checkAttempts++;
+      const val = document.getElementById(inputId).value.trim().toLowerCase();
+      const fb = document.getElementById(fbId);
+      const matched = validKeywords.some(k => val.includes(k));
+      if (matched) {
+        fb.className = 'item-feedback fb-correct';
+        fb.textContent = '✓ 答對了！掌握了關鍵資訊！';
+        speakChinese('答對了！掌握了關鍵資訊！');
+      } else {
+        fb.className = 'item-feedback fb-wrong';
+        fb.textContent = '✗ 未能符合關鍵字，請再看一次短文喔！';
+        speakChinese('再檢查一下短文內容喔！');
+      }
+    }
+
+    function verifyProof(inputId, expectedSentence, fbId) {
+      checkAttempts++;
+      const val = document.getElementById(inputId).value.trim();
+      const fb = document.getElementById(fbId);
+      if (val.replace(/\s+/g, ' ') === expectedSentence.replace(/\s+/g, ' ')) {
+        fb.className = 'item-feedback fb-correct';
+        fb.textContent = '✓ 完美格式！標點與大小寫完全正確！';
+        speakChinese('太棒了！英文書寫格式完全正確！');
+      } else {
+        fb.className = 'item-feedback fb-wrong';
+        fb.textContent = '✗ 標點、空格或大小寫仍有錯誤，請對照標準答案喔！';
+        speakChinese('標點或大小寫還有錯誤，再檢查一次喔！');
+      }
+    }
+
+    function submitLearningReport() {
+      const score = 100;
+      const stars = (checkAttempts <= 10) ? '⭐⭐⭐' : '⭐⭐';
+
+      document.getElementById('statAttempts').textContent = `${checkAttempts} 次`;
+      document.getElementById('certStudentText').textContent = `學生：${studentName || '未填寫'} ｜ 評價：${stars}`;
+
+      const newRecord = {
+        studentName: studentName || '無名同學',
+        level: 'C3 表達組',
+        score: score,
+        accuracy: '100%',
+        stars: stars,
+        hintsUsed: checkAttempts,
+        timestamp: new Date().toLocaleString()
+      };
+
+      const history = JSON.parse(localStorage.getItem('english_class_records') || '[]');
+      history.unshift(newRecord);
+      localStorage.setItem('english_class_records', JSON.stringify(history.slice(0, 100)));
+
+      const text = `【英語學習成果報告】\n👤 學生：${studentName || '同學'}\n📚 組別：C3 表達組\n🎯 得分：100 分\n🌟 評價：${stars}\n📅 完成時間：${new Date().toLocaleString()}\n狀態：三格代名詞、短文閱讀與書寫校對全數精熟！🏆`;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 3000);
+      });
+
+      speakChinese(`恭喜${studentName || ''}，C3 進階任務全數完成並存檔！`);
+    }
+  </script>
+
+</body>
+</html>
