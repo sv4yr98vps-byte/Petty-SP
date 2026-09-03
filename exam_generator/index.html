@@ -44,7 +44,7 @@
     header {
       background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
       color: white;
-      padding: 40px 20px 30px;
+      padding: 38px 20px 28px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
@@ -64,7 +64,7 @@
 
     .container {
       max-width: 1200px;
-      margin: 30px auto;
+      margin: 25px auto 50px;
       padding: 0 20px;
     }
 
@@ -217,7 +217,7 @@
       margin-bottom: 4px;
     }
 
-    /* QR Code Modal */
+    /* Modal styles */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -248,6 +248,14 @@
       animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    .dashboard-modal-box {
+      max-width: 960px;
+      width: 95%;
+      max-height: 88vh;
+      overflow-y: auto;
+      text-align: left;
+    }
+
     @keyframes popIn {
       from { transform: scale(0.9); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
@@ -275,17 +283,51 @@
       word-break: break-all;
     }
 
-    .close-btn {
+    /* Table Styles */
+    .table-responsive {
+      overflow-x: auto;
       margin-top: 15px;
-      width: 100%;
     }
+
+    table.styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    table.styled-table th {
+      background-color: #f1f5f9;
+      color: #334155;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    table.styled-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.styled-table tr:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    .score-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+    .score-badge-high { background: #dcfce7; color: #15803d; }
+    .score-badge-mid { background: #fef3c7; color: #b45309; }
+    .score-badge-low { background: #fee2e2; color: #b91c1c; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>🎓 英語教學題庫與有聲點讀教材網</h1>
-    <p>平板相機掃描 QR Code 即可直接開啟點讀練習卷與課堂講解簡報</p>
+    <p>大題庫動態抽題 · 真實鑑別計分 · Google 雲端試算表自動同步</p>
   </header>
 
   <div class="container">
@@ -298,7 +340,12 @@
           <option value="diff">差異化學習單 (C1/C2/C3)</option>
         </select>
       </div>
-      <button class="btn btn-secondary" onclick="toggleTheme()">🌓 切換深淺主題</button>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-green" onclick="openDashboardModal()" style="font-weight:bold;">
+          📊 全班學習歷程管理儀表板 (雲端即時同步)
+        </button>
+        <button class="btn btn-secondary" onclick="toggleTheme()">🌓 切換主題</button>
+      </div>
     </div>
 
     <div class="grid" id="exam-grid">
@@ -309,17 +356,18 @@
           <span class="card-badge badge-quiz">📝 四合一考卷 · 七上 L1</span>
           <h2 class="card-title">國中英語 (南一版七上) 第一單元 單字評量練習卷</h2>
           <div class="card-meta">
-            <div>📌 題數：10 題文意字彙 (16pt 大字)</div>
-            <div>🔊 特色：句子分段點讀、底線停頓、發音朗讀</div>
+            <div>📌 題數：<strong>45 題核心大題庫</strong> (每次隨機抽選 10 題)</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題深度解析、個人成長曲線</div>
+            <div>☁️ 雲端：自動同步至老師 Google 試算表</div>
           </div>
         </div>
         <div class="card-actions">
-          <div class="section-label">📱 學生線上點讀與平板 QR Code</div>
+          <div class="section-label">📱 學生線上隨機抽測與平板 QR Code</div>
           <div class="action-row">
             <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html" class="btn" target="_blank">
-              🎧 學生點讀版
+              🎧 進入線上抽測
             </a>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 單字 學生點讀', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
+            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 單字 學生抽測', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
               📱 QR Code
             </button>
           </div>
@@ -345,7 +393,7 @@
           <h2 class="card-title">國中英語 Starter 問候、自我介紹與代名詞</h2>
           <div class="card-meta">
             <div>📌 分層：C1 基礎 / C2 應用 / C3 表達</div>
-            <div>🔊 特色：三層分流點讀、有聲互動、A4 排版</div>
+            <div>🔊 特色：三層分流點讀、Google 語音小姐、A4 排版</div>
           </div>
         </div>
         <div class="card-actions">
@@ -439,12 +487,61 @@
       <div class="qr-container">
         <div id="qrcode"></div>
       </div>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">請使用平板相機或掃描器對準 QR Code 即可載入</p>
-      <button class="btn btn-secondary close-btn" onclick="closeQrModal()">關閉</button>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">請使用平板相機對準 QR Code 即可載入</p>
+      <button class="btn btn-secondary close-btn" onclick="closeQrModal()" style="margin-top:15px; width:100%;">關閉</button>
+    </div>
+  </div>
+
+  <!-- ==================== 📊 全班學習歷程儀表板 (雲端即時同步) ==================== -->
+  <div class="modal-backdrop" id="dashboard-modal" onclick="closeDashboardModal(event)">
+    <div class="modal-box dashboard-modal-box" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+        <h2 style="margin:0; font-size:1.45rem;">📊 全班學習歷程管理儀表板</h2>
+        <div style="display:flex; gap:8px;">
+          <a href="https://docs.google.com/spreadsheets/d/1byRCJ-axoqN3_EuE4TN62_Ank98Z6UsW39SQjV06rn0/edit" target="_blank" class="btn btn-green">
+            📑 開啟 Google 雲端試算表
+          </a>
+          <button class="btn btn-primary" onclick="loadCloudRecords()">
+            🔄 即時重新整理
+          </button>
+          <button class="btn btn-secondary" onclick="closeDashboardModal()">
+            ✕ 關閉
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; font-size:0.92rem; color:var(--text-muted); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <span>📡 <strong>雲端同步狀態：</strong> <span id="cloud-status-text" style="color:#059669; font-weight:bold;">🟢 Google 試算表連線中</span></span>
+        <span id="record-count-text">載入中...</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="styled-table" id="dashboard-table">
+          <thead>
+            <tr>
+              <th>提交時間</th>
+              <th>學生姓名 / 班級座號</th>
+              <th>教材單元</th>
+              <th>組別</th>
+              <th>真實得分</th>
+              <th>正確率</th>
+              <th>星級評價</th>
+            </tr>
+          </thead>
+          <tbody id="dashboard-tbody">
+            <tr>
+              <td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">
+                🔄 正在從 Google 雲端試算表載入全班作答紀錄...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
   <script>
+    const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec";
     let qrcodeObj = null;
 
     function showQrModal(title, relativeUrl) {
@@ -468,6 +565,67 @@
 
     function closeQrModal() {
       document.getElementById('qr-modal').classList.remove('active');
+    }
+
+    // ==========================================
+    // 📊 全班儀表板：從 Google Apps Script 抓取
+    // ==========================================
+    function openDashboardModal() {
+      document.getElementById('dashboard-modal').classList.add('active');
+      loadCloudRecords();
+    }
+
+    function closeDashboardModal() {
+      document.getElementById('dashboard-modal').classList.remove('active');
+    }
+
+    function loadCloudRecords() {
+      const tbody = document.getElementById('dashboard-tbody');
+      const countEl = document.getElementById('record-count-text');
+      const statusEl = document.getElementById('cloud-status-text');
+
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">🔄 正在從 Google 雲端試算表載入全班作答紀錄...</td></tr>';
+      countEl.textContent = '讀取中...';
+
+      fetch(GAS_ENDPOINT_URL)
+        .then(res => res.json())
+        .then(records => {
+          if (!records || records.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:35px; color:#94a3b8;">尚無學生作答紀錄。當學生在平板交卷後，資料將秒送此處！</td></tr>';
+            countEl.textContent = '共 0 筆作答記錄';
+            statusEl.textContent = '🟢 Google 試算表連線正常';
+            return;
+          }
+
+          countEl.textContent = `共 ${records.length} 筆學生作答紀錄`;
+          statusEl.textContent = '🟢 Google 試算表連線正常';
+          tbody.innerHTML = '';
+
+          // 依時間倒序排列（最新的在最上方）
+          records.slice().reverse().forEach(r => {
+            const tr = document.createElement('tr');
+            
+            const numScore = parseInt(r.score) || 0;
+            let badgeClass = 'score-badge-low';
+            if (numScore >= 80) badgeClass = 'score-badge-high';
+            else if (numScore >= 60) badgeClass = 'score-badge-mid';
+
+            tr.innerHTML = `
+              <td style="color:#64748b; font-size:0.9rem;">${r.timestamp || '剛才'}</td>
+              <td style="font-weight:bold;">${r.studentName || '未命名'}</td>
+              <td>${r.unit || '南一國中英語七上 L1'}</td>
+              <td><span style="font-size:0.85rem; color:#6366f1; background:#eef2ff; padding:2px 8px; border-radius:6px;">${r.level || '隨機抽測'}</span></td>
+              <td><span class="score-badge ${badgeClass}">${r.score} 分</span></td>
+              <td>${r.accuracy || '--'}</td>
+              <td>${r.stars || '⭐⭐⭐'}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        })
+        .catch(err => {
+          statusEl.textContent = '⚠️ 雲端讀取稍有延遲，請確認網路連線';
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:#b91c1c;">⚠️ 無法取得雲端記錄，請直接點擊上方按鈕「開啟 Google 雲端試算表」查看！</td></tr>';
+        });
     }
 
     function filterCards() {
