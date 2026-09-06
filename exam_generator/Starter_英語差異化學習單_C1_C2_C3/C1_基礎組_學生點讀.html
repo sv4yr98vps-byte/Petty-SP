@@ -934,9 +934,9 @@
       document.getElementById('navControls').style.display = 'none';
 
             const retries = Math.max(0, totalAttempts - totalQ);
-      // ?祕?閮?嚗??舫?閰西??內????祕??蝎曄?摨?      const penalty = retries * 8 + hintsUsed * 3;
+      // 真實鑑別計分計算
       const score = Math.max(20, Math.round(100 - penalty));
-      const retries = Math.max(0, totalAttempts - totalQ);
+      
       let stars = '⭐⭐⭐';
       if (hintsUsed > 3 || retries > 3) stars = '⭐⭐';
       if (hintsUsed > 6) stars = '⭐';
