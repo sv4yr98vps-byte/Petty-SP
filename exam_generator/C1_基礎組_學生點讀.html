@@ -1,0 +1,992 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C1 基礎組｜L1 現在完成式與飲食文化 互動點讀學習單</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #ecfdf5;
+      --accent: #f59e0b;
+      --bg: #f0fdf4;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #bbf7d0;
+      --radius: 20px;
+      --shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.1), 0 8px 10px -6px rgba(5, 150, 105, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: white;
+      border-bottom: 2px solid var(--border);
+      padding: 10px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .toolbar {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-c1 {
+      background: #10b981;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .student-badge {
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .student-badge:hover { background: #bae6fd; }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .audio-controls label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    select, input[type="range"] {
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    select {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.85rem;
+      background: white;
+    }
+
+    .progress-bar-wrap {
+      max-width: 960px;
+      margin: 16px auto 0;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      background: #dcfce7;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #10b981, #059669);
+      height: 100%;
+      width: 12.5%;
+      transition: width 0.3s ease;
+      border-radius: 999px;
+    }
+
+    main {
+      max-width: 800px;
+      width: 100%;
+      margin: 16px auto 40px;
+      padding: 0 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .question-card.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed #f0fdf4;
+      padding-bottom: 12px;
+    }
+
+    .module-pill {
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 8px;
+    }
+
+    .hint-trigger {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .hint-trigger:hover { background: #fde68a; }
+
+    .q-prompt {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .read-sentence {
+      cursor: pointer;
+      border-bottom: 2px dashed #60a5fa;
+      transition: all 0.2s ease;
+      padding: 0 4px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .read-sentence:hover {
+      background: #eff6ff;
+      border-bottom-color: #2563eb;
+    }
+
+    .speaking-highlight {
+      background-color: #fef08a !important;
+      border-bottom-color: #eab308 !important;
+      color: #713f12 !important;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
+
+    .speaker-btn {
+      background: #e0e7ff;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      vertical-align: middle;
+      margin-left: 6px;
+      color: #3730a3;
+    }
+
+    .speaker-btn:hover {
+      background: #c7d2fe;
+      transform: scale(1.08);
+    }
+
+    .visual-box {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 160px;
+      gap: 10px;
+    }
+
+    .visual-icon { font-size: 3.8rem; }
+
+    .visual-text {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0f766e;
+      letter-spacing: 1px;
+    }
+
+    .dialogue-box {
+      background: #f0fdfa;
+      border-left: 6px solid #0d9488;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: left;
+      width: 100%;
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .option-btn {
+      background: white;
+      border: 3px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 22px 18px;
+      font-family: 'Fredoka', 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+      background: #f0fdf4;
+      transform: translateY(-2px);
+    }
+
+    .option-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+
+    .option-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .phonics-badge {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .feedback-box {
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feedback-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .feedback-hint { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+
+    .nav-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .btn-nav {
+      background: #e2e8f0;
+      border: none;
+      color: #334155;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-nav:hover:not(:disabled) { background: #cbd5e1; }
+    .btn-nav:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-next { background: var(--primary); color: white; }
+    .btn-next:hover:not(:disabled) { background: var(--primary-dark); }
+
+    .completion-card {
+      text-align: center;
+      background: white;
+      border-radius: var(--radius);
+      border: 3px solid #10b981;
+      padding: 36px 20px;
+      box-shadow: var(--shadow);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .trophy { font-size: 4.5rem; animation: bounce 1s infinite alternate; }
+    @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+
+    .report-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 500px;
+      margin: 10px 0;
+    }
+
+    .stat-pill {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat-val { font-size: 1.4rem; font-weight: 700; color: #059669; }
+    .stat-lbl { font-size: 0.8rem; color: #64748b; }
+
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+      .q-prompt { font-size: 1.15rem; }
+      .option-btn { font-size: 1.25rem; padding: 16px; }
+      .report-stat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="toolbar">
+      <div class="brand-area">
+        <a href="index.html" style="text-decoration:none; color:inherit;">
+          <span class="badge-c1">C1 基礎組</span>
+        </a>
+        <div class="student-badge" onclick="promptStudentName()">
+          👤 <span id="studentDisplay">點擊輸入姓名</span> ✏️
+        </div>
+      </div>
+      
+      <div class="audio-controls">
+        <label>
+          🗣 英文發音
+          <select id="voiceSelect"></select>
+        </label>
+        <label>
+          ⚡ 語速
+          <input type="range" id="rateRange" min="0.25" max="1.2" step="0.05" value="0.8">
+          <span id="rateVal">0.8x</span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-info">
+      <span id="progressText">第 1 / 8 題</span>
+      <span id="levelHint">🌱 S4 高度鷹架・英文解碼辨認</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Q1: 復活節節慶食物 - 聽音解碼 -->
+    <div class="question-card active" data-q="1">
+      <div class="card-meta">
+        <span class="module-pill">MODULE A｜Vocabulary 聽音與單字解碼</span>
+        <button class="hint-trigger" onclick="showHint(1)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('點擊喇叭聽題目，選出你聽到的復活節點心')">點擊 🔊 聽題目，選出你聽到的復活節點心：</span>
+        <button class="speaker-btn" title="聽題目發音" onclick="speakEnglish('chocolate eggs')">🔊 聽題目</button>
+      </div>
+      <div class="visual-box">
+        <div class="visual-icon">🥚 🐰 🍫</div>
+        <div class="visual-text">Easter Snacks</div>
+        <small style="color:#64748b;">請仔細看英文拼字並聽發音</small>
+      </div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="checkAnswer(this, true, 1, '太棒了！chocolate eggs 就是復活節巧克力蛋。')">
+          <span class="read-sentence" onclick="speakEnglish('chocolate eggs', event)">chocolate eggs</span>
+          <span class="phonics-badge">/ˈtʃɒk.lət eɡz/</span>
+        </button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, '這是 pumpkin pie (南瓜派) 喔！')">
+          <span class="read-sentence" onclick="speakEnglish('pumpkin pie', event)">pumpkin pie</span>
+          <span class="phonics-badge">/ˈpʌmp.kɪn paɪ/</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-1"></div>
+    </div>
+
+    <!-- Q2: 感恩節食物 - 字母發音辨識 -->
+    <div class="question-card" data-q="2">
+      <div class="card-meta">
+        <span class="module-pill">MODULE A｜Vocabulary 語音與拼讀辨識</span>
+        <button class="hint-trigger" onclick="showHint(2)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('感恩節烤南瓜派，請選出正確的英文單字')">感恩節烤「南瓜派」，請選出正確的英文單字：</span>
+        <button class="speaker-btn" title="聽發音" onclick="speakEnglish('pumpkin pie')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <div class="visual-icon">🥧 🎃</div>
+        <div class="visual-text">Thanksgiving Food</div>
+        <small style="color:#64748b;">開頭字母為 p- 的甜派</small>
+      </div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="checkAnswer(this, true, 2, '答對了！pumpkin pie 就是南瓜派。')">
+          <span class="read-sentence" onclick="speakEnglish('pumpkin pie', event)">pumpkin pie</span>
+          <span class="phonics-badge">p-u-m-p-k-i-n</span>
+        </button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'candy apples 是萬聖節的糖蘋果喔！')">
+          <span class="read-sentence" onclick="speakEnglish('candy apples', event)">candy apples</span>
+          <span class="phonics-badge">c-a-n-d-y</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-2"></div>
+    </div>
+
+    <!-- Q3: 食物單字 - 薯條 French fries -->
+    <div class="question-card" data-q="3">
+      <div class="card-meta">
+        <span class="module-pill">MODULE A｜Vocabulary 美食字詞辨認</span>
+        <button class="hint-trigger" onclick="showHint(3)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('炸馬鈴薯條，英文是哪一個單字？')">「炸馬鈴薯條」，英文是哪一個單字？</span>
+        <button class="speaker-btn" title="聽發音" onclick="speakEnglish('French fries')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <div class="visual-icon">🍟 🥔</div>
+        <div class="visual-text">Fried Potato Sticks</div>
+        <small style="color:#64748b;">以 F- 開頭的炸薯條</small>
+      </div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="checkAnswer(this, true, 3, '答對了！薯條就是 French fries。')">
+          <span class="read-sentence" onclick="speakEnglish('French fries', event)">French fries</span>
+          <span class="phonics-badge">/frentʃ fraɪz/</span>
+        </button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'fried fish 是炸魚喔！')">
+          <span class="read-sentence" onclick="speakEnglish('fried fish', event)">fried fish</span>
+          <span class="phonics-badge">/fraɪd fɪʃ/</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-3"></div>
+    </div>
+
+    <!-- Q4: 聽音辨字 - eat 的過去分詞 eaten -->
+    <div class="question-card" data-q="4">
+      <div class="card-meta">
+        <span class="module-pill">MODULE A｜Vocabulary 動詞過去分詞 (p.p.)</span>
+        <button class="hint-trigger" onclick="showHint(4)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('聽一聽，選出吃過的過去分詞')">聽一聽 🔊，選出「吃過」的過去分詞 (p.p.)：</span>
+        <button class="speaker-btn" title="聽發音" onclick="speakEnglish('eaten')">🔊 聽題目</button>
+      </div>
+      <div class="visual-box">
+        <div class="visual-icon">🍽️ 😋</div>
+        <div class="visual-text" style="font-size:1.5rem;">動詞三態：eat ➔ ate ➔ ?</div>
+      </div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="checkAnswer(this, true, 4, '太棒了！eat 的過去分詞是 eaten。')">
+          <span class="read-sentence" onclick="speakEnglish('eaten', event)">eaten</span>
+          <span class="phonics-badge">p.p. (過去分詞)</span>
+        </button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'eating 是正在吃的現在分詞 (V-ing) 喔！')">
+          <span class="read-sentence" onclick="speakEnglish('eating', event)">eating</span>
+          <span class="phonics-badge">V-ing (進行式)</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-4"></div>
+    </div>
+
+    <!-- Q5: 經驗句型 - Have you ever eaten...? -->
+    <div class="question-card" data-q="5">
+      <div class="card-meta">
+        <span class="module-pill">MODULE B｜Sentence 經驗簡答</span>
+        <button class="hint-trigger" onclick="showHint(5)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('看對話，選出正確的肯定簡答')">看對話，選出正確的肯定簡答：</span>
+        <button class="speaker-btn" title="聽對話" onclick="speakEnglish('Have you ever eaten candy apples? Yes, I have.')">🔊</button>
+      </div>
+      <div class="dialogue-box">
+        <div>👧 <strong>Emily:</strong> <span class="read-sentence" onclick="speakEnglish('Have you ever eaten candy apples?', event)">"Have you ever eaten candy apples?"</span></div>
+        <div>👦 <strong>Tom:</strong> "Yes, I ________."</div>
+      </div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="checkAnswer(this, true, 5, '答對了！Have you 問，肯定簡答用 Yes, I have。')">
+          <span class="read-sentence" onclick="speakEnglish('Yes, I have.', event)">Yes, I have.</span>
+        </button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 5, '問句是用 Have 開頭，不能用 am 喔！')">
+          <span class="read-sentence" onclick="speakEnglish('Yes, I am.', event)">Yes, I am.</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-5"></div>
+    </div>
+
+    <!-- Q6: 經驗否定 - never vs ever -->
+    <div class="question-card" data-q="6">
+      <div class="card-meta">
+        <span class="module-pill">MODULE B｜Sentence 從未做過</span>
+        <button class="hint-trigger" onclick="showHint(6)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('表達我從未看過雪，空格要選哪一個字？')">表達「我從未看過雪」，空格要選哪一個字？</span>
+        <button class="speaker-btn" title="聽句子" onclick="speakEnglish('I have never seen snow before.')">🔊</button>
+      </div>
+      <div class="visual-box" style="background:#f5f3ff; border-color:#ddd6fe;">
+        <div class="visual-icon">⛄ ❄️</div>
+        <div style="font-size:1.3rem; font-weight:700; color:#5b21b6;">I have ________ seen snow before.</div>
+      </div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="checkAnswer(this, true, 6, '沒錯！never 代表從未做過。')">
+          <span class="read-sentence" onclick="speakEnglish('never', event)">never</span>
+          <span class="phonics-badge">否定：從未</span>
+        </button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'ever 通常用於問句（曾經）喔！')">
+          <span class="read-sentence" onclick="speakEnglish('ever', event)">ever</span>
+          <span class="phonics-badge">問句：曾經</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-6"></div>
+    </div>
+
+    <!-- Q7: 閱讀理解 - 薯條最早來自哪裡？ -->
+    <div class="question-card" data-q="7">
+      <div class="card-meta">
+        <span class="module-pill">MODULE C｜Reading 薯條歷史閱讀</span>
+        <button class="hint-trigger" onclick="showHint(7)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('閱讀句子，找出最早的薯條來自哪一個國家')">閱讀句子，找出最早的薯條發源於哪一個國家：</span>
+        <button class="speaker-btn" title="朗讀" onclick="speakEnglish('The earliest French fries were from Belgium.')">🔊</button>
+      </div>
+      <div class="visual-box" style="background:#eff6ff; border-color:#bfdbfe;">
+        <div style="font-weight:700; color:#1d4ed8; margin-bottom:6px;">🇧🇪 Fact Card (歷史事實)</div>
+        <div style="font-size:1.25rem; font-weight:700; color:#1e40af; line-height:1.6;">
+          "The earliest French fries were from <span class="read-sentence" onclick="speakEnglish('Belgium', event)">Belgium</span> along the river."
+        </div>
+      </div>
+      <div class="options-grid">
+        <button class="option-btn" onclick="checkAnswer(this, true, 7, '正確！文章寫著 from Belgium (比利時)。')">
+          <span class="read-sentence" onclick="speakEnglish('Belgium', event)">Belgium</span>
+          <span class="phonics-badge">比利時</span>
+        </button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 7, '不是法國喔，法國給了世界吹風機與比基尼，但沒發明薯條！')">
+          <span class="read-sentence" onclick="speakEnglish('France', event)">France</span>
+          <span class="phonics-badge">法國</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-7"></div>
+    </div>
+
+    <!-- Q8: 口說跟讀 - 經驗問答 -->
+    <div class="question-card" data-q="8">
+      <div class="card-meta">
+        <span class="module-pill">MODULE D｜Speaking 跟讀大聲說</span>
+        <button class="hint-trigger" onclick="showHint(8)">💡 提示一下</button>
+      </div>
+      <div class="q-prompt">
+        <span class="read-sentence" onclick="speakChinese('點擊喇叭聽兩次，並大聲跟著唸')">點擊 🔊 聽兩次，並大聲跟著唸：</span>
+        <button class="speaker-btn" title="聽示範" onclick="speakEnglish('Have you ever eaten French fries? Yes, I have.')">🔊 聽示範</button>
+      </div>
+      <div class="visual-box" style="background:#f0fdf4; border-color:#86efac;">
+        <div class="visual-icon">🗣️ 🍟</div>
+        <div style="font-size:1.4rem; font-family:'Fredoka',sans-serif; font-weight:700; color:#15803d; line-height:1.8;">
+          <span class="read-sentence" onclick="speakEnglish('Have you ever eaten French fries?', event)">"Have you ever eaten French fries?"</span><br>
+          <span class="read-sentence" onclick="speakEnglish('Yes, I have.', event)">"Yes, I have."</span>
+        </div>
+      </div>
+      <div style="text-align:center; font-size:1rem; color:#475569; margin:10px 0;">
+        請跟著大聲說出句子，完成後點擊下方綠色按鈕：
+      </div>
+      <div class="options-grid" style="grid-template-columns:1fr;">
+        <button class="option-btn" style="border-color:#10b981; background:#ecfdf5;" onclick="checkAnswer(this, true, 8, '太棒了！你的現在完成式問答發音非常標準！')">
+          <span>✅ 我已經大聲唸出來了！</span>
+        </button>
+      </div>
+      <div class="feedback-box" id="fb-8"></div>
+    </div>
+
+    <!-- 結算與證書頁面 -->
+    <div class="completion-card" id="completionCard">
+      <div class="trophy">🏆</div>
+      <h2 style="font-size:1.8rem; color:#065f46;">恭喜完成 L1 學習任務！</h2>
+      <p style="font-size:1.05rem; color:#475569;" id="certStudentText">學生：王小明 ｜ 評價：⭐⭐⭐</p>
+
+      <div class="report-stat-grid">
+        <div class="stat-pill">
+          <div class="stat-val" id="statScore">100 分</div>
+          <div class="stat-lbl">得分 (正確率)</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="statAttempts">0 次</div>
+          <div class="stat-lbl">重試次數</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="statHints">0 次</div>
+          <div class="stat-lbl">提示次數</div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:10px;">
+        <button class="btn-nav btn-next" onclick="copyReportText()">📋 一鍵複製學習成果</button>
+        <button class="btn-nav" onclick="restartQuiz()">🔄 再挑戰一次</button>
+        <a href="index.html" class="btn-nav" style="text-decoration:none;">🏠 回首頁</a>
+      </div>
+      <div id="copyToast" style="font-size:0.85rem; color:#059669; font-weight:700; display:none;">
+        ✓ 已複製報告文字！可直接貼在 LINE 或筆記本中。
+      </div>
+    </div>
+
+    <div class="nav-controls" id="navControls">
+      <button class="btn-nav" id="prevBtn" onclick="prevQuestion()" disabled>◀ 上一題</button>
+      <button class="btn-nav btn-next" id="nextBtn" onclick="nextQuestion()">下一題 ▶</button>
+    </div>
+
+  </main>
+
+  <script>
+    let currentQ = 1;
+    const totalQ = 8;
+    const synth = window.speechSynthesis;
+    let voices = [];
+
+    let studentName = localStorage.getItem('current_student_name') || '';
+    let totalAttempts = 0;
+    let hintsUsed = 0;
+    let correctCount = 0;
+
+    function initVoices() {
+      voices = synth.getVoices();
+      const enVoices = voices.filter(v => v.lang.startsWith('en'));
+      const voiceSelect = document.getElementById('voiceSelect');
+      voiceSelect.innerHTML = '';
+      
+      const enDefault = enVoices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) || enVoices.find(v => v.name.includes('Google')) || enVoices.find(v => v.lang.includes('US') || v.lang.includes('GB')) || enVoices[0] || voices[0];
+      
+      enVoices.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v.name;
+        opt.textContent = `${v.name} (${v.lang})`;
+        if (v === enDefault) opt.selected = true;
+        voiceSelect.appendChild(opt);
+      });
+    }
+
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = initVoices;
+    }
+    initVoices();
+
+    function updateStudentDisplay() {
+      const display = document.getElementById('studentDisplay');
+      if (studentName) {
+        display.textContent = studentName;
+      } else {
+        display.textContent = '輸入姓名';
+      }
+    }
+
+    function promptStudentName() {
+      const input = prompt('請輸入你的班級與姓名（例如：901 王小明）：', studentName);
+      if (input !== null && input.trim() !== '') {
+        studentName = input.trim();
+        localStorage.setItem('current_student_name', studentName);
+      fetch("https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          studentName: studentName || "?芸??摮?,
+          topic: document.title.split("嚚?)[0] || "?梯?撌桃?飛蝧",
+          level: newRecord.level || "撌桃??",
+          score: score,
+          accuracy: score + "%",
+          hintsUsed: hintsUsed,
+          stars: stars
+        })
+      }).catch(function(){});
+        updateStudentDisplay();
+      }
+    }
+
+    if (!studentName) {
+      setTimeout(promptStudentName, 400);
+    } else {
+      updateStudentDisplay();
+    }
+
+    document.getElementById('rateRange').addEventListener('input', function() {
+      document.getElementById('rateVal').textContent = `${this.value}x`;
+    });
+
+    function speakChinese(text, e) {
+      if (e) e.stopPropagation();
+      if (!synth) return;
+      synth.cancel();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) || voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW') || v.lang.includes('zh'));
+      if (zhVoice) utter.voice = zhVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+      synth.speak(utter);
+    }
+
+    function speakEnglish(text, e) {
+      if (e) e.stopPropagation();
+      if (!synth) return;
+      synth.cancel();
+
+      const cleanText = text.replace(/[_＿]+/g, ' ').replace(/\(\s*\)/g, ' ');
+      const utter = new SpeechSynthesisUtterance(cleanText);
+      utter.lang = 'en-US';
+
+      const voiceName = document.getElementById('voiceSelect').value;
+      const selectedVoice = voices.find(v => v.name === voiceName) || voices.find(v => v.lang.startsWith('en'));
+      if (selectedVoice) utter.voice = selectedVoice;
+      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+
+      if (e && e.target && e.target.classList.contains('read-sentence')) {
+        document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
+        e.target.classList.add('speaking-highlight');
+        utter.onend = () => e.target.classList.remove('speaking-highlight');
+        utter.onerror = () => e.target.classList.remove('speaking-highlight');
+      }
+
+      synth.speak(utter);
+    }
+
+    function checkAnswer(btn, isCorrect, qNum, feedbackMsg) {
+      const parentCard = btn.closest('.question-card');
+      const allBtns = parentCard.querySelectorAll('.option-btn');
+      const fbBox = document.getElementById(`fb-${qNum}`);
+
+      allBtns.forEach(b => b.classList.remove('correct', 'wrong'));
+      totalAttempts++;
+
+      if (isCorrect) {
+        btn.classList.add('correct');
+        fbBox.className = 'feedback-box feedback-success';
+        fbBox.innerHTML = `🎉 <strong>答對了！</strong> ${feedbackMsg}`;
+        fbBox.style.display = 'flex';
+        correctCount++;
+        speakChinese('答對了！' + feedbackMsg);
+      } else {
+        btn.classList.add('wrong');
+        fbBox.className = 'feedback-box feedback-hint';
+        fbBox.innerHTML = `💡 <strong>再試一次：</strong> ${feedbackMsg}`;
+        fbBox.style.display = 'flex';
+        speakChinese('再試一次：' + feedbackMsg);
+      }
+    }
+
+    function showHint(qNum) {
+      hintsUsed++;
+      const hints = {
+        1: "提示：點擊選項上的英文發音，聽看看 chocolate 開頭的字。",
+        2: "提示：看單字開頭字母 p-u-m-p-k-i-n (pumpkin pie)。",
+        3: "提示：炸馬鈴薯條是 French fries，開頭是 F。",
+        4: "提示：eat (吃) 的過去分詞是 eaten，字尾有 -en。",
+        5: "提示：問句用 Have you 開頭，回答用 Yes, I have。",
+        6: "提示：never 代表從未做過某件事，放於 have 與 p.p. 之間。",
+        7: "提示：最早的薯條是比利時 (Belgium) 人把馬鈴薯切條油炸的！",
+        8: "提示：大聲說出 Have you ever eaten French fries? Yes, I have。"
+      };
+      const fbBox = document.getElementById(`fb-${qNum}`);
+      fbBox.className = 'feedback-box feedback-hint';
+      fbBox.innerHTML = `🔍 <strong>提示：</strong> ${hints[qNum]}`;
+      fbBox.style.display = 'flex';
+      speakChinese(hints[qNum]);
+    }
+
+    function updateQuestionUI() {
+      document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
+      const activeCard = document.querySelector(`.question-card[data-q="${currentQ}"]`);
+      if (activeCard) activeCard.classList.add('active');
+
+      document.getElementById('progressText').textContent = `第 ${currentQ} / ${totalQ} 題`;
+      document.getElementById('progressFill').style.width = `${(currentQ / totalQ) * 100}%`;
+
+      document.getElementById('prevBtn').disabled = (currentQ === 1);
+      
+      if (currentQ === totalQ) {
+        document.getElementById('nextBtn').textContent = '完成結算 🎉';
+      } else {
+        document.getElementById('nextBtn').textContent = '下一題 ▶';
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQ < totalQ) {
+        currentQ++;
+        updateQuestionUI();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQ > 1) {
+        currentQ--;
+        updateQuestionUI();
+      }
+    }
+
+    function finishQuiz() {
+      document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
+      document.getElementById('completionCard').style.display = 'flex';
+      document.getElementById('navControls').style.display = 'none';
+
+            const retries = Math.max(0, totalAttempts - totalQ);
+      // ?祕?閮?嚗??舫?閰西??內????祕??蝎曄?摨?      const penalty = retries * 8 + hintsUsed * 3;
+      const score = Math.max(20, Math.round(100 - penalty));
+      const retries = Math.max(0, totalAttempts - totalQ);
+      let stars = '⭐⭐⭐';
+      if (hintsUsed > 3 || retries > 3) stars = '⭐⭐';
+      if (hintsUsed > 6) stars = '⭐';
+
+      document.getElementById('certStudentText').textContent = `學生：${studentName || '未填寫'} ｜ 評價：${stars}`;
+      document.getElementById('statScore').textContent = `${score} 分`;
+      document.getElementById('statAttempts').textContent = `${retries} 次`;
+      document.getElementById('statHints').textContent = `${hintsUsed} 次`;
+
+      const newRecord = {
+        studentName: studentName || '無名同學',
+        level: 'C1 基礎組',
+        score: score,
+        accuracy: `${score}%`,
+        stars: stars,
+        hintsUsed: hintsUsed,
+        retries: retries,
+        timestamp: new Date().toLocaleString()
+      };
+
+      const history = JSON.parse(localStorage.getItem('english_l1_records') || '[]');
+      history.unshift(newRecord);
+      localStorage.setItem('english_l1_records', JSON.stringify(history.slice(0, 100)));
+
+      speakChinese(`恭喜${studentName || ''}，你獲得了 ${score} 分！L1 基礎現在完成式與節慶美食完全掌握！`);
+    }
+
+    function copyReportText() {
+      const score = document.getElementById('statScore').textContent;
+      const text = `【L1 英語學習成果報告】\n👤 學生：${studentName || '同學'}\n📚 組別：C1 基礎組 (現在完成式與飲食文化)\n🎯 得分：${score}\n💡 提示次數：${hintsUsed} 次\n📅 時間：${new Date().toLocaleString()}\n狀態：已全數完成！🎉`;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 3000);
+      });
+    }
+
+    function restartQuiz() {
+      currentQ = 1;
+      totalAttempts = 0;
+      hintsUsed = 0;
+      correctCount = 0;
+      document.getElementById('completionCard').style.display = 'none';
+      document.getElementById('navControls').style.display = 'flex';
+      document.querySelectorAll('.feedback-box').forEach(fb => fb.style.display = 'none');
+      document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('correct', 'wrong'));
+      updateQuestionUI();
+    }
+  </script>
+
+</body>
+</html>
