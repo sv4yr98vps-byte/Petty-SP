@@ -1,0 +1,690 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎓 英語有聲點讀教材與題庫專屬入口網</title>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+  <!-- QRCode.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --border: #e2e8f0;
+      --accent-green: #059669;
+      --accent-orange: #d97706;
+      --accent-purple: #7c3aed;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-hover: #3b82f6;
+      --border: #334155;
+    }
+
+    body {
+      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: white;
+      padding: 38px 20px 28px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.15rem;
+      opacity: 0.92;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 25px auto 50px;
+      padding: 0 20px;
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      background-color: var(--card-bg);
+      padding: 15px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"], select {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-green { background-color: #059669; }
+    .btn-green:hover { background-color: #047857; }
+
+    .btn-orange { background-color: #d97706; }
+    .btn-orange:hover { background-color: #b45309; }
+
+    .btn-purple { background-color: #7c3aed; }
+    .btn-purple:hover { background-color: #6d28d9; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .exam-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .exam-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
+      border-color: var(--primary);
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .badge-quiz { background: #dbeafe; color: #1e40af; }
+    .badge-diff { background: #fef3c7; color: #92400e; }
+
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 0 0 10px;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-row .btn {
+      flex: 1;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* Modal styles */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
+      animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dashboard-modal-box {
+      max-width: 960px;
+      width: 95%;
+      max-height: 88vh;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .qr-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 15px 0;
+      box-shadow: inset 0 0 0 1px #e2e8f0;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+
+    /* Table Styles */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 15px;
+    }
+
+    table.styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    table.styled-table th {
+      background-color: #f1f5f9;
+      color: #334155;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    table.styled-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.styled-table tr:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    .score-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+    .score-badge-high { background: #dcfce7; color: #15803d; }
+    .score-badge-mid { background: #fef3c7; color: #b45309; }
+    .score-badge-low { background: #fee2e2; color: #b91c1c; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎓 英語教學題庫與有聲點讀教材網</h1>
+    <p>大題庫動態抽題 · 真實鑑別計分 · Google 雲端試算表自動同步</p>
+  </header>
+
+  <div class="container">
+    <div class="controls-bar">
+      <div class="filter-group">
+        <input type="text" id="search-input" placeholder="🔍 搜尋課文、單元或關鍵字..." oninput="filterCards()">
+        <select id="type-filter" onchange="filterCards()">
+          <option value="all">全部教材類型</option>
+          <option value="quiz">四合一練習卷</option>
+          <option value="diff">差異化學習單 (C1/C2/C3)</option>
+        </select>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-green" onclick="openDashboardModal()" style="font-weight:bold;">
+          📊 全班學習歷程管理儀表板 (雲端即時同步)
+        </button>
+        <button class="btn btn-secondary" onclick="toggleTheme()">🌓 切換主題</button>
+      </div>
+    </div>
+
+    <div class="grid" id="exam-grid">
+      
+      <!-- Card 1: 國中英語南一七上 L1 單字練習卷 (四合一) -->
+      <div class="exam-card" data-type="quiz" data-title="國中英語 南一版 七上 第一單元 單字評量 練習卷">
+        <div>
+          <span class="card-badge badge-quiz">📝 【國一 · 七年級】四合一考卷 · 南一七上 L1</span>
+          <h2 class="card-title">國中英語【國一 · 七年級】(南一七上) L1 單字評量練習卷</h2>
+          <div class="card-meta">
+            <div>📌 題數：<strong>45 題核心大題庫</strong> (每次隨機抽選 10 題)</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題深度解析、個人成長曲線</div>
+            <div>☁️ 雲端：自動同步至老師 Google 試算表</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">📱 學生線上隨機抽測與平板 QR Code</div>
+          <div class="action-row">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html" class="btn" target="_blank">
+              🎧 進入線上抽測
+            </a>
+            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 單字 學生抽測', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
+              📱 QR Code
+            </button>
+          </div>
+          <div class="section-label">👨‍🏫 教師教學與文件下載</div>
+          <div class="action-row">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_教師簡報.html" class="btn btn-secondary" target="_blank">
+              👨‍🏫 教師簡報
+            </a>
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_練習卷.pdf" class="btn btn-secondary" target="_blank">
+              📄 考卷 PDF
+            </a>
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_解析.pdf" class="btn btn-secondary" target="_blank">
+              🔍 解析 PDF
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Starter 英語差異化學習單 C1/C2/C3 -->
+      <div class="exam-card" data-type="diff" data-title="國中英語 Starter 英語問候與代名詞 差異化學習單 C1 C2 C3">
+        <div>
+          <span class="card-badge badge-diff">🎯 【國一 · 七年級】差異化學習單 · Starter</span>
+          <h2 class="card-title">國中英語【國一 · 七年級】Starter 問候與代名詞</h2>
+          <div class="card-meta">
+            <div>📌 分層：C1 基礎 / C2 應用 / C3 表達</div>
+            <div>🔊 特色：三層分流點讀、Google 語音小姐、A4 排版</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
+          <div class="action-row">
+            <a href="Starter_英語差異化學習單_C1_C2_C3/Starter_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
+              🎲 進入線上抽測 (10題)
+            </a>
+            <button class="btn btn-secondary" onclick="showQrModal('Starter 問候與代名詞 抽測', 'Starter_英語差異化學習單_C1_C2_C3/Starter_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C1 基礎', 'Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C2 應用', 'Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C3 表達', 'Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="action-row">
+            <a href="Starter_英語差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Unit 1 天氣與授與動詞 差異化學習單 -->
+      <div class="exam-card" data-type="diff" data-title="國中英語 Unit 1 天氣與授與動詞 差異化學習單 C1 C2 C3">
+        <div>
+          <span class="card-badge badge-diff">🎯 【國二 · 八年級】差異化學習單 · 天氣與授與動詞</span>
+          <h2 class="card-title">國中英語【國二 · 八年級】天氣表達與授與動詞</h2>
+          <div class="card-meta">
+            <div>📌 題數：<strong>40 題核心大題庫</strong> (每次隨機抽 10 題)</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題解析、Google 試算表同步</div>
+            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/Unit1_天氣與授與動詞_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
+              🎲 進入線上抽測 (10題)
+            </a>
+            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 天氣與授與動詞 抽測', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/Unit1_天氣與授與動詞_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C1 基礎', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C2 應用', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C3 表達', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: L1 現在完成式與飲食文化 差異化學習單 -->
+      <div class="exam-card" data-type="diff" data-title="國中英語 L1 現在完成式與飲食文化 差異化學習單 C1 C2 C3">
+        <div>
+          <span class="card-badge badge-diff">🎯 【國三 · 九年級】差異化學習單 · 完成式與飲食文化</span>
+          <h2 class="card-title">國中英語【國三 · 九年級】現在完成式與多元飲食文化</h2>
+          <div class="card-meta">
+            <div>📌 題數：<strong>40 題核心大題庫</strong> (每次隨機抽 10 題)</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題解析、Google 試算表同步</div>
+            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
+          <div class="action-row">
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/L1_現在完成式與飲食文化_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
+              🎲 進入線上抽測 (10題)
+            </a>
+            <button class="btn btn-secondary" onclick="showQrModal('現在完成式與飲食文化 抽測', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/L1_現在完成式與飲食文化_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C1 基礎', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C2 應用', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C3 表達', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="action-row">
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QR Code Modal -->
+  <div class="modal-backdrop" id="qr-modal" onclick="closeQrModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-title" id="modal-exam-title">掃描開啟教材</div>
+      <div class="modal-subtitle" id="modal-exam-url"></div>
+      <div class="qr-container">
+        <div id="qrcode"></div>
+      </div>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">請使用平板相機對準 QR Code 即可載入</p>
+      <button class="btn btn-secondary close-btn" onclick="closeQrModal()" style="margin-top:15px; width:100%;">關閉</button>
+    </div>
+  </div>
+
+  <!-- ==================== 📊 全班學習歷程儀表板 (雲端即時同步) ==================== -->
+  <div class="modal-backdrop" id="dashboard-modal" onclick="closeDashboardModal(event)">
+    <div class="modal-box dashboard-modal-box" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+        <h2 style="margin:0; font-size:1.45rem;">📊 全班學習歷程管理儀表板</h2>
+        <div style="display:flex; gap:8px;">
+          <a href="https://docs.google.com/spreadsheets/d/1byRCJ-axoqN3_EuE4TN62_Ank98Z6UsW39SQjV06rn0/edit" target="_blank" class="btn btn-green">
+            📑 開啟 Google 雲端試算表
+          </a>
+          <button class="btn btn-primary" onclick="loadCloudRecords()">
+            🔄 即時重新整理
+          </button>
+          <button class="btn btn-secondary" onclick="closeDashboardModal()">
+            ✕ 關閉
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; font-size:0.92rem; color:var(--text-muted); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <span>📡 <strong>雲端同步狀態：</strong> <span id="cloud-status-text" style="color:#059669; font-weight:bold;">🟢 Google 試算表連線中</span></span>
+        <span id="record-count-text">載入中...</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="styled-table" id="dashboard-table">
+          <thead>
+            <tr>
+              <th>提交時間</th>
+              <th>學生姓名 / 班級座號</th>
+              <th>教材單元</th>
+              <th>組別</th>
+              <th>真實得分</th>
+              <th>正確率</th>
+              <th>星級評價</th>
+            </tr>
+          </thead>
+          <tbody id="dashboard-tbody">
+            <tr>
+              <td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">
+                🔄 正在從 Google 雲端試算表載入全班作答紀錄...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec";
+    let qrcodeObj = null;
+
+    function showQrModal(title, relativeUrl) {
+      const fullUrl = new URL(relativeUrl, window.location.href).href;
+      document.getElementById('modal-exam-title').textContent = title;
+      document.getElementById('modal-exam-url').textContent = fullUrl;
+      
+      const qrEl = document.getElementById('qrcode');
+      qrEl.innerHTML = '';
+      qrcodeObj = new QRCode(qrEl, {
+        text: fullUrl,
+        width: 220,
+        height: 220,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.M
+      });
+
+      document.getElementById('qr-modal').classList.add('active');
+    }
+
+    function closeQrModal() {
+      document.getElementById('qr-modal').classList.remove('active');
+    }
+
+    // ==========================================
+    // 📊 全班儀表板：從 Google Apps Script 抓取
+    // ==========================================
+    function openDashboardModal() {
+      document.getElementById('dashboard-modal').classList.add('active');
+      loadCloudRecords();
+    }
+
+    function closeDashboardModal() {
+      document.getElementById('dashboard-modal').classList.remove('active');
+    }
+
+    function loadCloudRecords() {
+      const tbody = document.getElementById('dashboard-tbody');
+      const countEl = document.getElementById('record-count-text');
+      const statusEl = document.getElementById('cloud-status-text');
+
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">🔄 正在從 Google 雲端試算表載入全班作答紀錄...</td></tr>';
+      countEl.textContent = '讀取中...';
+
+      fetch(GAS_ENDPOINT_URL)
+        .then(res => res.json())
+        .then(records => {
+          if (!records || records.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:35px; color:#94a3b8;">尚無學生作答紀錄。當學生在平板交卷後，資料將秒送此處！</td></tr>';
+            countEl.textContent = '共 0 筆作答記錄';
+            statusEl.textContent = '🟢 Google 試算表連線正常';
+            return;
+          }
+
+          countEl.textContent = `共 ${records.length} 筆學生作答紀錄`;
+          statusEl.textContent = '🟢 Google 試算表連線正常';
+          tbody.innerHTML = '';
+
+          // 依時間倒序排列（最新的在最上方）
+          records.slice().reverse().forEach(r => {
+            const tr = document.createElement('tr');
+            
+            const numScore = parseInt(r.score) || 0;
+            let badgeClass = 'score-badge-low';
+            if (numScore >= 80) badgeClass = 'score-badge-high';
+            else if (numScore >= 60) badgeClass = 'score-badge-mid';
+
+            tr.innerHTML = `
+              <td style="color:#64748b; font-size:0.9rem;">${r.timestamp || '剛才'}</td>
+              <td style="font-weight:bold;">${r.studentName || '未命名'}</td>
+              <td>${r.unit || '南一國中英語七上 L1'}</td>
+              <td><span style="font-size:0.85rem; color:#6366f1; background:#eef2ff; padding:2px 8px; border-radius:6px;">${r.level || '隨機抽測'}</span></td>
+              <td><span class="score-badge ${badgeClass}">${r.score} 分</span></td>
+              <td>${r.accuracy || '--'}</td>
+              <td>${r.stars || '⭐⭐⭐'}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        })
+        .catch(err => {
+          statusEl.textContent = '⚠️ 雲端讀取稍有延遲，請確認網路連線';
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:#b91c1c;">⚠️ 無法取得雲端記錄，請直接點擊上方按鈕「開啟 Google 雲端試算表」查看！</td></tr>';
+        });
+    }
+
+    function filterCards() {
+      const keyword = document.getElementById('search-input').value.toLowerCase();
+      const type = document.getElementById('type-filter').value;
+      const cards = document.querySelectorAll('.exam-card');
+
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        const cardType = card.getAttribute('data-type');
+        const matchKeyword = title.includes(keyword);
+        const matchType = (type === 'all' || cardType === type);
+
+        if (matchKeyword && matchType) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('portal-theme', newTheme);
+    }
+
+    const savedTheme = localStorage.getItem('portal-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>
