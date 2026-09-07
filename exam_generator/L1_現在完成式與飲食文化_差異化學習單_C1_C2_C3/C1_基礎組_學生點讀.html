@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -464,7 +464,7 @@
         </label>
         <label>
           ⚡ 語速
-          <input type="range" id="rateRange" min="0.5" max="1.2" step="0.05" value="0.8">
+          <input type="range" id="rateRange" min="0.25" max="1.2" step="0.05" value="0.8">
           <span id="rateVal">0.8x</span>
         </label>
       </div>
@@ -709,6 +709,11 @@
       <h2 style="font-size:1.8rem; color:#065f46;">恭喜完成 L1 學習任務！</h2>
       <p style="font-size:1.05rem; color:#475569;" id="certStudentText">學生：王小明 ｜ 評價：⭐⭐⭐</p>
 
+      
+      <!-- 雲端儀表板同步狀態 -->
+      <div id="cloudSyncBanner" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:10px 16px; border-radius:10px; margin:16px auto; max-width:550px; font-size:0.95rem; display:flex; align-items:center; justify-content:center; gap:8px; width:100%; box-sizing:border-box;">
+        📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
+      </div>
       <div class="report-stat-grid">
         <div class="stat-pill">
           <div class="stat-val" id="statScore">100 分</div>
@@ -758,7 +763,7 @@
       const voiceSelect = document.getElementById('voiceSelect');
       voiceSelect.innerHTML = '';
       
-      const enDefault = enVoices.find(v => v.lang.includes('US') || v.lang.includes('GB')) || enVoices[0] || voices[0];
+      const enDefault = enVoices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) || enVoices.find(v => v.name.includes('Google')) || enVoices.find(v => v.lang.includes('US') || v.lang.includes('GB')) || enVoices[0] || voices[0];
       
       enVoices.forEach(v => {
         const opt = document.createElement('option');
@@ -788,6 +793,20 @@
       if (input !== null && input.trim() !== '') {
         studentName = input.trim();
         localStorage.setItem('current_student_name', studentName);
+      fetch("https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          studentName: studentName || "?芸??摮?,
+          topic: document.title.split("嚚?)[0] || "?梯?撌桃?飛蝧",
+          level: newRecord.level || "撌桃??",
+          score: score,
+          accuracy: score + "%",
+          hintsUsed: hintsUsed,
+          stars: stars
+        })
+      }).catch(function(){});
         updateStudentDisplay();
       }
     }
@@ -809,7 +828,7 @@
 
       const utter = new SpeechSynthesisUtterance(text);
       utter.lang = 'zh-TW';
-      const zhVoice = voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW') || v.lang.includes('zh'));
+      const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) || voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW') || v.lang.includes('zh'));
       if (zhVoice) utter.voice = zhVoice;
       utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
       synth.speak(utter);
@@ -920,8 +939,10 @@
       document.getElementById('completionCard').style.display = 'flex';
       document.getElementById('navControls').style.display = 'none';
 
-      const score = Math.round((Math.min(correctCount, totalQ) / totalQ) * 100);
-      const retries = Math.max(0, totalAttempts - totalQ);
+            const retries = Math.max(0, totalAttempts - totalQ);
+      // 真實鑑別計分計算
+      const score = Math.max(20, Math.round(100 - penalty));
+      
       let stars = '⭐⭐⭐';
       if (hintsUsed > 3 || retries > 3) stars = '⭐⭐';
       if (hintsUsed > 6) stars = '⭐';
@@ -946,6 +967,7 @@
       history.unshift(newRecord);
       localStorage.setItem('english_l1_records', JSON.stringify(history.slice(0, 100)));
 
+      uploadToCloudDashboard(score, stars, retries, hintsUsed);
       speakChinese(`恭喜${studentName || ''}，你獲得了 ${score} 分！L1 基礎現在完成式與節慶美食完全掌握！`);
     }
 
@@ -970,7 +992,55 @@
       document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('correct', 'wrong'));
       updateQuestionUI();
     }
-  </script>
+  
+    function uploadToCloudDashboard(scoreVal, starsVal, retriesVal, hintsVal) {
+      const banner = document.getElementById('cloudSyncBanner');
+      if (banner) {
+        banner.style.background = '#eff6ff';
+        banner.style.borderColor = '#bfdbfe';
+        banner.style.color = '#1e40af';
+        banner.innerHTML = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+      }
+
+      const rawScore = (typeof scoreVal !== 'undefined') ? scoreVal : (parseInt(document.getElementById('statScore')?.textContent) || 100);
+      const rawStars = starsVal || '⭐⭐⭐';
+      const rawHints = (typeof hintsVal !== 'undefined') ? hintsVal : (parseInt(document.getElementById('statHints')?.textContent) || 0);
+
+      const topicTitle = document.title.split('｜')[0].trim() || '國中英語差異化學習單';
+      const levelText = document.getElementById('slideLevel')?.textContent || document.querySelector('.card-level-tag')?.textContent || document.title.includes('C1') ? 'C1 基礎組' : (document.title.includes('C2') ? 'C2 應用組' : 'C3 表達組');
+
+      const payload = {
+        studentName: studentName || '未填寫同學',
+        topic: topicTitle,
+        level: levelText,
+        score: rawScore,
+        accuracy: rawScore + '%',
+        hintsUsed: rawHints,
+        stars: rawStars
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        if (banner) {
+          banner.style.background = '#ecfdf5';
+          banner.style.borderColor = '#a7f3d0';
+          banner.style.color = '#065f46';
+          banner.innerHTML = '✅ <strong>成績已成功同步至老師的 Google 雲端學習歷程儀表板！</strong>';
+        }
+      }).catch(err => {
+        if (banner) {
+          banner.style.background = '#fffbeb';
+          banner.style.borderColor = '#fde68a';
+          banner.style.color = '#92400e';
+          banner.innerHTML = '⚠️ 雲端同步受網路限制，已安全儲存於設備本機。';
+        }
+      });
+    }
+</script>
 
 </body>
 </html>
