@@ -43,20 +43,21 @@
       transition: background 0.3s, color 0.3s;
     }
 
-    /* 頂部工具列 */
     header {
       background: var(--card-bg);
       border-bottom: 2px solid var(--border);
-      padding: 10px 24px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .brand-title {
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -76,9 +77,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .btn-tool {
+    .btn-tool, select.tool-select {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid var(--border);
       color: var(--text);
@@ -93,8 +95,9 @@
       transition: all 0.2s;
     }
 
-    body.light-mode .btn-tool {
+    body.light-mode .btn-tool, body.light-mode select.tool-select {
       background: #f1f5f9;
+      color: #0f172a;
     }
 
     .btn-tool:hover {
@@ -108,7 +111,6 @@
       border-color: #be123c;
     }
 
-    /* 投影片主視窗 */
     main {
       flex: 1;
       display: flex;
@@ -124,13 +126,23 @@
       border-radius: 20px;
       width: 100%;
       max-width: 1100px;
-      height: 80vh;
-      display: flex;
+      height: 78vh;
+      display: none;
       flex-direction: column;
       padding: 36px 48px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
       position: relative;
       overflow-y: auto;
+    }
+
+    .slide-frame.active {
+      display: flex;
+      animation: popSlide 0.25s ease-out;
+    }
+
+    @keyframes popSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .slide-page-num {
@@ -143,7 +155,7 @@
     }
 
     .slide-title {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 700;
       color: var(--accent);
       margin-bottom: 20px;
@@ -155,8 +167,8 @@
     }
 
     .slide-content {
-      font-size: 1.25rem;
-      line-height: 2;
+      font-size: 1.2rem;
+      line-height: 1.9;
       flex: 1;
     }
 
@@ -165,7 +177,7 @@
       border-left: 6px solid #0284c7;
       border-radius: 10px;
       padding: 14px 20px;
-      margin-top: 20px;
+      margin-top: 18px;
       display: none;
     }
 
@@ -176,7 +188,6 @@
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* 電子白板畫布 */
     #whiteboardCanvas {
       position: absolute;
       top: 0;
@@ -192,7 +203,6 @@
       cursor: crosshair;
     }
 
-    /* 快捷鍵說明列 */
     footer {
       background: var(--card-bg);
       border-top: 1px solid var(--border);
@@ -215,6 +225,7 @@
 
     body.light-mode .key-badge {
       background: #e2e8f0;
+      color: #334155;
     }
   </style>
 </head>
@@ -222,19 +233,38 @@
 
   <header>
     <div class="brand-title">
-      <span class="badge-unit">Unit 1</span>
-      <span>國中英語教師逐題講解簡報</span>
+      <span class="badge-unit">國二 · 八年級</span>
+      <span>天氣表達與授與動詞 教師講解簡報</span>
     </div>
 
     <div class="slide-controls">
+      <label style="font-size:0.88rem; font-weight:600;">📑 跳頁：</label>
+      <select id="slideSelect" class="tool-select" onchange="jumpToSlide(parseInt(this.value))">
+        <option value="0">第 1 頁：共同核心鎖定 (Common Core)</option>
+        <option value="1">第 2 頁：C1 基礎組 - 天氣詢問與回答</option>
+        <option value="2">第 3 頁：C1 基礎組 - 授與動詞雙賓語 (to/for)</option>
+        <option value="3">第 4 頁：C2 應用組 - 天氣多樣句型轉換</option>
+        <option value="4">第 5 頁：C2 應用組 - 授與動詞介系詞判斷</option>
+        <option value="5">第 6 頁：C3 表達組 - 氣象報導與情境表達</option>
+      </select>
+
+      <label style="font-size:0.88rem; font-weight:600; margin-left:4px;">⚡ 語速：</label>
+      <select id="speedSelect" class="tool-select">
+        <option value="0.25">🐢 0.25x 極慢速</option>
+        <option value="0.4">🐢 0.4x 慢速</option>
+        <option value="0.6">0.6x 初學</option>
+        <option value="0.85" selected>0.85x 適中</option>
+        <option value="1.0">1.0x 標準</option>
+      </select>
+
       <button class="btn-tool" onclick="prevSlide()">◀ 上一頁</button>
-      <span id="slideIndicator" style="font-weight:700; padding:0 8px;">1 / 6</span>
+      <span id="slideIndicator" style="font-weight:700; padding:0 6px;">1 / 6</span>
       <button class="btn-tool" onclick="nextSlide()">下一頁 ▶</button>
       <button class="btn-tool" id="btnAns" onclick="toggleAnswer()">💡 答案解析 (Space)</button>
       <button class="btn-tool" id="btnBoard" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
       <button class="btn-tool" onclick="clearWhiteboard()">🧹 清除板書 (C)</button>
       <button class="btn-tool" onclick="speakCurrentSlide()">🔊 朗讀本頁 (R)</button>
-      <button class="btn-tool" onclick="toggleTheme()">🌓 主題切換</button>
+      <button class="btn-tool" onclick="toggleTheme()">🌓 主題</button>
       <a href="index.html" class="btn-tool" style="text-decoration:none;">🏠 回首頁</a>
     </div>
   </header>
@@ -243,260 +273,304 @@
     <canvas id="whiteboardCanvas"></canvas>
 
     <!-- Slide 1: 共同學習核心鎖定 -->
-    <div class="slide-frame" id="slide-1">
+    <div class="slide-frame active" id="slide-0">
       <div class="slide-page-num">1 / 6</div>
       <div class="slide-title">🎯 Unit 1 共同學習核心鎖定 (Common Core)</div>
       <div class="slide-content">
         <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
-          <h3 style="color:var(--accent-gold); font-size:1.3rem;">📌 本單元教學核心四柱：</h3>
-          <ul style="margin-left:24px; line-height:2.2;">
-            <li><strong>Seasons (四季)</strong>: spring (春), summer (夏), autumn/fall (秋), winter (冬)</li>
-            <li><strong>Weather (+y 形容詞)</strong>: sun ➔ sunny, rain ➔ rainy, cloud ➔ cloudy, snow ➔ snowy, wind ➔ windy</li>
-            <li><strong>Weather Questions (天氣問答)</strong>: <code>How is the weather?</code> = <code>What is the weather like?</code></li>
-            <li><strong>Ditransitive Verbs (授與雙賓動詞)</strong>: <code>give/send/write + to</code> vs <code>buy/make + for</code></li>
-          </ul>
+          <strong style="color:var(--accent-gold);">【核心單字 1200 聚焦】</strong><br>
+          sunny (晴朗), rainy (多雨), cloudy (多雲), snowy (下雪), windy (風大), cold (寒冷), warm (溫暖), umbrella (雨傘), give (給予), send (寄送), buy (購買), make (製作)
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
+          <strong style="color:var(--accent-gold);">【核心文法結構】</strong><br>
+          1. <strong>天氣詢問：</strong> How is the weather? = What is the weather like?<br>
+          2. <strong>天氣回答：</strong> It is sunny / rainy / cloudy. / We have a lot of rain.<br>
+          3. <strong>授與動詞介系詞：</strong><br>
+             &nbsp;&nbsp;• <strong>to (方向性)：</strong> give / send / show / teach / write<br>
+             &nbsp;&nbsp;• <strong>for (付出勞力)：</strong> buy / make / cook / get
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: C1 基礎組 - 天氣詢問與回答 -->
+    <div class="slide-frame" id="slide-1">
+      <div class="slide-page-num">2 / 6</div>
+      <div class="slide-title">🌤️ Slide 2: C1 基礎組 - 天氣詢問與回答</div>
+      <div class="slide-content">
+        <div style="margin-bottom:16px;">
+          <strong>【核心例句】</strong><br>
+          A: <span style="color:var(--accent);">How is the weather today?</span> (今天天氣如何？)<br>
+          B: <span style="color:var(--highlight);">It is sunny and warm.</span> (天氣晴朗又溫暖。)
+        </div>
+        <div style="margin-bottom:16px;">
+          <strong>【常見天氣形容詞對照】</strong><br>
+          • ☀️ Sun ➔ <strong style="color:var(--accent);">sunny</strong> (晴朗的)<br>
+          • 🌧️ Rain ➔ <strong style="color:var(--accent);">rainy</strong> (下雨的)<br>
+          • ☁️ Cloud ➔ <strong style="color:var(--accent);">cloudy</strong> (多雲的)<br>
+          • ❄️ Snow ➔ <strong style="color:var(--accent);">snowy</strong> (下雪的)
         </div>
       </div>
       <div class="ans-box" id="ans-1">
-        <strong>💡 教學提點：</strong> 提醒學生名詞加 <code>y</code> 變成形容詞；授與動詞「人+物」與「物+to/for+人」的雙向對應關係。
+        💡 <strong>教學引導：</strong> 注意 <code>How is the weather?</code> 後方不加 <code>like</code>；若用 <code>What</code> 則必須搭配 <code>What is the weather like?</code>。
       </div>
     </div>
 
-    <!-- Slide 2: Theme Words 四季與天氣形容詞 -->
-    <div class="slide-frame" id="slide-2" style="display:none;">
-      <div class="slide-page-num">2 / 6</div>
-      <div class="slide-title">🌸 Theme Words: Seasons & Weather</div>
+    <!-- Slide 3: C1 基礎組 - 授與動詞雙賓語 -->
+    <div class="slide-frame" id="slide-2">
+      <div class="slide-page-num">3 / 6</div>
+      <div class="slide-title">🎁 Slide 3: C1 基礎組 - 授與動詞雙賓語 (to vs. for)</div>
       <div class="slide-content">
-        <p><strong>1. 季節與氣候特徵：</strong></p>
-        <ul style="margin-left:24px; line-height:2.2;">
-          <li>🌸 <strong>spring</strong>: warm, rainy, flowers bloom</li>
-          <li>🏖️ <strong>summer</strong>: hot, sunny, summer vacation</li>
-          <li>🍁 <strong>autumn / fall</strong>: cool, windy</li>
-          <li>⛄ <strong>winter</strong>: cold, snowy, snow in the mountains</li>
-        </ul>
-        <p style="margin-top:12px;"><strong>2. 名詞 ➔ 形容詞規則 (+y)：</strong></p>
-        <div style="background:rgba(255,255,255,0.05); padding:12px 18px; border-radius:10px;">
-          <code>sun ➔ sunny</code> (雙寫 n + y) ｜ <code>rain ➔ rainy</code> ｜ <code>cloud ➔ cloudy</code> ｜ <code>snow ➔ snowy</code> ｜ <code>wind ➔ windy</code>
+        <div style="margin-bottom:16px;">
+          <strong>【句型 1：動詞 + 人 + 物】</strong><br>
+          • He gave <span style="color:var(--accent);">me</span> <span style="color:var(--highlight);">a gift</span>.<br>
+          • Mom bought <span style="color:var(--accent);">me</span> <span style="color:var(--highlight);">a new umbrella</span>.
+        </div>
+        <div style="margin-bottom:16px;">
+          <strong>【句型 2：動詞 + 物 + 介系詞 (to/for) + 人】</strong><br>
+          • He gave <span style="color:var(--highlight);">a gift</span> <strong style="color:#38bdf8;">to</strong> <span style="color:var(--accent);">me</span>.<br>
+          • Mom bought <span style="color:var(--highlight);">a new umbrella</span> <strong style="color:#fbbf24;">for</strong> <span style="color:var(--accent);">me</span>.
         </div>
       </div>
       <div class="ans-box" id="ans-2">
-        <strong>💡 例句解析：</strong> <code>It is sunny and hot today.</code> (主詞 It 指天氣，後面放形容詞)。
+        💡 <strong>記憶口訣：</strong><br>
+        • 方向傳遞用 <strong>to</strong>：give, send, show, tell, write, teach.<br>
+        • 貼心付出用 <strong>for</strong>：buy, make, cook, get, bake.
       </div>
     </div>
 
-    <!-- Slide 3: Grammar Focus 1 天氣問答句型 -->
-    <div class="slide-frame" id="slide-3" style="display:none;">
-      <div class="slide-page-num">3 / 6</div>
-      <div class="slide-title">☀️ Grammar Focus 1: 天氣問答與動名詞句型</div>
+    <!-- Slide 4: C2 應用組 - 天氣多樣句型轉換 -->
+    <div class="slide-frame" id="slide-3">
+      <div class="slide-page-num">4 / 6</div>
+      <div class="slide-title">🔄 Slide 4: C2 應用組 - 天氣三種表達互換</div>
       <div class="slide-content">
-        <p><strong>句型一：問天氣</strong></p>
-        <div style="padding:10px 16px; background:rgba(255,255,255,0.05); border-radius:8px;">
-          👉 <code>How is the weather today?</code><br>
-          = <code>What is the weather like today?</code> (注意有 like 要用 What！)
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong>【例句：這裡夏天常下大雨】</strong><br>
+          1. <strong>代名詞 It (形容詞)：</strong> It is very rainy here in summer.<br>
+          2. <strong>代名詞 It (動詞)：</strong> It rains a lot here in summer.<br>
+          3. <strong>人稱/地點 We/There is (名詞)：</strong> We have a lot of rain here in summer. / There is a lot of rain here in summer.
         </div>
-        <p style="margin-top:16px;"><strong>句型二：下雨與下雪的三種講法</strong></p>
-        <ul style="margin-left:24px; line-height:2.2;">
-          <li>1. <code>It rains a lot in summer.</code> (動詞 rains)</li>
-          <li>2. <code>There is a lot of rain in summer.</code> (名詞 rain)</li>
-          <li>3. <code>We have a lot of rain in summer.</code> (名詞 rain)</li>
-        </ul>
       </div>
       <div class="ans-box" id="ans-3">
-        <strong>💡 易錯提醒：</strong> <code>How is the weather like?</code> ❌ 錯誤！有 <strong>like</strong> (介系詞) 必須搭配疑問代名詞 <strong>What</strong>！
+        💡 <strong>常考陷阱：</strong><br>
+        • <code>rain</code> 作動詞時受詞是副詞 (<code>a lot</code> / <code>heavily</code>)。<br>
+        • <code>rain</code> 作不可數名詞時搭配形容詞 (<code>a lot of rain</code> / <code>heavy rain</code>)。
       </div>
     </div>
 
-    <!-- Slide 4: Grammar Focus 2 授與動詞 -->
-    <div class="slide-frame" id="slide-4" style="display:none;">
-      <div class="slide-page-num">4 / 6</div>
-      <div class="slide-title">🎁 Grammar Focus 2: 授與雙賓動詞 (to vs for)</div>
+    <!-- Slide 5: C2 應用組 - 授與動詞介系詞判斷 -->
+    <div class="slide-frame" id="slide-4">
+      <div class="slide-page-num">5 / 6</div>
+      <div class="slide-title">⚖️ Slide 5: C2 應用組 - 授與動詞進階句型與代名詞受詞</div>
       <div class="slide-content">
-        <p><strong>結構公式：</strong></p>
-        <div style="padding:10px 16px; background:rgba(255,255,255,0.05); border-radius:8px; line-height:2.2;">
-          <strong>A 式：</strong> <code>[主詞] + [動詞] + [人] + [物]</code> ➔ <code>Uncle gave me a card.</code><br>
-          <strong>B 式：</strong> <code>[主詞] + [動詞] + [物] + [to/for] + [人]</code> ➔ <code>Uncle gave a card to me.</code>
+        <div style="margin-bottom:16px;">
+          <strong>【當受詞是代名詞 (it / them) 時的唯一結構】</strong><br>
+          ✅ He gave <strong style="color:var(--highlight);">it to</strong> me. (正確)<br>
+          ❌ He gave me it. (文法不自然 / 錯誤)
         </div>
-        <p style="margin-top:16px;"><strong>介系詞分類口訣：</strong></p>
-        <ul style="margin-left:24px; line-height:2.2;">
-          <li>👉 <strong>to</strong> (方向/直接傳遞): <code>give, send, write, lend, show</code></li>
-          <li>👉 <strong>for</strong> (付出心意/為某人做): <code>buy, make</code></li>
-        </ul>
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
+          <strong>【即時隨堂測驗】</strong><br>
+          1. Linda made a delicious cake ______ her brother. (to / for)<br>
+          2. Eric sent a postcard ______ his teacher. (to / for)
+        </div>
       </div>
       <div class="ans-box" id="ans-4">
-        <strong>💡 實戰例題：</strong><br>
-        1. Kate bought a jacket <strong>for</strong> Pat.<br>
-        2. Ariel sent a birthday gift <strong>to</strong> her cousin.
+        💡 <strong>答案解析：</strong><br>
+        1. <strong>for</strong> (make 為付費/製作類，用 for)<br>
+        2. <strong>to</strong> (send 為方向傳遞類，用 to)
       </div>
     </div>
 
-    <!-- Slide 5: Dialogue 假期跨國旅遊 -->
-    <div class="slide-frame" id="slide-5" style="display:none;">
-      <div class="slide-page-num">5 / 6</div>
-      <div class="slide-title">✈️ Dialogue: Jamie & Zac (暑假跨國對話)</div>
+    <!-- Slide 6: C3 表達組 - 氣象報導與情境表達 -->
+    <div class="slide-frame" id="slide-5">
+      <div class="slide-page-num">6 / 6</div>
+      <div class="slide-title">🎙️ Slide 6: C3 表達組 - 英語氣象主播情境表達</div>
       <div class="slide-content">
-        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; line-height:2.2;">
-          <div>👦 <strong>Jamie:</strong> "How was your summer vacation, Zac?"</div>
-          <div>👦 <strong>Zac:</strong> "It was good. I visited my aunt in India. It was hot, and it rained a lot."</div>
-          <div>👦 <strong>Jamie:</strong> "I traveled to Australia. It was cold, and it snowed for a few days."</div>
-          <div>👦 <strong>Jamie:</strong> "I sent you a postcard from Australia. My parents also gave me a warm jacket!"</div>
+        <div style="background:rgba(255,255,255,0.05); padding:18px; border-radius:12px; margin-bottom:16px;">
+          <strong>【情境短文 (Weather Report)】</strong><br>
+          "Good morning, Taipei! It is <strong>cold and rainy</strong> today. Don't forget to take an umbrella with you when you go out. My mother gave <strong>a warm jacket to me</strong> before I left home. Have a wonderful day!"
+        </div>
+        <div>
+          <strong>【書寫表達要點】</strong><br>
+          1. 正確使用氣候形容詞 (cold, rainy, snowy).<br>
+          2. 授與動詞與介系詞的精準搭配 (gave ... to ... / bought ... for ...).<br>
+          3. 首字大寫與句尾標點檢查。
         </div>
       </div>
       <div class="ans-box" id="ans-5">
-        <strong>💡 跨領域素養（地理）：</strong> 澳洲在南半球，台灣放暑假（7~8月）時，澳洲正是寒冷的「冬季」！
+        💡 <strong>寫作評分指標：</strong><br>
+        1. 語法正確性 (動詞時態、介系詞 to/for 搭配)<br>
+        2. 詞彙豐富度 (weather, umbrella, jacket, rainy, cloudy)<br>
+        3. 標點與大小寫規範 (首字大寫、句尾句號)
       </div>
     </div>
-
-    <!-- Slide 6: C1 / C2 / C3 差異化教學與評量重點 -->
-    <div class="slide-frame" id="slide-6" style="display:none;">
-      <div class="slide-page-num">6 / 6</div>
-      <div class="slide-title">🧭 C1・C2・C3 差異化教學實施建議</div>
-      <div class="slide-content">
-        <ul style="margin-left:24px; line-height:2.2;">
-          <li>🌱 <strong>C1 基礎組</strong>: 聚焦看圖認四季、5 大天氣形容詞二選一、<code>give me a card</code> 基礎圖卡，提供大量口語報讀與及時增強。</li>
-          <li>🌿 <strong>C2 應用組</strong>: 透過 <code>+y</code> 橋樑表與 <code>to / for</code> 提示填空，練習 Word Bank 動態選字與簡短對話理解。</li>
-          <li>🌳 <strong>C3 表達組</strong>: 撤除提示進行雙賓動詞雙向句型改寫、南北半球氣候短文細節理解、自主向外國人介紹台灣四季。</li>
-        </ul>
-      </div>
-      <div class="ans-box" id="ans-6">
-        <strong>💡 評量建議：</strong> 善用全班學習歷程儀表板，將學生在各組別的正確率與提示次數納入平時評量與 IEP 成長記錄！
-      </div>
-    </div>
-
   </main>
 
   <footer>
-    <div>
-      快捷鍵：<span class="key-badge">←</span> <span class="key-badge">→</span> 換頁 ｜ <span class="key-badge">Space</span> 答案 ｜ <span class="key-badge">W</span> 白板 ｜ <span class="key-badge">C</span> 清除 ｜ <span class="key-badge">R</span> 朗讀
+    <div class="key-hints">
+      <span><span class="key-badge">Space</span> 答案開關</span>
+      <span><span class="key-badge">◀</span> / <span class="key-badge">▶</span> 換頁</span>
+      <span><span class="key-badge">W</span> 電子白板</span>
+      <span><span class="key-badge">C</span> 清除筆跡</span>
+      <span><span class="key-badge">R</span> 語音朗讀</span>
     </div>
-    <div>國中英語資源班差異化教材系統 (Unit 1)</div>
+    <div>國中英語差異化教學團隊 · 國二 (八年級) 教師專用</div>
   </footer>
 
   <script>
-    let currentSlide = 1;
+    let currentSlide = 0;
     const totalSlides = 6;
-    let isDrawing = false;
     let whiteboardActive = false;
-    const canvas = document.getElementById('whiteboardCanvas');
-    const ctx = canvas.getContext('2d');
-    const slideCanvasMemory = {};
+    let isDrawing = false;
+    let ctx = null;
 
+    let bestEnVoice = null;
+    let bestZhVoice = null;
+
+    function initVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
+                 || voices.find(v => v.lang.startsWith('en')) || null;
+      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
+                 || voices.find(v => v.lang.startsWith('zh')) || null;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initVoices;
+      initVoices();
+    }
+
+    function showSlide(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= totalSlides) idx = totalSlides - 1;
+      currentSlide = idx;
+
+      for (let i = 0; i < totalSlides; i++) {
+        const slide = document.getElementById('slide-' + i);
+        if (slide) {
+          if (i === currentSlide) slide.classList.add('active');
+          else slide.classList.remove('active');
+        }
+      }
+
+      document.getElementById('slideIndicator').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+      document.getElementById('slideSelect').value = currentSlide;
+      
+      const currentAns = document.getElementById('ans-' + currentSlide);
+      const btnAns = document.getElementById('btnAns');
+      if (currentAns && currentAns.classList.contains('show')) {
+        btnAns.classList.add('active');
+      } else {
+        btnAns.classList.remove('active');
+      }
+    }
+
+    function jumpToSlide(idx) {
+      showSlide(idx);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) showSlide(currentSlide - 1);
+    }
+
+    function toggleAnswer() {
+      const ans = document.getElementById('ans-' + currentSlide);
+      const btn = document.getElementById('btnAns');
+      if (ans) {
+        ans.classList.toggle('show');
+        btn.classList.toggle('active', ans.classList.contains('show'));
+      }
+    }
+
+    function speakCurrentSlide() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const activeSlide = document.getElementById('slide-' + currentSlide);
+      if (!activeSlide) return;
+
+      const title = activeSlide.querySelector('.slide-title').innerText;
+      const content = activeSlide.querySelector('.slide-content').innerText;
+      const fullText = title + '。' + content;
+
+      const spRate = parseFloat(document.getElementById('speedSelect').value) || 0.85;
+
+      const chunks = fullText.split(/[\n。！？]/).map(s => s.trim()).filter(Boolean);
+      chunks.forEach(ch => {
+        const hasEn = /[a-zA-Z]/.test(ch);
+        const utt = new SpeechSynthesisUtterance(ch);
+        utt.rate = spRate;
+        if (hasEn) {
+          if (bestEnVoice) utt.voice = bestEnVoice;
+          utt.lang = 'en-US';
+        } else {
+          if (bestZhVoice) utt.voice = bestZhVoice;
+          utt.lang = 'zh-TW';
+        }
+        window.speechSynthesis.speak(utt);
+      });
+    }
+
+    // 電子白板
+    const canvas = document.getElementById('whiteboardCanvas');
     function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      restoreSlideCanvas(currentSlide);
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    function updateSlideUI() {
-      for (let i = 1; i <= totalSlides; i++) {
-        const slide = document.getElementById(`slide-${i}`);
-        if (slide) slide.style.display = (i === currentSlide) ? 'flex' : 'none';
-      }
-      document.getElementById('slideIndicator').textContent = `${currentSlide} / ${totalSlides}`;
-      restoreSlideCanvas(currentSlide);
-    }
-
-    function nextSlide() {
-      if (currentSlide < totalSlides) {
-        saveSlideCanvas(currentSlide);
-        currentSlide++;
-        updateSlideUI();
-      }
-    }
-
-    function prevSlide() {
-      if (currentSlide > 1) {
-        saveSlideCanvas(currentSlide);
-        currentSlide--;
-        updateSlideUI();
-      }
-    }
-
-    function toggleAnswer() {
-      const ans = document.getElementById(`ans-${currentSlide}`);
-      if (ans) ans.classList.toggle('show');
-    }
+    ctx = canvas.getContext('2d');
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#e11d48';
 
     function toggleWhiteboard() {
       whiteboardActive = !whiteboardActive;
-      const btn = document.getElementById('btnBoard');
-      if (whiteboardActive) {
-        canvas.classList.add('drawing-active');
-        btn.classList.add('active');
-      } else {
-        canvas.classList.remove('drawing-active');
-        btn.classList.remove('active');
-      }
+      canvas.classList.toggle('drawing-active', whiteboardActive);
+      document.getElementById('btnBoard').classList.toggle('active', whiteboardActive);
     }
 
     function clearWhiteboard() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      slideCanvasMemory[currentSlide] = null;
     }
 
-    function saveSlideCanvas(slideNum) {
-      slideCanvasMemory[slideNum] = canvas.toDataURL();
-    }
-
-    function restoreSlideCanvas(slideNum) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (slideCanvasMemory[slideNum]) {
-        const img = new Image();
-        img.src = slideCanvasMemory[slideNum];
-        img.onload = () => ctx.drawImage(img, 0, 0);
-      }
-    }
-
-    // 白板手寫畫筆
-    canvas.addEventListener('mousedown', (e) => {
+    canvas.addEventListener('mousedown', e => {
       if (!whiteboardActive) return;
       isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
       ctx.beginPath();
-      ctx.moveTo(e.clientX, e.clientY);
-      ctx.strokeStyle = '#f43f5e';
-      ctx.lineWidth = 3.5;
-      ctx.lineCap = 'round';
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
     });
 
-    canvas.addEventListener('mousemove', (e) => {
-      if (!isDrawing || !whiteboardActive) return;
-      ctx.lineTo(e.clientX, e.clientY);
+    canvas.addEventListener('mousemove', e => {
+      if (!whiteboardActive || !isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
       ctx.stroke();
     });
 
-    window.addEventListener('mouseup', () => {
-      if (isDrawing) {
-        isDrawing = false;
-        saveSlideCanvas(currentSlide);
-      }
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseleave', () => isDrawing = false);
+
+    window.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      else if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggleAnswer(); }
+      else if (e.key === 'w' || e.key === 'W') toggleWhiteboard();
+      else if (e.key === 'c' || e.key === 'C') clearWhiteboard();
+      else if (e.key === 'r' || e.key === 'R') speakCurrentSlide();
     });
 
     function toggleTheme() {
       document.body.classList.toggle('light-mode');
     }
 
-    function speakCurrentSlide() {
-      const slide = document.getElementById(`slide-${currentSlide}`);
-      if (!slide) return;
-      window.speechSynthesis.cancel();
-      const text = slide.innerText.replace(/[\n\r]+/g, ' ');
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.rate = 0.85;
-      window.speechSynthesis.speak(utter);
-    }
-
-    // 鍵盤監聽
-    window.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
-      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
-      if (e.key === ' ') { e.preventDefault(); toggleAnswer(); }
-      if (e.key.toLowerCase() === 'w') toggleWhiteboard();
-      if (e.key.toLowerCase() === 'c') clearWhiteboard();
-      if (e.key.toLowerCase() === 'r') speakCurrentSlide();
-    });
+    showSlide(0);
   </script>
-
 </body>
 </html>
