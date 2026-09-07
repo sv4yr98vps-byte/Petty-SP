@@ -403,12 +403,12 @@
       card.innerHTML = `
         <div class="q-title">
           <span>${task.title}</span>
-          <button class="speaker-btn" onclick="speakEnglish('${task.target.join(' ')}')" title="朗讀">🔊</button>
+          <button class="speaker-btn" onclick="speakEnglish('${task.target.join(' ').replace(/'/g, "\\'")}')" title="朗讀">🔊</button>
         </div>
         <div class="drop-zone empty" id="drop-${task.id}"></div>
         <div class="word-pool" id="pool-${task.id}">
           ${task.chips.map((chip, cIdx) => `
-            <button class="word-chip" id="chip-${task.id}-${cIdx}" onclick="addUnscrambleChip('${task.id}', '${chip}', ${cIdx})">${chip}</button>
+            <button class="word-chip" id="chip-${task.id}-${cIdx}" onclick="addUnscrambleChip('${task.id}', ${cIdx})">${chip}</button>
           `).join('')}
         </div>
         <div style="display:flex; justify-content:flex-end;">
@@ -419,7 +419,11 @@
     });
   }
 
-  function addUnscrambleChip(taskId, word, cIdx) {
+  function addUnscrambleChip(taskId, cIdx) {
+    const task = unscrambleTasks.find(t => t.id === taskId);
+    if (!task) return;
+    const word = task.chips[cIdx];
+
     const chipBtn = document.getElementById(`chip-${taskId}-${cIdx}`);
     if (chipBtn.classList.contains('in-drop')) return;
 
