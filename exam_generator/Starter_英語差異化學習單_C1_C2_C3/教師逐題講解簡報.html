@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語 Starter 差異化教材｜教師逐題講解簡報</title>
+  <title>國中英語【國一 · 七年級】Starter 差異化教學講解簡報</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -262,10 +262,27 @@
   <header>
     <div class="title-area">
       <span class="badge-teach">教師講解簡報</span>
-      <h2 style="font-size:1.15rem;">Starter Unit 英語差異化教學投影片</h2>
+      <h2 style="font-size:1.15rem;">【國一 · 七年級】Starter 問候與代名詞 教學投影片</h2>
     </div>
 
     <div class="btn-group">
+      <label style="color:var(--text); font-size:0.88rem; font-weight:600;">📑 跳頁：</label>
+      <select id="slideSelect" class="tool-btn" onchange="jumpToSlide(parseInt(this.value))">
+        <option value="0">第 1 頁：C1 基礎 - 數字認讀與發音 (1~3)</option>
+        <option value="1">第 2 頁：C1 基礎 - 數字聽音辨字 (4~6)</option>
+        <option value="2">第 3 頁：C2 應用 - 自我介紹問句與答覆</option>
+        <option value="3">第 4 頁：C2 應用 - 詢問電話號碼與答覆</option>
+        <option value="4">第 5 頁：C3 表達 - 人稱代名詞三格矩陣</option>
+        <option value="5">第 6 頁：C3 表達 - 專業英文書寫校對員</option>
+      </select>
+      <label style="color:var(--text); font-size:0.88rem; font-weight:600; margin-left:4px;">⚡ 語速：</label>
+      <select id="speedSelect" class="tool-btn">
+        <option value="0.25">🐢 0.25x 極慢速</option>
+        <option value="0.4">🐢 0.4x 慢速</option>
+        <option value="0.6">0.6x 初學</option>
+        <option value="0.85" selected>0.85x 適中</option>
+        <option value="1.0">1.0x 標準</option>
+      </select>
       <button class="tool-btn" id="btnSpeakSlide" onclick="speakCurrentSlide()">🔊 朗讀本頁 (R)</button>
       <button class="tool-btn" id="btnWb" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
       <button class="tool-btn" onclick="clearWhiteboard()">🧹 清除畫痕</button>
@@ -336,7 +353,18 @@
         speechText: "一、數字認讀與發音。1 is one, 2 is two, 3 is three. 看到數字 3，英文是哪一個？ 選項 A: three, 選項 B: two",
         content: `
           <div style="font-size:1.8rem; font-family:'Fredoka',sans-serif; text-align:center; margin-bottom:12px;">
-            1 = one　｜　2 = two　｜　3 = three
+            <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; font-family:'Fredoka',sans-serif; text-align:center; font-size:1.3rem; margin-bottom:12px;">
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">1 one</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">2 two</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">3 three</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">4 four</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">5 five</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">6 six</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">7 seven</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">8 eight</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">9 nine</div>
+            <div style="background:rgba(255,255,255,0.08); padding:8px; border-radius:8px;">10 ten</div>
+          </div>
           </div>
           <div style="line-height:2;">
             👦 題目：看到數字 <strong>3</strong>，英文是哪一個？<br>
@@ -445,7 +473,17 @@
     }
     window.addEventListener('resize', resizeCanvas);
 
+    function jumpToSlide(idx) {
+      if (idx >= 0 && idx < slides.length) {
+        saveCurrentSlideMemory();
+        currentSlide = idx;
+        renderSlide();
+      }
+    }
+
     function renderSlide() {
+      const sel = document.getElementById('slideSelect');
+      if (sel) sel.value = currentSlide;
       synth.cancel();
       const s = slides[currentSlide];
       document.getElementById('slideLevel').textContent = s.level;
@@ -468,7 +506,7 @@
       utter.lang = 'zh-TW';
       const zhVoice = voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW') || v.lang.includes('zh'));
       if (zhVoice) utter.voice = zhVoice;
-      utter.rate = 0.85;
+      const sp = parseFloat(document.getElementById('speedSelect')?.value) || 0.85; utter.rate = sp;
       synth.speak(utter);
     }
 
