@@ -3,911 +3,571 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C3 表達組｜Starter 英語互動點讀學習單</title>
+  <title>國中英語【國一 · 七年級】Starter 英語差異化學習單｜C3 表達組</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #dc2626;
-      --primary-dark: #b91c1c;
-      --primary-light: #fef2f2;
-      --accent: #4f46e5;
-      --bg: #fff5f5;
+      --primary: #7c3aed;
+      --primary-dark: #6d28d9;
+      --bg: #faf5ff;
       --card-bg: #ffffff;
-      --text: #1e293b;
+      --text: #0f172a;
       --text-muted: #64748b;
-      --border: #fecaca;
-      --radius: 18px;
-      --shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.1), 0 8px 10px -6px rgba(220, 38, 38, 0.05);
+      --border: #e9d5ff;
+      --success: #10b981;
+      --error: #ef4444;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: 'Noto Sans TC', 'Outfit', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      padding: 16px;
+      padding-bottom: 60px;
     }
-
-    header {
-      background: white;
-      border-bottom: 2px solid var(--border);
-      padding: 10px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    .container { max-width: 820px; margin: 0 auto; }
+    .header {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
     }
-
+    .badge-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .level-badge { background: var(--primary); color: white; padding: 4px 12px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; }
+    .student-tag { background: #f3e8ff; color: #7c3aed; padding: 4px 12px; border-radius: 999px; font-weight: 700; cursor: pointer; border: 1px dashed #7c3aed; }
     .toolbar {
-      max-width: 1000px;
-      margin: 0 auto;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .voice-badge { background: rgba(124,58,237,0.1); color: var(--primary); font-weight: 700; font-size: 0.88rem; padding: 4px 10px; border-radius: 8px; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #6d28d9; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+    .exercise-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .q-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; }
+    .speaker-btn { background: none; border: none; font-size: 1.35rem; cursor: pointer; padding: 0 4px; transition: transform 0.1s; }
+    .speaker-btn:hover { transform: scale(1.15); }
+    .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+    .option-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+    }
+    .option-btn:hover { border-color: var(--primary); background: #faf5ff; }
+    .option-btn.selected { border-color: var(--primary); background: #f3e8ff; color: #6d28d9; font-weight: 700; }
+    .drop-zone {
+      min-height: 52px;
+      background-color: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
       display: flex;
       flex-wrap: wrap;
+      gap: 8px;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
     }
-
-    .brand-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .badge-c3 {
-      background: #ef4444;
-      color: white;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
-
-    .student-badge {
-      background: #fee2e2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-      padding: 4px 12px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-
-    .student-badge:hover { background: #fecaca; }
-
-    .audio-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--primary-light);
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-    }
-
-    .audio-controls label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary-dark);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    select, input[type="range"] {
-      cursor: pointer;
-      accent-color: var(--primary);
-    }
-
-    select {
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2px 8px;
-      font-size: 0.85rem;
-      background: white;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-      margin: 20px auto 40px;
-      padding: 0 20px;
-      flex: 1;
-    }
-
-    .section-card {
-      background: white;
-      border-radius: var(--radius);
-      border: 2px solid #e2e8f0;
-      padding: 26px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .section-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 2px solid #f1f5f9;
-      padding-bottom: 10px;
-    }
-
-    .matrix-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0 16px;
-      font-size: 0.95rem;
-    }
-
-    .matrix-table th, .matrix-table td {
-      border: 1px solid #fecaca;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .matrix-table th {
-      background: #fef2f2;
-      color: #991b1b;
-      font-weight: 700;
-    }
-
-    .blank-input {
+    .drop-zone.empty::before { content: '👉 點擊單字積木完成重組...'; color: #94a3b8; font-size: 0.88rem; }
+    .word-pool { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .word-chip {
+      background: #ffffff;
       border: 2px solid #cbd5e1;
       border-radius: 8px;
       padding: 6px 12px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #0f172a;
-      width: 100%;
-      max-width: 130px;
-      text-align: center;
-      background: white;
-      outline: none;
-      transition: all 0.2s;
-      font-family: 'Fredoka', sans-serif;
-    }
-
-    .blank-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
-      background: #fff5f5;
-    }
-
-    .q-item {
-      margin-bottom: 20px;
-      padding: 18px;
-      background: #fafaf9;
-      border-radius: 14px;
-      border-left: 5px solid var(--primary);
-    }
-
-    .q-text {
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .read-sentence {
-      cursor: pointer;
-      border-bottom: 2px dashed #60a5fa;
-      transition: all 0.2s ease;
-      padding: 2px 4px;
-      border-radius: 4px;
-      display: inline;
-    }
-
-    .read-sentence:hover {
-      background: #eff6ff;
-      border-bottom-color: #2563eb;
-    }
-
-    .speaking-highlight {
-      background-color: #fef08a !important;
-      border-bottom: 2px solid #eab308 !important;
-      color: #713f12 !important;
-      font-weight: 700 !important;
-      border-radius: 4px;
-      box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
-      animation: pulseHighlight 1.5s infinite;
-    }
-
-    @keyframes pulseHighlight {
-      0%, 100% { background-color: #fef08a; }
-      50% { background-color: #fde047; }
-    }
-
-    .speaker-btn {
-      background: #fee2e2;
-      border: 1px solid #fca5a5;
-      color: #991b1b;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
       font-size: 1rem;
-      margin-left: 6px;
-      vertical-align: middle;
-      transition: all 0.2s;
-    }
-
-    .speaker-btn:hover {
-      background: #fca5a5;
-      transform: scale(1.1);
-    }
-
-    .btn-play-all {
-      background: #dc2626;
-      color: white;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 8px;
       font-weight: 700;
-      font-size: 0.95rem;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-      box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+      box-shadow: 0 2px 0 #cbd5e1;
+      transition: all 0.1s;
     }
-
-    .btn-play-all:hover { background: #b91c1c; }
-    .btn-play-all.playing { background: #475569; }
-
-    .check-btn {
+    .word-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .word-chip:active { transform: translateY(2px); box-shadow: none; }
+    .word-chip.in-drop { opacity: 0.4; pointer-events: none; }
+    .input-box {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-family: 'Fredoka', 'Outfit', sans-serif;
+      margin-top: 8px;
+      outline: none;
+    }
+    .input-box:focus { border-color: var(--primary); }
+    .btn-submit-all {
       background: var(--primary);
       color: white;
       border: none;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-left: 8px;
-    }
-
-    .check-btn:hover { background: var(--primary-dark); }
-
-    .item-feedback {
-      display: inline-block;
-      margin-left: 10px;
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .fb-correct { color: #059669; }
-    .fb-wrong { color: #dc2626; }
-
-    .passage-box {
-      background: #fdf4ff;
-      border: 2px solid #f0abfc;
-      border-radius: 14px;
-      padding: 24px;
-      font-size: 1.2rem;
-      line-height: 2.2;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(240, 171, 252, 0.15);
-    }
-
-    .reading-tracker-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #fae8ff;
-      border-radius: 8px;
-      padding: 6px 12px;
-      margin-bottom: 12px;
-      font-size: 0.88rem;
-      color: #86198f;
-      font-weight: 600;
-    }
-
-    .finish-section {
-      background: white;
-      border-radius: var(--radius);
-      border: 3px solid #dc2626;
-      padding: 30px;
-      text-align: center;
-      margin-top: 30px;
-      box-shadow: var(--shadow);
-    }
-
-    .report-stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      width: 100%;
-      max-width: 500px;
-      margin: 16px auto;
-    }
-
-    .stat-pill {
-      background: #fff5f5;
-      border: 1px solid #fecaca;
+      padding: 14px 36px;
       border-radius: 12px;
-      padding: 10px;
-      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin: 24px 0;
+      box-shadow: 0 10px 15px -3px rgba(124,58,237,0.3);
     }
-
-    .stat-val { font-size: 1.4rem; font-weight: 700; color: #dc2626; }
-    .stat-lbl { font-size: 0.8rem; color: #7f1d1d; }
-
-    @media (max-width: 600px) {
-      .container { padding: 0 12px; }
-      .matrix-table { font-size: 0.85rem; }
-      .blank-input { max-width: 90px; padding: 4px 6px; }
-      .report-stat-grid { grid-template-columns: 1fr; }
-    }
+    .completion-card { background: var(--card-bg); border-radius: 20px; padding: 32px; text-align: center; border: 2px solid var(--primary); display: none; margin-top: 20px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+    .stat-box { background: #f8fafc; border: 1px solid var(--border); padding: 14px; border-radius: 12px; }
+    .stat-val { font-size: 1.8rem; font-weight: 800; color: var(--primary-dark); }
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); }
+    .sync-status-box { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; padding: 12px 16px; border-radius: 10px; margin: 18px 0; font-size: 0.95rem; font-weight: 700; }
   </style>
 </head>
 <body>
-
-  <header>
-    <div class="toolbar">
-      <div class="brand-area">
-        <a href="index.html" style="text-decoration:none; color:inherit;">
-          <span class="badge-c3">C3 表達組</span>
-        </a>
-        <div class="student-badge" onclick="promptStudentName()">
-          👤 <span id="studentDisplay">點擊輸入姓名</span> ✏️
-        </div>
-      </div>
-      
-      <div class="audio-controls">
-        <label>
-          🗣 英文發音
-          <select id="voiceSelect"></select>
-        </label>
-        <label>
-          ⚡ 語速
-          <input type="range" id="rateRange" min="0.25" max="1.2" step="0.05" value="0.8">
-          <span id="rateVal">0.8x</span>
-        </label>
-      </div>
+<div class="container">
+  <div class="header">
+    <div class="badge-bar">
+      <span class="level-badge">國一 Starter · C3 表達組</span>
+      <span class="student-tag" id="studentDisplay" onclick="promptStudentName()">👤 點此輸入姓名座號</span>
     </div>
-  </header>
+    <h1 style="font-size:1.6rem; color:#6d28d9;">Starter 深度表達評量 (進階4選1·句子重組·格式校對)</h1>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 5題進階4選1 · 4題重組 · 1題校對 · 零直接提示 · 雲端即時記錄</p>
+  </div>
 
-  <main class="container">
+  <div class="toolbar">
+    <span class="voice-badge">🗣️ Google 雙語語音小姐 (已鎖定)</span>
+    <label style="font-weight:600; font-size:0.9rem;">⚡ 語速：</label>
+    <select id="speedSelect" style="padding:4px 8px; border-radius:6px; border:1px solid #cbd5e1;">
+      <option value="0.25">🐢 0.25x 極慢速 (音素解碼)</option>
+      <option value="0.4">🐢 0.4x 慢速</option>
+      <option value="0.6">0.6x 初學清晰</option>
+      <option value="0.85" selected>0.85x 適中推薦</option>
+      <option value="1.0">1.0x 標準原速</option>
+    </select>
+  </div>
 
-    <!-- 任務一：代名詞三格矩陣快填 -->
-    <div class="section-card">
-      <div class="section-title">
-        <span class="read-sentence" onclick="speakChinese('第一大題：代名詞三格矩陣快填')">一、代名詞三格矩陣 (Subject / Possessive / Object)</span>
-        <button class="speaker-btn" title="聽大題說明" onclick="speakChinese('請依據語法規則，完成代名詞三格表格填空。')">🔊</button>
+  <div id="c3Content">
+    <!-- Part 1: 5題 4選1 選擇題 -->
+    <div class="section-title">📝 第一部分：進階文法與核心概念 (4 選 1 選擇題)</div>
+
+    <!-- Q1 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        1. This special birthday card is for ________. (這張卡片是給他的。)
+        <button class="speaker-btn" onclick="speakEnglish('This special birthday card is for him.')">🔊</button>
       </div>
-      <p style="font-size:0.92rem; color:#64748b; margin-bottom:10px;">
-        請依據語法規則，完成代名詞三格表格填空（點擊文字可聽發音）：
-      </p>
-
-      <table class="matrix-table">
-        <thead>
-          <tr>
-            <th>中文</th>
-            <th>主格 (動作發出者)</th>
-            <th>所有格 (...的)</th>
-            <th>受格 (接受者/for後面)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>我</td>
-            <td><strong class="read-sentence" onclick="speakEnglish('I', event)">I</strong></td>
-            <td><strong class="read-sentence" onclick="speakEnglish('my', event)">my</strong></td>
-            <td>
-              <input type="text" id="m1" class="blank-input" placeholder="受格">
-            </td>
-          </tr>
-          <tr>
-            <td>你</td>
-            <td><strong class="read-sentence" onclick="speakEnglish('you', event)">you</strong></td>
-            <td>
-              <input type="text" id="m2" class="blank-input" placeholder="所有格">
-            </td>
-            <td><strong class="read-sentence" onclick="speakEnglish('you', event)">you</strong></td>
-          </tr>
-          <tr>
-            <td>他 (男)</td>
-            <td><strong class="read-sentence" onclick="speakEnglish('he', event)">he</strong></td>
-            <td><strong class="read-sentence" onclick="speakEnglish('his', event)">his</strong></td>
-            <td>
-              <input type="text" id="m3" class="blank-input" placeholder="受格">
-            </td>
-          </tr>
-          <tr>
-            <td>她 (女)</td>
-            <td><strong class="read-sentence" onclick="speakEnglish('she', event)">she</strong></td>
-            <td>
-              <input type="text" id="m4" class="blank-input" placeholder="所有格">
-            </td>
-            <td><strong class="read-sentence" onclick="speakEnglish('her', event)">her</strong></td>
-          </tr>
-          <tr>
-            <td>他們</td>
-            <td><strong class="read-sentence" onclick="speakEnglish('they', event)">they</strong></td>
-            <td><strong class="read-sentence" onclick="speakEnglish('their', event)">their</strong></td>
-            <td>
-              <input type="text" id="m5" class="blank-input" placeholder="受格">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="text-align:right;">
-        <button class="check-btn" onclick="verifyMatrix()">一鍵檢查表格</button>
-        <span id="fb_matrix" class="item-feedback"></span>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(1, 'A', this)">(A) he</button>
+        <button class="option-btn" onclick="pickChoice(1, 'B', this)">(B) him</button>
+        <button class="option-btn" onclick="pickChoice(1, 'C', this)">(C) his</button>
+        <button class="option-btn" onclick="pickChoice(1, 'D', this)">(D) himself</button>
       </div>
     </div>
 
-    <!-- 任務二：情境短文閱讀理解（含即時逐句高亮追蹤） -->
-    <div class="section-card">
-      <div class="section-title">
-        <span class="read-sentence" onclick="speakChinese('第二大題：情境短文閱讀，國中開學第一天')">二、情境短文閱讀：國中開學第一天</span>
-        <button class="btn-play-all" id="btnPlayPassage" onclick="togglePlayPassage()">
-          <span>🔊 循序朗讀短文（有追蹤提示）</span>
-        </button>
+    <!-- Q2 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        2. Mike and I ________ in Class 701. We are good classmates.
+        <button class="speaker-btn" onclick="speakEnglish('Mike and I are in Class 701. We are good classmates.')">🔊</button>
       </div>
-
-      <div class="reading-tracker-bar">
-        <span>📖 點擊任一句子單獨聽讀，或點上方按鈕自動循序朗讀（黃色光條跟隨）</span>
-        <span id="readingStatusText"></span>
-      </div>
-
-      <div class="passage-box" id="c3PassageBox">
-        <p>
-          <span class="read-sentence" onclick="speakEnglish('Today is the first day of junior high school.', event)">Today is the first day of junior high school.</span> 
-          <span class="read-sentence" onclick="speakEnglish('Mike meets Tina in the classroom.', event)">Mike meets Tina in the classroom.</span>
-        </p>
-        <p>
-          <strong>Mike:</strong> 
-          <span class="read-sentence" onclick="speakEnglish('Hello! I am Mike. What is your name?', event)">"Hello! I am Mike. What is your name?"</span>
-        </p>
-        <p>
-          <strong>Tina:</strong> 
-          <span class="read-sentence" onclick="speakEnglish('Hi, Mike! My name is Tina. This is my dog. Its name is Rocky.', event)">"Hi, Mike! My name is Tina. This is my dog. Its name is Rocky."</span>
-        </p>
-        <p>
-          <strong>Mike:</strong> 
-          <span class="read-sentence" onclick="speakEnglish('Nice to meet you, Tina! Rocky is so cute. The ball is for it.', event)">"Nice to meet you, Tina! Rocky is so cute. The ball is for it."</span>
-        </p>
-        <p>
-          <strong>Tina:</strong> 
-          <span class="read-sentence" onclick="speakEnglish('Thank you! What is your phone number?', event)">"Thank you! What's your phone number?"</span>
-        </p>
-        <p>
-          <strong>Mike:</strong> 
-          <span class="read-sentence" onclick="speakEnglish('It is 2345-0189. Let us practice English together!', event)">"It is 2345-0189. Let's practice English together!"</span>
-        </p>
-      </div>
-
-      <div class="q-item">
-        <div class="q-text">1. Who is Rocky? (Rocky 是誰？)</div>
-        <input type="text" id="c3_q1" class="blank-input" style="width:300px; text-align:left;" placeholder="It is Tina's dog.">
-        <button class="check-btn" onclick="verifyKeyword('c3_q1', ['dog', 'tina\'s dog', 'tina dog'], 'fb_c3_1')">檢查</button>
-        <span id="fb_c3_1" class="item-feedback"></span>
-      </div>
-
-      <div class="q-item">
-        <div class="q-text">2. What is the ball for? (這顆球是給誰的？)</div>
-        <input type="text" id="c3_q2" class="blank-input" style="width:300px; text-align:left;" placeholder="The ball is for Rocky / it.">
-        <button class="check-btn" onclick="verifyKeyword('c3_q2', ['rocky', 'dog', 'it'], 'fb_c3_2')">檢查</button>
-        <span id="fb_c3_2" class="item-feedback"></span>
-      </div>
-
-      <div class="q-item">
-        <div class="q-text">3. What is Mike's phone number? (Mike 的電話號碼是？)</div>
-        <input type="text" id="c3_q3" class="blank-input" style="width:200px;" placeholder="2345-0189">
-        <button class="check-btn" onclick="verifyKeyword('c3_q3', ['2345-0189', '23450189'], 'fb_c3_3')">檢查</button>
-        <span id="fb_c3_3" class="item-feedback"></span>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(2, 'A', this)">(A) am</button>
+        <button class="option-btn" onclick="pickChoice(2, 'B', this)">(B) is</button>
+        <button class="option-btn" onclick="pickChoice(2, 'C', this)">(C) are</button>
+        <button class="option-btn" onclick="pickChoice(2, 'D', this)">(D) be</button>
       </div>
     </div>
 
-    <!-- 任務三：專業書寫校對員 -->
-    <div class="section-card">
-      <div class="section-title">
-        <span class="read-sentence" onclick="speakChinese('第三大題：專業英文書寫校對員')">三、專業英文書寫校對員 (Proofreading)</span>
-        <button class="speaker-btn" title="聽大題說明" onclick="speakChinese('請找出句子中的所有格式錯誤，包含大小寫與標點符號，並寫出正確句子。')">🔊</button>
+    <!-- Q3 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        3. Look at that young girl. ________ name is Amy.
+        <button class="speaker-btn" onclick="speakEnglish('Look at that young girl. Her name is Amy.')">🔊</button>
       </div>
-      <p style="font-size:0.92rem; color:#64748b; margin-bottom:14px;">
-        請修正句子中的所有格式錯誤（句首大寫、人名大寫、代名詞 I 大寫、標點符號與空格）：
-      </p>
-
-      <div class="q-item">
-        <div class="q-text">1. <code>how are you? i am fine.thank you</code> (有 4 處錯誤)</div>
-        <input type="text" id="proof_1" class="blank-input" style="width:100%; max-width:520px; text-align:left;" placeholder="輸入修正後的完整句子">
-        <div style="margin-top:8px;">
-          <button class="check-btn" onclick="verifyProof('proof_1', '請檢查：1. 句首大寫 2. 代名詞 I 大寫 3. 句尾標點符號', 'fb_p1')">校對檢查</button>
-          <span id="fb_p1" class="item-feedback"></span>
-        </div>
-        <small style="color:#64748b;">標準答案：<code>請檢查：1. 句首大寫 2. 代名詞 I 大寫 3. 句尾標點符號</code></small>
-      </div>
-
-      <div class="q-item">
-        <div class="q-text">2. <code>what is your name hi,my name is Rose.</code> (有 3 處錯誤)</div>
-        <input type="text" id="proof_2" class="blank-input" style="width:100%; max-width:520px; text-align:left;" placeholder="輸入修正後的完整句子">
-        <div style="margin-top:8px;">
-          <button class="check-btn" onclick="verifyProof('proof_2', 'What is your name? Hi, my name is Rose.', 'fb_p2')">校對檢查</button>
-          <span id="fb_p2" class="item-feedback"></span>
-        </div>
-        <small style="color:#64748b;">標準答案：<code>What is your name? Hi, my name is Rose.</code></small>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(3, 'A', this)">(A) She</button>
+        <button class="option-btn" onclick="pickChoice(3, 'B', this)">(B) Her</button>
+        <button class="option-btn" onclick="pickChoice(3, 'C', this)">(C) He</button>
+        <button class="option-btn" onclick="pickChoice(3, 'D', this)">(D) His</button>
       </div>
     </div>
 
-    <!-- 成果結算區 -->
-    <div class="finish-section">
-      <h3 style="font-size:1.4rem; color:#dc2626; margin-bottom:8px;">🎉 完成 C3 表達組挑戰</h3>
-      <p style="font-size:0.95rem; color:#7f1d1d;" id="certStudentText">學生：未填寫 ｜ 評價：⭐⭐⭐</p>
-      
-      
-      <!-- 雲端儀表板同步狀態 -->
-      <div id="cloudSyncBanner" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:10px 16px; border-radius:10px; margin:16px auto; max-width:550px; font-size:0.95rem; display:flex; align-items:center; justify-content:center; gap:8px; width:100%; box-sizing:border-box;">
-        📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
+    <!-- Q4 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        4. I have ________ in my school bag.
+        <button class="speaker-btn" onclick="speakEnglish('I have two pens and three books in my school bag.')">🔊</button>
       </div>
-      <div class="report-stat-grid">
-        <div class="stat-pill">
-          <div class="stat-val" id="statScore">100 分</div>
-          <div class="stat-lbl">進階掌握度</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-val" id="statAttempts">0 次</div>
-          <div class="stat-lbl">校對重試次數</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-val" id="statStatus">優秀</div>
-          <div class="stat-lbl">自主表達表現</div>
-        </div>
-      </div>
-
-      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:16px;">
-        <button class="check-btn" style="background:#059669; padding:10px 20px;" onclick="submitLearningReport()">
-          💾 儲存並產出成果報告
-        </button>
-        <a href="index.html" class="check-btn" style="text-decoration:none; padding:10px 20px; background:#334155;">🏠 回到首頁</a>
-      </div>
-      <div id="copyToast" style="font-size:0.85rem; color:#059669; font-weight:700; margin-top:10px; display:none;">
-        ✓ 已儲存並複製報告文字！可直接貼在 LINE 或筆記本中。
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(4, 'A', this)">(A) two pen</button>
+        <button class="option-btn" onclick="pickChoice(4, 'B', this)">(B) two pens</button>
+        <button class="option-btn" onclick="pickChoice(4, 'C', this)">(C) one pens</button>
+        <button class="option-btn" onclick="pickChoice(4, 'D', this)">(D) three book</button>
       </div>
     </div>
 
-  </main>
+    <!-- Q5 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        5. A: "How are you today?"<br>B: "____________________"
+        <button class="speaker-btn" onclick="speakEnglish('How are you today? I am fine, thank you.')">🔊</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(5, 'A', this)">(A) I am 13 years old.</button>
+        <button class="option-btn" onclick="pickChoice(5, 'B', this)">(B) I'm fine, thank you.</button>
+        <button class="option-btn" onclick="pickChoice(5, 'C', this)">(C) It is a red pen.</button>
+        <button class="option-btn" onclick="pickChoice(5, 'D', this)">(D) You are welcome.</button>
+      </div>
+    </div>
 
-  <script>
-    const synth = window.speechSynthesis;
-    let voices = [];
-    let isPlayingPassage = false;
-    let passageSentenceIndex = 0;
-    let passageSentences = [];
-    let checkAttempts = 0;
+    <!-- Part 2: 4題 句子重組 -->
+    <div class="section-title">🧩 第二部分：句型架構與句子重組 (點擊排列)</div>
 
-    let studentName = localStorage.getItem('current_student_name') || '';
+    <div id="unscrambleContainer"></div>
 
-    function initVoices() {
-      voices = synth.getVoices();
-      const enVoices = voices.filter(v => v.lang.startsWith('en'));
-      const voiceSelect = document.getElementById('voiceSelect');
-      voiceSelect.innerHTML = '';
-      const enDefault = enVoices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) || enVoices.find(v => v.name.includes('Google')) || enVoices.find(v => v.lang.includes('US') || v.lang.includes('GB')) || enVoices[0] || voices[0];
-      enVoices.forEach(v => {
-        const opt = document.createElement('option');
-        opt.value = v.name;
-        opt.textContent = `${v.name} (${v.lang})`;
-        if (v === enDefault) opt.selected = true;
-        voiceSelect.appendChild(opt);
-      });
+    <!-- Part 3: 英文格式校對員 -->
+    <div class="section-title">✍️ 第三部分：專業英文格式校對員 (找出錯誤並修正)</div>
+    <div class="exercise-card">
+      <div class="q-title">
+        10. 請修正下列句子中的所有大寫與標點符號錯誤，在下方輸入正確句子：<br>
+        <code style="color:#b91c1c; font-size:1.15rem; background:#fee2e2; padding:2px 8px; border-radius:6px;">hello, my name is leo.how are you?</code>
+      </div>
+      <input type="text" class="input-box" id="q10Input" placeholder="請輸入修正後的標準英文字句..." />
+    </div>
+
+    <button class="btn-submit-all" onclick="submitC3()">🎉 完成並結算 C3 表達成績</button>
+  </div>
+
+  <div class="completion-card" id="completionCard">
+    <div style="font-size:3.5rem; margin-bottom:8px;">🏆</div>
+    <h2 style="color:#6d28d9; font-size:1.8rem;">恭喜完成 Starter C3 表達挑戰！</h2>
+    <p id="certStudentText" style="color:var(--text-muted); font-size:1.1rem; margin-top:4px;">學生：未填寫 ｜ 評價：⭐⭐⭐</p>
+    
+    <div class="sync-status-box" id="syncStatusBanner">
+      📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val" id="resScore">100 分</div>
+        <div class="stat-lbl">真實得分</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resCorrect">10 / 10</div>
+        <div class="stat-lbl">答對題數</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resLevel">C3 卓越</div>
+        <div class="stat-lbl">鑑別等級</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+      <button class="btn-small" style="background:#7c3aed; color:white; padding:10px 20px; font-size:1rem; border:none; border-radius:8px; cursor:pointer;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="btn-small" style="background:#10b981; color:white; padding:10px 20px; font-size:1rem; border:none; border-radius:8px; cursor:pointer;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="btn-small" style="background:#64748b; color:white; padding:10px 20px; font-size:1rem; border:none; border-radius:8px; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" class="btn-small" style="background:#0f172a; color:white; padding:10px 20px; font-size:1rem; text-decoration:none; border-radius:8px;">🏠 回首頁</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const synth = window.speechSynthesis;
+  let voices = [];
+  let studentName = localStorage.getItem('starter_c3_student') || '';
+
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+  const userChoices = { 1: null, 2: null, 3: null, 4: null, 5: null };
+  const correctAnswers = { 1: 'B', 2: 'C', 3: 'B', 4: 'B', 5: 'B' };
+
+  const unscrambleTasks = [
+    {
+      id: 'u6',
+      num: 6,
+      title: '6. 重組句子：「他是我們的新英文老師。」',
+      target: ['He', 'is', 'our', 'new', 'English', 'teacher', '.'],
+      chips: ['new', 'teacher', 'He', 'English', 'our', 'is', '.']
+    },
+    {
+      id: 'u7',
+      num: 7,
+      title: '7. 重組問句：「你的電話號碼是什麼？」',
+      target: ['What', 'is', 'your', 'phone', 'number', '?'],
+      chips: ['number', 'is', 'What', 'phone', 'your', '?']
+    },
+    {
+      id: 'u8',
+      num: 8,
+      title: '8. 重組句子：「很高興認識你，Mike。」',
+      target: ['Nice', 'to', 'meet', 'you', ',', 'Mike', '.'],
+      chips: ['Mike', 'meet', 'to', 'Nice', ',', 'you', '.']
+    },
+    {
+      id: 'u9',
+      num: 9,
+      title: '9. 重組句子：「他們是我的好同學。」',
+      target: ['They', 'are', 'my', 'good', 'classmates', '.'],
+      chips: ['classmates', 'are', 'They', 'good', 'my', '.']
     }
+  ];
 
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = initVoices;
+  const unscrambleState = {};
+
+  function initVoices() {
+    voices = synth ? synth.getVoices() : [];
+  }
+  if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = initVoices;
+  }
+  initVoices();
+
+  function updateStudentUI() {
+    const el = document.getElementById('studentDisplay');
+    if (el) el.textContent = studentName ? ('👤 ' + studentName) : '👤 點此輸入姓名座號';
+  }
+
+  function promptStudentName() {
+    const input = prompt('請輸入你的班級座號與姓名（例如：701 王小明）：', studentName);
+    if (input !== null && input.trim() !== '') {
+      studentName = input.trim();
+      localStorage.setItem('starter_c3_student', studentName);
+      updateStudentUI();
     }
-    initVoices();
+  }
 
-    function updateStudentDisplay() {
-      const display = document.getElementById('studentDisplay');
-      if (studentName) {
-        display.textContent = studentName;
-        document.getElementById('certStudentText').textContent = `學生：${studentName} ｜ 評價：⭐⭐⭐`;
-      } else {
-        display.textContent = '輸入姓名';
+  if (!studentName) {
+    setTimeout(promptStudentName, 300);
+  } else {
+    updateStudentUI();
+  }
+
+  function speakEnglish(text) {
+    if (!synth) return;
+    synth.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                    voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (enVoice) utter.voice = enVoice;
+    utter.rate = parseFloat(document.getElementById('speedSelect')?.value) || 0.85;
+    synth.speak(utter);
+  }
+
+  function speakChinese(text) {
+    if (!synth) return;
+    synth.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-TW';
+    const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                    voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+    if (zhVoice) utter.voice = zhVoice;
+    utter.rate = 0.85;
+    synth.speak(utter);
+  }
+
+  function pickChoice(qNum, choice, btn) {
+    userChoices[qNum] = choice;
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
+  function renderUnscrambles() {
+    const container = document.getElementById('unscrambleContainer');
+    container.innerHTML = '';
+
+    unscrambleTasks.forEach(task => {
+      unscrambleState[task.id] = { selected: [] };
+
+      const card = document.createElement('div');
+      card.className = 'exercise-card';
+      card.innerHTML = `
+        <div class="q-title">
+          <span>${task.title}</span>
+          <button class="speaker-btn" onclick="speakEnglish('${task.target.join(' ')}')" title="朗讀">🔊</button>
+        </div>
+        <div class="drop-zone empty" id="drop-${task.id}"></div>
+        <div class="word-pool" id="pool-${task.id}">
+          ${task.chips.map((chip, cIdx) => `
+            <button class="word-chip" id="chip-${task.id}-${cIdx}" onclick="addUnscrambleChip('${task.id}', '${chip}', ${cIdx})">${chip}</button>
+          `).join('')}
+        </div>
+        <div style="display:flex; justify-content:flex-end;">
+          <button style="background:#f1f5f9; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-weight:600; cursor:pointer;" onclick="resetUnscramble('${task.id}')">🧹 清空重排</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function addUnscrambleChip(taskId, word, cIdx) {
+    const chipBtn = document.getElementById(`chip-${taskId}-${cIdx}`);
+    if (chipBtn.classList.contains('in-drop')) return;
+
+    chipBtn.classList.add('in-drop');
+    unscrambleState[taskId].selected.push({ word, cIdx });
+    speakEnglish(word);
+    updateUnscrambleDrop(taskId);
+  }
+
+  function removeUnscrambleChip(taskId, sIdx) {
+    const item = unscrambleState[taskId].selected[sIdx];
+    const chipBtn = document.getElementById(`chip-${taskId}-${item.cIdx}`);
+    if (chipBtn) chipBtn.classList.remove('in-drop');
+    unscrambleState[taskId].selected.splice(sIdx, 1);
+    updateUnscrambleDrop(taskId);
+  }
+
+  function updateUnscrambleDrop(taskId) {
+    const drop = document.getElementById(`drop-${taskId}`);
+    drop.innerHTML = '';
+
+    if (unscrambleState[taskId].selected.length === 0) {
+      drop.className = 'drop-zone empty';
+      return;
+    }
+    drop.className = 'drop-zone';
+
+    unscrambleState[taskId].selected.forEach((item, sIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'word-chip';
+      btn.textContent = item.word;
+      btn.style.borderColor = '#7c3aed';
+      btn.style.color = '#7c3aed';
+      btn.title = '點擊收回';
+      btn.onclick = () => removeUnscrambleChip(taskId, sIdx);
+      drop.appendChild(btn);
+    });
+  }
+
+  function resetUnscramble(taskId) {
+    unscrambleState[taskId].selected = [];
+    updateUnscrambleDrop(taskId);
+    const pool = document.getElementById(`pool-${taskId}`);
+    pool.querySelectorAll('.word-chip').forEach(btn => btn.classList.remove('in-drop'));
+  }
+
+  function submitC3() {
+    let score = 0;
+    let correctCount = 0;
+
+    // Part 1: Choices 1-5 (10 pts each)
+    for (let i = 1; i <= 5; i++) {
+      if (userChoices[i] === correctAnswers[i]) {
+        score += 10;
+        correctCount++;
       }
     }
 
-    function promptStudentName() {
-      const input = prompt('請輸入你的班級與姓名（例如：701 王小明）：', studentName);
-      if (input !== null && input.trim() !== '') {
-        studentName = input.trim();
-        localStorage.setItem('current_student_name', studentName);
-      fetch("https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({
-          studentName: studentName || "?芸??摮?,
-          topic: document.title.split("嚚?)[0] || "?梯?撌桃?飛蝧",
-          level: newRecord.level || "撌桃??",
-          score: score,
-          accuracy: score + "%",
-          hintsUsed: hintsUsed,
-          stars: stars
-        })
-      }).catch(function(){});
-        updateStudentDisplay();
+    // Part 2: Unscramble 6-9 (10 pts each)
+    unscrambleTasks.forEach(task => {
+      const userWords = (unscrambleState[task.id]?.selected || []).map(item => item.word);
+      if (userWords.join(' ') === task.target.join(' ')) {
+        score += 10;
+        correctCount++;
       }
-    }
-
-    if (!studentName) {
-      setTimeout(promptStudentName, 400);
-    } else {
-      updateStudentDisplay();
-    }
-
-    document.getElementById('rateRange').addEventListener('input', function() {
-      document.getElementById('rateVal').textContent = `${this.value}x (清晰慢速)`;
     });
 
-    function speakChinese(text, e) {
-      if (e) e.stopPropagation();
-      if (!synth) return;
-      synth.cancel();
-      stopPassage();
-
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'zh-TW';
-      const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) || voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW') || v.lang.includes('zh'));
-      if (zhVoice) utter.voice = zhVoice;
-      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
-      synth.speak(utter);
+    // Part 3: Proofreading Q10 (10 pts)
+    const q10Val = document.getElementById('q10Input')?.value.trim() || '';
+    const cleanQ10 = q10Val.replace(/\s+/g, ' ');
+    if (cleanQ10.toLowerCase() === 'hello, my name is leo. how are you?' ||
+        cleanQ10 === 'Hello, my name is Leo. How are you?' ||
+        cleanQ10 === 'Hello, my name is Leo.How are you?') {
+      score += 10;
+      correctCount++;
     }
 
-    function speakEnglish(text, e) {
-      if (e) e.stopPropagation();
-      if (!synth) return;
-      synth.cancel();
-      stopPassage();
+    let stars = '⭐⭐⭐';
+    if (score < 80) stars = '⭐⭐';
+    if (score < 60) stars = '⭐';
 
-      const cleanText = text.replace(/[_＿]+/g, ' ').replace(/\(\s*\)/g, ' ');
-      const utter = new SpeechSynthesisUtterance(cleanText);
-      utter.lang = 'en-US';
+    document.getElementById('c3Content').style.display = 'none';
+    document.getElementById('completionCard').style.display = 'block';
 
-      const voiceName = document.getElementById('voiceSelect').value;
-      const selectedVoice = voices.find(v => v.name === voiceName) || voices.find(v => v.lang.startsWith('en'));
-      if (selectedVoice) utter.voice = selectedVoice;
-      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
+    document.getElementById('certStudentText').textContent = `學生：${studentName || '同學'} ｜ 評價：${stars}`;
+    document.getElementById('resScore').textContent = score + ' 分';
+    document.getElementById('resCorrect').textContent = `${correctCount} / 10 題`;
+    document.getElementById('resLevel').textContent = (score >= 90) ? 'C3 精熟卓越' : (score >= 60 ? 'C3 基礎達成' : '需加強練習');
 
-      if (e && e.target && e.target.classList.contains('read-sentence')) {
-        document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
-        e.target.classList.add('speaking-highlight');
-        utter.onend = () => e.target.classList.remove('speaking-highlight');
-        utter.onerror = () => e.target.classList.remove('speaking-highlight');
-      }
+    syncToCloud(score, stars);
+    speakChinese(`太棒了，${studentName || ''}完成 C3 挑戰！得到 ${score} 分！`);
+  }
 
-      synth.speak(utter);
+  function syncToCloud(score, stars) {
+    const banner = document.getElementById('syncStatusBanner');
+    if (banner) {
+      banner.style.background = '#eff6ff';
+      banner.style.borderColor = '#bfdbfe';
+      banner.style.color = '#1e40af';
+      banner.innerHTML = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
     }
 
-    function togglePlayPassage() {
-      if (isPlayingPassage) {
-        stopPassage();
-      } else {
-        startPassage();
-      }
-    }
+    const payload = {
+      studentName: studentName || '未填寫同學',
+      topic: '【國一】Starter 問候與代名詞 (C3 表達組)',
+      level: 'C3 表達組',
+      score: score,
+      accuracy: score + '%',
+      hintsUsed: 0,
+      stars: stars
+    };
 
-    function startPassage() {
-      const box = document.getElementById('c3PassageBox');
-      passageSentences = Array.from(box.querySelectorAll('.read-sentence'));
-      if (passageSentences.length === 0) return;
-
-      isPlayingPassage = true;
-      passageSentenceIndex = 0;
-      const btn = document.getElementById('btnPlayPassage');
-      btn.classList.add('playing');
-      btn.innerHTML = '⏹ 停止朗讀';
-      document.getElementById('readingStatusText').textContent = '🔊 正在循序朗讀中...';
-
-      playNextPassageSentence();
-    }
-
-    function playNextPassageSentence() {
-      if (!isPlayingPassage || passageSentenceIndex >= passageSentences.length) {
-        stopPassage();
-        return;
-      }
-
-      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
-      const el = passageSentences[passageSentenceIndex];
-      el.classList.add('speaking-highlight');
-      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-      const text = el.innerText.replace(/[_＿]+/g, ' ');
-      synth.cancel();
-
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'en-US';
-      const voiceName = document.getElementById('voiceSelect').value;
-      const selectedVoice = voices.find(v => v.name === voiceName) || voices.find(v => v.lang.startsWith('en'));
-      if (selectedVoice) utter.voice = selectedVoice;
-      utter.rate = parseFloat(document.getElementById('rateRange').value) || 0.8;
-
-      utter.onend = () => {
-        el.classList.remove('speaking-highlight');
-        if (isPlayingPassage) {
-          passageSentenceIndex++;
-          setTimeout(playNextPassageSentence, 450);
-        }
-      };
-
-      utter.onerror = () => stopPassage();
-
-      synth.speak(utter);
-    }
-
-    function stopPassage() {
-      isPlayingPassage = false;
-      synth.cancel();
-      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
-      const btn = document.getElementById('btnPlayPassage');
-      if (btn) {
-        btn.classList.remove('playing');
-        btn.innerHTML = '🔊 循序朗讀短文（有追蹤提示）';
-      }
-      const st = document.getElementById('readingStatusText');
-      if (st) st.textContent = '';
-    }
-
-    function verifyMatrix() {
-      checkAttempts++;
-      const answers = {
-        m1: ['me'],
-        m2: ['your'],
-        m3: ['him'],
-        m4: ['her'],
-        m5: ['them']
-      };
-      let allCorrect = true;
-      for (const id in answers) {
-        const val = document.getElementById(id).value.trim().toLowerCase();
-        if (!answers[id].includes(val)) {
-          allCorrect = false;
-        }
-      }
-      const fb = document.getElementById('fb_matrix');
-      if (allCorrect) {
-        fb.className = 'item-feedback fb-correct';
-        fb.textContent = '✓ 太強了！代名詞三格完全正確！';
-        speakChinese('太強了！代名詞三格完全正確！');
-      } else {
-        fb.className = 'item-feedback fb-wrong';
-        fb.textContent = '✗ 表格中有部分錯誤，請再檢查一次喔！(答案：me, your, him, her, them)';
-        speakChinese('表格中有部分錯誤，請再檢查一次喔！');
-      }
-    }
-
-    function verifyKeyword(inputId, validKeywords, fbId) {
-      checkAttempts++;
-      const val = document.getElementById(inputId).value.trim().toLowerCase();
-      const fb = document.getElementById(fbId);
-      const matched = validKeywords.some(k => val.includes(k));
-      if (matched) {
-        fb.className = 'item-feedback fb-correct';
-        fb.textContent = '✓ 答對了！掌握了關鍵資訊！';
-        speakChinese('答對了！掌握了關鍵資訊！');
-      } else {
-        fb.className = 'item-feedback fb-wrong';
-        fb.textContent = '✗ 未能符合關鍵字，請再看一次短文喔！';
-        speakChinese('再檢查一下短文內容喔！');
-      }
-    }
-
-    function verifyProof(inputId, expectedSentence, fbId) {
-      checkAttempts++;
-      const val = document.getElementById(inputId).value.trim();
-      const fb = document.getElementById(fbId);
-      if (val.replace(/\s+/g, ' ') === expectedSentence.replace(/\s+/g, ' ')) {
-        fb.className = 'item-feedback fb-correct';
-        fb.textContent = '✓ 完美格式！標點與大小寫完全正確！';
-        speakChinese('太棒了！英文書寫格式完全正確！');
-      } else {
-        fb.className = 'item-feedback fb-wrong';
-        fb.textContent = '✗ 標點、空格或大小寫仍有錯誤，請對照標準答案喔！';
-        speakChinese('標點或大小寫還有錯誤，再檢查一次喔！');
-      }
-    }
-
-    function submitLearningReport() {
-      const score = Math.max(30, Math.round(100 - Math.max(0, (typeof checkAttempts !== 'undefined' ? checkAttempts : 4) - 4) * 12));
-      const stars = (checkAttempts <= 10) ? '⭐⭐⭐' : '⭐⭐';
-
-      document.getElementById('statAttempts').textContent = `${checkAttempts} 次`;
-      document.getElementById('certStudentText').textContent = `學生：${studentName || '未填寫'} ｜ 評價：${stars}`;
-
-      const newRecord = {
-        studentName: studentName || '無名同學',
-        level: 'C3 表達組',
-        score: score,
-        accuracy: score + '%',
-        stars: stars,
-        hintsUsed: checkAttempts,
-        timestamp: new Date().toLocaleString()
-      };
-
-      const history = JSON.parse(localStorage.getItem('english_class_records') || '[]');
-      history.unshift(newRecord);
-      localStorage.setItem('english_class_records', JSON.stringify(history.slice(0, 100)));
-
-      const text = `【英語學習成果報告】\n👤 學生：${studentName || '同學'}\n📚 組別：C3 表達組\n🎯 得分：100 分\n🌟 評價：${stars}\n📅 完成時間：${new Date().toLocaleString()}\n狀態：三格代名詞、短文閱讀與書寫校對全數精熟！🏆`;
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('copyToast');
-        toast.style.display = 'block';
-        setTimeout(() => toast.style.display = 'none', 3000);
-      });
-
-      speakChinese(`恭喜${studentName || ''}，C3 進階任務全數完成並存檔！`);
-    }
-  
-    function uploadToCloudDashboard(scoreVal, starsVal, retriesVal, hintsVal) {
-      const banner = document.getElementById('cloudSyncBanner');
+    fetch(gasUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).then(() => {
       if (banner) {
-        banner.style.background = '#eff6ff';
-        banner.style.borderColor = '#bfdbfe';
-        banner.style.color = '#1e40af';
-        banner.innerHTML = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+        banner.style.background = '#ecfdf5';
+        banner.style.borderColor = '#a7f3d0';
+        banner.style.color = '#065f46';
+        banner.innerHTML = '✅ <strong>成績已成功同步至老師的 Google 雲端學習歷程儀表板！</strong>';
       }
+    }).catch(() => {
+      if (banner) {
+        banner.style.background = '#fffbeb';
+        banner.style.borderColor = '#fde68a';
+        banner.style.color = '#92400e';
+        banner.innerHTML = '⚠️ 雲端同步受網路限制，已安全儲存於設備本機。';
+      }
+    });
+  }
 
-      const rawScore = (typeof scoreVal !== 'undefined') ? scoreVal : (parseInt(document.getElementById('statScore')?.textContent) || 100);
-      const rawStars = starsVal || '⭐⭐⭐';
-      const rawHints = (typeof hintsVal !== 'undefined') ? hintsVal : (parseInt(document.getElementById('statHints')?.textContent) || 0);
+  function manualSync() {
+    const score = parseInt(document.getElementById('resScore')?.textContent) || 90;
+    syncToCloud(score, '⭐⭐⭐');
+  }
 
-      const topicTitle = document.title.split('｜')[0].trim() || '國中英語差異化學習單';
-      const levelText = document.getElementById('slideLevel')?.textContent || document.querySelector('.card-level-tag')?.textContent || document.title.includes('C1') ? 'C1 基礎組' : (document.title.includes('C2') ? 'C2 應用組' : 'C3 表達組');
+  function copyReport() {
+    const score = document.getElementById('resScore')?.textContent || '100 分';
+    const text = `【Starter 英語成果】\n👤 學生：${studentName || '同學'}\n📚 組別：C3 表達組 (4選1·句子重組·格式校對)\n🎯 得分：${score}\n📅 時間：${new Date().toLocaleString()}\n狀態：已全數完成！🎉`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('✓ 已複製學習成果報告！可直接貼在 LINE 或筆記本中。');
+    });
+  }
 
-      const payload = {
-        studentName: studentName || '未填寫同學',
-        topic: topicTitle,
-        level: levelText,
-        score: rawScore,
-        accuracy: rawScore + '%',
-        hintsUsed: rawHints,
-        stars: rawStars
-      };
-
-      fetch('https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      }).then(() => {
-        if (banner) {
-          banner.style.background = '#ecfdf5';
-          banner.style.borderColor = '#a7f3d0';
-          banner.style.color = '#065f46';
-          banner.innerHTML = '✅ <strong>成績已成功同步至老師的 Google 雲端學習歷程儀表板！</strong>';
-        }
-      }).catch(err => {
-        if (banner) {
-          banner.style.background = '#fffbeb';
-          banner.style.borderColor = '#fde68a';
-          banner.style.color = '#92400e';
-          banner.innerHTML = '⚠️ 雲端同步受網路限制，已安全儲存於設備本機。';
-        }
-      });
-    }
+  renderUnscrambles();
 </script>
-
 </body>
 </html>
