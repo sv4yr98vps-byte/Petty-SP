@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L1 動物生詞與形容詞 教師講解簡報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+      --accent-gold: #fbbf24;
+      --border: #334155;
+      --highlight: #fef08a;
+    }
+
+    body.light-mode {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #059669;
+      --accent-gold: #d97706;
+      --border: #e2e8f0;
+      --highlight: #fde047;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--card-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+    }
+
+    .badge-unit {
+      background: #059669;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-tool, select.tool-select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    body.light-mode .btn-tool, body.light-mode select.tool-select {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .btn-tool:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-tool.active {
+      background: #e11d48;
+      color: white;
+      border-color: #be123c;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .slide-frame {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 1100px;
+      height: 78vh;
+      display: none;
+      flex-direction: column;
+      padding: 36px 48px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .slide-frame.active {
+      display: flex;
+      animation: popSlide 0.25s ease-out;
+    }
+
+    @keyframes popSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-page-num {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .slide-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    .slide-content {
+      font-size: 1.2rem;
+      line-height: 1.9;
+      flex: 1;
+    }
+
+    .ans-box {
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 6px solid #10b981;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-top: 18px;
+      display: none;
+    }
+
+    .ans-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    #whiteboardCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    #whiteboardCanvas.drawing-active {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 8px 24px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .key-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+
+    body.light-mode .key-badge {
+      background: #e2e8f0;
+      color: #334155;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span class="badge-unit">國一 · 七年級</span>
+      <span>L1 動物生詞與形容詞 教師講解簡報</span>
+    </div>
+
+    <div class="slide-controls">
+      <label style="font-size:0.88rem; font-weight:600;">📑 跳頁：</label>
+      <select id="slideSelect" class="tool-select" onchange="jumpToSlide(parseInt(this.value))">
+        <option value="0">第 1 頁：共同核心鎖定 (Common Core 31 生詞)</option>
+        <option value="1">第 2 頁：C1 基礎組 - 動物單字辨讀與發音</option>
+        <option value="2">第 3 頁：C1 基礎組 - 性狀形容詞與對比</option>
+        <option value="3">第 4 頁：C2 應用組 - 主詞 + be動詞 + 形容詞造句</option>
+        <option value="4">第 5 頁：C2 應用組 - 對等連接詞 but 的轉折語意</option>
+        <option value="5">第 6 頁：C3 表達組 - 不規則複數與情境會話</option>
+      </select>
+
+      <label style="font-size:0.88rem; font-weight:600; margin-left:4px;">⚡ 語速：</label>
+      <select id="speedSelect" class="tool-select">
+        <option value="0.25">🐢 0.25x 極慢速</option>
+        <option value="0.4">🐢 0.4x 慢速</option>
+        <option value="0.6">0.6x 初學</option>
+        <option value="0.85" selected>0.85x 適中</option>
+        <option value="1.0">1.0x 標準</option>
+      </select>
+
+      <button class="btn-tool" onclick="prevSlide()">◀ 上一頁</button>
+      <span id="slideIndicator" style="font-weight:700; padding:0 6px;">1 / 6</span>
+      <button class="btn-tool" onclick="nextSlide()">下一頁 ▶</button>
+      <button class="btn-tool" id="btnAns" onclick="toggleAnswer()">💡 答案解析 (Space)</button>
+      <button class="btn-tool" id="btnBoard" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
+      <button class="btn-tool" onclick="clearWhiteboard()">🧹 清除板書 (C)</button>
+      <button class="btn-tool" onclick="speakCurrentSlide()">🔊 朗讀本頁 (R)</button>
+      <button class="btn-tool" onclick="toggleTheme()">🌓 主題</button>
+      <a href="index.html" class="btn-tool" style="text-decoration:none;">🏠 回首頁</a>
+    </div>
+  </header>
+
+  <main>
+    <canvas id="whiteboardCanvas"></canvas>
+
+    <!-- Slide 1: 共同學習核心鎖定 -->
+    <div class="slide-frame active" id="slide-0">
+      <div class="slide-page-num">1 / 6</div>
+      <div class="slide-title">🎯 L1 共同學習核心鎖定 (Common Core)</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong style="color:var(--accent-gold);">【核心單字 1200 聚焦】</strong><br>
+          • <strong>動物篇：</strong> lion (獅子), monkey (猴子), zebra (斑馬), elephant (大象), mouse (老鼠/複數 mice), ant (螞蟻), sheep (綿羊), goat (山羊), hippo (河馬), bear (熊), bee (蜜蜂), frog (青蛙), goose (鵝/複數 geese)<br>
+          • <strong>形容詞篇：</strong> angry (生氣的), young (年輕的), clean (乾淨的), dirty (髒的), strong (強壯的), brown (棕色的), favorite (最愛的), hairy (毛茸茸的), more (更多的)
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
+          <strong style="color:var(--accent-gold);">【核心文法結構】</strong><br>
+          1. <strong>描述外貌與特徵：</strong> S + is / are + adj. (e.g. <em>Jack is tall and strong.</em>)<br>
+          2. <strong>轉折連接詞 but：</strong> <em>The dog is big, but it is nice.</em><br>
+          3. <strong>不規則名詞複數：</strong> <code>goose ➔ geese</code>, <code>mouse ➔ mice</code>, <code>sheep ➔ sheep (單複同形)</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: C1 基礎組 - 動物單字辨讀 -->
+    <div class="slide-frame" id="slide-1">
+      <div class="slide-page-num">2 / 6</div>
+      <div class="slide-title">🦁 Slide 2: C1 基礎組 - 動物名詞圖文辨析</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;">
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • 🦁 <strong>lion</strong> [ `laɪən ] 獅子<br>
+            • 🐒 <strong>monkey</strong> [ `mʌŋkɪ ] 猴子<br>
+            • 🦓 <strong>zebra</strong> [ `zibrə ] 斑馬<br>
+            • 🐘 <strong>elephant</strong> [ `ɛləfənt ] 大象
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • 🐻 <strong>bear</strong> [ bɛr ] 熊<br>
+            • 🐸 <strong>frog</strong> [ frɑg ] 青蛙<br>
+            • 🐝 <strong>bee</strong> [ bi ] 蜜蜂<br>
+            • 🦛 <strong>hippo</strong> [ `hɪpo ] 河馬
+          </div>
+        </div>
+      </div>
+      <div class="ans-box" id="ans-1">
+        💡 <strong>教學引導：</strong> 鼓勵學生看圖片大聲朗讀，注意 <code>lion</code> 與 <code>elephant</code> 的母音發音！
+      </div>
+    </div>
+
+    <!-- Slide 3: C1 基礎組 - 性狀形容詞與對比 -->
+    <div class="slide-frame" id="slide-2">
+      <div class="slide-page-num">3 / 6</div>
+      <div class="slide-title">🎨 Slide 3: C1 基礎組 - 常見對比形容詞</div>
+      <div class="slide-content">
+        <div style="margin-bottom:16px;">
+          <strong>【相反詞對照記憶】</strong><br>
+          • 🧼 <strong>clean</strong> (乾淨的) ⟷ 🪣 <strong>dirty</strong> (髒的)<br>
+          • 👶 <strong>young</strong> (年輕的) ⟷ 👴 <strong>old</strong> (年老的)<br>
+          • 🦁 <strong>strong</strong> (強壯的) ⟷ 🐱 <strong>weak</strong> (虛弱的)
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+          • <em>The white doll is clean.</em> (白色洋娃娃是乾淨的。)<br>
+          • <em>The table is dirty.</em> (桌子是髒的。)
+        </div>
+      </div>
+      <div class="ans-box" id="ans-2">
+        💡 <strong>記憶技巧：</strong> 形容詞放在 be 動詞後面用來描述主詞的狀態或特徵！
+      </div>
+    </div>
+
+    <!-- Slide 4: C2 應用組 - 主詞 + be動詞 + 形容詞造句 -->
+    <div class="slide-frame" id="slide-3">
+      <div class="slide-page-num">4 / 6</div>
+      <div class="slide-title">🔄 Slide 4: C2 應用組 - 句型組合與主詞單複數一致性</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong>【單數主詞 + is vs. 複數主詞 + are】</strong><br>
+          1. <strong>單數：</strong> The frog <strong>is</strong> small and green.<br>
+          2. <strong>複數：</strong> Lions and monkeys <strong>are</strong> brown.<br>
+          3. <strong>複數：</strong> Bears <strong>are</strong> big and strong animals.
+        </div>
+      </div>
+      <div class="ans-box" id="ans-3">
+        💡 <strong>常考陷阱：</strong> 當主詞用 and 連接兩者（如 Lions and monkeys）時，動詞務必使用複數 <code>are</code>！
+      </div>
+    </div>
+
+    <!-- Slide 5: C2 應用組 - 對等連接詞 but -->
+    <div class="slide-frame" id="slide-4">
+      <div class="slide-page-num">5 / 6</div>
+      <div class="slide-title">⚖️ Slide 5: C2 應用組 - 對等連接詞 but 的轉折用法</div>
+      <div class="slide-content">
+        <div style="margin-bottom:16px;">
+          <strong>【句型公式】</strong><br>
+          子句 A (正面/特徵 1), <strong style="color:var(--accent);">but</strong> + 子句 B (轉折/特徵 2)<br><br>
+          • <em>The dog is big, <span style="color:var(--highlight);">but</span> it is nice.</em> (這隻狗很大，但牠很友善。)<br>
+          • <em>Peter's mother is angry, <span style="color:var(--highlight);">but</span> she still loves him.</em> (彼得的媽媽很生氣，但她依然愛他。)
+        </div>
+      </div>
+      <div class="ans-box" id="ans-4">
+        💡 <strong>標點重點：</strong> 連接兩個完整子句時，<code>but</code> 前方通常會加上逗號 <code>,</code>。
+      </div>
+    </div>
+
+    <!-- Slide 6: C3 表達組 - 不規則複數與情境會話 -->
+    <div class="slide-frame" id="slide-5">
+      <div class="slide-page-num">6 / 6</div>
+      <div class="slide-title">🎙️ Slide 6: C3 表達組 - 不規則名詞複數與生活會話</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong>【會考必背三大不規則名詞】</strong><br>
+          1. <code>goose ➔ geese</code> (一隻鵝 ➔ 許多鵝)<br>
+          2. <code>mouse ➔ mice</code> (一隻老鼠 ➔ 許多老鼠)<br>
+          3. <code>sheep ➔ sheep</code> (綿羊單複數同形！)
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
+          <strong>【實用會話與慣用語】</strong><br>
+          • <em>You are a smart cookie!</em> (你真是冰雪聰明！)<br>
+          • <em>Harry is the winner of this game. Five points for you!</em>
+        </div>
+      </div>
+      <div class="ans-box" id="ans-5">
+        💡 <strong>教學評量指引：</strong> 鼓勵學生書寫整句英文並檢查名詞單複數與標點符號！
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="key-hints">
+      <span><span class="key-badge">Space</span> 答案開關</span>
+      <span><span class="key-badge">◀</span> / <span class="key-badge">▶</span> 換頁</span>
+      <span><span class="key-badge">W</span> 電子白板</span>
+      <span><span class="key-badge">C</span> 清除筆跡</span>
+      <span><span class="key-badge">R</span> 語音朗讀</span>
+    </div>
+    <div>國中英語差異化教學團隊 · 國一 (七年級) 教師專用</div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 6;
+    let whiteboardActive = false;
+    let isDrawing = false;
+    let ctx = null;
+
+    let bestEnVoice = null;
+    let bestZhVoice = null;
+
+    function initVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
+                 || voices.find(v => v.lang.startsWith('en')) || null;
+      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
+                 || voices.find(v => v.lang.startsWith('zh')) || null;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initVoices;
+      initVoices();
+    }
+
+    function showSlide(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= totalSlides) idx = totalSlides - 1;
+      currentSlide = idx;
+
+      for (let i = 0; i < totalSlides; i++) {
+        const slide = document.getElementById('slide-' + i);
+        if (slide) {
+          if (i === currentSlide) slide.classList.add('active');
+          else slide.classList.remove('active');
+        }
+      }
+
+      document.getElementById('slideIndicator').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+      document.getElementById('slideSelect').value = currentSlide;
+      
+      const currentAns = document.getElementById('ans-' + currentSlide);
+      const btnAns = document.getElementById('btnAns');
+      if (currentAns && currentAns.classList.contains('show')) {
+        btnAns.classList.add('active');
+      } else {
+        btnAns.classList.remove('active');
+      }
+    }
+
+    function jumpToSlide(idx) {
+      showSlide(idx);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) showSlide(currentSlide - 1);
+    }
+
+    function toggleAnswer() {
+      const ans = document.getElementById('ans-' + currentSlide);
+      const btn = document.getElementById('btnAns');
+      if (ans) {
+        ans.classList.toggle('show');
+        btn.classList.toggle('active', ans.classList.contains('show'));
+      }
+    }
+
+    function speakCurrentSlide() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const activeSlide = document.getElementById('slide-' + currentSlide);
+      if (!activeSlide) return;
+
+      const title = activeSlide.querySelector('.slide-title').innerText;
+      const content = activeSlide.querySelector('.slide-content').innerText;
+      const fullText = title + '。' + content;
+
+      const spRate = parseFloat(document.getElementById('speedSelect').value) || 0.85;
+
+      const chunks = fullText.split(/[\n。！？]/).map(s => s.trim()).filter(Boolean);
+      chunks.forEach(ch => {
+        const hasEn = /[a-zA-Z]/.test(ch);
+        const utt = new SpeechSynthesisUtterance(ch);
+        utt.rate = spRate;
+        if (hasEn) {
+          if (bestEnVoice) utt.voice = bestEnVoice;
+          utt.lang = 'en-US';
+        } else {
+          if (bestZhVoice) utt.voice = bestZhVoice;
+          utt.lang = 'zh-TW';
+        }
+        window.speechSynthesis.speak(utt);
+      });
+    }
+
+    // 電子白板
+    const canvas = document.getElementById('whiteboardCanvas');
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    ctx = canvas.getContext('2d');
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#e11d48';
+
+    function toggleWhiteboard() {
+      whiteboardActive = !whiteboardActive;
+      canvas.classList.toggle('drawing-active', whiteboardActive);
+      document.getElementById('btnBoard').classList.toggle('active', whiteboardActive);
+    }
+
+    function clearWhiteboard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    canvas.addEventListener('mousedown', e => {
+      if (!whiteboardActive) return;
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    });
+
+    canvas.addEventListener('mousemove', e => {
+      if (!whiteboardActive || !isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    });
+
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseleave', () => isDrawing = false);
+
+    window.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      else if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggleAnswer(); }
+      else if (e.key === 'w' || e.key === 'W') toggleWhiteboard();
+      else if (e.key === 'c' || e.key === 'C') clearWhiteboard();
+      else if (e.key === 'r' || e.key === 'R') speakCurrentSlide();
+    });
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    showSlide(0);
+  </script>
+</body>
+</html>

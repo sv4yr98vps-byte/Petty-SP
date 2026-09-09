@@ -1,0 +1,543 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L1 動物生詞與形容詞 差異化學習單｜C2 應用組</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --bg: #fffbeb;
+      --card-bg: #ffffff;
+      --text: #78350f;
+      --text-muted: #64748b;
+      --border: #fde68a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(217,119,6,0.15);
+    }
+
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+
+    .container {
+      max-width: 840px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .info-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .input-name {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .voice-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .voice-ctrl select {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+    }
+
+    .matrix-box {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      color: #78350f;
+    }
+
+    .matrix-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .target-chinese {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .answer-zone {
+      min-height: 52px;
+      background: #fafaf9;
+      border: 2px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .word-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .chip-btn {
+      background: white;
+      border: 1.5px solid #d97706;
+      color: #92400e;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: all 0.15s;
+    }
+
+    .chip-btn:hover {
+      background: #fef3c7;
+      transform: translateY(-1px);
+    }
+
+    .chip-btn.selected {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .chip-ans {
+      background: #d97706;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 18px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip-ans:hover {
+      background: #b45309;
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-act {
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-act:hover { background: #f1f5f9; }
+
+    .fb-msg {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .fb-msg.show { display: block; }
+    .fb-msg.ok { color: #15803d; }
+    .fb-msg.fail { color: #b91c1c; }
+
+    .bottom-bar {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 30px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(217,119,6,0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>國中英語【國一 · 七年級】L1 動物生詞與形容詞</h1>
+    <p>🧩 C2 應用組 · 步步練字詞積木互動造句 · 文法句型精準組合</p>
+  </header>
+
+  <div class="container">
+    <div class="info-bar">
+      <div>
+        <label>👤 學生姓名 / 座號：</label>
+        <input type="text" id="studentName" class="input-name" placeholder="例：701 李小華">
+      </div>
+      <div class="voice-ctrl">
+        <label>⚡ 朗讀語速：</label>
+        <select id="speedSelect">
+          <option value="0.25">🐢 0.25x 極慢速</option>
+          <option value="0.4">🐢 0.4x 慢速</option>
+          <option value="0.6">0.6x 初學</option>
+          <option value="0.85" selected>0.85x 適中</option>
+          <option value="1.0">1.0x 標準</option>
+        </select>
+        <a href="index.html" style="text-decoration:none; margin-left:8px; color:var(--primary); font-weight:bold;">🏠 回單元首頁</a>
+      </div>
+    </div>
+
+    <!-- 頂部常駐文法矩陣 -->
+    <div class="matrix-box">
+      <div class="matrix-title">💡 七上 L1 文法核心造句結構</div>
+      <div style="font-size:0.95rem; line-height:1.8;">
+        1. <strong>主詞 + be 動詞 (is / are) + 形容詞：</strong> <em>Lions are big and brown.</em><br>
+        2. <strong>對等連接詞 but (但是)：</strong> <em>The dog is big, but it is nice.</em><br>
+        3. <strong>名詞複數與單複數動詞搭配：</strong> <em>A goose is a big bird. / Monkeys like fruit.</em>
+      </div>
+    </div>
+
+    <!-- 造句練習容器 (由 JavaScript 動態綁定 DOM 事件，徹底杜絕引號衝突) -->
+    <div id="exercises-container"></div>
+
+    <div class="bottom-bar">
+      <button class="btn-submit" onclick="submitC2()" type="button">📤 交卷並同步至全班學習儀表板</button>
+      <div id="submit-status" style="margin-top:14px; font-weight:bold; font-size:1.05rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+    
+    // 練習題目設定 (字詞拆解)
+    const exercises = [
+      {
+        id: 1,
+        chinese: '1. 這隻青蛙又小又綠。',
+        words: ['The', 'frog', 'is', 'small', 'and', 'green.'],
+        correct: 'The frog is small and green.'
+      },
+      {
+        id: 2,
+        chinese: '2. 獅子和猴子是棕色的。',
+        words: ['Lions', 'and', 'monkeys', 'are', 'brown.'],
+        correct: 'Lions and monkeys are brown.'
+      },
+      {
+        id: 3,
+        chinese: '3. 這隻狗很大，但是牠很親切。',
+        words: ['The', 'dog', 'is', 'big,', 'but', 'it', 'is', 'nice.'],
+        correct: 'The dog is big, but it is nice.'
+      },
+      {
+        id: 4,
+        chinese: '4. 傑克又高又強壯。',
+        words: ['Jack', 'is', 'tall', 'and', 'strong.'],
+        correct: 'Jack is tall and strong.'
+      },
+      {
+        id: 5,
+        chinese: '5. 熊是又大又強壯的動物。',
+        words: ['Bears', 'are', 'big', 'and', 'strong', 'animals.'],
+        correct: 'Bears are big and strong animals.'
+      },
+      {
+        id: 6,
+        chinese: '6. 這座森林非常大而且有許多樹。',
+        words: ['The', 'forest', 'is', 'very', 'big', 'and', 'has', 'trees.'],
+        correct: 'The forest is very big and has trees.'
+      }
+    ];
+
+    const userAnswers = {};
+    const exerciseScores = {};
+
+    let bestEnVoice = null;
+    let bestZhVoice = null;
+
+    function initVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
+                 || voices.find(v => v.lang.startsWith('en')) || null;
+      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
+                 || voices.find(v => v.lang.startsWith('zh')) || null;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initVoices;
+      initVoices();
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const sp = parseFloat(document.getElementById('speedSelect').value) || 0.85;
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.rate = sp;
+      if (/[a-zA-Z]/.test(text)) {
+        if (bestEnVoice) utt.voice = bestEnVoice;
+        utt.lang = 'en-US';
+      } else {
+        if (bestZhVoice) utt.voice = bestZhVoice;
+        utt.lang = 'zh-TW';
+      }
+      window.speechSynthesis.speak(utt);
+    }
+
+    // 初始化題目卡片 (DOM 建立)
+    function renderExercises() {
+      const container = document.getElementById('exercises-container');
+      container.innerHTML = '';
+
+      exercises.forEach(ex => {
+        userAnswers[ex.id] = [];
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.id = 'card-' + ex.id;
+
+        // 目標中文
+        const promptDiv = document.createElement('div');
+        promptDiv.className = 'target-chinese';
+        promptDiv.innerHTML = '<span>' + ex.chinese + '</span>';
+        
+        const speakTargetBtn = document.createElement('button');
+        speakTargetBtn.className = 'btn-act';
+        speakTargetBtn.textContent = '🔊 聽示範句';
+        speakTargetBtn.onclick = () => speakText(ex.correct);
+        promptDiv.appendChild(speakTargetBtn);
+        card.appendChild(promptDiv);
+
+        // 作答區
+        const answerZone = document.createElement('div');
+        answerZone.className = 'answer-zone';
+        answerZone.id = 'ans-zone-' + ex.id;
+        card.appendChild(answerZone);
+
+        // 字詞積木池 (打散順序)
+        const poolDiv = document.createElement('div');
+        poolDiv.className = 'word-pool';
+        poolDiv.id = 'pool-' + ex.id;
+
+        const shuffled = ex.words.map((w, idx) => ({ word: w, originalIndex: idx }))
+                                 .sort(() => Math.random() - 0.5);
+
+        shuffled.forEach(item => {
+          const chip = document.createElement('button');
+          chip.className = 'chip-btn';
+          chip.id = 'chip-' + ex.id + '-' + item.originalIndex;
+          chip.textContent = item.word;
+          chip.onclick = () => {
+            speakText(item.word);
+            addWordToAnswer(ex.id, item.word, item.originalIndex);
+          };
+          poolDiv.appendChild(chip);
+        });
+        card.appendChild(poolDiv);
+
+        // 操作工具列
+        const actRow = document.createElement('div');
+        actRow.className = 'actions-row';
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'btn-act';
+        checkBtn.style.background = '#d97706';
+        checkBtn.style.color = 'white';
+        checkBtn.style.borderColor = '#b45309';
+        checkBtn.textContent = '✨ 檢查答案';
+        checkBtn.onclick = () => checkExercise(ex.id);
+        actRow.appendChild(checkBtn);
+
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'btn-act';
+        resetBtn.textContent = '🔄 重組本題';
+        resetBtn.onclick = () => resetExercise(ex.id);
+        actRow.appendChild(resetBtn);
+
+        const speakAnsBtn = document.createElement('button');
+        speakAnsBtn.className = 'btn-act';
+        speakAnsBtn.textContent = '🎧 朗讀我排的句子';
+        speakAnsBtn.onclick = () => {
+          const s = userAnswers[ex.id].map(x => x.word).join(' ');
+          if (s) speakText(s);
+          else speakText('請先點選單字積木');
+        };
+        actRow.appendChild(speakAnsBtn);
+
+        card.appendChild(actRow);
+
+        // 回饋訊息區
+        const fbDiv = document.createElement('div');
+        fbDiv.className = 'fb-msg';
+        fbDiv.id = 'fb-' + ex.id;
+        card.appendChild(fbDiv);
+
+        container.appendChild(card);
+      });
+    }
+
+    function addWordToAnswer(exId, word, origIdx) {
+      userAnswers[exId].push({ word, origIdx });
+      document.getElementById('chip-' + exId + '-' + origIdx).classList.add('selected');
+      renderAnswerZone(exId);
+    }
+
+    function removeWordFromAnswer(exId, arrayIdx) {
+      const removed = userAnswers[exId].splice(arrayIdx, 1)[0];
+      document.getElementById('chip-' + exId + '-' + removed.origIdx).classList.remove('selected');
+      renderAnswerZone(exId);
+    }
+
+    function renderAnswerZone(exId) {
+      const zone = document.getElementById('ans-zone-' + exId);
+      zone.innerHTML = '';
+      userAnswers[exId].forEach((item, arrIdx) => {
+        const btn = document.createElement('button');
+        btn.className = 'chip-ans';
+        btn.textContent = item.word + ' ✕';
+        btn.onclick = () => removeWordFromAnswer(exId, arrIdx);
+        zone.appendChild(btn);
+      });
+    }
+
+    function resetExercise(exId) {
+      userAnswers[exId] = [];
+      const chips = document.querySelectorAll('#pool-' + exId + ' .chip-btn');
+      chips.forEach(c => c.classList.remove('selected'));
+      renderAnswerZone(exId);
+      const fb = document.getElementById('fb-' + exId);
+      fb.className = 'fb-msg';
+    }
+
+    function checkExercise(exId) {
+      const ex = exercises.find(e => e.id === exId);
+      const built = userAnswers[exId].map(x => x.word).join(' ').trim();
+      const fb = document.getElementById('fb-' + exId);
+
+      if (built === ex.correct) {
+        exerciseScores[exId] = Math.round(100 / exercises.length);
+        fb.className = 'fb-msg show ok';
+        fb.innerHTML = '🎉 太棒了！組合完全正確！<br>🔊 ' + ex.correct;
+        speakText('Great job! ' + ex.correct);
+      } else {
+        exerciseScores[exId] = 0;
+        fb.className = 'fb-msg show fail';
+        fb.innerHTML = '❌ 順序還差一點點喔！請檢查主詞、be動詞與形容詞順序。<br>💡 提示句意：' + ex.chinese;
+      }
+    }
+
+    function submitC2() {
+      const name = document.getElementById('studentName').value.trim() || '七年級應用組學生';
+      let totalScore = 0;
+      exercises.forEach(ex => {
+        totalScore += (exerciseScores[ex.id] || 0);
+      });
+      if (totalScore > 100) totalScore = 100;
+      const accuracy = totalScore + '%';
+      let stars = '⭐⭐⭐';
+      if (totalScore < 60) stars = '⭐';
+      else if (totalScore < 85) stars = '⭐⭐';
+
+      const statusEl = document.getElementById('submit-status');
+      statusEl.style.color = '#d97706';
+      statusEl.textContent = '📡 正在同步成績至老師的 Google 試算表...';
+
+      const payload = {
+        timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+        studentName: name,
+        unit: '國中英語七上 L1 動物與生詞',
+        level: 'C2 應用組',
+        score: totalScore,
+        accuracy: accuracy,
+        stars: stars
+      };
+
+      fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        statusEl.innerHTML = '🎉 <strong>交卷成功！</strong> 得分：<span style="color:#d97706;">' + totalScore + ' 分</span> (' + accuracy + ')，已同步至全班學習儀表板！';
+        alert('🎉 交卷成功！\n學生：' + name + '\n得分：' + totalScore + ' 分 (' + accuracy + ')\n星級：' + stars);
+      }).catch(err => {
+        statusEl.innerHTML = '🎉 作答完成！得分：' + totalScore + ' 分 (離線記錄)';
+      });
+    }
+
+    renderExercises();
+  </script>
+</body>
+</html>

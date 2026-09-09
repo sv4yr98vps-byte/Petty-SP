@@ -1,0 +1,566 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L1 動物生詞與形容詞 差異化學習單｜C3 表達組</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-hover: #6d28d9;
+      --bg: #f5f3ff;
+      --card-bg: #ffffff;
+      --text: #4c1d95;
+      --text-muted: #64748b;
+      --border: #ddd6fe;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(124,58,237,0.15);
+    }
+
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+
+    .container {
+      max-width: 840px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .info-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .input-name {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .voice-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .voice-ctrl select {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #5b21b6;
+      margin: 24px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .q-title {
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-speak {
+      background: #ede9fe;
+      border: 1px solid #c4b5fd;
+      color: #6d28d9;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-speak:hover {
+      background: #7c3aed;
+      color: white;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .opt-btn {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .opt-btn:hover { background: #f1f5f9; }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    .fb-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .fb-box.show { display: block; }
+    .fb-box.correct { background: #dcfce7; color: #166534; }
+    .fb-box.wrong { background: #fef2f2; color: #991b1b; }
+
+    /* 書寫題區塊 */
+    .write-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      margin: 10px 0;
+    }
+
+    .write-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+    }
+
+    .btn-check-write {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-check-write:hover { background: #6d28d9; }
+
+    .diag-box {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.94rem;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .diag-box.show { display: block; }
+    .diag-box.success { background: #dcfce7; color: #14532d; border-left: 4px solid #22c55e; }
+    .diag-box.hint { background: #fef3c7; color: #78350f; border-left: 4px solid #f59e0b; }
+
+    .bottom-bar {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 30px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(124,58,237,0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>國中英語【國一 · 七年級】L1 動物生詞與形容詞</h1>
+    <p>📝 C3 表達組 · 標準段考選擇題 (70%) ＋ 情境書寫與中翻英任務 (30%)</p>
+  </header>
+
+  <div class="container">
+    <div class="info-bar">
+      <div>
+        <label>👤 學生姓名 / 座號：</label>
+        <input type="text" id="studentName" class="input-name" placeholder="例：701 張大為">
+      </div>
+      <div class="voice-ctrl">
+        <label>⚡ 朗讀語速：</label>
+        <select id="speedSelect">
+          <option value="0.25">🐢 0.25x 極慢速</option>
+          <option value="0.4">🐢 0.4x 慢速</option>
+          <option value="0.6">0.6x 初學</option>
+          <option value="0.85" selected>0.85x 適中</option>
+          <option value="1.0">1.0x 標準</option>
+        </select>
+        <a href="index.html" style="text-decoration:none; margin-left:8px; color:var(--primary); font-weight:bold;">🏠 回單元首頁</a>
+      </div>
+    </div>
+
+    <!-- 第一大題：7 題標準段考 4 選 1 (每題 10 分，共 70 分) -->
+    <div class="section-title">📝 第一部分：國中標準段考選擇題 (70 分)</div>
+
+    <!-- Q1 -->
+    <div class="card" id="q1-card">
+      <div class="q-title">
+        <span>1. Look at the photo. The boy is the ________ of the game and holds a big cup.</span>
+        <button class="btn-speak" onclick="speakText('Look at the photo. The boy is the winner of the game and holds a big cup.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q1-opts">
+        <button class="opt-btn" onclick="checkChoice(1, 'A', 'C', 'winner (贏家)')" type="button">(A) picture</button>
+        <button class="opt-btn" onclick="checkChoice(1, 'B', 'C', 'winner (贏家)')" type="button">(B) point</button>
+        <button class="opt-btn" onclick="checkChoice(1, 'C', 'C', 'winner (贏家)')" type="button">(C) winner</button>
+        <button class="opt-btn" onclick="checkChoice(1, 'D', 'C', 'winner (贏家)')" type="button">(D) show</button>
+      </div>
+      <div class="fb-box" id="q1-fb"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="card" id="q2-card">
+      <div class="q-title">
+        <span>2. There are many animals in the zoo, such as ________, lions, and zebras.</span>
+        <button class="btn-speak" onclick="speakText('There are many animals in the zoo, such as monkeys, lions, and zebras.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q2-opts">
+        <button class="opt-btn" onclick="checkChoice(2, 'A', 'B', 'monkeys (猴子複數)')" type="button">(A) fruits</button>
+        <button class="opt-btn" onclick="checkChoice(2, 'B', 'B', 'monkeys (猴子複數)')" type="button">(B) monkeys</button>
+        <button class="opt-btn" onclick="checkChoice(2, 'C', 'B', 'monkeys (猴子複數)')" type="button">(C) forests</button>
+        <button class="opt-btn" onclick="checkChoice(2, 'D', 'B', 'monkeys (猴子複數)')" type="button">(D) birthdays</button>
+      </div>
+      <div class="fb-box" id="q2-fb"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="card" id="q3-card">
+      <div class="q-title">
+        <span>3. One goose is swimming in the lake, and three ________ are walking on grass.</span>
+        <button class="btn-speak" onclick="speakText('One goose is swimming in the lake, and three geese are walking on grass.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q3-opts">
+        <button class="opt-btn" onclick="checkChoice(3, 'A', 'D', 'geese (goose 之不規則複數)')" type="button">(A) gooses</button>
+        <button class="opt-btn" onclick="checkChoice(3, 'B', 'D', 'geese (goose 之不規則複數)')" type="button">(B) goosies</button>
+        <button class="opt-btn" onclick="checkChoice(3, 'C', 'D', 'geese (goose 之不規則複數)')" type="button">(C) goosess</button>
+        <button class="opt-btn" onclick="checkChoice(3, 'D', 'D', 'geese (goose 之不規則複數)')" type="button">(D) geese</button>
+      </div>
+      <div class="fb-box" id="q3-fb"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="card" id="q4-card">
+      <div class="q-title">
+        <span>4. A: What is your ________ fruit? B: I like sweet mangoes best.</span>
+        <button class="btn-speak" onclick="speakText('What is your favorite fruit? I like sweet mangoes best.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q4-opts">
+        <button class="opt-btn" onclick="checkChoice(4, 'A', 'A', 'favorite (最喜愛的)')" type="button">(A) favorite</button>
+        <button class="opt-btn" onclick="checkChoice(4, 'B', 'A', 'favorite (最喜愛的)')" type="button">(B) dirty</button>
+        <button class="opt-btn" onclick="checkChoice(4, 'C', 'A', 'favorite (最喜愛的)')" type="button">(C) angry</button>
+        <button class="opt-btn" onclick="checkChoice(4, 'D', 'A', 'favorite (最喜愛的)')" type="button">(D) hairy</button>
+      </div>
+      <div class="fb-box" id="q4-fb"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="card" id="q5-card">
+      <div class="q-title">
+        <span>5. Help! There is a small ________ in the kitchen box. I am so scared!</span>
+        <button class="btn-speak" onclick="speakText('Help! There is a small mouse in the kitchen box. I am so scared!')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q5-opts">
+        <button class="opt-btn" onclick="checkChoice(5, 'A', 'B', 'mouse (老鼠單數)')" type="button">(A) mice</button>
+        <button class="opt-btn" onclick="checkChoice(5, 'B', 'B', 'mouse (老鼠單數)')" type="button">(B) mouse</button>
+        <button class="opt-btn" onclick="checkChoice(5, 'C', 'B', 'mouse (老鼠單數)')" type="button">(C) sheep</button>
+        <button class="opt-btn" onclick="checkChoice(5, 'D', 'B', 'mouse (老鼠單數)')" type="button">(D) frog</button>
+      </div>
+      <div class="fb-box" id="q5-fb"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="card" id="q6-card">
+      <div class="q-title">
+        <span>6. The house is very clean, ________ the yard outside is full of trash.</span>
+        <button class="btn-speak" onclick="speakText('The house is very clean, but the yard outside is full of trash.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q6-opts">
+        <button class="opt-btn" onclick="checkChoice(6, 'A', 'C', 'but (但是，表轉折)')" type="button">(A) and</button>
+        <button class="opt-btn" onclick="checkChoice(6, 'B', 'C', 'but (但是，表轉折)')" type="button">(B) so</button>
+        <button class="opt-btn" onclick="checkChoice(6, 'C', 'C', 'but (但是，表轉折)')" type="button">(C) but</button>
+        <button class="opt-btn" onclick="checkChoice(6, 'D', 'C', 'but (但是，表轉折)')" type="button">(D) or</button>
+      </div>
+      <div class="fb-box" id="q6-fb"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="card" id="q7-card">
+      <div class="q-title">
+        <span>7. Look at those big ________ in the mud! Is it Bigfoot?</span>
+        <button class="btn-speak" onclick="speakText('Look at those big footprints in the mud! Is it Bigfoot?')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q7-opts">
+        <button class="opt-btn" onclick="checkChoice(7, 'A', 'B', 'footprints (腳印複數)')" type="button">(A) points</button>
+        <button class="opt-btn" onclick="checkChoice(7, 'B', 'B', 'footprints (腳印複數)')" type="button">(B) footprints</button>
+        <button class="opt-btn" onclick="checkChoice(7, 'C', 'B', 'footprints (腳印複數)')" type="button">(C) pictures</button>
+        <button class="opt-btn" onclick="checkChoice(7, 'D', 'B', 'footprints (腳印複數)')" type="button">(D) cookies</button>
+      </div>
+      <div class="fb-box" id="q7-fb"></div>
+    </div>
+
+    <!-- 第二大題：3 題情境書寫與中翻英任務 (每題 10 分，共 30 分) -->
+    <div class="section-title">✍️ 第二部分：情境書寫與中翻英任務 (30 分)</div>
+
+    <!-- W1 -->
+    <div class="card">
+      <div class="q-title">
+        <span>8. 【中翻英任務】「獅子和熊是強壯的動物。」</span>
+        <button class="btn-speak" onclick="speakText('Lions and bears are strong animals.')" type="button">🔊 點讀範文</button>
+      </div>
+      <p style="font-size:0.92rem; color:var(--text-muted);">💡 請注意：主詞為複數 (Lions and bears)，be 動詞用 are，句尾加句號。</p>
+      <input type="text" id="w1-input" class="write-input" placeholder="請在此輸入英文完整句子...">
+      <button class="btn-check-write" onclick="diagnoseWriting(1)" type="button">🔍 智慧文法診斷</button>
+      <div class="diag-box" id="w1-diag"></div>
+    </div>
+
+    <!-- W2 -->
+    <div class="card">
+      <div class="q-title">
+        <span>9. 【中翻英任務】「今天是我祖母的生日。」</span>
+        <button class="btn-speak" onclick="speakText('Today is my grandmother\'s birthday.')" type="button">🔊 點讀範文</button>
+      </div>
+      <p style="font-size:0.92rem; color:var(--text-muted);">💡 請注意：首字大寫 Today，所有格 grandmother's。</p>
+      <input type="text" id="w2-input" class="write-input" placeholder="請在此輸入英文完整句子...">
+      <button class="btn-check-write" onclick="diagnoseWriting(2)" type="button">🔍 智慧文法診斷</button>
+      <div class="diag-box" id="w2-diag"></div>
+    </div>
+
+    <!-- W3 -->
+    <div class="card">
+      <div class="q-title">
+        <span>10. 【慣用語情境表達】讚美同學「你真是冰雪聰明！」</span>
+        <button class="btn-speak" onclick="speakText('You are a smart cookie!')" type="button">🔊 點讀範文</button>
+      </div>
+      <p style="font-size:0.92rem; color:var(--text-muted);">💡 請運用課本片語：You are a smart cookie!</p>
+      <input type="text" id="w3-input" class="write-input" placeholder="請在此輸入英文慣用語...">
+      <button class="btn-check-write" onclick="diagnoseWriting(3)" type="button">🔍 智慧文法診斷</button>
+      <div class="diag-box" id="w3-diag"></div>
+    </div>
+
+    <div class="bottom-bar">
+      <button class="btn-submit" onclick="submitC3()" type="button">📤 交卷並同步至全班學習儀表板</button>
+      <div id="submit-status" style="margin-top:14px; font-weight:bold; font-size:1.05rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+    const choiceScores = {};
+    const writeScores = {};
+
+    let bestEnVoice = null;
+    let bestZhVoice = null;
+
+    function initVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
+                 || voices.find(v => v.lang.startsWith('en')) || null;
+      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
+                 || voices.find(v => v.lang.startsWith('zh')) || null;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initVoices;
+      initVoices();
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const sp = parseFloat(document.getElementById('speedSelect').value) || 0.85;
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.rate = sp;
+      if (/[a-zA-Z]/.test(text)) {
+        if (bestEnVoice) utt.voice = bestEnVoice;
+        utt.lang = 'en-US';
+      } else {
+        if (bestZhVoice) utt.voice = bestZhVoice;
+        utt.lang = 'zh-TW';
+      }
+      window.speechSynthesis.speak(utt);
+    }
+
+    function checkChoice(qNum, selected, correct, desc) {
+      const isRight = (selected === correct);
+      choiceScores[qNum] = isRight ? 10 : 0;
+
+      const opts = document.querySelectorAll('#q' + qNum + '-opts .opt-btn');
+      opts.forEach(b => {
+        b.disabled = true;
+        if (b.textContent.includes('(' + correct + ')')) b.classList.add('correct');
+        else if (b.textContent.includes('(' + selected + ')') && !isRight) b.classList.add('wrong');
+      });
+
+      const fb = document.getElementById('q' + qNum + '-fb');
+      fb.className = 'fb-box show ' + (isRight ? 'correct' : 'wrong');
+      fb.innerHTML = isRight ? '✅ 答對了！' + desc : '❌ 答錯了！正確答案是 (' + correct + ') ' + desc;
+    }
+
+    function diagnoseWriting(taskNum) {
+      const inputVal = document.getElementById('w' + taskNum + '-input').value.trim();
+      const diagEl = document.getElementById('w' + taskNum + '-diag');
+
+      if (!inputVal) {
+        diagEl.className = 'diag-box show hint';
+        diagEl.textContent = '⚠️ 請先輸入您的英文句子再進行診斷喔！';
+        return;
+      }
+
+      let target = '';
+      let isCorrect = false;
+      let feedback = '';
+
+      if (taskNum === 1) {
+        target = 'Lions and bears are strong animals.';
+        const clean = inputVal.replace(/[.!?]/g, '').toLowerCase();
+        if (clean === 'lions and bears are strong animals' || clean === 'bears and lions are strong animals') {
+          isCorrect = true;
+          feedback = '🌟 完美！主詞複數、be動詞 are 與形容詞 strong 搭配非常精確！';
+        } else {
+          feedback = '💡 診斷建議：請確認主詞為「Lions and bears」，be動詞使用「are」，形容詞「strong」，名詞複數「animals.」。<br>標準參考：<code>' + target + '</code>';
+        }
+      } else if (taskNum === 2) {
+        target = "Today is my grandmother's birthday.";
+        const clean = inputVal.replace(/[.!?]/g, '').toLowerCase();
+        if (clean.includes('today is my grandmother') && clean.includes('birthday')) {
+          isCorrect = true;
+          feedback = '🌟 讚！時間主詞 Today 與所有格 grandmother\'s birthday 書寫完全正確！';
+        } else {
+          feedback = '💡 診斷建議：注意所有格符號 grandmother\'s 以及生詞 birthday 的正確拼法。<br>標準參考：<code>' + target + '</code>';
+        }
+      } else if (taskNum === 3) {
+        target = 'You are a smart cookie!';
+        const clean = inputVal.replace(/[.!?]/g, '').toLowerCase();
+        if (clean === 'you are a smart cookie' || clean === "you're a smart cookie") {
+          isCorrect = true;
+          feedback = '🌟 答對了！道地英語慣用語「You are a smart cookie!」運用自如！';
+        } else {
+          feedback = '💡 診斷建議：課本道地片語為「a smart cookie」。<br>標準參考：<code>' + target + '</code>';
+        }
+      }
+
+      writeScores[taskNum] = isCorrect ? 10 : 5; // 寫入至少得 5 分基本分
+      diagEl.className = 'diag-box show ' + (isCorrect ? 'success' : 'hint');
+      diagEl.innerHTML = (isCorrect ? '✅ ' : '🔍 ') + feedback;
+    }
+
+    function submitC3() {
+      const name = document.getElementById('studentName').value.trim() || '七年級表達組學生';
+      let choiceTotal = 0;
+      for (let i = 1; i <= 7; i++) choiceTotal += (choiceScores[i] || 0);
+
+      let writeTotal = 0;
+      for (let j = 1; j <= 3; j++) writeTotal += (writeScores[j] || 0);
+
+      const grandTotal = choiceTotal + writeTotal;
+      const accuracy = grandTotal + '%';
+      let stars = '⭐⭐⭐';
+      if (grandTotal < 60) stars = '⭐';
+      else if (grandTotal < 85) stars = '⭐⭐';
+
+      const statusEl = document.getElementById('submit-status');
+      statusEl.style.color = '#7c3aed';
+      statusEl.textContent = '📡 正在同步成績至老師的 Google 試算表...';
+
+      const payload = {
+        timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+        studentName: name,
+        unit: '國中英語七上 L1 動物與生詞',
+        level: 'C3 表達組',
+        score: grandTotal,
+        accuracy: accuracy,
+        stars: stars
+      };
+
+      fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        statusEl.innerHTML = '🎉 <strong>交卷成功！</strong> 總分：<span style="color:#7c3aed;">' + grandTotal + ' 分</span> (選擇 ' + choiceTotal + ' + 寫作 ' + writeTotal + ')，已同步至全班學習儀表板！';
+        alert('🎉 交卷成功！\n學生：' + name + '\n總分：' + grandTotal + ' 分\n選擇題：' + choiceTotal + ' / 70\n書寫題：' + writeTotal + ' / 30\n星級：' + stars);
+      }).catch(err => {
+        statusEl.innerHTML = '🎉 作答完成！總分：' + grandTotal + ' 分 (離線記錄)';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L1 動物生詞與形容詞 差異化學習單｜C1 基礎組</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-hover: #047857;
+      --bg: #ecfdf5;
+      --card-bg: #ffffff;
+      --text: #064e3b;
+      --text-muted: #64748b;
+      --border: #a7f3d0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(5,150,105,0.15);
+    }
+
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+
+    .container {
+      max-width: 820px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .info-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .input-name {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .voice-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .voice-ctrl select {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #065f46;
+      margin: 24px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .q-prompt {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-speak {
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      color: #0369a1;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-speak:hover {
+      background: #0284c7;
+      color: white;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .opt-btn {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .opt-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    .feedback-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .feedback-box.show { display: block; }
+    .feedback-box.correct { background: #dcfce7; color: #166534; }
+    .feedback-box.wrong { background: #fef2f2; color: #991b1b; }
+
+    .bottom-bar {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 30px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(5,150,105,0.3);
+      transition: all 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>國中英語【國一 · 七年級】L1 動物生詞與形容詞</h1>
+    <p>🎯 C1 基礎組 · 核心 1200 生詞辨讀 · 4 選 1 / 3 選 1 點讀評量</p>
+  </header>
+
+  <div class="container">
+    <div class="info-bar">
+      <div>
+        <label>👤 學生姓名 / 座號：</label>
+        <input type="text" id="studentName" class="input-name" placeholder="例：701 王小明">
+      </div>
+      <div class="voice-ctrl">
+        <label>⚡ 朗讀語速：</label>
+        <select id="speedSelect">
+          <option value="0.25">🐢 0.25x 極慢速</option>
+          <option value="0.4">🐢 0.4x 慢速</option>
+          <option value="0.6">0.6x 初學</option>
+          <option value="0.85" selected>0.85x 適中</option>
+          <option value="1.0">1.0x 標準</option>
+        </select>
+        <a href="index.html" style="text-decoration:none; margin-left:8px; color:var(--primary); font-weight:bold;">🏠 回單元首頁</a>
+      </div>
+    </div>
+
+    <!-- 第一大題：單字 4 選 1 辨析 (動物篇) -->
+    <div class="section-title">🦁 第一部分：核心生詞辨析 (4 選 1)</div>
+
+    <!-- Q1 -->
+    <div class="card" id="q1-card">
+      <div class="q-prompt">
+        <span>1. <strong>lion</strong> [ `laɪən ]</span>
+        <button class="btn-speak" onclick="speakText('lion')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q1-opts">
+        <button class="opt-btn" onclick="checkQ(1, 'A', 'A', '🦁 獅子')" type="button">(A) 獅子</button>
+        <button class="opt-btn" onclick="checkQ(1, 'B', 'A', '🦁 獅子')" type="button">(B) 猴子</button>
+        <button class="opt-btn" onclick="checkQ(1, 'C', 'A', '🦁 獅子')" type="button">(C) 斑馬</button>
+        <button class="opt-btn" onclick="checkQ(1, 'D', 'A', '🦁 獅子')" type="button">(D) 大象</button>
+      </div>
+      <div class="feedback-box" id="q1-fb"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="card" id="q2-card">
+      <div class="q-prompt">
+        <span>2. <strong>monkey</strong> [ `mʌŋkɪ ]</span>
+        <button class="btn-speak" onclick="speakText('monkey')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q2-opts">
+        <button class="opt-btn" onclick="checkQ(2, 'A', 'B', '🐒 猴子')" type="button">(A) 蜜蜂</button>
+        <button class="opt-btn" onclick="checkQ(2, 'B', 'B', '🐒 猴子')" type="button">(B) 猴子</button>
+        <button class="opt-btn" onclick="checkQ(2, 'C', 'B', '🐒 猴子')" type="button">(C) 青蛙</button>
+        <button class="opt-btn" onclick="checkQ(2, 'D', 'B', '🐒 猴子')" type="button">(D) 老鼠</button>
+      </div>
+      <div class="feedback-box" id="q2-fb"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="card" id="q3-card">
+      <div class="q-prompt">
+        <span>3. <strong>elephant</strong> [ `ɛləfənt ]</span>
+        <button class="btn-speak" onclick="speakText('elephant')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q3-opts">
+        <button class="opt-btn" onclick="checkQ(3, 'A', 'C', '🐘 大象')" type="button">(A) 綿羊</button>
+        <button class="opt-btn" onclick="checkQ(3, 'B', 'C', '🐘 大象')" type="button">(B) 山羊</button>
+        <button class="opt-btn" onclick="checkQ(3, 'C', 'C', '🐘 大象')" type="button">(C) 大象</button>
+        <button class="opt-btn" onclick="checkQ(3, 'D', 'C', '🐘 大象')" type="button">(D) 河馬</button>
+      </div>
+      <div class="feedback-box" id="q3-fb"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="card" id="q4-card">
+      <div class="q-prompt">
+        <span>4. <strong>zebra</strong> [ `zibrə ]</span>
+        <button class="btn-speak" onclick="speakText('zebra')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q4-opts">
+        <button class="opt-btn" onclick="checkQ(4, 'A', 'D', '🦓 斑馬')" type="button">(A) 熊</button>
+        <button class="opt-btn" onclick="checkQ(4, 'B', 'D', '🦓 斑馬')" type="button">(B) 鵝</button>
+        <button class="opt-btn" onclick="checkQ(4, 'C', 'D', '🦓 斑馬')" type="button">(C) 螞蟻</button>
+        <button class="opt-btn" onclick="checkQ(4, 'D', 'D', '🦓 斑馬')" type="button">(D) 斑馬</button>
+      </div>
+      <div class="feedback-box" id="q4-fb"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="card" id="q5-card">
+      <div class="q-prompt">
+        <span>5. <strong>bear</strong> [ bɛr ]</span>
+        <button class="btn-speak" onclick="speakText('bear')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q5-opts">
+        <button class="opt-btn" onclick="checkQ(5, 'A', 'A', '🐻 熊')" type="button">(A) 熊</button>
+        <button class="opt-btn" onclick="checkQ(5, 'B', 'A', '🐻 熊')" type="button">(B) 老鼠</button>
+        <button class="opt-btn" onclick="checkQ(5, 'C', 'A', '🐻 熊')" type="button">(C) 河馬</button>
+        <button class="opt-btn" onclick="checkQ(5, 'D', 'A', '🐻 熊')" type="button">(D) 蜜蜂</button>
+      </div>
+      <div class="feedback-box" id="q5-fb"></div>
+    </div>
+
+    <!-- 第二大題：形容詞與生活單字 3 選 1 -->
+    <div class="section-title">🎨 第二部分：形容詞與生活例句 (3 選 1)</div>
+
+    <!-- Q6 -->
+    <div class="card" id="q6-card">
+      <div class="q-prompt">
+        <span>6. Jack is tall and ________. He can lift heavy boxes. (強壯的)</span>
+        <button class="btn-speak" onclick="speakText('Jack is tall and strong. He can lift heavy boxes.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q6-opts">
+        <button class="opt-btn" onclick="checkQ(6, 'A', 'A', 'strong (強壯的)')" type="button">(A) strong</button>
+        <button class="opt-btn" onclick="checkQ(6, 'B', 'A', 'strong (強壯的)')" type="button">(B) angry</button>
+        <button class="opt-btn" onclick="checkQ(6, 'C', 'A', 'strong (強壯的)')" type="button">(C) dirty</button>
+      </div>
+      <div class="feedback-box" id="q6-fb"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="card" id="q7-card">
+      <div class="q-prompt">
+        <span>7. The table is ________. Please wipe it with a cloth. (髒的)</span>
+        <button class="btn-speak" onclick="speakText('The table is dirty. Please wipe it with a cloth.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q7-opts">
+        <button class="opt-btn" onclick="checkQ(7, 'A', 'C', 'dirty (髒的)')" type="button">(A) clean</button>
+        <button class="opt-btn" onclick="checkQ(7, 'B', 'C', 'dirty (髒的)')" type="button">(B) young</button>
+        <button class="opt-btn" onclick="checkQ(7, 'C', 'C', 'dirty (髒的)')" type="button">(C) dirty</button>
+      </div>
+      <div class="feedback-box" id="q7-fb"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="card" id="q8-card">
+      <div class="q-prompt">
+        <span>8. Peter didn't do his homework, so his mother is ________ with him. (生氣的)</span>
+        <button class="btn-speak" onclick="speakText('Peter did not do his homework, so his mother is angry with him.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q8-opts">
+        <button class="opt-btn" onclick="checkQ(8, 'A', 'B', 'angry (生氣的)')" type="button">(A) favorite</button>
+        <button class="opt-btn" onclick="checkQ(8, 'B', 'B', 'angry (生氣的)')" type="button">(B) angry</button>
+        <button class="opt-btn" onclick="checkQ(8, 'C', 'B', 'angry (生氣的)')" type="button">(C) hairy</button>
+      </div>
+      <div class="feedback-box" id="q8-fb"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="card" id="q9-card">
+      <div class="q-prompt">
+        <span>9. The dog is big, ________ it is very friendly. (但是)</span>
+        <button class="btn-speak" onclick="speakText('The dog is big, but it is very friendly.')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q9-opts">
+        <button class="opt-btn" onclick="checkQ(9, 'A', 'A', 'but (但是)')" type="button">(A) but</button>
+        <button class="opt-btn" onclick="checkQ(9, 'B', 'A', 'but (但是)')" type="button">(B) more</button>
+        <button class="opt-btn" onclick="checkQ(9, 'C', 'A', 'but (但是)')" type="button">(C) show</button>
+      </div>
+      <div class="feedback-box" id="q9-fb"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="card" id="q10-card">
+      <div class="q-prompt">
+        <span>10. Do you want some ________? An apple or a banana? (水果)</span>
+        <button class="btn-speak" onclick="speakText('Do you want some fruit? An apple or a banana?')" type="button">🔊 點讀</button>
+      </div>
+      <div class="options-grid" id="q10-opts">
+        <button class="opt-btn" onclick="checkQ(10, 'A', 'B', 'fruit (水果)')" type="button">(A) forest</button>
+        <button class="opt-btn" onclick="checkQ(10, 'B', 'B', 'fruit (水果)')" type="button">(B) fruit</button>
+        <button class="opt-btn" onclick="checkQ(10, 'C', 'B', 'fruit (水果)')" type="button">(C) footprint</button>
+      </div>
+      <div class="feedback-box" id="q10-fb"></div>
+    </div>
+
+    <div class="bottom-bar">
+      <button class="btn-submit" onclick="submitC1()" type="button">📤 交卷並同步至全班學習儀表板</button>
+      <div id="submit-status" style="margin-top:14px; font-weight:bold; font-size:1.05rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+    const totalQ = 10;
+    const scores = {};
+
+    let bestEnVoice = null;
+    let bestZhVoice = null;
+
+    function initVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
+                 || voices.find(v => v.lang.startsWith('en')) || null;
+      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
+                 || voices.find(v => v.lang.startsWith('zh')) || null;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initVoices;
+      initVoices();
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const sp = parseFloat(document.getElementById('speedSelect').value) || 0.85;
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.rate = sp;
+      const hasEn = /[a-zA-Z]/.test(text);
+      if (hasEn) {
+        if (bestEnVoice) utt.voice = bestEnVoice;
+        utt.lang = 'en-US';
+      } else {
+        if (bestZhVoice) utt.voice = bestZhVoice;
+        utt.lang = 'zh-TW';
+      }
+      window.speechSynthesis.speak(utt);
+    }
+
+    function checkQ(qNum, selected, correct, desc) {
+      const isRight = (selected === correct);
+      scores[qNum] = isRight ? 10 : 0;
+
+      const opts = document.querySelectorAll('#q' + qNum + '-opts .opt-btn');
+      opts.forEach(b => {
+        b.disabled = true;
+        if (b.textContent.includes('(' + correct + ')')) b.classList.add('correct');
+        else if (b.textContent.includes('(' + selected + ')') && !isRight) b.classList.add('wrong');
+      });
+
+      const fb = document.getElementById('q' + qNum + '-fb');
+      fb.className = 'feedback-box show ' + (isRight ? 'correct' : 'wrong');
+      fb.innerHTML = isRight ? '✅ 答對了！' + desc : '❌ 答錯了！正確答案是 (' + correct + ') ' + desc;
+    }
+
+    function submitC1() {
+      const name = document.getElementById('studentName').value.trim() || '七年級學生';
+      let correctCount = 0;
+      for (let i = 1; i <= totalQ; i++) {
+        if (scores[i] === 10) correctCount++;
+      }
+      const totalScore = correctCount * 10;
+      const accuracy = (totalScore) + '%';
+      let stars = '⭐⭐⭐';
+      if (totalScore < 60) stars = '⭐';
+      else if (totalScore < 80) stars = '⭐⭐';
+
+      const statusEl = document.getElementById('submit-status');
+      statusEl.style.color = '#059669';
+      statusEl.textContent = '📡 正在同步成績至老師的 Google 試算表...';
+
+      const payload = {
+        timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+        studentName: name,
+        unit: '國中英語七上 L1 動物與生詞',
+        level: 'C1 基礎組',
+        score: totalScore,
+        accuracy: accuracy,
+        stars: stars
+      };
+
+      fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        statusEl.innerHTML = '🎉 <strong>交卷成功！</strong> 得分：<span style="color:#059669;">' + totalScore + ' 分</span> (' + accuracy + ')，已同步至全班學習儀表板！';
+        alert('🎉 交卷成功！\n學生：' + name + '\n得分：' + totalScore + ' 分 (' + accuracy + ')\n星級：' + stars);
+      }).catch(err => {
+        statusEl.innerHTML = '🎉 作答完成！得分：' + totalScore + ' 分 (離線記錄)';
+      });
+    }
+  </script>
+</body>
+</html>
