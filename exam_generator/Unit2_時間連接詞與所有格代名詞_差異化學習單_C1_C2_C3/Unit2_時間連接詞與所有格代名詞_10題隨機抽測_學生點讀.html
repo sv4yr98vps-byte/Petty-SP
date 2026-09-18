@@ -362,17 +362,41 @@ function setSpeed(speed, btn) {
   btn.classList.add('active');
 }
 
-function speak(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = currentSpeed;
 
-  const voiceSelect = document.getElementById('voiceSelect');
-  const voices = window.speechSynthesis.getVoices();
-  if (voiceSelect && voiceSelect.value !== '') {
-    utter.voice = voices[voiceSelect.value];
-  }
+    function speakEnglish(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.85;
+      const voices = window.speechSynthesis.getVoices();
+      const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                      voices.find(v => v.lang.startsWith('en')) || voices[0];
+      if (enVoice) utter.voice = enVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakChinese(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      utter.rate = 0.85;
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                      voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+      if (zhVoice) utter.voice = zhVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speak(text) {
+      if (/[\u4e00-\u9fa5]/.test(text)) {
+        speakChinese(text);
+      } else {
+        speakEnglish(text);
+      }
+    }
+
   window.speechSynthesis.speak(utter);
 }
 
