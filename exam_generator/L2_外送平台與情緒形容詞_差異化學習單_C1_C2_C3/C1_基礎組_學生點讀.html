@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】L2 外送生活與情緒形容詞 差異化學習單｜C1 基礎組（鷹架點讀版）</title>
+  <title>國中英語【國三 · 九年級】L2 外送生活與情緒動詞/形容詞 差異化學習單｜C1 基礎組（鷹架點讀版）</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -306,8 +306,8 @@
 <body>
 
 <header>
-  <h1>國中英語【國三 · 九年級】L2 外送生活與情緒形容詞</h1>
-  <p>🎯 C1 基礎組：外送生詞 4 選 1 ＋ -ed/-ing 情緒形容詞與 That 子句 3 選 1（共 15 題 · 鷹架點讀版）</p>
+  <h1>國中英語【國三 · 九年級】L2 外送生活與情緒動詞/形容詞</h1>
+  <p>🎯 C1 基礎組：外送核心生詞 4 選 1 ＋ 情緒形容詞與 That 子句 3 選 1（共 15 題 · 鷹架點讀版）</p>
 </header>
 
 <div class="container">
@@ -328,10 +328,10 @@
     </div>
   </div>
 
-  <div class="section-title">🛵 第一部分：外送平台與生活生詞（8 題 · 4 選 1）</div>
+  <div class="section-title">🦁 第一部分：核心生詞與語境理解（8 題 · 4 選 1）</div>
   <div id="vocab-container"></div>
 
-  <div class="section-title">🎭 第二部分：-ed/-ing 情緒形容詞與 That 子句（7 題 · 3 選 1）</div>
+  <div class="section-title">✨ 第二部分：文法句型與情境應用（7 題 · 3 選 1）</div>
   <div id="grammar-container"></div>
 
   <div class="submit-bar">
@@ -351,301 +351,299 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1
 const vocabQuestions = [
   {
     id: 'v1',
-    module: 'MODULE A｜外送生活 Food Delivery (4選1)',
-    zhTitle: '1. 現在很多人使用的「🛵 外送服務／遞送」，英文是哪一個單字？',
-    visual: '🛵 外送服務 ➔ food [ delivery ]',
-    tts: 'Food delivery is very convenient.',
-    hint: '提示：deliver 是遞送，delivery 是外送名詞。',
-    options: ['delivery', 'driver', 'platform', 'app'],
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '1. 現代人常使用的「🛵 外送服務」，「外送/遞送」英文是？',
+    visual: '🛵 線上點餐 · 快速送達服務 ➔ food [ d _ _ _ _ _ _ y ]',
+    tts: 'Food delivery is very popular in Taiwan.',
+    hint: '提示：外送、遞送的英文是 delivery 喔！',
+    options: ['delivery', 'driver', 'platform', 'supermarket'],
     ans: 0,
-    expCorrect: '太棒了！delivery 代表遞送／外送服務。',
-    expWrong: '不對喔！driver 是司機，外送服務是 delivery。'
+    expCorrect: '太棒了！delivery 代表外送或遞送。',
+    expWrong: '不對喔！driver 是司機，外送是 delivery。'
   },
   {
     id: 'v2',
-    module: 'MODULE A｜外送生活 Food Delivery (4選1)',
-    zhTitle: '2. 騎機車在街頭穿梭奔波的「🛵 外送員／司機」，英文是？',
-    visual: '🛵 外送員 · 司機 ➔ delivery [ driver ]',
-    tts: 'The delivery driver arrived quickly.',
-    hint: '提示：drive 是開車，driver 是司機／外送駕駛。',
-    options: ['clerk', 'driver', 'swimmer', 'nurse'],
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '2. 在手機上「📱 線上訂購」晚餐，「訂購/點餐」英文是？',
+    visual: '📱 透過網路點選美味餐點 ➔ [ o _ _ _ r ] dinner online',
+    tts: 'Many people order dinner online through delivery apps.',
+    hint: '提示：下訂單、點餐的動詞是 order 喔！',
+    options: ['save', 'order', 'touch', 'bored'],
     ans: 1,
-    expCorrect: '答對了！delivery driver 代表外送員。',
-    expWrong: '再想想看！clerk 是職員，外送員是 driver。'
+    expCorrect: '答對了！order 代表點餐或訂購。',
+    expWrong: '再想想看！save 是節省，點餐訂購是 order。'
   },
   {
     id: 'v3',
-    module: 'MODULE A｜生活形容詞 Adjectives (4選1)',
-    zhTitle: '3. 手機點餐送到家讓生活變得非常「✨ 便利的／方便的」，英文是？',
-    visual: '✨ 方便便利 ➔ very [ convenient ]',
-    tts: 'Ordering food online is convenient.',
-    hint: '提示：convenient 代表便利的。',
-    options: ['bored', 'convenient', 'poor', 'wrong'],
-    ans: 1,
-    expCorrect: '答對了！convenient 代表便利的、方便的。',
-    expWrong: '不對喔！bored 是感到無聊的，便利的是 convenient。'
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '3. 騎車穿梭大街小巷的「🛵 外送司機」，「司機」英文是？',
+    visual: '🛵 騎車送餐的人員 ➔ delivery [ d _ _ _ _ r ]',
+    tts: 'The delivery driver was tired after working all day.',
+    hint: '提示：開車、騎車運送的司機是 driver 喔！',
+    options: ['driver', 'clerk', 'farmer', 'cook'],
+    ans: 0,
+    expCorrect: '正確！delivery driver 代表外送司機或外送員。',
+    expWrong: '不對喔！cook 是廚師，外送司機是 driver。'
   },
   {
     id: 'v4',
-    module: 'MODULE A｜外送生活 Food Delivery (4選1)',
-    zhTitle: '4. 下雨天給辛苦的外送員一些「💵 小費」，英文是哪一個單字？',
-    visual: '💵 小費 ➔ give a [ tip ]',
-    tts: 'I gave the driver a tip.',
-    hint: '提示：tip 是小費或實用建議。',
-    options: ['tip', 'card', 'box', 'dish'],
-    ans: 0,
-    expCorrect: '答對了！tip 代表小費。',
-    expWrong: '再想想看！card 是卡片，小費是 tip。'
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '4. 線上訂餐為生活帶來極大「⏰ 便利/方便的」，「方便的」英文是？',
+    visual: '⏰ 隨時隨地享受服務 · 省時省力 ➔ [ c _ _ _ _ _ _ _ _ t ]',
+    tts: 'Ordering food online is convenient for modern people.',
+    hint: '提示：形容非常便利、方便的是 convenient 喔！',
+    options: ['terrible', 'convenient', 'bored', 'touching'],
+    ans: 1,
+    expCorrect: '太棒了！convenient 代表方便的、便利的。',
+    expWrong: '再想想看！terrible 是糟糕的，方便的是 convenient。'
   },
   {
     id: 'v5',
-    module: 'MODULE A｜外送生活 Food Delivery (4選1)',
-    zhTitle: '5. 在外送 App 上「🍔 點餐／下訂單」，英文動詞是哪一個？',
-    visual: '🍔 點餐 · 下訂單 ➔ [ order ] food',
-    tts: 'We can order pizza on the app.',
-    hint: '提示：order 是點餐或訂單。',
-    options: ['order', 'hear', 'tell', 'pull'],
-    ans: 0,
-    expCorrect: '太棒了！order 代表點餐或訂購。',
-    expWrong: '不對喔！hear 是聽見，點餐是 order。'
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '5. 外送員送來熱騰騰的「🍽️ 餐點/一餐」，「餐點」英文是？',
+    visual: '🍽️ 餐廳烹調的美味食物 ➔ delicious [ m _ _ l ]',
+    tts: 'The family enjoyed a delicious meal together.',
+    hint: '提示：一餐、餐點的英文是 meal 喔！',
+    options: ['app', 'meal', 'weather', 'platform'],
+    ans: 1,
+    expCorrect: '答對了！meal 代表一餐或餐點。',
+    expWrong: '不對喔！app 是應用程式，餐點是 meal。'
   },
   {
     id: 'v6',
-    module: 'MODULE A｜科技名詞 Technology (4選1)',
-    zhTitle: '6. 手機上用來叫外送的「📱 應用程式 (App)」，全名是？',
-    visual: '📱 應用程式 ➔ mobile [ app ]',
-    tts: 'You can download the food app.',
-    hint: '提示：app 是 application 的簡稱。',
-    options: ['app', 'book', 'trip', 'end'],
-    ans: 0,
-    expCorrect: '答對了！app 代表手機應用程式。',
-    expWrong: '不對喔！trip 是旅行，應用程式是 app。'
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '6. 外送員在風雨交加的「🌧️ 惡劣天氣」下工作，「極糟的」英文是？',
+    visual: '🌧️ 風雨交加 · 險惡天候 ➔ [ t _ _ _ _ _ _ e ] weather',
+    tts: 'Delivery workers work hard in terrible weather.',
+    hint: '提示：形容非常糟糕、惡劣的是 terrible 喔！',
+    options: ['convenient', 'terrible', 'excited', 'popular'],
+    ans: 1,
+    expCorrect: '正確！terrible 代表惡劣的、糟糕的。',
+    expWrong: '再想想看！convenient 是方便的，惡劣天氣是 terrible weather。'
   },
   {
     id: 'v7',
-    module: 'MODULE A｜科技名詞 Technology (4選1)',
-    zhTitle: '7. 透過網際網路進行的「🌐 線上／網路上的」購物與點餐，英文是？',
-    visual: '🌐 線上 · 網路上的 ➔ [ online ] shopping',
-    tts: 'Many people order food online.',
-    hint: '提示：online 代表線上的、在網路上的。',
-    options: ['online', 'offline', 'poor', 'same'],
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '7. 線上訂餐「💰 省下」了許多出門的時間，「節省」英文是？',
+    visual: '💰 減少時間消耗 ➔ [ s _ _ e ] a lot of time',
+    tts: 'Food delivery apps save a lot of time for busy workers.',
+    hint: '提示：節省時間、儲蓄的動詞是 save 喔！',
+    options: ['save', 'order', 'touch', 'cost'],
     ans: 0,
-    expCorrect: '正確！online 代表在線上的、網路上的。',
-    expWrong: '不對喔！offline 是離線的，線上的是 online。'
+    expCorrect: '太棒了！save 代表節省或儲蓄。',
+    expWrong: '不對喔！order 是訂購，節省時間是 save time。'
   },
   {
     id: 'v8',
-    module: 'MODULE A｜服務名詞 Service (4選1)',
-    zhTitle: '8. 顧客對這家外送平台提供的「🛎️ 服務」非常滿意，英文是？',
-    visual: '🛎️ 優質服務 ➔ good [ service ]',
-    tts: 'The delivery service is great.',
-    hint: '提示：serve 是動詞服務，service 是名詞服務。',
-    options: ['subject', 'service', 'science', 'sandwich'],
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '8. 這部關於外送員辛酸的影片非常「😭 感人的」，「感人的」英文是？',
+    visual: '😭 讓人流淚動容 ➔ a [ t _ _ _ _ _ _ g ] story',
+    tts: 'The movie about delivery workers was so touching that everyone cried.',
+    hint: '提示：使人感動、動人的是 touching 喔！',
+    options: ['bored', 'touching', 'tired', 'surprised'],
     ans: 1,
-    expCorrect: '答對了！service 代表服務。',
-    expWrong: '不對喔！subject 是學科，服務是 service。'
+    expCorrect: '答對了！touching 代表感人的、令人動容的。',
+    expWrong: '不對喔！tired 是疲勞的，令人感動的是 touching。'
   }
 ];
-
 const grammarQuestions = [
   {
     id: 'g1',
-    module: 'MODULE B｜情緒形容詞 -ed (感到...的) (3選1)',
-    zhTitle: '9. 「Cody 收到新遊戲感到非常『🤩 興奮』。」，人（Cody）當主詞要用：',
-    visual: '🤩 人當主詞 ➔ Cody is [ excited ].',
-    tts: 'Cody is very excited about the new game.',
-    hint: '提示：人感到興奮用 excited（字尾 -ed）；令人興奮的事物用 exciting（字尾 -ing）。',
-    options: ['excited', 'exciting', 'excite'],
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '9. 「外送員工作一整天後感到很『😴 疲倦』。」，人感到疲倦是：',
+    visual: '😴 The driver was very [ ______ ] after working all day.',
+    tts: 'The delivery driver was tired.',
+    hint: '提示：人感到疲累使用 -ed 結尾的 tired。',
+    options: ['tired', 'tiring', 'tire'],
     ans: 0,
-    expCorrect: '太棒了！人作主詞表示「感到興奮」，搭配 -ed 形容詞 excited。',
-    expWrong: '不對喔！exciting 是令人興奮的（事物），人感到興奮要用 excited。'
+    expCorrect: '答對了！人感到疲累使用 tired。',
+    expWrong: '不對喔！tiring 是令人疲勞的，人感到累要用 tired。'
   },
   {
     id: 'g2',
-    module: 'MODULE B｜情緒形容詞 -ing (令人...的) (3選1)',
-    zhTitle: '10. 「這款最新的電玩遊戲非常『🎮 令人興奮』。」，事物（The game）當主詞要用：',
-    visual: '🎮 事物當主詞 ➔ The game is [ exciting ].',
-    tts: 'The video game is really exciting.',
-    hint: '提示：事物（The game）具有令人興奮的特性，要用 -ing 形容詞 exciting。',
-    options: ['excited', 'exciting', 'excite'],
-    ans: 1,
-    expCorrect: '答對了！事物作主詞表示「令人興奮的」，搭配 -ing 形容詞 exciting。',
-    expWrong: '注意！The game 是事物，令人興奮要用 exciting。'
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '10. 「我對透過 App 訂餐很『🙋‍♂️ 感興趣』。」，be interested 後接：',
+    visual: '🙋‍♂️ I am [ ______ ] in ordering food online.',
+    tts: 'I am interested in ordering food online.',
+    hint: '提示：人對事物感興趣使用 be interested in。',
+    options: ['interested', 'interesting', 'interest'],
+    ans: 0,
+    expCorrect: '太棒了！人感到興趣使用 be interested in。',
+    expWrong: '再想想看！interesting 是事物令人感到有趣，人感到興趣用 interested。'
   },
   {
     id: 'g3',
-    module: 'MODULE B｜情緒形容詞 -ed (感到無聊) (3選1)',
-    zhTitle: '11. 「下雨天待在家裡，孩子們感到很『🥱 無聊』。」，人（The kids）感到無聊用：',
-    visual: '🥱 人感到無聊 ➔ The kids are [ bored ].',
-    tts: 'The kids are bored staying at home.',
-    hint: '提示：人感到無聊用 bored；令人無聊的事物用 boring。',
-    options: ['bored', 'boring', 'bore'],
-    ans: 0,
-    expCorrect: '正確！人感到無聊用 bored。',
-    expWrong: '不對喔！boring 是令人無聊的事物，人感到無聊要用 bored。'
+    module: 'MODULE B｜情緒形容詞 -ing (事物令人) (3選1)',
+    zhTitle: '11. 「這款全新的外送 App 非常『💡 令人感興趣』。」，事物特質用：',
+    visual: '💡 The new delivery app is very [ ______ ].',
+    tts: 'The new delivery app is very interesting.',
+    hint: '提示：事物令人感到有趣使用 -ing 結尾的 interesting。',
+    options: ['interested', 'interesting', 'interest'],
+    ans: 1,
+    expCorrect: '正確！事物令人感到有趣使用 interesting。',
+    expWrong: '注意！app 是事物，要用 -ing 結尾的 interesting。'
   },
   {
     id: 'g4',
-    module: 'MODULE B｜情緒形容詞 -ing (令人無聊的) (3選1)',
-    zhTitle: '12. 「這部冗長的電影非常『😴 令人無聊』。」，事物（The movie）當主詞用：',
-    visual: '😴 事物令人無聊 ➔ The movie is [ boring ].',
-    tts: 'The long movie is so boring.',
-    hint: '提示：事物（The movie）很無聊，用 boring。',
-    options: ['bored', 'boring', 'boredom'],
-    ans: 1,
-    expCorrect: '答對了！事物令人無聊用 boring。',
-    expWrong: '注意！movie 是事物，要用 boring。'
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '12. 「學生們對這部長影片感到『🥱 無聊』。」，人感到無聊是：',
+    visual: '🥱 The students are [ ______ ] with the long video.',
+    tts: 'The students are bored with the video.',
+    hint: '提示：人感到無趣、無聊使用 bored with。',
+    options: ['bored', 'boring', 'bore'],
+    ans: 0,
+    expCorrect: '答對了！人感到無聊使用 be bored with。',
+    expWrong: '不對喔！boring 是令人無聊的，人感到無聊用 bored。'
   },
   {
     id: 'g5',
-    module: 'MODULE B｜情緒形容詞 -ed (感到驚訝) (3選1)',
-    zhTitle: '13. 「外送員 10 分鐘就送達，大家都感到很『😲 驚訝』。」，人感到驚訝用：',
-    visual: '😲 人感到驚訝 ➔ We were [ surprised ].',
-    tts: 'We were surprised that the food came so fast.',
-    hint: '提示：人感到驚訝用 surprised。',
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '13. 「他對外送這麼快到達感到很『😲 驚訝』。」，人感到驚訝是：',
+    visual: '😲 He was [ ______ ] that the food arrived so fast.',
+    tts: 'He was surprised that the food arrived so fast.',
+    hint: '提示：人感到驚訝使用 surprised。',
     options: ['surprised', 'surprising', 'surprise'],
     ans: 0,
-    expCorrect: '答對了！人感到驚訝用 surprised。',
-    expWrong: '不對喔！surprising 是令人驚訝的，人感到驚訝用 surprised。'
+    expCorrect: '太棒了！人感到驚訝使用 surprised。',
+    expWrong: '再想想看！surprising 是令人驚訝的，人感到驚訝用 surprised。'
   },
   {
     id: 'g6',
-    module: 'MODULE C｜名詞子句連接詞 That (3選1)',
-    zhTitle: '14. 「我認為『💬 外送服務非常方便』。」，引導名詞子句的連接詞是：',
-    visual: '💬 I think [ that ] delivery is convenient.',
-    tts: 'I think that delivery is convenient.',
-    hint: '提示：think, know, believe 後接 that 引導的名詞子句。',
-    options: ['that', 'whose', 'when'],
+    module: 'MODULE C｜That 名詞子句 know that (3選1)',
+    zhTitle: '14. 「我『知道』線上點餐能節省時間。」，引導名詞子句的連接詞是：',
+    visual: '🧠 I know [ ______ ] online ordering saves time.',
+    tts: 'I know that online ordering saves time.',
+    hint: '提示：接完整名詞子句當受詞，連接詞使用 that。',
+    options: ['that', 'which', 'what'],
     ans: 0,
-    expCorrect: '太棒了！that 引導名詞子句作為 think 的受詞。',
-    expWrong: '不對喔！whose 是誰的，引導名詞子句要用 that。'
+    expCorrect: '答對了！know that + 完整句子代表「知道某件事」。',
+    expWrong: '注意！引導完整名詞子句要使用 that。'
   },
   {
     id: 'g7',
-    module: 'MODULE B｜情緒形容詞 -ed (感到疲累) (3選1)',
-    zhTitle: '15. 「外送司機工作了一整天，感到非常『😫 疲憊』。」，人感到疲累用：',
-    visual: '😫 人感到疲累 ➔ The driver was [ tired ].',
-    tts: 'The driver was tired after working all day.',
-    hint: '提示：人感到疲累用 tired；令人疲累的事物用 tiring。',
-    options: ['tired', 'tiring', 'tire'],
+    module: 'MODULE C｜That 名詞子句 believe that (3選1)',
+    zhTitle: '15. 「媽媽『相信』吃健康食物很重要。」，引導名詞子句的連接詞是：',
+    visual: '❤️ Mom believes [ ______ ] eating healthy food is important.',
+    tts: 'Mom believes that eating healthy food is important.',
+    hint: '提示：動詞 believe 後面連接名詞子句使用 that。',
+    options: ['that', 'who', 'where'],
     ans: 0,
-    expCorrect: '答對了！人感到疲累用 tired。',
-    expWrong: '不對喔！tiring 是令人疲累的，人感到疲累用 tired。'
+    expCorrect: '正確！believe that + 句子代表「相信某件事」。',
+    expWrong: '不對喔！連接名詞子句要使用 that。'
   }
 ];
 
 let userAnswers = {};
 
-function initQuestions() {
+function renderQuestions() {
   const vContainer = document.getElementById('vocab-container');
+  const gContainer = document.getElementById('grammar-container');
+
   vocabQuestions.forEach((q, idx) => {
-    vContainer.appendChild(createScaffoldedCard(q, idx + 1, 4));
+    vContainer.appendChild(createQuestionCard(q, idx, 4));
   });
 
-  const gContainer = document.getElementById('grammar-container');
   grammarQuestions.forEach((q, idx) => {
-    gContainer.appendChild(createScaffoldedCard(q, idx + 9, 3));
+    gContainer.appendChild(createQuestionCard(q, idx + vocabQuestions.length, 3));
   });
 }
 
-function createScaffoldedCard(q, num, optCount) {
+function createQuestionCard(q, index, optCount) {
   const card = document.createElement('div');
   card.className = 'card';
   card.id = 'card-' + q.id;
 
-  const metaDiv = document.createElement('div');
-  metaDiv.className = 'q-meta';
-  metaDiv.innerHTML = `<span class="module-tag">${q.module}</span>`;
-  
-  const hintBtn = document.createElement('button');
-  hintBtn.className = 'hint-btn';
-  hintBtn.innerHTML = '💡 提示';
-  hintBtn.onclick = () => showHint(q.id, q.hint);
-  metaDiv.appendChild(hintBtn);
-  card.appendChild(metaDiv);
+  const meta = document.createElement('div');
+  meta.className = 'q-meta';
+  meta.innerHTML = `
+    <span class="module-tag">${q.module}</span>
+    <button type="button" class="hint-btn" onclick="showHint('${q.id}', '${escapeQuotes(q.hint)}')">💡 提示</button>
+  `;
+  card.appendChild(meta);
 
-  const titleDiv = document.createElement('div');
-  titleDiv.className = 'q-title';
-  titleDiv.innerHTML = `<span>${q.zhTitle}</span>`;
+  const title = document.createElement('div');
+  title.className = 'q-title';
+  title.innerHTML = `
+    <span>${q.zhTitle}</span>
+    <button type="button" class="speaker-btn" onclick="speakEnglish('${escapeQuotes(q.tts)}')">🔊 英文朗讀</button>
+  `;
+  card.appendChild(title);
 
-  const speakerBtn = document.createElement('button');
-  speakerBtn.className = 'speaker-btn';
-  speakerBtn.innerHTML = '🔊 英文朗讀';
-  speakerBtn.onclick = () => speakEnglish(q.tts);
-  titleDiv.appendChild(speakerBtn);
-  card.appendChild(titleDiv);
-
-  const visualBox = document.createElement('div');
-  visualBox.className = 'visual-box';
-  visualBox.innerHTML = q.visual;
-  card.appendChild(visualBox);
+  const visual = document.createElement('div');
+  visual.className = 'visual-box';
+  visual.innerHTML = q.visual;
+  card.appendChild(visual);
 
   const grid = document.createElement('div');
-  grid.className = (optCount === 4) ? 'options-grid-4' : 'options-grid-3';
+  grid.className = optCount === 4 ? 'options-grid-4' : 'options-grid-3';
 
-  q.options.forEach((opt, oIdx) => {
+  const letters = ['(A)', '(B)', '(C)', '(D)'];
+  q.options.forEach((opt, optIdx) => {
     const btn = document.createElement('button');
+    btn.type = 'button';
     btn.className = 'opt-btn';
-    btn.innerHTML = `<strong>(${String.fromCharCode(65 + oIdx)})</strong> ${opt}`;
-    btn.onclick = () => selectOption(q.id, oIdx, q.ans, q.expCorrect, q.expWrong);
-    btn.id = `btn-${q.id}-${oIdx}`;
+    btn.id = `btn-${q.id}-${optIdx}`;
+    btn.innerHTML = `<strong>${letters[optIdx]}</strong> ${opt}`;
+    btn.onclick = () => selectOption(q, optIdx);
     grid.appendChild(btn);
   });
-
   card.appendChild(grid);
 
-  const fb = document.createElement('div');
-  fb.className = 'feedback-box';
-  fb.id = 'fb-' + q.id;
-  card.appendChild(fb);
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback-box';
+  feedback.id = 'fb-' + q.id;
+  card.appendChild(feedback);
 
   return card;
+}
+
+function escapeQuotes(str) {
+  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function selectOption(q, selectedIdx) {
+  userAnswers[q.id] = selectedIdx;
+
+  for (let i = 0; i < q.options.length; i++) {
+    const btn = document.getElementById(`btn-${q.id}-${i}`);
+    if (btn) btn.className = 'opt-btn';
+  }
+
+  const selectedBtn = document.getElementById(`btn-${q.id}-${selectedIdx}`);
+  const fb = document.getElementById('fb-' + q.id);
+  fb.style.display = 'block';
+
+  if (selectedIdx === q.ans) {
+    if (selectedBtn) selectedBtn.classList.add('correct');
+    fb.style.background = '#dcfce7';
+    fb.style.border = '1px solid #86efac';
+    fb.style.color = '#15803d';
+    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect}`;
+    speakChinese(q.expCorrect);
+  } else {
+    if (selectedBtn) selectedBtn.classList.add('wrong');
+    fb.style.background = '#fee2e2';
+    fb.style.border = '1px solid #fca5a5';
+    fb.style.color = '#b91c1c';
+    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong}`;
+    speakChinese(q.expWrong);
+  }
 }
 
 function showHint(qId, hintText) {
   const fb = document.getElementById('fb-' + qId);
   fb.style.display = 'block';
   fb.style.background = '#fef3c7';
+  fb.style.border = '1px solid #fde68a';
   fb.style.color = '#92400e';
-  fb.style.borderLeft = '4px solid #f59e0b';
-  fb.innerHTML = '💡 <strong>' + hintText + '</strong>';
+  fb.innerHTML = `<strong>💡 提示引導：</strong> ${hintText}`;
   speakChinese(hintText);
-}
-
-function selectOption(qId, selectedIdx, correctIdx, expCorrect, expWrong) {
-  userAnswers[qId] = selectedIdx;
-  const isCorrect = (selectedIdx === correctIdx);
-  const card = document.getElementById('card-' + qId);
-  const btns = card.querySelectorAll('.opt-btn');
-  
-  btns.forEach((btn, idx) => {
-    btn.classList.remove('correct', 'wrong');
-    if (idx === selectedIdx) {
-      btn.classList.add(isCorrect ? 'correct' : 'wrong');
-    }
-  });
-
-  const fb = document.getElementById('fb-' + qId);
-  fb.style.display = 'block';
-  if (isCorrect) {
-    fb.style.background = '#dcfce7';
-    fb.style.color = '#15803d';
-    fb.style.borderLeft = '4px solid #22c55e';
-    fb.innerHTML = '✅ <strong>' + expCorrect + '</strong>';
-    speakChinese(expCorrect);
-  } else {
-    fb.style.background = '#fee2e2';
-    fb.style.color = '#b91c1c';
-    fb.style.borderLeft = '4px solid #ef4444';
-    fb.innerHTML = '❌ <strong>' + expWrong + '</strong>';
-    speakChinese(expWrong);
-  }
 }
 
 function setSpeed(speed, btn) {
   currentSpeed = speed;
   document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
 function speakEnglish(text) {
@@ -654,7 +652,6 @@ function speakEnglish(text) {
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'en-US';
   utter.rate = currentSpeed;
-
   const voices = window.speechSynthesis.getVoices();
   const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
                   voices.find(v => v.lang.startsWith('en')) || voices[0];
@@ -668,7 +665,6 @@ function speakChinese(text) {
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'zh-TW';
   utter.rate = 0.85;
-
   const voices = window.speechSynthesis.getVoices();
   const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
                   voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
@@ -677,28 +673,29 @@ function speakChinese(text) {
 }
 
 function submitExam() {
-  const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
-  let totalCorrect = 0;
   const allQs = [...vocabQuestions, ...grammarQuestions];
+  let correctCount = 0;
 
   allQs.forEach(q => {
     if (userAnswers[q.id] === q.ans) {
-      totalCorrect++;
+      correctCount++;
     }
   });
 
-  const finalScore = Math.round((totalCorrect / allQs.length) * 100);
+  const finalScore = Math.round((correctCount / allQs.length) * 100);
+  const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
+
   document.getElementById('scoreText').innerText = finalScore;
   document.getElementById('scoreBanner').style.display = 'block';
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
   const payload = {
-    unit: '國三 L2 外送生活與情緒形容詞',
+    unit: '國三 L2 外送平台與情緒形容詞',
     level: 'C1 基礎組',
     name: sName,
     score: finalScore,
     totalQuestions: allQs.length,
-    correctCount: totalCorrect,
+    correctCount: correctCount,
     timestamp: new Date().toISOString()
   };
 
@@ -708,14 +705,14 @@ function submitExam() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).then(() => {
-    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師雲端後台！';
+    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師後台！';
   }).catch(() => {
-    document.getElementById('syncStatus').innerText = '⚠️ 成績已完成評分（雲端同步已排程）。';
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已計算（離線暫存模式）。';
   });
 }
 
 window.onload = () => {
-  initQuestions();
+  renderQuestions();
   if ('speechSynthesis' in window) {
     window.speechSynthesis.getVoices();
   }

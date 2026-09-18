@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國一 · 七年級】L2 家庭職業與問句 差異化學習單｜C1 基礎組（鷹架點讀版）</title>
+  <title>國中英語【國一 · 七年級】L2 家庭成員、職業與疑問句 (Who/Where/How old) 差異化學習單｜C1 基礎組（鷹架點讀版）</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -196,7 +196,6 @@
 
     .speaker-btn:hover { background: #bae6fd; }
 
-    /* 鷹架視覺情境方塊 */
     .visual-box {
       background: #f8fafc;
       border: 1px dashed #94a3b8;
@@ -307,8 +306,8 @@
 <body>
 
 <header>
-  <h1>國中英語【國一 · 七年級】L2 家庭成員、職業與疑問句</h1>
-  <p>🎯 C1 基礎組：家庭職業生詞 4 選 1 ＋ Who/Where/How old 問句 3 選 1（共 15 題 · 鷹架點讀版）</p>
+  <h1>國中英語【國一 · 七年級】L2 家庭成員、職業與疑問句 (Who/Where/How old)</h1>
+  <p>🎯 C1 基礎組：家庭成員與職業 4 選 1 ＋ 疑問詞與句型 3 選 1（共 15 題 · 鷹架點讀版）</p>
 </header>
 
 <div class="container">
@@ -329,10 +328,10 @@
     </div>
   </div>
 
-  <div class="section-title">👨‍👩‍👧 第一部分：家庭成員與職業生詞（8 題 · 4 選 1）</div>
+  <div class="section-title">🦁 第一部分：核心生詞與語境理解（8 題 · 4 選 1）</div>
   <div id="vocab-container"></div>
 
-  <div class="section-title">💡 第二部分：Who / Where / How old 問句與文法（7 題 · 3 選 1）</div>
+  <div class="section-title">✨ 第二部分：文法句型與情境應用（7 題 · 3 選 1）</div>
   <div id="grammar-container"></div>
 
   <div class="submit-bar">
@@ -353,315 +352,306 @@ const vocabQuestions = [
   {
     id: 'v1',
     module: 'MODULE A｜家庭成員 Family Members (4選1)',
-    zhTitle: '1. 想要介紹家裡的「👨 丈夫／先生」，英文是哪一個單字？',
-    visual: '👨 丈夫 · 先生 ➔ [ husband ]',
-    tts: 'He is my husband.',
-    hint: '提示：husband 是丈夫；wife 是妻子。',
-    options: ['husband', 'wife', 'son', 'daughter'],
+    zhTitle: '1. 在家庭中辛勤照顧全家的「👩 母親/媽媽」，英文是？',
+    visual: '👩 溫柔慈愛 · 家庭核心支柱 ➔ [ m _ _ _ _ r ]',
+    tts: 'My mother is very kind.',
+    hint: '提示：母親是 mother 喔！',
+    options: ['mother', 'father', 'brother', 'sister'],
     ans: 0,
-    expCorrect: '太棒了！husband 代表丈夫，wife 代表妻子。',
-    expWrong: '不對喔！wife 是妻子，son 是兒子，丈夫是 husband。'
+    expCorrect: '答對了！mother 代表母親。',
+    expWrong: '不對喔！father 是父親，母親是 mother。'
   },
   {
     id: 'v2',
     module: 'MODULE A｜家庭成員 Family Members (4選1)',
-    zhTitle: '2. 想要介紹家裡可愛的「👧 女兒」，英文是哪一個單字？',
-    visual: '👧 女兒 ➔ [ daughter ]',
-    tts: 'She is my daughter.',
-    hint: '提示：daughter 是女兒；son 是兒子。',
-    options: ['son', 'farmer', 'housewife', 'daughter'],
-    ans: 3,
-    expCorrect: '答對了！daughter 代表女兒，son 代表兒子。',
-    expWrong: '再想想看！farmer 是農夫，son 是兒子，女兒是 daughter。'
+    zhTitle: '2. 家中遮風避雨的堅強支柱「👨 父親/爸爸」，英文是？',
+    visual: '👨 堅強守護 · 撐起家庭的支柱 ➔ [ f _ _ _ _ r ]',
+    tts: 'My father is a doctor.',
+    hint: '提示：父親是 father 喔！',
+    options: ['brother', 'sister', 'father', 'mother'],
+    ans: 2,
+    expCorrect: '答對了！father 代表父親。',
+    expWrong: '再想想看！brother 是兄弟，父親是 father。'
   },
   {
     id: 'v3',
     module: 'MODULE B｜職業身份 Occupations (4選1)',
     zhTitle: '3. 在田裡辛勤耕作的「🌾 農夫」，英文是哪一個職業？',
-    visual: '🌾 農夫 · 種田者 ➔ [ farmer ]',
+    visual: '🌾 辛勤耕種 · 在農場(farm)工作 ➔ [ f _ _ _ _ r ]',
     tts: 'My grandfather is a farmer.',
-    hint: '提示：farm 是農場，farmer 是農夫。',
+    hint: '提示：農場是 farm，字尾加 er 就是農夫 farmer 喔！',
     options: ['clerk', 'farmer', 'actress', 'doctor'],
     ans: 1,
-    expCorrect: '答對了！farmer 代表農夫，在田裡耕作。',
-    expWrong: '不對喔！clerk 是職員，actress 是女演員，農夫是 farmer。'
+    expCorrect: '答對了！farmer 代表農夫。',
+    expWrong: '不對喔！clerk 是職員，農夫是 farmer。'
   },
   {
     id: 'v4',
     module: 'MODULE B｜職業身份 Occupations (4選1)',
-    zhTitle: '4. 在舞台與電影演出的「🎭 女演員」，英文是哪一個單字？',
-    visual: '🎭 女演員 ➔ [ actress ]',
-    tts: 'She is a famous actress.',
-    hint: '提示：actor 是男演員，actress 是女演員。',
-    options: ['nurse', 'housewife', 'actress', 'founder'],
-    ans: 2,
-    expCorrect: '答對了！actress 代表女演員，演出電影或戲劇。',
-    expWrong: '再想想看！nurse 是護士，housewife 是家庭主婦，女演員是 actress。'
+    zhTitle: '4. 在醫院穿著白袍救治病人的「👨‍⚕️ 醫生」，英文是？',
+    visual: '👨‍⚕️ 白袍天使 · 在醫院救治病人 ➔ [ d _ _ _ _ r ]',
+    tts: 'The doctor helps sick people.',
+    hint: '提示：在醫院診斷治療的是 doctor 喔！',
+    options: ['doctor', 'nurse', 'cook', 'teacher'],
+    ans: 0,
+    expCorrect: '太棒了！doctor 代表醫生。',
+    expWrong: '再想想看！nurse 是護理師，醫生是 doctor。'
   },
   {
     id: 'v5',
-    module: 'MODULE A｜生活名詞 Daily Nouns (4選1)',
-    zhTitle: '5. 從國外寄回來的「📮 明信片」，英文是哪一個？',
-    visual: '📮 明信片 ➔ [ postcard ]',
-    tts: 'This is a beautiful postcard from the USA.',
-    hint: '提示：post 是郵件，card 是卡片，postcard 是明信片。',
-    options: ['postcard', 'theme park', 'cartoon', 'place'],
-    ans: 0,
-    expCorrect: '答對了！postcard 代表明信片。',
-    expWrong: '不對喔！theme park 是主題樂園，cartoon 是卡通，明信片是 postcard。'
+    module: 'MODULE B｜職業身份 Occupations (4選1)',
+    zhTitle: '5. 在醫院細心照顧病患的「👩‍⚕️ 護理師」，英文是？',
+    visual: '👩‍⚕️ 愛心照顧 · 協助病患量體溫 ➔ [ n _ _ _ e ]',
+    tts: 'Her sister is a nurse.',
+    hint: '提示：在醫院給予細心照護的是 nurse 喔！',
+    options: ['farmer', 'nurse', 'clerk', 'driver'],
+    ans: 1,
+    expCorrect: '正確！nurse 代表護理師。',
+    expWrong: '不對喔！driver 是司機，護理師是 nurse。'
   },
   {
     id: 'v6',
     module: 'MODULE B｜職業身份 Occupations (4選1)',
-    zhTitle: '6. 在家照顧全家人起居的「🏠 家庭主婦」，英文是哪一個？',
-    visual: '🏠 家庭主婦 ➔ [ housewife ]',
-    tts: 'My mother is a housewife.',
-    hint: '提示：house 是房子，wife 是妻子，housewife 是家庭主婦。',
-    options: ['doctor', 'nurse', 'housewife', 'clerk'],
-    ans: 2,
-    expCorrect: '太棒了！housewife 代表家庭主婦。',
-    expWrong: '再想想看！doctor 是醫生，nurse 是護士，家庭主婦是 housewife。'
+    zhTitle: '6. 打擊犯罪、維護治安的「👮 警察」，英文是？',
+    visual: '👮 打擊犯罪 · 維護社會治安 ➔ [ p _ _ _ _ e  o _ _ _ _ _ r ]',
+    tts: 'His uncle is a police officer.',
+    hint: '提示：人民的保姆是 police officer 喔！',
+    options: ['police officer', 'cook', 'teacher', 'actor'],
+    ans: 0,
+    expCorrect: '太棒了！police officer 代表警察。',
+    expWrong: '再想想看！cook 是廚師，警察是 police officer。'
   },
   {
     id: 'v7',
     module: 'MODULE B｜職業身份 Occupations (4選1)',
-    zhTitle: '7. 在辦公室或商店工作的「💼 職員／店員」，英文是？',
-    visual: '💼 辦公室職員 · 店員 ➔ [ clerk ]',
-    tts: 'Kevin is an office clerk.',
-    hint: '提示：clerk 是職員或店員。',
-    options: ['clerk', 'farmer', 'father', 'son'],
-    ans: 0,
-    expCorrect: '正確！clerk 代表職員或店員。',
-    expWrong: '不對喔！farmer 是農夫，職員是 clerk。'
+    zhTitle: '7. 在餐廳大顯身手、烹飪美味料理的「👨‍🍳 廚師」，英文是？',
+    visual: '👨‍🍳 烹飪美食 · 餐廳掌廚大師 ➔ [ c _ _ k ]',
+    tts: 'The cook makes delicious food.',
+    hint: '提示：烹飪料理的大師是 cook 喔！',
+    options: ['clerk', 'cook', 'farmer', 'nurse'],
+    ans: 1,
+    expCorrect: '答對了！cook 代表廚師。',
+    expWrong: '不對喔！farmer 是農夫，廚師是 cook。'
   },
   {
     id: 'v8',
     module: 'MODULE B｜職業身份 Occupations (4選1)',
-    zhTitle: '8. 在醫院細心照顧病人的「👩‍⚕️ 護士」，英文是哪一個？',
-    visual: '👩‍⚕️ 護士 · 護理師 ➔ [ nurse ]',
-    tts: 'My sister is a nurse in the hospital.',
-    hint: '提示：nurse 是護士；doctor 是醫生。',
-    options: ['actress', 'nurse', 'husband', 'place'],
+    zhTitle: '8. 在辦公室處理文書業務的「👨‍💼 職員/店員」，英文是？',
+    visual: '👨‍💼 辦公室內勤 · 處理文書業務 ➔ [ c _ _ _ k ]',
+    tts: 'My aunt is a clerk.',
+    hint: '提示：辦公室或店鋪職員是 clerk 喔！',
+    options: ['doctor', 'clerk', 'actor', 'farmer'],
     ans: 1,
-    expCorrect: '答對了！nurse 代表護士／護理師。',
-    expWrong: '不對喔！actress 是女演員，護士是 nurse。'
+    expCorrect: '正確！clerk 代表職員。',
+    expWrong: '不對喔！doctor 是醫生，職員是 clerk。'
   }
 ];
-
 const grammarQuestions = [
   {
     id: 'g1',
-    module: 'MODULE C｜疑問詞 Who 詢問身份 (3選1)',
-    zhTitle: '9. 「那名高大的男孩是『👤 誰』？他是我的同學 Kevin。」，空格填入：',
-    visual: '👤 [ Who ] is that tall boy? ➔ He is Kevin.',
-    tts: 'Who is that tall boy? He is Kevin, my classmate.',
-    hint: '提示：Who 詢問「是誰」，回答人名或身分關係。',
-    options: ['Who', 'Where', 'How'],
+    module: 'MODULE C｜疑問詞 Who (3選1)',
+    zhTitle: '9. 「照片中那位高大的男子是『誰』？」，詢問身分使用：',
+    visual: '❓ [ ______ ] is the tall man? ➔ He is my father.',
+    tts: 'Who is the tall man in the picture?',
+    hint: '提示：詢問人物身分使用 Who。',
+    options: ['Who', 'Where', 'What'],
     ans: 0,
-    expCorrect: '太棒了！Who 詢問「是誰」，用於詢問人物身分。',
-    expWrong: '不對喔！Where 是問地點，詢問人物身分要用 Who。'
+    expCorrect: '太棒了！Who 用於詢問人物身分。',
+    expWrong: '不對喔！Where 是問地點，問人要用 Who。'
   },
   {
     id: 'g2',
-    module: 'MODULE C｜疑問詞 Where 詢問國家地點 (3選1)',
-    zhTitle: '10. 「Tom 來自『🌍 哪裡』？他來自美國。」，空格填入：',
-    visual: '🌍 [ Where ] is Tom from? ➔ He is from the USA.',
-    tts: 'Where is Tom from? He is from the USA.',
-    hint: '提示：Where ... from 詢問來自何處／哪一個國家。',
-    options: ['Who', 'Where', 'What'],
+    module: 'MODULE C｜疑問詞 Where (3選1)',
+    zhTitle: '10. 「你媽媽現在『在哪裡』？」，詢問地點位置使用：',
+    visual: '❓ [ ______ ] is your mother now? ➔ She is in the kitchen.',
+    tts: 'Where is your mother now?',
+    hint: '提示：詢問位置地點使用 Where。',
+    options: ['Who', 'Where', 'How old'],
     ans: 1,
-    expCorrect: '答對了！Where is sb from 詢問某人來自哪裡。',
-    expWrong: '不對喔！Who 是誰，詢問來自哪裡要用 Where。'
+    expCorrect: '答對了！Where 用於詢問地點。',
+    expWrong: '再想想看！Who 是問人，問地點要用 Where。'
   },
   {
     id: 'g3',
-    module: 'MODULE C｜疑問詞 How old 詢問年齡 (3選1)',
-    zhTitle: '11. 「你的祖父『🎂 幾歲』？他 72 歲。」，單數主詞 grandfather 搭配的 be 動詞是：',
-    visual: '🎂 How old [ is ] your grandfather? ➔ He is 72.',
-    tts: 'How old is your grandfather? He is seventy-two years old.',
-    hint: '提示：主詞 your grandfather 是單數（第三人稱單數），be 動詞用 is。',
-    options: ['is', 'are', 'am'],
+    module: 'MODULE C｜疑問詞 How old (3選1)',
+    zhTitle: '11. 「你的弟弟今年『幾歲』？」，詢問年齡使用：',
+    visual: '❓ [ ______ ] is your little brother? ➔ He is ten.',
+    tts: 'How old is your little brother?',
+    hint: '提示：詢問幾歲、年齡使用 How old。',
+    options: ['How old', 'Who', 'Where'],
     ans: 0,
-    expCorrect: '正確！主詞 your grandfather 是單數，搭配 is。',
-    expWrong: '不對喔！are 用於複數，grandfather 是單數要用 is。'
+    expCorrect: '正確！How old 用於詢問年齡。',
+    expWrong: '不對喔！How old 才是詢問年齡幾歲。'
   },
   {
     id: 'g4',
-    module: 'MODULE A｜家庭關係固定搭配 (3選1)',
-    zhTitle: '12. 「Neil 與 Judy 他們是『👫 夫妻（丈夫與妻子）』。」，空格填入：',
-    visual: '👫 They are husband and [ wife ].',
-    tts: 'Look at Neil and Judy. They are husband and wife.',
-    hint: '提示：husband and wife 是固定片語，代表夫妻。',
-    options: ['son', 'daughter', 'wife'],
-    ans: 2,
-    expCorrect: '答對了！husband and wife 代表丈夫與妻子（夫妻）。',
-    expWrong: '注意！husband 搭配 wife，代表夫妻。'
+    module: 'MODULE D｜代名詞 He is (3選1)',
+    zhTitle: '12. 「看那位彼得。他是一位好學生。」，男性單數代名詞使用：',
+    visual: '👨 Look at Peter. [ ______ ] is a good student.',
+    tts: 'He is a good student.',
+    hint: '提示：指稱男性單數使用 He。',
+    options: ['He', 'She', 'They'],
+    ans: 0,
+    expCorrect: '答對了！男性單數使用 He。',
+    expWrong: '注意！She 是女性，Peter 要用男性代名詞 He。'
   },
   {
     id: 'g5',
-    module: 'MODULE C｜年齡單複數表達 (3選1)',
-    zhTitle: '13. 「這隻小狗只有『🐕 一歲』大。」，單數 1 歲後面搭配：',
-    visual: '🐕 The puppy is only one [ year ] old.',
-    tts: 'The puppy is only one year old.',
-    hint: '提示：數字 1 配單數 year（one year old）；2 歲以上配複數 years old。',
-    options: ['year', 'years', 'year\'s'],
-    ans: 0,
-    expCorrect: '答對了！one 是單數，後面要用單數 year old。',
-    expWrong: '不對喔！只有 2 歲以上才加 s（years old），1 歲要用 year old。'
+    module: 'MODULE D｜代名詞 She is (3選1)',
+    zhTitle: '13. 「看那位瑪麗。她是一位親切的護理師。」，女性單數代名詞使用：',
+    visual: '👩 Look at Mary. [ ______ ] is a kind nurse.',
+    tts: 'She is a kind nurse.',
+    hint: '提示：指稱女性單數使用 She。',
+    options: ['He', 'She', 'They'],
+    ans: 1,
+    expCorrect: '太棒了！女性單數使用 She。',
+    expWrong: '不對喔！Mary 是女生，要使用 She。'
   },
   {
     id: 'g6',
-    module: 'MODULE C｜來源句型 be from (3選1)',
-    zhTitle: '14. 「Emma 來自加拿大。」，主詞 Emma 單數搭配：',
-    visual: '🍁 Emma [ is from ] Canada.',
-    tts: 'Emma is from Canada.',
-    hint: '提示：主詞 Emma 是單數，搭配 is from。',
-    options: ['is from', 'are from', 'am from'],
-    ans: 0,
-    expCorrect: '太棒了！Emma 是第三人稱單數，搭配 is from。',
-    expWrong: '不對喔！are 用於複數，Emma 是單數要用 is from。'
+    module: 'MODULE D｜職業冠詞 a / an (3選1)',
+    zhTitle: '14. 「我的哥哥是一位演員 (actor)。」，actor 開頭為母音，前面要用：',
+    visual: '🎭 My brother is [ ______ ] actor.',
+    tts: 'My brother is an actor.',
+    hint: '提示：actor 開頭為母音 a，冠詞要用 an。',
+    options: ['a', 'an', 'the'],
+    ans: 1,
+    expCorrect: '答對了！母音開頭名詞前使用 an。',
+    expWrong: '注意！actor 開頭是母音 a，不能用 a，要用 an。'
   },
   {
     id: 'g7',
-    module: 'MODULE A｜實用片語 Idioms (3選1)',
-    zhTitle: '15. 「這對我來說簡直是『🍰 小菜一碟／輕而易舉』！」：',
-    visual: '🍰 It\'s a [ piece of cake ].',
-    tts: 'It is a piece of cake.',
-    hint: '提示：a piece of cake 是英語慣用語，表示非常簡單、易如反掌。',
-    options: ['piece of cake', 'theme park', 'postcard'],
-    ans: 0,
-    expCorrect: '答對了！a piece of cake 慣用語代表「輕而易舉、小事一樁」。',
-    expWrong: '不對喔！theme park 是主題樂園，輕而易舉是 piece of cake。'
+    module: 'MODULE D｜複數問年齡 (3選1)',
+    zhTitle: '15. 「你的祖父母今年幾歲？」，複數主詞 grandparents 搭配：',
+    visual: '❓ How old [ ______ ] your grandparents?',
+    tts: 'How old are your grandparents?',
+    hint: '提示：grandparents 是複數，搭配 are。',
+    options: ['is', 'are', 'am'],
+    ans: 1,
+    expCorrect: '正確！複數主詞 grandparents 搭配 are。',
+    expWrong: '不對喔！is 用於單數，複數主詞要搭配 are。'
   }
 ];
 
 let userAnswers = {};
 
-function initQuestions() {
+function renderQuestions() {
   const vContainer = document.getElementById('vocab-container');
+  const gContainer = document.getElementById('grammar-container');
+
   vocabQuestions.forEach((q, idx) => {
-    vContainer.appendChild(createScaffoldedCard(q, idx + 1, 4));
+    vContainer.appendChild(createQuestionCard(q, idx, 4));
   });
 
-  const gContainer = document.getElementById('grammar-container');
   grammarQuestions.forEach((q, idx) => {
-    gContainer.appendChild(createScaffoldedCard(q, idx + 9, 3));
+    gContainer.appendChild(createQuestionCard(q, idx + vocabQuestions.length, 3));
   });
 }
 
-function createScaffoldedCard(q, num, optCount) {
+function createQuestionCard(q, index, optCount) {
   const card = document.createElement('div');
   card.className = 'card';
   card.id = 'card-' + q.id;
 
-  // 1. Meta (Module tag + Hint button)
-  const metaDiv = document.createElement('div');
-  metaDiv.className = 'q-meta';
-  metaDiv.innerHTML = `<span class="module-tag">${q.module}</span>`;
-  
-  const hintBtn = document.createElement('button');
-  hintBtn.className = 'hint-btn';
-  hintBtn.innerHTML = '💡 提示';
-  hintBtn.onclick = () => showHint(q.id, q.hint);
-  metaDiv.appendChild(hintBtn);
-  card.appendChild(metaDiv);
+  const meta = document.createElement('div');
+  meta.className = 'q-meta';
+  meta.innerHTML = `
+    <span class="module-tag">${q.module}</span>
+    <button type="button" class="hint-btn" onclick="showHint('${q.id}', '${escapeQuotes(q.hint)}')">💡 提示</button>
+  `;
+  card.appendChild(meta);
 
-  // 2. Title with Bilingual Guide and Speaker Button
-  const titleDiv = document.createElement('div');
-  titleDiv.className = 'q-title';
-  titleDiv.innerHTML = `<span>${q.zhTitle}</span>`;
+  const title = document.createElement('div');
+  title.className = 'q-title';
+  title.innerHTML = `
+    <span>${q.zhTitle}</span>
+    <button type="button" class="speaker-btn" onclick="speakEnglish('${escapeQuotes(q.tts)}')">🔊 英文朗讀</button>
+  `;
+  card.appendChild(title);
 
-  const speakerBtn = document.createElement('button');
-  speakerBtn.className = 'speaker-btn';
-  speakerBtn.innerHTML = '🔊 英文朗讀';
-  speakerBtn.onclick = () => speakEnglish(q.tts);
-  titleDiv.appendChild(speakerBtn);
-  card.appendChild(titleDiv);
+  const visual = document.createElement('div');
+  visual.className = 'visual-box';
+  visual.innerHTML = q.visual;
+  card.appendChild(visual);
 
-  // 3. Visual Box (Scaffolding Graphic)
-  const visualBox = document.createElement('div');
-  visualBox.className = 'visual-box';
-  visualBox.innerHTML = q.visual;
-  card.appendChild(visualBox);
-
-  // 4. Options Grid
   const grid = document.createElement('div');
-  grid.className = (optCount === 4) ? 'options-grid-4' : 'options-grid-3';
+  grid.className = optCount === 4 ? 'options-grid-4' : 'options-grid-3';
 
-  q.options.forEach((opt, oIdx) => {
+  const letters = ['(A)', '(B)', '(C)', '(D)'];
+  q.options.forEach((opt, optIdx) => {
     const btn = document.createElement('button');
+    btn.type = 'button';
     btn.className = 'opt-btn';
-    btn.innerHTML = `<strong>(${String.fromCharCode(65 + oIdx)})</strong> ${opt}`;
-    btn.onclick = () => selectOption(q.id, oIdx, q.ans, q.expCorrect, q.expWrong);
-    btn.id = `btn-${q.id}-${oIdx}`;
+    btn.id = `btn-${q.id}-${optIdx}`;
+    btn.innerHTML = `<strong>${letters[optIdx]}</strong> ${opt}`;
+    btn.onclick = () => selectOption(q, optIdx);
     grid.appendChild(btn);
   });
-
   card.appendChild(grid);
 
-  // 5. Feedback Box
-  const fb = document.createElement('div');
-  fb.className = 'feedback-box';
-  fb.id = 'fb-' + q.id;
-  card.appendChild(fb);
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback-box';
+  feedback.id = 'fb-' + q.id;
+  card.appendChild(feedback);
 
   return card;
+}
+
+function escapeQuotes(str) {
+  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function selectOption(q, selectedIdx) {
+  userAnswers[q.id] = selectedIdx;
+
+  for (let i = 0; i < q.options.length; i++) {
+    const btn = document.getElementById(`btn-${q.id}-${i}`);
+    if (btn) btn.className = 'opt-btn';
+  }
+
+  const selectedBtn = document.getElementById(`btn-${q.id}-${selectedIdx}`);
+  const fb = document.getElementById('fb-' + q.id);
+  fb.style.display = 'block';
+
+  if (selectedIdx === q.ans) {
+    if (selectedBtn) selectedBtn.classList.add('correct');
+    fb.style.background = '#dcfce7';
+    fb.style.border = '1px solid #86efac';
+    fb.style.color = '#15803d';
+    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect}`;
+    speakChinese(q.expCorrect);
+  } else {
+    if (selectedBtn) selectedBtn.classList.add('wrong');
+    fb.style.background = '#fee2e2';
+    fb.style.border = '1px solid #fca5a5';
+    fb.style.color = '#b91c1c';
+    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong}`;
+    speakChinese(q.expWrong);
+  }
 }
 
 function showHint(qId, hintText) {
   const fb = document.getElementById('fb-' + qId);
   fb.style.display = 'block';
   fb.style.background = '#fef3c7';
+  fb.style.border = '1px solid #fde68a';
   fb.style.color = '#92400e';
-  fb.style.borderLeft = '4px solid #f59e0b';
-  fb.innerHTML = '💡 <strong>' + hintText + '</strong>';
+  fb.innerHTML = `<strong>💡 提示引導：</strong> ${hintText}`;
   speakChinese(hintText);
-}
-
-function selectOption(qId, selectedIdx, correctIdx, expCorrect, expWrong) {
-  userAnswers[qId] = selectedIdx;
-  const isCorrect = (selectedIdx === correctIdx);
-  const card = document.getElementById('card-' + qId);
-  const btns = card.querySelectorAll('.opt-btn');
-  
-  btns.forEach((btn, idx) => {
-    btn.classList.remove('correct', 'wrong');
-    if (idx === selectedIdx) {
-      btn.classList.add(isCorrect ? 'correct' : 'wrong');
-    }
-  });
-
-  const fb = document.getElementById('fb-' + qId);
-  fb.style.display = 'block';
-  if (isCorrect) {
-    fb.style.background = '#dcfce7';
-    fb.style.color = '#15803d';
-    fb.style.borderLeft = '4px solid #22c55e';
-    fb.innerHTML = '✅ <strong>' + expCorrect + '</strong>';
-    speakChinese(expCorrect);
-  } else {
-    fb.style.background = '#fee2e2';
-    fb.style.color = '#b91c1c';
-    fb.style.borderLeft = '4px solid #ef4444';
-    fb.innerHTML = '❌ <strong>' + expWrong + '</strong>';
-    speakChinese(expWrong);
-  }
 }
 
 function setSpeed(speed, btn) {
   currentSpeed = speed;
   document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
-// 嚴格鎖定 Google 雙語語音小姐
 function speakEnglish(text) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'en-US';
   utter.rate = currentSpeed;
-
   const voices = window.speechSynthesis.getVoices();
   const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
                   voices.find(v => v.lang.startsWith('en')) || voices[0];
@@ -675,7 +665,6 @@ function speakChinese(text) {
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'zh-TW';
   utter.rate = 0.85;
-
   const voices = window.speechSynthesis.getVoices();
   const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
                   voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
@@ -684,29 +673,29 @@ function speakChinese(text) {
 }
 
 function submitExam() {
-  const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
-  let totalCorrect = 0;
   const allQs = [...vocabQuestions, ...grammarQuestions];
+  let correctCount = 0;
 
   allQs.forEach(q => {
     if (userAnswers[q.id] === q.ans) {
-      totalCorrect++;
+      correctCount++;
     }
   });
 
-  const finalScore = Math.round((totalCorrect / allQs.length) * 100);
+  const finalScore = Math.round((correctCount / allQs.length) * 100);
+  const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
+
   document.getElementById('scoreText').innerText = finalScore;
   document.getElementById('scoreBanner').style.display = 'block';
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
-  // Sync to GAS
   const payload = {
     unit: '國一 L2 家庭職業與問句',
     level: 'C1 基礎組',
     name: sName,
     score: finalScore,
     totalQuestions: allQs.length,
-    correctCount: totalCorrect,
+    correctCount: correctCount,
     timestamp: new Date().toISOString()
   };
 
@@ -716,14 +705,14 @@ function submitExam() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).then(() => {
-    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師雲端後台！';
+    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師後台！';
   }).catch(() => {
-    document.getElementById('syncStatus').innerText = '⚠️ 成績已完成評分（雲端同步已排程）。';
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已計算（離線暫存模式）。';
   });
 }
 
 window.onload = () => {
-  initQuestions();
+  renderQuestions();
   if ('speechSynthesis' in window) {
     window.speechSynthesis.getVoices();
   }
