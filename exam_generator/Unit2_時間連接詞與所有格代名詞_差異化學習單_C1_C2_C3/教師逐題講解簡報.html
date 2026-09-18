@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國二 · 八年級】Unit 2 時間連接詞與所有格代名詞｜教師逐題講解簡報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --accent: #2563eb;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #1e293b;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .title-group h1 { font-size: 1.25rem; font-weight: 700; color: #60a5fa; }
+    .title-group p { font-size: 0.85rem; color: var(--text-muted); }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn:hover { background: #334155; border-color: #60a5fa; }
+    .btn-primary { background: #2563eb; color: white; border: none; }
+    .btn-primary:hover { background: #1d4ed8; }
+
+    select.slide-select {
+      background: #1e293b;
+      color: white;
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .speed-btn {
+      background: #334155;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .speed-btn.active {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+
+    .slide-stage {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .slide {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 960px;
+      min-height: 520px;
+      padding: 36px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .slide.active { display: flex; animation: slideFade 0.3s ease; }
+
+    @keyframes slideFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+    .slide-badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: #1e3a8a;
+      color: #93c5fd;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .slide-title {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .slide-body {
+      flex: 1;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #cbd5e1;
+    }
+
+    .slide-body strong { color: #60a5fa; }
+    .slide-body em { color: #f59e0b; font-style: normal; font-weight: 600; }
+
+    .point-box {
+      background: #0f172a;
+      border-left: 4px solid #3b82f6;
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-top: 14px;
+      font-size: 1.05rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .grid-box {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .table-slide {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    .table-slide th, .table-slide td {
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      text-align: center;
+    }
+
+    .table-slide th { background: #334155; color: #93c5fd; }
+
+    /* 白板繪圖層 */
+    #wb-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    #wb-canvas.drawing {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+
+    .wb-toolbar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1e293b;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      z-index: 20;
+    }
+
+    .wb-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 50%;
+    }
+
+    .wb-btn.active { background: #2563eb; }
+
+    .tts-inline {
+      background: #1e3a8a;
+      color: #93c5fd;
+      border: none;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="title-group">
+    <h1>👨‍🏫 教師逐題講解簡報｜國二 Unit 2 時間連接詞與所有格代名詞</h1>
+    <p>支援：動態跳頁 · 0.25x 慢速讀音 · 雙語語音小姐 · 全螢幕板書筆</p>
+  </div>
+  <div class="nav-controls">
+    <select id="slideSelect" class="slide-select" onchange="jumpSlide(this.value)">
+      <option value="0">Slide 1: 單元核心字彙與實用電話情境</option>
+      <option value="1">Slide 2: 所有格代名詞全矩陣圖解</option>
+      <option value="2">Slide 3: 時間連接詞 (When/Before/After) 句型精析</option>
+      <option value="3">Slide 4: C1 基礎組 重點題目逐題解析</option>
+      <option value="4">Slide 5: C2 應用組 組句邏輯與易錯點突破</option>
+      <option value="5">Slide 6: C3 表達組 會考選擇與中翻英診斷精講</option>
+    </select>
+    <button class="btn" onclick="prevSlide()">◀ 上一頁</button>
+    <button class="btn btn-primary" onclick="nextSlide()">下一頁 ▶</button>
+    <div style="display:flex; align-items:center; gap:4px; margin-left:8px;">
+      <span style="font-size:0.8rem; color:#94a3b8;">語速:</span>
+      <button class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+</header>
+
+<div class="slide-stage">
+  <canvas id="wb-canvas"></canvas>
+
+  <!-- Slide 1 -->
+  <div class="slide active" id="slide-0">
+    <span class="slide-badge">SLIDE 1 / 6 · VOCABULARY & PHONE CALLS</span>
+    <h2 class="slide-title">📞 單元核心生詞與實用電話情境</h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="grid-box">
+          <h3 style="color:#60a5fa; margin-bottom:8px;">社團與興趣生詞</h3>
+          • <strong>club</strong> [n.] 社團（water sports club 水上運動社）<button class="tts-inline" onclick="speak('water sports club')">🔊</button><br>
+          • <strong>make up one's mind</strong> [phr.] 下定決心<button class="tts-inline" onclick="speak('make up one\'s mind')">🔊</button><br>
+          • <strong>science / subject</strong> [n.] 科學 / 學科<br>
+          • <strong>pull one's leg</strong> [phr.] 開玩笑；唬人<button class="tts-inline" onclick="speak('Are you pulling my leg?')">🔊</button><br>
+          • <strong>poor swimmer</strong> [n.] 拙劣的泳者（poor 表不佳的）
+        </div>
+        <div class="grid-box">
+          <h3 style="color:#f59e0b; margin-bottom:8px;">電話常用標準句型</h3>
+          • <em>May I speak to Yuki, please?</em>（我可以和 Yuki 說話嗎？）<button class="tts-inline" onclick="speak('May I speak to Yuki, please?')">🔊</button><br>
+          • <em>Speaking. / This is Meg speaking.</em>（我就是。）<br>
+          • <em>Please hold on.</em>（請稍候。）<button class="tts-inline" onclick="speak('Please hold on.')">🔊</button><br>
+          • <em>You have the wrong number.</em>（你打錯電話了。）<br>
+          • <em>She's not in. Please call back later.</em>（她不在，請稍後再撥。）
+        </div>
+      </div>
+      <div class="point-box">
+        💡 <strong>教學叮嚀：</strong> 打電話回答「我是某某某」時，英語習慣用 <em>This is [Name].</em> 或 <em>Speaking.</em>，絕不能說 <s>I am [Name].</s> 喔！
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide" id="slide-1">
+    <span class="slide-badge">SLIDE 2 / 6 · POSSESSIVE PRONOUNS</span>
+    <h2 class="slide-title">👜 所有格代名詞 (Possessive Pronouns) 全矩陣</h2>
+    <div class="slide-body">
+      <p>所有格代名詞用來代替<strong>「所有格 ＋ 名詞」</strong>，避免句子重複贅字。</p>
+      <table class="table-slide">
+        <tr>
+          <th>人稱</th>
+          <th>主格 (S)</th>
+          <th>所有格 (Adj)</th>
+          <th>所有格代名詞 (Pronoun)</th>
+          <th>例句對照</th>
+        </tr>
+        <tr>
+          <td>第一人稱</td><td>I / we</td><td>my / our</td><td><strong>mine / ours</strong></td>
+          <td>This sandwich is <strong>mine</strong>. (= my sandwich)</td>
+        </tr>
+        <tr>
+          <td>第二人稱</td><td>you</td><td>your</td><td><strong>yours</strong></td>
+          <td>Is this umbrella <strong>yours</strong>? (= your umbrella)</td>
+        </tr>
+        <tr>
+          <td>第三人稱 (男)</td><td>he</td><td>his</td><td><strong>his</strong></td>
+          <td>This car is not <strong>his</strong>. (= his car)</td>
+        </tr>
+        <tr>
+          <td>第三人稱 (女)</td><td>she</td><td>her</td><td><strong>hers</strong></td>
+          <td>It's that girl's car. It's <strong>hers</strong>.</td>
+        </tr>
+        <tr>
+          <td>第三人稱 (複)</td><td>they</td><td>their</td><td><strong>theirs</strong></td>
+          <td>These jackets are <strong>theirs</strong>. (= their jackets)</td>
+        </tr>
+        <tr>
+          <td>人名 / 專有名詞</td><td>Jamie / boys</td><td>Jamie's / boys'</td><td><strong>Jamie's / the boys'</strong></td>
+          <td>The basketballs are <strong>those boys'</strong>.</td>
+        </tr>
+      </table>
+      <div class="point-box">
+        🔑 <strong>記憶口訣：</strong> mine 獨特無 s，his 本身帶 s 不變，其餘 yours, hers, ours, theirs 全部以 <strong>-s</strong> 結尾！
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide" id="slide-2">
+    <span class="slide-badge">SLIDE 3 / 6 · TIME CONJUNCTIONS</span>
+    <h2 class="slide-title">⏳ 時間連接詞 When, Before, After 句型精析</h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="grid-box">
+          <h3 style="color:#60a5fa;">規則 1：連接詞放句首（加逗號）</h3>
+          • <strong>Before</strong> S1 + V1<strong>,</strong> S2 + V2.<br>
+          <em style="font-size:0.95rem;">Before Miss Turner went to work, she bought a sandwich.</em><button class="tts-inline" onclick="speak('Before Miss Turner went to work, she bought a sandwich.')">🔊</button><br><br>
+          • <strong>After</strong> S1 + V1<strong>,</strong> S2 + V2.<br>
+          <em style="font-size:0.95rem;">After Alan got up, he made the bed.</em><br><br>
+          • <strong>When</strong> S1 + V1<strong>,</strong> S2 + V2.<br>
+          <em style="font-size:0.95rem;">When Dylan was at the airport, he called his parents.</em>
+        </div>
+        <div class="grid-box">
+          <h3 style="color:#f59e0b;">規則 2：連接詞放句中（不加逗號）</h3>
+          • S2 + V2 + <strong>before</strong> + S1 + V1.<br>
+          <em style="font-size:0.95rem;">Miss Turner bought a sandwich before she went to work.</em><br><br>
+          • S2 + V2 + <strong>after</strong> + S1 + V1.<br>
+          <em style="font-size:0.95rem;">Alan made the bed after he got up.</em><br><br>
+          • S2 + V2 + <strong>when</strong> + S1 + V1.<br>
+          <em style="font-size:0.95rem;">Dylan called his parents when he was at the airport.</em>
+        </div>
+      </div>
+      <div class="point-box">
+        ⚠️ <strong>時態一致性提醒：</strong> 敘述過去發生的兩件事時，連接詞子句與主要子句<strong>皆使用過去式</strong>（went, bought / got, made / was, called）！
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide" id="slide-3">
+    <span class="slide-badge">SLIDE 4 / 6 · C1 ITEM ANALYSIS</span>
+    <h2 class="slide-title">🎯 C1 基礎組 重點題目逐題解析</h2>
+    <div class="slide-body">
+      <div class="grid-box" style="margin-bottom:12px;">
+        <strong>【第 3 題 · 電話常用語】</strong><br>
+        <em>May I speak to Meg, please? - Yes, please _______ (hold on).</em><br>
+        👉 解題關鍵：要求對方「在線上等候」固定用 <strong>hold on</strong>。
+      </div>
+      <div class="grid-box" style="margin-bottom:12px;">
+        <strong>【第 9 題 · 所有格代名詞 mine】</strong><br>
+        <em>This sandwich is _______ (my sandwich), not yours.</em><br>
+        👉 解題關鍵：空格後無名詞，需用所有格代名詞 <strong>mine</strong> 代替 my sandwich。
+      </div>
+      <div class="grid-box" style="margin-bottom:12px;">
+        <strong>【第 12 題 · 複數所有格 those girls'】</strong><br>
+        <em>Whose basketballs are they? - They are _______ (those girls').</em><br>
+        👉 解題關鍵：those girls 為複數名詞，所有格只在字尾加撇號（'），故選 <strong>those girls'</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide" id="slide-4">
+    <span class="slide-badge">SLIDE 5 / 6 · C2 UNCREAMBLE LOGIC</span>
+    <h2 class="slide-title">🚀 C2 應用組 組句邏輯與易錯點突破</h2>
+    <div class="slide-body">
+      <p style="margin-bottom:10px;">學生在組句時最常見的兩大盲點：<strong>逗號位置</strong> 與 <strong>代名詞主格/所有格混淆</strong>。</p>
+      <div class="point-box" style="margin-bottom:14px;">
+        <strong>範例 1：Before 放句首 vs. 句中</strong><br>
+        • <span style="color:#22c55e;">Before Miss Turner went to work, she bought a sandwich.</span>（句首引導副詞子句，需加逗號）<br>
+        • <span style="color:#22c55e;">Miss Turner bought a sandwich before she went to work.</span>（放句中連接，不加逗號）
+      </div>
+      <div class="point-box">
+        <strong>範例 2：多重所有格代名詞並列</strong><br>
+        • <span style="color:#22c55e;">These jackets are theirs, and ours are over there.</span><br>
+        👉 說明：theirs = their jackets；ours = our jackets，兩者皆為所有格代名詞。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide" id="slide-5">
+    <span class="slide-badge">SLIDE 6 / 6 · C3 EXAM & TRANSLATION</span>
+    <h2 class="slide-title">🏆 C3 表達組 會考選擇與中翻英診斷精講</h2>
+    <div class="slide-body">
+      <div class="grid-box" style="margin-bottom:12px;">
+        <strong>【會考精選題 3】時態呼應</strong><br>
+        <em>Megan studied Chinese after she _______ (did) her math homework.</em><br>
+        👉 診斷提示：主要子句 studied 為過去式，after 子句發生在過去，動詞需用 <strong>did</strong>。
+      </div>
+      <div class="grid-box" style="margin-bottom:12px;">
+        <strong>【中翻英書寫診斷】</strong><br>
+        1. <em>這份三明治是我的，不是你的。</em><br>
+        👉 <strong>This sandwich is mine, not yours.</strong>（檢核：sandwich 拼字、mine/yours 正確性）<br><br>
+        2. <em>當天氣很熱的時候，孩子們吃冰淇淋。</em><br>
+        👉 <strong>When the weather is hot, the kids eat ice cream.</strong>（檢核：When 首字大寫、逗號、現在式 eat）
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 白板工具列 -->
+<div class="wb-toolbar">
+  <button class="wb-btn" id="wbToggle" onclick="toggleWhiteboard()" title="開啟板書筆">✏️</button>
+  <button class="wb-btn" onclick="clearWhiteboard()" title="清除筆跡">🗑️</button>
+</div>
+
+<script>
+let currentSlide = 0;
+const totalSlides = 6;
+let currentSpeed = 0.25;
+
+function showSlide(idx) {
+  document.querySelectorAll('.slide').forEach((s, i) => {
+    s.classList.toggle('active', i === idx);
+  });
+  document.getElementById('slideSelect').value = idx;
+  currentSlide = idx;
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides - 1) {
+    showSlide(currentSlide + 1);
+  }
+}
+
+function prevSlide() {
+  if (currentSlide > 0) {
+    showSlide(currentSlide - 1);
+  }
+}
+
+function jumpSlide(idx) {
+  showSlide(parseInt(idx));
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+    nextSlide();
+  } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+    prevSlide();
+  }
+});
+
+function setSpeed(speed, btn) {
+  currentSpeed = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = currentSpeed;
+  utter.lang = 'en-US';
+  window.speechSynthesis.speak(utter);
+}
+
+// Canvas 白板功能
+const canvas = document.getElementById('wb-canvas');
+const ctx = canvas.getContext('2d');
+let isDrawing = false;
+let wbEnabled = false;
+
+function resizeCanvas() {
+  canvas.width = canvas.parentElement.clientWidth;
+  canvas.height = canvas.parentElement.clientHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function toggleWhiteboard() {
+  wbEnabled = !wbEnabled;
+  canvas.classList.toggle('drawing', wbEnabled);
+  document.getElementById('wbToggle').classList.toggle('active', wbEnabled);
+}
+
+function clearWhiteboard() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  if (!wbEnabled) return;
+  isDrawing = true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  if (!isDrawing || !wbEnabled) return;
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+});
+
+canvas.addEventListener('mouseup', () => { isDrawing = false; });
+canvas.addEventListener('mouseleave', () => { isDrawing = false; });
+</script>
+
+</body>
+</html>

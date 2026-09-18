@@ -1,0 +1,600 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國二 · 八年級】Unit 2 時間連接詞與所有格代名詞 差異化學習單｜C3 表達組</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-hover: #6d28d9;
+      --bg: #f5f3ff;
+      --card-bg: #ffffff;
+      --text: #4c1d95;
+      --text-muted: #64748b;
+      --border: #ddd6fe;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(124,58,237,0.15);
+    }
+
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+
+    .container {
+      max-width: 840px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .info-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .input-name {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .voice-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .voice-ctrl select {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+    }
+
+    .speed-btn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+    .speed-btn.active {
+      background: #7c3aed;
+      color: white;
+      border-color: #7c3aed;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #5b21b6;
+      margin: 24px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .q-prompt {
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      line-height: 1.5;
+    }
+
+    .tts-btn {
+      background: #ede9fe;
+      color: #7c3aed;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      margin-left: 10px;
+    }
+
+    .tts-btn:hover { background: #ddd6fe; }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .opt-btn {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .opt-btn:hover {
+      background: #f1f5f9;
+      border-color: #a78bfa;
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: bold;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    .input-writing {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-family: inherit;
+      margin-top: 8px;
+      outline: none;
+    }
+
+    .input-writing:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+    }
+
+    .explanation {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #f5f3ff;
+      border-left: 4px solid #8b5cf6;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .submit-bar {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 10px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(124,58,237,0.3);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+    .score-banner {
+      display: none;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 25px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .score-banner h2 { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
+    .score-banner p { font-size: 1.05rem; color: var(--text-muted); }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>國中英語【國二 · 八年級】Unit 2 時間連接詞與所有格代名詞</h1>
+  <p>🎯 C3 表達組：標準會考選擇題（70分）＋ 診斷式中翻英書寫（30分）</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="voice-ctrl">
+      <label>🔊 朗讀語音：</label>
+      <select id="voiceSelect"></select>
+      <span>語速:</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+
+  <div class="section-title">📝 第一部分：標準會考綜合選擇題（7 題 · 每題 10 分，共 70 分）</div>
+  <div id="mc-container"></div>
+
+  <div class="section-title">✍️ 第二部分：情境中翻英書寫診斷題（3 題 · 每題 10 分，共 30 分）</div>
+  <div id="writing-container"></div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出答案並計分</button>
+  </div>
+
+  <div class="score-banner" id="scoreBanner">
+    <h2>🎉 測驗完成！得分：<span id="scoreText">0</span> / 100</h2>
+    <p id="syncStatus">正在同步成績至雲端學習歷程資料庫...</p>
+  </div>
+</div>
+
+<script>
+let currentSpeed = 0.25;
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+const c3MultipleChoice = [
+  {
+    id: 'c3_mc1',
+    prompt: '1. Cody: Hello, this is Cody. May I speak to Yuki, please?<br>Yuki: _______ What\'s up, Cody?',
+    tts: 'Hello, this is Cody. May I speak to Yuki, please? Speaking. What is up, Cody?',
+    options: [
+      'Speaking.',
+      'Yes, you are Yuki.',
+      'I am speaking Yuki.',
+      'Yuki is speaking to me.'
+    ],
+    ans: 0,
+    exp: '【解析】電話用語中，本人接聽時可回答 Speaking. 或 This is Yuki speaking.（我就是）。'
+  },
+  {
+    id: 'c3_mc2',
+    prompt: '2. Shin was a poor swimmer _______ he joined the water sports club last year.',
+    tts: 'Shin was a poor swimmer before he joined the water sports club last year.',
+    options: ['before', 'after', 'whose', 'so'],
+    ans: 0,
+    exp: '【解析】語意為「Shin 在去年加入水上運動社團之前，是個拙劣的泳者」，故選 before。'
+  },
+  {
+    id: 'c3_mc3',
+    prompt: '3. Megan studied Chinese after she _______ her math homework.',
+    tts: 'Megan studied Chinese after she did her math homework.',
+    options: ['did', 'does', 'doing', 'is doing'],
+    ans: 0,
+    exp: '【解析】主要子句為過去式（studied），after 引導的子句亦需用過去式（did）以維持時態一致。'
+  },
+  {
+    id: 'c3_mc4',
+    prompt: '4. Allan: Look at the basketballs. Whose are they?<br>Betty: They\'re _______ (those girls\' basketballs).',
+    tts: 'Look at the basketballs. Whose are they? They are those girls\'.',
+    options: ['those girls\'', 'those girl\'s', 'those girls', 'them girls'],
+    ans: 0,
+    exp: '【解析】複數名詞所有格代名詞：those girls\' basketballs 代換為 those girls\'（字尾已有 s 只加撇號）。'
+  },
+  {
+    id: 'c3_mc5',
+    prompt: '5. When the weather is hot, the kids _______ ice cream.',
+    tts: 'When the weather is hot, the kids eat ice cream.',
+    options: ['eat', 'ate', 'eating', 'to eat'],
+    ans: 0,
+    exp: '【解析】描述規律習慣時態用現在式，主詞 the kids 為複數，動詞用原形 eat。'
+  },
+  {
+    id: 'c3_mc6',
+    prompt: '6. I\'m thinking about the video game design club because computer science is my favorite _______.',
+    tts: 'I am thinking about the video game design club because computer science is my favorite subject.',
+    options: ['subject', 'wrong', 'swimmer', 'camera'],
+    ans: 0,
+    exp: '【解析】subject 代表「學科／科目」。電腦科學是我最喜歡的學科。'
+  },
+  {
+    id: 'c3_mc7',
+    prompt: '7. Cody: Are you pulling my _______? You are a poor swimmer!<br>Yuki: No, I\'m serious. I really signed up for it.',
+    tts: 'Are you pulling my leg? You are a poor swimmer! No, I am serious.',
+    options: ['leg', 'arm', 'hand', 'foot'],
+    ans: 0,
+    exp: '【解析】慣用語 pull one\'s leg 代表「開玩笑／唬人」。'
+  }
+];
+
+const c3Writing = [
+  {
+    id: 'c3_w1',
+    zh: '8. 這份三明治是我的，不是你的。',
+    target: 'This sandwich is mine, not yours.',
+    keywords: ['this', 'sandwich', 'mine', 'yours', 'not'],
+    exp: '【標準答案】This sandwich is mine, not yours.<br>【評分要點】This sandwich 主詞單數配 is；mine 代替 my sandwich；yours 代替 your sandwich。'
+  },
+  {
+    id: 'c3_w2',
+    zh: '9. 在特納小姐去上班之前，她買了一份三明治。（提示：Before...）',
+    target: 'Before Miss Turner went to work, she bought a sandwich.',
+    keywords: ['before', 'went to work', 'bought', 'sandwich'],
+    exp: '【標準答案】Before Miss Turner went to work, she bought a sandwich.<br>【評分要點】Before 放句首引導過去式子句（went to work），後加逗號，主要子句用 bought。'
+  },
+  {
+    id: 'c3_w3',
+    zh: '10. 當天氣很熱的時候，孩子們吃冰淇淋。（提示：When...）',
+    target: 'When the weather is hot, the kids eat ice cream.',
+    keywords: ['when', 'weather', 'hot', 'kids', 'eat', 'ice cream'],
+    exp: '【標準答案】When the weather is hot, the kids eat ice cream.<br>【評分要點】When 引導條件子句加逗號；描述習慣用現在式 is / eat。'
+  }
+];
+
+let userMCAnswers = {};
+
+function initC3() {
+  const mcContainer = document.getElementById('mc-container');
+  c3MultipleChoice.forEach((q, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-' + q.id;
+
+    const promptDiv = document.createElement('div');
+    promptDiv.className = 'q-prompt';
+    promptDiv.innerHTML = `<div>${q.prompt}</div>`;
+
+    const ttsBtn = document.createElement('button');
+    ttsBtn.className = 'tts-btn';
+    ttsBtn.innerHTML = '🔊 點讀';
+    ttsBtn.onclick = () => speak(q.tts);
+    promptDiv.appendChild(ttsBtn);
+    card.appendChild(promptDiv);
+
+    const grid = document.createElement('div');
+    grid.className = 'options-grid';
+
+    q.options.forEach((opt, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.innerHTML = `<strong>(${String.fromCharCode(65 + oIdx)})</strong> ${opt}`;
+      btn.onclick = () => selectMCOption(q.id, oIdx, q.ans);
+      btn.id = `btn-${q.id}-${oIdx}`;
+      grid.appendChild(btn);
+    });
+
+    card.appendChild(grid);
+
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.id = 'exp-' + q.id;
+    exp.innerHTML = q.exp;
+    card.appendChild(exp);
+
+    mcContainer.appendChild(card);
+  });
+
+  const wContainer = document.getElementById('writing-container');
+  c3Writing.forEach((q, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-' + q.id;
+
+    const promptDiv = document.createElement('div');
+    promptDiv.className = 'q-prompt';
+    promptDiv.innerHTML = `<div><strong>${q.zh}</strong></div>`;
+
+    const ttsBtn = document.createElement('button');
+    ttsBtn.className = 'tts-btn';
+    ttsBtn.innerHTML = '🔊 範例讀音';
+    ttsBtn.onclick = () => speak(q.target);
+    promptDiv.appendChild(ttsBtn);
+    card.appendChild(promptDiv);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'input-writing';
+    input.placeholder = '請在此輸入完整英文句子...';
+    input.id = 'input-' + q.id;
+    card.appendChild(input);
+
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.id = 'exp-' + q.id;
+    exp.innerHTML = q.exp;
+    card.appendChild(exp);
+
+    wContainer.appendChild(card);
+  });
+}
+
+function selectMCOption(qId, selectedIdx, correctIdx) {
+  userMCAnswers[qId] = selectedIdx;
+  const isCorrect = (selectedIdx === correctIdx);
+  const card = document.getElementById('card-' + qId);
+  const btns = card.querySelectorAll('.opt-btn');
+  
+  btns.forEach((btn, idx) => {
+    btn.classList.remove('correct', 'wrong');
+    if (idx === selectedIdx) {
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+    }
+  });
+
+  document.getElementById('exp-' + qId).style.display = 'block';
+}
+
+function setSpeed(speed, btn) {
+  currentSpeed = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = currentSpeed;
+
+  const voiceSelect = document.getElementById('voiceSelect');
+  const voices = window.speechSynthesis.getVoices();
+  if (voiceSelect && voiceSelect.value !== '') {
+    utter.voice = voices[voiceSelect.value];
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+function initVoices() {
+  const voiceSelect = document.getElementById('voiceSelect');
+  const voices = window.speechSynthesis.getVoices();
+  voiceSelect.innerHTML = '';
+  
+  let targetIdx = -1;
+  voices.forEach((v, idx) => {
+    if (v.lang.startsWith('en')) {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = `${v.name} (${v.lang})`;
+      voiceSelect.appendChild(opt);
+      if (targetIdx === -1 && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('US'))) {
+        targetIdx = voiceSelect.options.length - 1;
+      }
+    }
+  });
+
+  if (targetIdx !== -1) {
+    voiceSelect.selectedIndex = targetIdx;
+  }
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = initVoices;
+}
+
+function cleanStr(s) {
+  return s.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?'"]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function gradeWriting(userInput, q) {
+  const cleanUser = cleanStr(userInput);
+  const cleanTarget = cleanStr(q.target);
+
+  if (cleanUser === cleanTarget) return 10;
+
+  // Keyword partial credit
+  let matched = 0;
+  q.keywords.forEach(kw => {
+    if (cleanUser.includes(cleanStr(kw))) {
+      matched++;
+    }
+  });
+
+  const ratio = matched / q.keywords.length;
+  if (ratio >= 0.8) return 8;
+  if (ratio >= 0.5) return 5;
+  if (ratio > 0) return 3;
+  return 0;
+}
+
+function submitExam() {
+  const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
+  let totalScore = 0;
+
+  // 1. Grade MC (70 pts)
+  c3MultipleChoice.forEach(q => {
+    if (userMCAnswers[q.id] === q.ans) {
+      totalScore += 10;
+    }
+    document.getElementById('exp-' + q.id).style.display = 'block';
+  });
+
+  // 2. Grade Writing (30 pts)
+  c3Writing.forEach(q => {
+    const inputVal = document.getElementById('input-' + q.id).value;
+    const itemScore = gradeWriting(inputVal, q);
+    totalScore += itemScore;
+    
+    const expDiv = document.getElementById('exp-' + q.id);
+    expDiv.style.display = 'block';
+    expDiv.innerHTML = `<strong>本題得分：${itemScore} / 10 分</strong><br>` + q.exp;
+  });
+
+  document.getElementById('scoreText').innerText = totalScore;
+  document.getElementById('scoreBanner').style.display = 'block';
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+  // Sync to GAS
+  const payload = {
+    unit: '國二 Unit 2 時間連接詞與所有格代名詞',
+    level: 'C3 表達組',
+    name: sName,
+    score: totalScore,
+    totalQuestions: 10,
+    timestamp: new Date().toISOString()
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師雲端後台！';
+  }).catch(() => {
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已完成評分（雲端同步已排程）。';
+  });
+}
+
+window.onload = () => {
+  initC3();
+  setTimeout(initVoices, 200);
+};
+</script>
+
+</body>
+</html>

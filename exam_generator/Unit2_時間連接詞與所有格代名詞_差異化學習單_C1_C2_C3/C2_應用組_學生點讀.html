@@ -1,0 +1,679 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國二 · 八年級】Unit 2 時間連接詞與所有格代名詞 差異化學習單｜C2 應用組</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --bg: #fffbeb;
+      --card-bg: #ffffff;
+      --text: #78350f;
+      --text-muted: #64748b;
+      --border: #fde68a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(217,119,6,0.15);
+    }
+
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+
+    .container {
+      max-width: 860px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .info-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .input-name {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .voice-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .voice-ctrl select {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+    }
+
+    .speed-btn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+    .speed-btn.active {
+      background: #d97706;
+      color: white;
+      border-color: #d97706;
+    }
+
+    .matrix-card {
+      background: #ffffff;
+      border: 2px solid #fde68a;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 24px;
+      box-shadow: 0 3px 8px rgba(217,119,6,0.06);
+    }
+
+    .matrix-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .grammar-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .grammar-table th, .grammar-table td {
+      border: 1px solid #fde68a;
+      padding: 6px 10px;
+      text-align: center;
+    }
+
+    .grammar-table th {
+      background: #fef3c7;
+      color: #78350f;
+      font-weight: 700;
+    }
+
+    .rule-box {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      color: #78350f;
+      border-radius: 4px;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .q-zh {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #92400e;
+    }
+
+    .tts-btn {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s;
+    }
+
+    .tts-btn:hover { background: #fde68a; }
+
+    .answer-zone {
+      min-height: 48px;
+      border: 2px dashed #d97706;
+      border-radius: 10px;
+      background: #fffdfa;
+      padding: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .chips-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 6px 0;
+      margin-bottom: 12px;
+    }
+
+    .chip {
+      background: #fef3c7;
+      color: #78350f;
+      border: 1.5px solid #fcd34d;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .chip:hover {
+      background: #fde68a;
+      transform: translateY(-1px);
+    }
+
+    .chip.used {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .chip.answer {
+      background: #d97706;
+      color: white;
+      border-color: #b45309;
+    }
+
+    .btn-clear {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .feedback {
+      font-size: 0.95rem;
+      margin-top: 8px;
+      display: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .feedback.correct {
+      background: #dcfce7;
+      color: #15803d;
+      display: block;
+    }
+
+    .feedback.wrong {
+      background: #fee2e2;
+      color: #b91c1c;
+      display: block;
+    }
+
+    .submit-bar {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 10px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(217,119,6,0.3);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+    .score-banner {
+      display: none;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 25px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .score-banner h2 { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
+    .score-banner p { font-size: 1.05rem; color: var(--text-muted); }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>國中英語【國二 · 八年級】Unit 2 時間連接詞與所有格代名詞</h1>
+  <p>🚀 C2 應用組：文法結構表 ＋ 步步練單字積木組句（共 10 題）</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="voice-ctrl">
+      <label>🔊 朗讀語音：</label>
+      <select id="voiceSelect"></select>
+      <span>語速:</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+
+  <!-- 文法結構圖表 -->
+  <div class="matrix-card">
+    <div class="matrix-title">💡 所有格代名詞 (Possessive Pronouns) 與 時間連接詞 (Time Conjunctions) 核心矩陣</div>
+    <table class="grammar-table">
+      <tr>
+        <th>主格</th>
+        <th>所有格 (形容詞)</th>
+        <th>所有格代名詞 (Pronoun)</th>
+        <th>主格</th>
+        <th>所有格 (形容詞)</th>
+        <th>所有格代名詞 (Pronoun)</th>
+      </tr>
+      <tr>
+        <td>I</td><td>my</td><td><strong>mine</strong></td>
+        <td>we</td><td>our</td><td><strong>ours</strong></td>
+      </tr>
+      <tr>
+        <td>you</td><td>your</td><td><strong>yours</strong></td>
+        <td>you</td><td>your</td><td><strong>yours</strong></td>
+      </tr>
+      <tr>
+        <td>he</td><td>his</td><td><strong>his</strong></td>
+        <td>they</td><td>their</td><td><strong>theirs</strong></td>
+      </tr>
+      <tr>
+        <td>she</td><td>her</td><td><strong>hers</strong></td>
+        <td>the boys</td><td>the boys'</td><td><strong>the boys'</strong></td>
+      </tr>
+    </table>
+    <div class="rule-box">
+      <strong>📌 時間連接詞規則：</strong><br>
+      • <strong>Before / After / When + S1 + V1, S2 + V2.</strong>（連接詞放句首，副詞子句後<strong>加逗號</strong>）<br>
+      • <strong>S2 + V2 + before / after / when + S1 + V1.</strong>（連接詞放句中，<strong>不加逗號</strong>）
+    </div>
+  </div>
+
+  <!-- 題目區 -->
+  <div id="questions-container"></div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出答案並計分</button>
+  </div>
+
+  <div class="score-banner" id="scoreBanner">
+    <h2>🎉 測驗完成！得分：<span id="scoreText">0</span> / 100</h2>
+    <p id="syncStatus">正在同步成績至雲端學習歷程資料庫...</p>
+  </div>
+</div>
+
+<script>
+let currentSpeed = 0.25;
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+const c2Questions = [
+  {
+    id: 'c2_1',
+    zh: '1. 在特納小姐去上班之前，她買了一份三明治。（Before 放句首）',
+    target: 'Before Miss Turner went to work, she bought a sandwich.',
+    tokens: ['Before', 'Miss Turner', 'went', 'to work,', 'she', 'bought', 'a sandwich.']
+  },
+  {
+    id: 'c2_2',
+    zh: '2. 特納小姐在去上班之前買了一份三明治。（before 放句中）',
+    target: 'Miss Turner bought a sandwich before she went to work.',
+    tokens: ['Miss Turner', 'bought', 'a sandwich', 'before', 'she', 'went', 'to work.']
+  },
+  {
+    id: 'c2_3',
+    zh: '3. 在 Yuki 和她堂哥談過之後，她加入了水上運動社團。（After 放句首）',
+    target: 'After Yuki talked to her cousin, she joined the club.',
+    tokens: ['After', 'Yuki', 'talked', 'to her cousin,', 'she', 'joined', 'the club.']
+  },
+  {
+    id: 'c2_4',
+    zh: '4. Yuki 在和她堂哥談過之後加入了水上運動社團。（after 放句中）',
+    target: 'Yuki joined the club after she talked to her cousin.',
+    tokens: ['Yuki', 'joined', 'the club', 'after', 'she', 'talked', 'to her cousin.']
+  },
+  {
+    id: 'c2_5',
+    zh: '5. 當 Dylan 在機場時，他打電話給他的父母。（When 放句首）',
+    target: 'When Dylan was at the airport, he called his parents.',
+    tokens: ['When', 'Dylan', 'was', 'at the airport,', 'he', 'called', 'his parents.']
+  },
+  {
+    id: 'c2_6',
+    zh: '6. Dylan 在機場時打電話給他的父母。（when 放句中）',
+    target: 'Dylan called his parents when he was at the airport.',
+    tokens: ['Dylan', 'called', 'his parents', 'when', 'he', 'was', 'at the airport.']
+  },
+  {
+    id: 'c2_7',
+    zh: '7. 這份三明治是我的，不是你的。',
+    target: 'This sandwich is mine, not yours.',
+    tokens: ['This sandwich', 'is', 'mine,', 'not', 'yours.']
+  },
+  {
+    id: 'c2_8',
+    zh: '8. 這輛車不是他的；它是她的。',
+    target: 'This car is not his; it is hers.',
+    tokens: ['This car', 'is', 'not his;', 'it', 'is', 'hers.']
+  },
+  {
+    id: 'c2_9',
+    zh: '9. 這些外套是他們的，而我們的在那邊。',
+    target: 'These jackets are theirs, and ours are over there.',
+    tokens: ['These jackets', 'are', 'theirs,', 'and ours', 'are', 'over there.']
+  },
+  {
+    id: 'c2_10',
+    zh: '10. 桌上的這台相機是誰的？它是我的。',
+    target: 'Whose camera is this on the table? It is mine.',
+    tokens: ['Whose camera', 'is this', 'on the table?', 'It', 'is', 'mine.']
+  }
+];
+
+let state = {};
+
+function initC2() {
+  const container = document.getElementById('questions-container');
+  c2Questions.forEach((q, idx) => {
+    state[q.id] = {
+      selected: [],
+      chips: shuffle([...q.tokens])
+    };
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-' + q.id;
+
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'q-header';
+    headerDiv.innerHTML = `<div class="q-zh">${q.zh}</div>`;
+
+    const ttsBtn = document.createElement('button');
+    ttsBtn.className = 'tts-btn';
+    ttsBtn.innerHTML = '🔊 聽示範讀音';
+    ttsBtn.onclick = () => speak(q.target);
+    headerDiv.appendChild(ttsBtn);
+    card.appendChild(headerDiv);
+
+    // 答題區
+    const ansZone = document.createElement('div');
+    ansZone.className = 'answer-zone';
+    ansZone.id = 'ans-' + q.id;
+    card.appendChild(ansZone);
+
+    // 單字積木區
+    const chipsZone = document.createElement('div');
+    chipsZone.className = 'chips-zone';
+    chipsZone.id = 'chips-' + q.id;
+    card.appendChild(chipsZone);
+
+    // 控制與回饋
+    const ctrlDiv = document.createElement('div');
+    ctrlDiv.style.display = 'flex';
+    ctrlDiv.style.justifyContent = 'space-between';
+    ctrlDiv.style.alignItems = 'center';
+
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'btn-clear';
+    clearBtn.innerText = '↺ 重置本題';
+    clearBtn.onclick = () => resetQuestion(q.id);
+    ctrlDiv.appendChild(clearBtn);
+
+    card.appendChild(ctrlDiv);
+
+    const fb = document.createElement('div');
+    fb.className = 'feedback';
+    fb.id = 'fb-' + q.id;
+    card.appendChild(fb);
+
+    container.appendChild(card);
+    renderQuestion(q.id);
+  });
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function renderQuestion(qId) {
+  const qState = state[qId];
+  const ansZone = document.getElementById('ans-' + qId);
+  const chipsZone = document.getElementById('chips-' + qId);
+
+  ansZone.innerHTML = '';
+  qState.selected.forEach((word, idx) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip answer';
+    chip.innerText = word;
+    chip.onclick = () => removeWord(qId, idx);
+    ansZone.appendChild(chip);
+  });
+
+  chipsZone.innerHTML = '';
+  qState.chips.forEach((word, idx) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.innerText = word;
+    
+    // Check if used
+    const countInSelected = qState.selected.filter(w => w === word).length;
+    const countInChipsPrior = qState.chips.slice(0, idx).filter(w => w === word).length;
+    if (countInSelected > countInChipsPrior) {
+      chip.classList.add('used');
+    } else {
+      chip.onclick = () => addWord(qId, word);
+    }
+    chipsZone.appendChild(chip);
+  });
+}
+
+function addWord(qId, word) {
+  state[qId].selected.push(word);
+  renderQuestion(qId);
+  checkAutoAnswer(qId);
+}
+
+function removeWord(qId, idx) {
+  state[qId].selected.splice(idx, 1);
+  renderQuestion(qId);
+  document.getElementById('fb-' + qId).style.display = 'none';
+}
+
+function resetQuestion(qId) {
+  state[qId].selected = [];
+  renderQuestion(qId);
+  document.getElementById('fb-' + qId).style.display = 'none';
+}
+
+function checkAutoAnswer(qId) {
+  const q = c2Questions.find(x => x.id === qId);
+  const qState = state[qId];
+  if (qState.selected.length === q.tokens.length) {
+    const userStr = qState.selected.join(' ');
+    const fb = document.getElementById('fb-' + qId);
+    if (userStr === q.target) {
+      fb.className = 'feedback correct';
+      fb.innerText = '✅ 組句完全正確！';
+    } else {
+      fb.className = 'feedback wrong';
+      fb.innerText = '❌ 順序有誤，正確應為：' + q.target;
+    }
+  }
+}
+
+function setSpeed(speed, btn) {
+  currentSpeed = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = currentSpeed;
+
+  const voiceSelect = document.getElementById('voiceSelect');
+  const voices = window.speechSynthesis.getVoices();
+  if (voiceSelect && voiceSelect.value !== '') {
+    utter.voice = voices[voiceSelect.value];
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+function initVoices() {
+  const voiceSelect = document.getElementById('voiceSelect');
+  const voices = window.speechSynthesis.getVoices();
+  voiceSelect.innerHTML = '';
+  
+  let targetIdx = -1;
+  voices.forEach((v, idx) => {
+    if (v.lang.startsWith('en')) {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = `${v.name} (${v.lang})`;
+      voiceSelect.appendChild(opt);
+      if (targetIdx === -1 && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('US'))) {
+        targetIdx = voiceSelect.options.length - 1;
+      }
+    }
+  });
+
+  if (targetIdx !== -1) {
+    voiceSelect.selectedIndex = targetIdx;
+  }
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = initVoices;
+}
+
+function submitExam() {
+  const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
+  let totalCorrect = 0;
+
+  c2Questions.forEach(q => {
+    const userStr = state[q.id].selected.join(' ');
+    const fb = document.getElementById('fb-' + q.id);
+    if (userStr === q.target) {
+      totalCorrect++;
+      fb.className = 'feedback correct';
+      fb.innerText = '✅ 組句完全正確！';
+    } else {
+      fb.className = 'feedback wrong';
+      fb.innerText = '❌ 正確答案：' + q.target;
+    }
+  });
+
+  const finalScore = Math.round((totalCorrect / c2Questions.length) * 100);
+  document.getElementById('scoreText').innerText = finalScore;
+  document.getElementById('scoreBanner').style.display = 'block';
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+  // Sync to GAS
+  const payload = {
+    unit: '國二 Unit 2 時間連接詞與所有格代名詞',
+    level: 'C2 應用組',
+    name: sName,
+    score: finalScore,
+    totalQuestions: c2Questions.length,
+    correctCount: totalCorrect,
+    timestamp: new Date().toISOString()
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師雲端後台！';
+  }).catch(() => {
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已完成評分（雲端同步已排程）。';
+  });
+}
+
+window.onload = () => {
+  initC2();
+  setTimeout(initVoices, 200);
+};
+</script>
+
+</body>
+</html>
