@@ -1,0 +1,573 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L2 家庭職業與問句 教師講解簡報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+      --accent-gold: #fbbf24;
+      --border: #334155;
+      --highlight: #fef08a;
+    }
+
+    body.light-mode {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #059669;
+      --accent-gold: #d97706;
+      --border: #e2e8f0;
+      --highlight: #fde047;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--card-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+    }
+
+    .badge-unit {
+      background: #059669;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-tool, select.tool-select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    body.light-mode .btn-tool, body.light-mode select.tool-select {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .btn-tool:hover { background: var(--accent); color: white; }
+
+    .btn-tool.active {
+      background: #e11d48;
+      color: white;
+      border-color: #be123c;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .slide-frame {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 1100px;
+      height: 78vh;
+      display: none;
+      flex-direction: column;
+      padding: 36px 48px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .slide-frame.active {
+      display: flex;
+      animation: popSlide 0.25s ease-out;
+    }
+
+    @keyframes popSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-page-num {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .slide-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    .slide-content {
+      font-size: 1.2rem;
+      line-height: 1.9;
+      flex: 1;
+    }
+
+    .ans-box {
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 6px solid #10b981;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-top: 18px;
+      display: none;
+    }
+
+    .ans-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    #whiteboardCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    #whiteboardCanvas.drawing-active {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 8px 24px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .key-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+
+    body.light-mode .key-badge {
+      background: #e2e8f0;
+      color: #334155;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span class="badge-unit">國一 · 七年級</span>
+      <span>L2 家庭職業與問句 教師講解簡報</span>
+    </div>
+
+    <div class="slide-controls">
+      <label style="font-size:0.88rem; font-weight:600;">📑 跳頁：</label>
+      <select id="slideSelect" class="tool-select" onchange="jumpToSlide(parseInt(this.value))">
+        <option value="0">第 1 頁：共同核心鎖定 (Common Core 28 生詞)</option>
+        <option value="1">第 2 頁：C1 基礎組 - 家庭成員與職業對照 (Family Tree)</option>
+        <option value="2">第 3 頁：C1 基礎組 - 疑問詞 Who / Where / How old 問答</option>
+        <option value="3">第 4 頁：C2 應用組 - 基數詞 10~99 與歲數 (Numbers & Age)</option>
+        <option value="4">第 5 頁：C2 應用組 - 國籍與來源介系詞 from the USA</option>
+        <option value="5">第 6 頁：C3 表達組 - 自我介紹與生活慣用語情境</option>
+      </select>
+
+      <label style="font-size:0.88rem; font-weight:600; margin-left:4px;">⚡ 語速：</label>
+      <select id="speedSelect" class="tool-select">
+        <option value="0.25">🐢 0.25x 極慢速</option>
+        <option value="0.4">🐢 0.4x 慢速</option>
+        <option value="0.6">0.6x 初學</option>
+        <option value="0.85" selected>0.85x 適中</option>
+        <option value="1.0">1.0x 標準</option>
+      </select>
+
+      <button class="btn-tool" onclick="prevSlide()">◀ 上一頁</button>
+      <span id="slideIndicator" style="font-weight:700; padding:0 6px;">1 / 6</span>
+      <button class="btn-tool" onclick="nextSlide()">下一頁 ▶</button>
+      <button class="btn-tool" id="btnAns" onclick="toggleAnswer()">💡 答案解析 (Space)</button>
+      <button class="btn-tool" id="btnBoard" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
+      <button class="btn-tool" onclick="clearWhiteboard()">🧹 清除板書 (C)</button>
+      <button class="btn-tool" onclick="speakCurrentSlide()">🔊 朗讀本頁 (R)</button>
+      <button class="btn-tool" onclick="toggleTheme()">🌓 主題</button>
+      <a href="index.html" class="btn-tool" style="text-decoration:none;">🏠 回首頁</a>
+    </div>
+  </header>
+
+  <main>
+    <canvas id="whiteboardCanvas"></canvas>
+
+    <!-- Slide 1: 共同學習核心鎖定 -->
+    <div class="slide-frame active" id="slide-0">
+      <div class="slide-page-num">1 / 6</div>
+      <div class="slide-title">🎯 L2 共同學習核心鎖定 (Common Core)</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong style="color:var(--accent-gold);">【核心單字 1200 聚焦】</strong><br>
+          • <strong>家庭與稱謂：</strong> family (家庭), husband (丈夫), wife (妻子), son (兒子), daughter (女兒), brother (兄弟), sister (姊妹)<br>
+          • <strong>職業與身分：</strong> farmer (農夫), housewife (家庭主婦), clerk (職員), actress (女演員), doctor (醫生), nurse (護士), student (學生)<br>
+          • <strong>國家與生活：</strong> the USA (美國), postcard (明信片), famous (有名的), beautiful (漂亮的), hard (困難的), easy (簡單的), theme park (主題樂園), founder (創辦者)
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
+          <strong style="color:var(--accent-gold);">【核心三大疑問詞結構】</strong><br>
+          1. <strong>Who (問身分)：</strong> Who is he/she? - He/She is my friend.<br>
+          2. <strong>Where ... from (問來源)：</strong> Where are you from? - I am from the USA.<br>
+          3. <strong>How old (問年齡)：</strong> How old are you? - I am twelve years old.
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: C1 基礎組 - 家庭樹與職業對照 -->
+    <div class="slide-frame" id="slide-1">
+      <div class="slide-page-num">2 / 6</div>
+      <div class="slide-title">👨‍👩‍👧 Slide 2: C1 基礎組 - 家庭成員關係 (Family Tree)</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;">
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • <strong>husband & wife</strong> (夫妻)<br>
+            • <strong>father & mother</strong> (父母)<br>
+            • <strong>son & daughter</strong> (兒女)
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • <strong>farmer</strong> (農夫)<br>
+            • <strong>housewife</strong> (家庭主婦)<br>
+            • <strong>clerk</strong> (職員) / <strong>actress</strong> (女演員)
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+          • <em>Neil and Judy are husband and wife.</em> (尼爾和茱蒂是夫妻。)<br>
+          • <em>My grandfather is a hard-working farmer.</em> (我的祖父是一位勤勞的農夫。)
+        </div>
+      </div>
+      <div class="ans-box" id="ans-1">
+        💡 <strong>教學引導：</strong> 留意 <code>actress</code> 字尾 <code>-ess</code> 代表女性職業（女演員）！
+      </div>
+    </div>
+
+    <!-- Slide 3: C1 基礎組 - 疑問詞 Who / Where / How old 問答 -->
+    <div class="slide-frame" id="slide-2">
+      <div class="slide-page-num">3 / 6</div>
+      <div class="slide-title">🔍 Slide 3: C1 基礎組 - 三大疑問句對照</div>
+      <div class="slide-content">
+        <div style="margin-bottom:16px;">
+          <strong>【句型公式與例句】</strong><br>
+          1. <strong>Who is she?</strong> ➔ She is Mandy. / She is our teacher.<br>
+          2. <strong>Where is Tom from?</strong> ➔ He is from the USA.<br>
+          3. <strong>How old is your sister?</strong> ➔ She is ten years old.
+        </div>
+      </div>
+      <div class="ans-box" id="ans-2">
+        💡 <strong>記憶技巧：</strong> 疑問詞開頭的問句句尾語調要「下降」喔！
+      </div>
+    </div>
+
+    <!-- Slide 4: C2 應用組 - 基數詞 10~99 與歲數 -->
+    <div class="slide-frame" id="slide-3">
+      <div class="slide-page-num">4 / 6</div>
+      <div class="slide-title">🔢 Slide 4: C2 應用組 - 英文數字與歲數表達 (10~99)</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:1.05rem;">
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            <strong>【十位數 -teen (重音在後)】</strong><br>
+            • 13 thirteen &nbsp;• 14 fourteen<br>
+            • 15 <strong>fifteen</strong> &nbsp;• 18 eighteen
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            <strong>【整十位 -ty (重音在前)】</strong><br>
+            • 20 twenty &nbsp;• 30 thirty<br>
+            • 40 <strong>forty</strong> &nbsp;• 50 fifty
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          • <strong>單數 1 歲：</strong> <em>He is one year old.</em> (year 不加 s)<br>
+          • <strong>複數 2 歲以上：</strong> <em>He is 72 years old.</em> (years 必須加 s)
+        </div>
+      </div>
+      <div class="ans-box" id="ans-3">
+        💡 <strong>常考陷阱：</strong> <code>14 fourteen</code> 有 u，但 <code>40 forty</code> 沒有 u！<code>15 fifteen</code> 與 <code>50 fifty</code> 拼法是 fif 而非 five！
+      </div>
+    </div>
+
+    <!-- Slide 5: C2 應用組 - 國籍與來源介系詞 -->
+    <div class="slide-frame" id="slide-4">
+      <div class="slide-page-num">5 / 6</div>
+      <div class="slide-title">🗽 Slide 5: C2 應用組 - 來自國家與地方表達 (from)</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          • <strong>國家用法：</strong><br>
+            &nbsp;&nbsp;• <em>Kevin is from <strong>the USA</strong>.</em> (美國前面必須加 the)<br>
+            &nbsp;&nbsp;• <em>Sakura is from <strong>Japan</strong>.</em> (一般國家前不加 the)<br><br>
+          • <strong>世界各地：</strong><br>
+            &nbsp;&nbsp;• <em>This postcard is famous <strong>all over the world</strong>.</em>
+        </div>
+      </div>
+      <div class="ans-box" id="ans-4">
+        💡 <strong>重點提醒：</strong> 縮寫 <code>the USA</code> 是由三個單字 United States of America 組成，故冠詞 <code>the</code> 不可省略。
+      </div>
+    </div>
+
+    <!-- Slide 6: C3 表達組 - 自我介紹與生活慣用語情境 -->
+    <div class="slide-frame" id="slide-5">
+      <div class="slide-page-num">6 / 6</div>
+      <div class="slide-title">🎙️ Slide 6: C3 表達組 - 情境會話與道地英語慣用語</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong>【課本道地生活情境句】</strong><br>
+          • <em>A: Is English hard for you?</em> (英文對你來說很難嗎？)<br>
+          • <em>B: No, <strong>it's a piece of cake</strong>!</em> (不，這簡直是小菜一碟／非常簡單！)<br><br>
+          • <em>Come and <strong>have a great time</strong> at the theme park!</em> (快來主題樂園玩得開心！)
+        </div>
+        <div>
+          <strong>【寫作表達三大檢核點】</strong><br>
+          1. 正確書寫問句標點符號 <code>?</code> 與大寫。<br>
+          2. 人名與國家專有名詞大寫 (Kevin, the USA, Japan)。<br>
+          3. 基數詞拼字與 year(s) 單複數。
+        </div>
+      </div>
+      <div class="ans-box" id="ans-5">
+        💡 <strong>教學評量指引：</strong> 鼓勵學生互相用 <em>Where are you from?</em> 與 <em>How old are you?</em> 進行英語口語互動練習！
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="key-hints">
+      <span><span class="key-badge">Space</span> 答案開關</span>
+      <span><span class="key-badge">◀</span> / <span class="key-badge">▶</span> 換頁</span>
+      <span><span class="key-badge">W</span> 電子白板</span>
+      <span><span class="key-badge">C</span> 清除筆跡</span>
+      <span><span class="key-badge">R</span> 語音朗讀</span>
+    </div>
+    <div>國中英語差異化教學團隊 · 國一 (七年級) 教師專用</div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 6;
+    let whiteboardActive = false;
+    let isDrawing = false;
+    let ctx = null;
+
+    let bestEnVoice = null;
+    let bestZhVoice = null;
+
+    function initVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
+                 || voices.find(v => v.lang.startsWith('en')) || null;
+      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
+                 || voices.find(v => v.lang.startsWith('zh')) || null;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initVoices;
+      initVoices();
+    }
+
+    function showSlide(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= totalSlides) idx = totalSlides - 1;
+      currentSlide = idx;
+
+      for (let i = 0; i < totalSlides; i++) {
+        const slide = document.getElementById('slide-' + i);
+        if (slide) {
+          if (i === currentSlide) slide.classList.add('active');
+          else slide.classList.remove('active');
+        }
+      }
+
+      document.getElementById('slideIndicator').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+      document.getElementById('slideSelect').value = currentSlide;
+      
+      const currentAns = document.getElementById('ans-' + currentSlide);
+      const btnAns = document.getElementById('btnAns');
+      if (currentAns && currentAns.classList.contains('show')) {
+        btnAns.classList.add('active');
+      } else {
+        btnAns.classList.remove('active');
+      }
+    }
+
+    function jumpToSlide(idx) {
+      showSlide(idx);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) showSlide(currentSlide - 1);
+    }
+
+    function toggleAnswer() {
+      const ans = document.getElementById('ans-' + currentSlide);
+      const btn = document.getElementById('btnAns');
+      if (ans) {
+        ans.classList.toggle('show');
+        btn.classList.toggle('active', ans.classList.contains('show'));
+      }
+    }
+
+    function speakCurrentSlide() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const activeSlide = document.getElementById('slide-' + currentSlide);
+      if (!activeSlide) return;
+
+      const title = activeSlide.querySelector('.slide-title').innerText;
+      const content = activeSlide.querySelector('.slide-content').innerText;
+      const fullText = title + '。' + content;
+
+      const spRate = parseFloat(document.getElementById('speedSelect').value) || 0.85;
+
+      const chunks = fullText.split(/[\n。！？]/).map(s => s.trim()).filter(Boolean);
+      chunks.forEach(ch => {
+        const hasEn = /[a-zA-Z]/.test(ch);
+        const utt = new SpeechSynthesisUtterance(ch);
+        utt.rate = spRate;
+        if (hasEn) {
+          if (bestEnVoice) utt.voice = bestEnVoice;
+          utt.lang = 'en-US';
+        } else {
+          if (bestZhVoice) utt.voice = bestZhVoice;
+          utt.lang = 'zh-TW';
+        }
+        window.speechSynthesis.speak(utt);
+      });
+    }
+
+    // 電子白板
+    const canvas = document.getElementById('whiteboardCanvas');
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    ctx = canvas.getContext('2d');
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#e11d48';
+
+    function toggleWhiteboard() {
+      whiteboardActive = !whiteboardActive;
+      canvas.classList.toggle('drawing-active', whiteboardActive);
+      document.getElementById('btnBoard').classList.toggle('active', whiteboardActive);
+    }
+
+    function clearWhiteboard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    canvas.addEventListener('mousedown', e => {
+      if (!whiteboardActive) return;
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    });
+
+    canvas.addEventListener('mousemove', e => {
+      if (!whiteboardActive || !isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+    });
+
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseleave', () => isDrawing = false);
+
+    window.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      else if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggleAnswer(); }
+      else if (e.key === 'w' || e.key === 'W') toggleWhiteboard();
+      else if (e.key === 'c' || e.key === 'C') clearWhiteboard();
+      else if (e.key === 'r' || e.key === 'R') speakCurrentSlide();
+    });
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    showSlide(0);
+  </script>
+</body>
+</html>
