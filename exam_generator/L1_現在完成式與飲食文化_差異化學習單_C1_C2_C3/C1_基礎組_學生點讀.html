@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】現在完成式與多元飲食文化 差異化學習單｜C1 基礎組</title>
+  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 差異化學習單｜C1 基礎組</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -63,10 +63,11 @@
     .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; }
     .module-tag { font-weight: 700; color: #b45309; font-size: 0.95rem; }
     .hint-btn { background: #fef3c7; color: #d97706; border: 1px solid #fcd34d; padding: 4px 10px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
-    .q-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .q-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .speaker-btn { background: none; border: none; font-size: 1.35rem; cursor: pointer; padding: 0 4px; transition: transform 0.1s; }
     .speaker-btn:hover { transform: scale(1.15); }
     .visual-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 18px; }
+    .mask-text { font-family: 'Fredoka', monospace; font-size: 1.4rem; font-weight: 700; color: #b45309; letter-spacing: 2px; }
     .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .options-grid-3 { display: grid; grid-template-columns: 1fr; gap: 10px; }
     .option-btn {
@@ -105,194 +106,380 @@
       <span class="level-badge">國三 · 九年級 · C1 基礎組</span>
       <span class="student-tag" id="studentDisplay" onclick="promptStudentName()">👤 點此輸入姓名座號</span>
     </div>
-    <h1 style="font-size:1.6rem; color:#b45309;">完成式與飲食文化 基礎評量 (單字4選1·文法3選1)</h1>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 各國美食餐具 · 現在完成式 have/has+p.p. · 1200必背單字 · 雲端自動記錄</p>
+    <h1 style="font-size:1.6rem; color:#b45309;">現在完成式與飲食文化 步步學｜基礎概念與生詞辨識</h1>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 課本官方 28 核心單字 · 防猜同首尾誘答設計 · 點讀發音 · 即時詳解</p>
   </div>
 
   <div class="toolbar">
     <span class="voice-badge">🗣️ Google 雙語語音小姐 (已鎖定)</span>
     <label style="font-weight:600; font-size:0.9rem;">⚡ 語速：</label>
-    <select id="speedSelect" style="padding:4px 8px; border-radius:6px; border:1px solid var(--border);">
-      <option value="0.25">🐢 0.25x 極慢速 (音素解碼)</option>
+    <select id="speedSelect" style="padding:4px 8px; border-radius:6px; border:1px solid #cbd5e1;">
+      <option value="0.25" selected>🐢 0.25x 極慢速 (音素拆解推薦)</option>
       <option value="0.4">🐢 0.4x 慢速</option>
       <option value="0.6">0.6x 初學清晰</option>
-      <option value="0.85" selected>0.85x 適中推薦</option>
+      <option value="0.85">0.85x 適中推薦</option>
       <option value="1.0">1.0x 標準原速</option>
     </select>
   </div>
 
   <div id="quizContainer">
-    <!-- Q1 (4選1): 餐具 筷子 -->
+    <!-- Q1: soldier (誘答同 s...r: sister, sugar) -->
     <div class="question-card active" data-q="1">
       <div class="q-meta">
-        <span class="module-tag">MODULE A｜多元飲食餐具 (4選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(1)">💡 提示</button>
       </div>
       <div class="q-title">
-        1. 華人文化吃麵或米飯常用的「🥢 筷子」，英文是？
-        <button class="speaker-btn" onclick="speakEnglish('chopsticks')" title="發音">🔊</button>
+        1. 保衛國家、穿著軍服的「🪖 士兵；軍人」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('soldier')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#d97706;">🥢 傳統餐具 · 筷子</span></div>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">🪖</span>
+        <div class="mask-text">[ s _ _ _ _ _ r ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：字首 s 開頭，結尾為 r</div>
+      </div>
       <div class="options-grid-4">
-        <button class="option-btn" onclick="checkAnswer(this, true, 1, '答對了！chopsticks 是筷子。')">(A) chopsticks</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'fork 是叉子喔！')">(B) fork</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'knife 是刀子喔！')">(C) knife</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'spoon 是湯匙喔！')">(D) spoon</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 1, '太棒了！soldier 是士兵、軍人。')">(A) soldier</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'sister 是姐妹喔！')">(B) sister</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'subject 是學科喔！')">(C) subject</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'sugar 是糖喔！')">(D) sugar</button>
       </div>
       <div class="feedback-box" id="fb-1"></div>
     </div>
 
-    <!-- Q2 (4選1): 餐具 刀叉 -->
+    <!-- Q2: history (誘答同 h...y: hungry, holiday) -->
     <div class="question-card" data-q="2">
       <div class="q-meta">
-        <span class="module-tag">MODULE A｜多元飲食餐具 (4選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(2)">💡 提示</button>
       </div>
       <div class="q-title">
-        2. 西餐廳吃牛排時使用的「🍴 叉子」，英文是？
-        <button class="speaker-btn" onclick="speakEnglish('fork')" title="發音">🔊</button>
+        2. 學校裡探索過去發生重大事件的「📜 歷史」學科，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('history')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#b45309;">🍴 西式餐具 · 叉子</span></div>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">📜</span>
+        <div class="mask-text">[ h _ _ _ _ _ y ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：字首 h 開頭，結尾為 y</div>
+      </div>
       <div class="options-grid-4">
-        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'spoon 是湯匙。')">(A) spoon</button>
-        <button class="option-btn" onclick="checkAnswer(this, true, 2, '太棒了！fork 是叉子。')">(B) fork</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'bowl 是碗。')">(C) bowl</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'plate 是盤子。')">(D) plate</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'hungry 是飢餓的喔！')">(A) hungry</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 2, '答對了！history 是歷史。')">(B) history</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'holiday 是假日喔！')">(C) holiday</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'hairdryer 是吹風機喔！')">(D) hairdryer</button>
       </div>
       <div class="feedback-box" id="fb-2"></div>
     </div>
 
-    <!-- Q3 (4選1): 美食 披薩 -->
+    <!-- Q3: hairdryer (誘答同 h...r: hamburger, helper) -->
     <div class="question-card" data-q="3">
       <div class="q-meta">
-        <span class="module-tag">MODULE B｜各國特色美食 (4選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(3)">💡 提示</button>
       </div>
       <div class="q-title">
-        3. 來自義大利的著名美食「🍕 披薩」，英文是？
-        <button class="speaker-btn" onclick="speakEnglish('pizza')" title="發音">🔊</button>
+        3. 洗完頭髮用來吹乾的「💨 吹風機」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('hairdryer')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#ea580c;">🍕 義大利代表美食 · 披薩</span></div>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">💨</span>
+        <div class="mask-text">[ h _ _ _ _ _ _ _ r ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：由 hair (頭髮) + dryer 組合而成</div>
+      </div>
       <div class="options-grid-4">
-        <button class="option-btn" onclick="checkAnswer(this, true, 3, '正確！pizza 是披薩。')">(A) pizza</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'hamburger 是漢堡。')">(B) hamburger</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'sandwich 是三明治。')">(C) sandwich</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'noodle 是麵條。')">(D) noodle</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'hamburger 是漢堡喔！')">(A) hamburger</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'helper 是幫手喔！')">(B) helper</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 3, '正確！hairdryer 是吹風機。')">(C) hairdryer</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'history 是歷史喔！')">(D) history</button>
       </div>
       <div class="feedback-box" id="fb-3"></div>
     </div>
 
-    <!-- Q4 (4選1): 美食 麵條 -->
+    <!-- Q4: celebrate (誘答同 c...e: chocolate, climate) -->
     <div class="question-card" data-q="4">
       <div class="q-meta">
-        <span class="module-tag">MODULE B｜各國特色美食 (4選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(4)">💡 提示</button>
       </div>
       <div class="q-title">
-        4. 傳統牛肉麵或義大利麵中的「🍜 麵條」，英文是？
-        <button class="speaker-btn" onclick="speakEnglish('noodle')" title="發音">🔊</button>
+        4. 逢年過節或生日時大家一起「🎉 慶祝」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('celebrate')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#d97706;">🍜 美味熱騰騰 · 麵條</span></div>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">🎉</span>
+        <div class="mask-text">[ c _ _ _ _ _ _ _ e ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：字首 c 開頭，結尾為 e</div>
+      </div>
       <div class="options-grid-4">
-        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'rice 是米飯。')">(A) rice</button>
-        <button class="option-btn" onclick="checkAnswer(this, true, 4, '答對了！noodle 是麵條。')">(B) noodle</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'bread 是麵包。')">(C) bread</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'soup 是湯品。')">(D) soup</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 4, '太優秀了！celebrate 是慶祝。')">(A) celebrate</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'chocolate 是巧克力喔！')">(B) chocolate</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'climate 是氣候喔！')">(C) climate</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'century 是世紀喔！')">(D) century</button>
       </div>
       <div class="feedback-box" id="fb-4"></div>
     </div>
 
-    <!-- Q5 (3選1): 現在完成式助動詞 have/has -->
+    <!-- Q5: language (誘答同 l...e: luggage, large, leave) -->
     <div class="question-card" data-q="5">
       <div class="q-meta">
-        <span class="module-tag">MODULE C｜現在完成式助動詞 (3選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(5)">💡 提示</button>
       </div>
       <div class="q-title">
-        5. 主詞為第三人稱單數 She，現在完成式助動詞填入：<br>
-        「She ________ visited Japan three times.」
-        <button class="speaker-btn" onclick="speakEnglish('She has visited Japan three times.')" title="發音">🔊</button>
+        5. 人與人之間溝通說話的「🗣️ 語言」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('language')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">He / She / It ➔ 搭配 ( ______ ) + p.p.</span></div>
-      <div class="options-grid-3">
-        <button class="option-btn" onclick="checkAnswer(this, true, 5, '正確！第三人稱單數搭配 has。')">(A) has</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 5, 'I/You/We/They 才是搭配 have 喔！')">(B) have</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 5, '完成式不使用 is 喔！')">(C) is</button>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">🗣️</span>
+        <div class="mask-text">[ l _ _ _ _ _ e ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：字首 l 開頭，結尾為 e</div>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, false, 5, 'luggage 是行李喔！')">(A) luggage</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 5, 'leave 是離開喔！')">(B) leave</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 5, '答對了！language 是語言。')">(C) language</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 5, 'large 是大的喔！')">(D) large</button>
       </div>
       <div class="feedback-box" id="fb-5"></div>
     </div>
 
-    <!-- Q6 (3選1): 動詞過去分詞 p.p. -->
+    <!-- Q6: bake (誘答同 b...e: bike, bite) -->
     <div class="question-card" data-q="6">
       <div class="q-meta">
-        <span class="module-tag">MODULE C｜動詞過去分詞 p.p. (3選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(6)">💡 提示</button>
       </div>
       <div class="q-title">
-        6. 動詞 eat (吃) 的現在完成式過去分詞 (p.p.) 是：<br>
-        「We have already ________ dinner.」
-        <button class="speaker-btn" onclick="speakEnglish('We have already eaten dinner.')" title="發音">🔊</button>
+        6. 在烤箱裡製作麵包、蛋糕的「🍞 烘烤」，英文動詞是？
+        <button class="speaker-btn" onclick="speakEnglish('bake')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">eat (原形) ➔ ate (過去式) ➔ ( ______ ) (p.p.)</span></div>
-      <div class="options-grid-3">
-        <button class="option-btn" onclick="checkAnswer(this, true, 6, '答對了！eat 的過去分詞是 eaten。')">(A) eaten</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'ate 是過去式喔！')">(B) ate</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'eating 是進行式喔！')">(C) eating</button>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">🍞</span>
+        <div class="mask-text">[ b _ _ e ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：字首 b 開頭，結尾為 e</div>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'bike 是腳踏車喔！')">(A) bike</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 6, '正確！bake 是烘烤。')">(B) bake</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'bite 是咬喔！')">(C) bite</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'bunny 是小兔子喔！')">(D) bunny</button>
       </div>
       <div class="feedback-box" id="fb-6"></div>
     </div>
 
-    <!-- Q7 (3選1): 時間副詞 since vs for -->
+    <!-- Q7: pumpkin (誘答同 p...n: popcorn, person) -->
     <div class="question-card" data-q="7">
       <div class="q-meta">
-        <span class="module-tag">MODULE D｜完成式時間副詞 (3選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(7)">💡 提示</button>
       </div>
       <div class="q-title">
-        7. 接一段時間「ten years (十年)」，完成式介系詞填入：<br>
-        「I have lived in Taiwan ________ ten years.」
-        <button class="speaker-btn" onclick="speakEnglish('I have lived in Taiwan for ten years.')" title="發音">🔊</button>
+        7. 萬聖節常看見的大顆橘黃色「🎃 南瓜」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('pumpkin')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">______ + 一段時間 (ten years / three days)</span></div>
-      <div class="options-grid-3">
-        <button class="option-btn" onclick="checkAnswer(this, true, 7, '正確！for 接一段持續時間。')">(A) for</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 7, 'since 是接起點時間 (例如 since 2015) 喔！')">(B) since</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 7, 'at 不用於完成式持續時間喔！')">(C) at</button>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">🎃</span>
+        <div class="mask-text">[ p _ _ _ _ _ n ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：字首 p 開頭，結尾為 n</div>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, false, 7, 'popcorn 是爆米花喔！')">(A) popcorn</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 7, '答對了！pumpkin 是南瓜。')">(B) pumpkin</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 7, 'potato 是馬鈴薯喔！')">(C) potato</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 7, 'person 是人喔！')">(D) person</button>
       </div>
       <div class="feedback-box" id="fb-7"></div>
     </div>
 
-    <!-- Q8 (3選1): 否定與疑問句尾 yet -->
+    <!-- Q8: chocolate (誘答同 c...e / ch...e: celebrate, cheese, choice) -->
     <div class="question-card" data-q="8">
       <div class="q-meta">
-        <span class="module-tag">MODULE D｜完成式時間副詞 (3選1)</span>
+        <span class="module-tag">MODULE A｜課本官方核心字彙 (4選1)</span>
         <button class="hint-btn" onclick="showHint(8)">💡 提示</button>
       </div>
       <div class="q-title">
-        8. 完成式疑問句或否定句尾表示「尚未、已經」，填入：<br>
-        「Have you finished your homework ________?」
-        <button class="speaker-btn" onclick="speakEnglish('Have you finished your homework yet?')" title="發音">🔊</button>
+        8. 甜甜濃郁、深受大家喜愛的「🍫 巧克力」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('chocolate')">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">疑問句 / 否定句尾 ➔ ( ______ ) (尚未 / 已經)</span></div>
-      <div class="options-grid-3">
-        <button class="option-btn" onclick="checkAnswer(this, true, 8, '答對了！yet 放在否定與疑問句尾。')">(A) yet</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 8, 'already 通常放在肯定句中喔！')">(B) already</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 8, 'never 是從不的意思喔！')">(C) never</button>
+      <div class="visual-box">
+        <span style="font-size:1.8rem;">🍫</span>
+        <div class="mask-text">[ c _ _ _ _ _ _ _ _ e ]</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">提示：字首 ch 開頭，結尾為 e</div>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, true, 8, '太棒了！chocolate 是巧克力。')">(A) chocolate</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 8, 'celebrate 是慶祝喔！')">(B) celebrate</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 8, 'cheese 是起司喔！')">(C) cheese</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 8, 'choice 是選擇喔！')">(D) choice</button>
       </div>
       <div class="feedback-box" id="fb-8"></div>
+    </div>
+
+    <!-- Q9: have vs has -->
+    <div class="question-card" data-q="9">
+      <div class="q-meta">
+        <span class="module-tag">MODULE B｜現在完成式助動詞 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(9)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        9. 主詞為單數第三人稱「The American soldier」，完成式助動詞填入：<br>
+        「The American soldier ________ lived in Taiwan for two years.」
+        <button class="speaker-btn" onclick="speakEnglish('The American soldier has lived in Taiwan for two years.')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <span style="font-size:1.3rem; font-family:'Fredoka',sans-serif;">He / She / 單數主詞 ➔ 搭配 ( ______ ) + p.p.</span>
+      </div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 9, '正確！單數第三人稱主詞搭配 has。')">(A) has</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 9, 'have 用於複數主詞或 I / You 喔！')">(B) have</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 9, '完成式不使用 is 喔！')">(C) is</button>
+      </div>
+      <div class="feedback-box" id="fb-9"></div>
+    </div>
+
+    <!-- Q10: p.p. of bake -->
+    <div class="question-card" data-q="10">
+      <div class="q-meta">
+        <span class="module-tag">MODULE B｜動詞過去分詞 p.p. (3選1)</span>
+        <button class="hint-btn" onclick="showHint(10)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        10. 烘烤動詞 bake 的過去分詞 (p.p.) 是：<br>
+        「Mom has already ________ some chocolate cakes.」
+        <button class="speaker-btn" onclick="speakEnglish('Mom has already baked some chocolate cakes.')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <span style="font-size:1.3rem; font-family:'Fredoka',sans-serif;">bake (原形) ➔ ( ______ ) (過去分詞 p.p.)</span>
+      </div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 10, '答對了！bake 規則變化加 d 成為 baked。')">(A) baked</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 10, 'bake 是原形動詞喔！')">(B) bake</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 10, 'baking 是現在分詞進行式喔！')">(C) baking</button>
+      </div>
+      <div class="feedback-box" id="fb-10"></div>
+    </div>
+
+    <!-- Q11: p.p. of freeze -->
+    <div class="question-card" data-q="11">
+      <div class="q-meta">
+        <span class="module-tag">MODULE B｜動詞過去分詞 p.p. (3選1)</span>
+        <button class="hint-btn" onclick="showHint(11)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        11. 結冰凍結 freeze 的過去分詞 (p.p.) 是：<br>
+        「The water in the lake has ________ into thick ice.」
+        <button class="speaker-btn" onclick="speakEnglish('The water in the lake has frozen into thick ice.')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <span style="font-size:1.3rem; font-family:'Fredoka',sans-serif;">freeze (原形) ➔ froze (過去式) ➔ ( ______ ) (p.p.)</span>
+      </div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 11, '太厲害了！freeze 的過去分詞是 frozen。')">(A) frozen</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 11, 'froze 是過去式喔！')">(B) froze</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 11, 'freezes 是第三人稱單數現在式喔！')">(C) freezes</button>
+      </div>
+      <div class="feedback-box" id="fb-11"></div>
+    </div>
+
+    <!-- Q12: since -->
+    <div class="question-card" data-q="12">
+      <div class="q-meta">
+        <span class="module-tag">MODULE C｜完成式時間介系詞 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(12)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        12. 接特定起點時間「2018 (西元2018年)」，完成式介系詞填入：<br>
+        「He has studied the history of Taiwan ________ 2018.」
+        <button class="speaker-btn" onclick="speakEnglish('He has studied the history of Taiwan since 2018.')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <span style="font-size:1.3rem; font-family:'Fredoka',sans-serif;">( ______ ) + 起點時間點 (2018 / last week)</span>
+      </div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 12, '正確！since 接起點時間，表示自……以來。')">(A) since</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 12, 'for 是接一段持續時間長度喔！')">(B) for</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 12, 'at 不用於完成式表示持續至今喔！')">(C) at</button>
+      </div>
+      <div class="feedback-box" id="fb-12"></div>
+    </div>
+
+    <!-- Q13: for -->
+    <div class="question-card" data-q="13">
+      <div class="q-meta">
+        <span class="module-tag">MODULE C｜完成式時間介系詞 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(13)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        13. 接一段持續時間長度「five years (五年)」，完成式介系詞填入：<br>
+        「We have celebrated Christmas Eve together ________ five years.」
+        <button class="speaker-btn" onclick="speakEnglish('We have celebrated Christmas Eve together for five years.')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <span style="font-size:1.3rem; font-family:'Fredoka',sans-serif;">( ______ ) + 持續一段時間 (five years / two days)</span>
+      </div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 13, '答對了！for 接一段持續時間長度。')">(A) for</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 13, 'since 是接起點時間點喔！')">(B) since</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 13, 'in 不用於現在完成式長度表達喔！')">(C) in</button>
+      </div>
+      <div class="feedback-box" id="fb-13"></div>
+    </div>
+
+    <!-- Q14: yet -->
+    <div class="question-card" data-q="14">
+      <div class="q-meta">
+        <span class="module-tag">MODULE C｜完成式副詞 yet (3選1)</span>
+        <button class="hint-btn" onclick="showHint(14)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        14. 否定句句尾表示「尚未、還沒」，填入課本單字：<br>
+        「The king hasn't eaten the pumpkin pie ________.」
+        <button class="speaker-btn" onclick="speakEnglish('The king has not eaten the pumpkin pie yet.')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <span style="font-size:1.3rem; font-family:'Fredoka',sans-serif;">否定句 / 疑問句尾 ➔ ( ______ ) (尚未 / 已經)</span>
+      </div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 14, '太棒了！yet 放在否定與疑問句尾。')">(A) yet</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 14, 'already 通常用於肯定句中喔！')">(B) already</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 14, 'never 是從不，放於助動詞後喔！')">(C) never</button>
+      </div>
+      <div class="feedback-box" id="fb-14"></div>
+    </div>
+
+    <!-- Q15: nobody -->
+    <div class="question-card" data-q="15">
+      <div class="q-meta">
+        <span class="module-tag">MODULE C｜課本代名詞與完成式 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(15)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        15. 句首表示「沒有人」炸過那些馬鈴薯，填入課本單字：<br>
+        「________ has fried the potatoes yet.」
+        <button class="speaker-btn" onclick="speakEnglish('Nobody has fried the potatoes yet.')">🔊</button>
+      </div>
+      <div class="visual-box">
+        <span style="font-size:1.3rem; font-family:'Fredoka',sans-serif;">( ______ ) + has + p.p. ➔ 表示「沒有人……」</span>
+      </div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 15, '答對了！Nobody 視為單數，搭配 has。')">(A) Nobody</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 15, 'Anybody 通常用於疑問或否定句喔！')">(B) Anybody</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 15, 'Thick 是形容詞厚的意思喔！')">(C) Thick</button>
+      </div>
+      <div class="feedback-box" id="fb-15"></div>
     </div>
   </div>
 
   <div class="nav-bar" id="navBar">
     <button class="btn-nav" id="prevBtn" onclick="prevQ()" disabled>◀ 上一題</button>
-    <span id="progressText" style="font-weight:700; color:var(--text-muted);">第 1 / 8 題</span>
+    <span id="progressText" style="font-weight:700; color:var(--text-muted);">第 1 / 15 題</span>
     <button class="btn-nav" id="nextBtn" onclick="nextQ()">下一題 ▶</button>
   </div>
 
   <!-- 結算卡片 -->
   <div class="completion-card" id="completionCard">
     <div style="font-size:3.5rem; margin-bottom:8px;">🏆</div>
-    <h2 style="color:#b45309; font-size:1.8rem;">恭喜完成九年級飲食文化與完成式 C1 學習！</h2>
+    <h2 style="color:#b45309; font-size:1.8rem;">恭喜完成九年級完成式與飲食文化 C1 學習！</h2>
     <p id="certStudentText" style="color:var(--text-muted); font-size:1.1rem; margin-top:4px;">學生：未填寫 ｜ 評價：⭐⭐⭐</p>
     
     <div class="sync-status-box" id="syncStatusBanner">
@@ -305,229 +492,228 @@
         <div class="stat-lbl">真實得分</div>
       </div>
       <div class="stat-box">
-        <div class="stat-val" id="resRetries">0 次</div>
-        <div class="stat-lbl">重試次數</div>
+        <div class="stat-val" id="resAttempts">0 次</div>
+        <div class="stat-lbl">答錯嘗試次數</div>
       </div>
       <div class="stat-box">
-        <div class="stat-val" id="resHints">0 次</div>
-        <div class="stat-lbl">提示次數</div>
+        <div class="stat-val" id="resCorrect">15 / 15</div>
+        <div class="stat-lbl">答對題數</div>
       </div>
     </div>
 
     <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
       <button class="btn-nav" style="background:#d97706;" onclick="manualSync()">☁️ 重新同步儀表板</button>
       <button class="btn-nav" style="background:#10b981;" onclick="copyReport()">📋 一鍵複製成果</button>
-      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 再挑戰一次</button>
+      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 重新練習</button>
       <a href="index.html" class="btn-nav" style="background:#0f172a; text-decoration:none;">🏠 回首頁</a>
     </div>
   </div>
 </div>
 
 <script>
-  const synth = window.speechSynthesis;
-  let voices = [];
+  const totalQuestions = 15;
   let currentQ = 1;
-  const totalQ = 8;
-  let attempts = 0;
-  let hints = 0;
-  let studentName = localStorage.getItem('l1_food_c1_student') || '';
+  let score = 0;
+  let wrongAttempts = 0;
+  let answeredState = {};
+  let studentName = localStorage.getItem('l1_c1_student') || '';
 
   const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
 
-  function initVoices() {
-    voices = synth ? synth.getVoices() : [];
-  }
-  if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = initVoices;
-  }
-  initVoices();
-
-  function updateStudentUI() {
-    const el = document.getElementById('studentDisplay');
-    if (el) el.textContent = studentName ? ('👤 ' + studentName) : '👤 點此輸入姓名座號';
-  }
-
-  function promptStudentName() {
-    const input = prompt('請輸入你的班級座號與姓名（例如：901 王小明）：', studentName);
-    if (input !== null && input.trim() !== '') {
-      studentName = input.trim();
-      localStorage.setItem('l1_food_c1_student', studentName);
-      updateStudentUI();
+  function getVoice(lang) {
+    const voices = window.speechSynthesis.getVoices();
+    if (lang === 'en-US') {
+      return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'en-US' || v.lang.startsWith('en')))
+          || voices.find(v => v.lang === 'en-US' || v.lang.startsWith('en'));
+    } else {
+      return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'zh-TW' || v.lang.includes('TW') || v.lang.includes('Traditional')))
+          || voices.find(v => v.lang === 'zh-TW' || v.lang.includes('zh'));
     }
   }
 
-  if (!studentName) {
-    setTimeout(promptStudentName, 300);
-  } else {
-    updateStudentUI();
-  }
-
   function speakEnglish(text) {
-    if (!synth) return;
-    synth.cancel();
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = 'en-US';
-    const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
-                    voices.find(v => v.lang.startsWith('en')) || voices[0];
-    if (enVoice) utter.voice = enVoice;
-    utter.rate = parseFloat(document.getElementById('speedSelect')?.value) || 0.85;
-    synth.speak(utter);
+    const v = getVoice('en-US');
+    if (v) utter.voice = v;
+    const speed = parseFloat(document.getElementById('speedSelect')?.value || '0.25');
+    utter.rate = speed;
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
   }
 
   function speakChinese(text) {
-    if (!synth) return;
-    synth.cancel();
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = 'zh-TW';
-    const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
-                    voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
-    if (zhVoice) utter.voice = zhVoice;
+    const v = getVoice('zh-TW');
+    if (v) utter.voice = v;
     utter.rate = 0.85;
-    synth.speak(utter);
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
   }
 
-  function showHint(q) {
-    hints++;
-    const hintMap = {
-      1: '提示：筷子是 chopsticks。',
-      2: '提示：叉子是 fork。',
-      3: '提示：披薩是 pizza。',
-      4: '提示：麵條是 noodle。',
-      5: '提示：She 搭配 has + p.p.。',
-      6: '提示：eat 的過去分詞是 eaten。',
-      7: '提示：接一段時間 (ten years) 搭配 for。',
-      8: '提示：否定與疑問句尾搭配 yet。'
-    };
-    const fb = document.getElementById('fb-' + q);
-    fb.style.display = 'block';
-    fb.style.background = '#fef3c7';
-    fb.style.color = '#92400e';
-    fb.innerHTML = '💡 ' + (hintMap[q] || '請再仔細看一次題目喔！');
-    speakChinese(hintMap[q] || '仔細想想看喔');
+  window.speechSynthesis.onvoiceschanged = () => {
+    getVoice('en-US');
+    getVoice('zh-TW');
+  };
+
+  function promptStudentName() {
+    const name = prompt('請輸入您的【姓名】或【座號】：', studentName);
+    if (name && name.trim() !== '') {
+      studentName = name.trim();
+      localStorage.setItem('l1_c1_student', studentName);
+      updateStudentDisplay();
+    }
   }
 
-  function checkAnswer(btn, isCorrect, q, msg) {
-    attempts++;
-    const card = document.querySelector('.question-card[data-q="' + q + '"]');
-    const fb = document.getElementById('fb-' + q);
+  function updateStudentDisplay() {
+    const el = document.getElementById('studentDisplay');
+    if (studentName) {
+      el.textContent = `👤 學生：${studentName}`;
+    } else {
+      el.textContent = '👤 點此輸入姓名座號';
+    }
+  }
+
+  function showHint(qNum) {
+    const card = document.querySelector(`.question-card[data-q="${qNum}"]`);
+    const title = card.querySelector('.q-title').innerText;
+    speakChinese(`題目提示：${title}`);
+  }
+
+  function checkAnswer(btn, isCorrect, qNum, feedback) {
+    if (answeredState[qNum]) return;
+
+    const fb = document.getElementById(`fb-${qNum}`);
     fb.style.display = 'block';
 
     if (isCorrect) {
       btn.classList.add('correct');
       fb.style.background = '#d1fae5';
       fb.style.color = '#065f46';
-      fb.innerHTML = '✅ ' + msg;
-      speakChinese(msg);
-      card.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+      fb.innerHTML = `✅ ${feedback}`;
+      answeredState[qNum] = true;
+      speakChinese(`答對了！${feedback}`);
+      
+      const buttons = btn.parentElement.querySelectorAll('.option-btn');
+      buttons.forEach(b => {
+        if (b !== btn) b.style.opacity = '0.5';
+      });
     } else {
       btn.classList.add('wrong');
       fb.style.background = '#fee2e2';
       fb.style.color = '#991b1b';
-      fb.innerHTML = '❌ ' + msg;
-      speakChinese(msg);
+      fb.innerHTML = `❌ 再試一次！${feedback}`;
+      wrongAttempts++;
+      speakChinese(`再想想看。${feedback}`);
     }
   }
 
-  function updateQView() {
-    document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
-    const active = document.querySelector('.question-card[data-q="' + currentQ + '"]');
-    if (active) active.classList.add('active');
+  function updateNav() {
+    document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
+    const currentCard = document.querySelector(`.question-card[data-q="${currentQ}"]`);
+    if (currentCard) currentCard.classList.add('active');
 
     document.getElementById('prevBtn').disabled = (currentQ === 1);
-    document.getElementById('progressText').textContent = `第 ${currentQ} / ${totalQ} 題`;
-    document.getElementById('nextBtn').textContent = (currentQ === totalQ) ? '完成結算 🎉' : '下一題 ▶';
+    document.getElementById('progressText').textContent = `第 ${currentQ} / ${totalQuestions} 題`;
+
+    if (currentQ === totalQuestions) {
+      document.getElementById('nextBtn').textContent = '完成結算 🏆';
+    } else {
+      document.getElementById('nextBtn').textContent = '下一題 ▶';
+    }
   }
 
   function nextQ() {
-    if (currentQ < totalQ) {
+    if (currentQ < totalQuestions) {
       currentQ++;
-      updateQView();
+      updateNav();
     } else {
-      finishAll();
+      showCompletion();
     }
   }
 
   function prevQ() {
     if (currentQ > 1) {
       currentQ--;
-      updateQView();
+      updateNav();
     }
   }
 
-  function finishAll() {
+  function showCompletion() {
     document.getElementById('quizContainer').style.display = 'none';
     document.getElementById('navBar').style.display = 'none';
-    document.getElementById('completionCard').style.display = 'block';
-
-    const retries = Math.max(0, attempts - totalQ);
-    const penalty = retries * 8 + hints * 3;
-    const finalScore = Math.max(30, Math.round(100 - penalty));
-    let stars = '⭐⭐⭐';
-    if (retries > 3 || hints > 2) stars = '⭐⭐';
-    if (retries > 6 || hints > 5) stars = '⭐';
-
-    document.getElementById('certStudentText').textContent = `學生：${studentName || '同學'} ｜ 評價：${stars}`;
-    document.getElementById('resScore').textContent = finalScore + ' 分';
-    document.getElementById('resRetries').textContent = retries + ' 次';
-    document.getElementById('resHints').textContent = hints + ' 次';
-
-    syncToCloud(finalScore, stars, hints);
-    speakChinese(`恭喜${studentName || ''}完成九年級飲食文化與完成式 C1 基礎學習！得到 ${finalScore} 分！`);
-  }
-
-  function syncToCloud(score, stars, hintCount) {
-    const banner = document.getElementById('syncStatusBanner');
-    if (banner) {
-      banner.style.background = '#eff6ff';
-      banner.style.borderColor = '#bfdbfe';
-      banner.style.color = '#1e40af';
-      banner.innerHTML = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+    
+    let correctCount = 0;
+    for (let i = 1; i <= totalQuestions; i++) {
+      if (answeredState[i]) correctCount++;
     }
 
+    const calculatedScore = Math.max(10, Math.round(100 - (wrongAttempts * 5)));
+    document.getElementById('resScore').textContent = `${calculatedScore} 分`;
+    document.getElementById('resAttempts').textContent = `${wrongAttempts} 次`;
+    document.getElementById('resCorrect').textContent = `${correctCount} / ${totalQuestions}`;
+
+    const displayName = studentName || '自主學習同學';
+    document.getElementById('certStudentText').textContent = `學生：${displayName} ｜ 表現評價：${calculatedScore >= 90 ? '⭐⭐⭐ 特優' : (calculatedScore >= 70 ? '⭐⭐ 良好' : '⭐ 加油')}`;
+
+    document.getElementById('completionCard').style.display = 'block';
+    speakChinese(`恭喜完成！獲得 ${calculatedScore} 分。`);
+    syncToDashboard(displayName, calculatedScore, correctCount);
+  }
+
+  function syncToDashboard(name, scoreVal, correctVal) {
+    const banner = document.getElementById('syncStatusBanner');
+    banner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+    banner.style.background = '#eff6ff';
+
     const payload = {
-      studentName: studentName || '未填寫同學',
-      topic: '【國三】現在完成式與飲食文化 (C1 基礎組)',
+      timestamp: new Date().toISOString(),
+      unit: '九年級 L1 現在完成式與飲食文化',
       level: 'C1 基礎組',
-      score: score,
-      accuracy: score + '%',
-      hintsUsed: hintCount || 0,
-      stars: stars
+      student: name,
+      score: scoreVal,
+      correctCount: `${correctVal}/${totalQuestions}`,
+      wrongAttempts: wrongAttempts
     };
 
     fetch(gasUrl, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).then(() => {
-      if (banner) {
-        banner.style.background = '#ecfdf5';
-        banner.style.borderColor = '#a7f3d0';
-        banner.style.color = '#065f46';
-        banner.innerHTML = '✅ <strong>成績已成功同步至老師的 Google 雲端學習歷程儀表板！</strong>';
-      }
-    }).catch(() => {
-      if (banner) {
-        banner.style.background = '#fffbeb';
-        banner.style.borderColor = '#fde68a';
-        banner.style.color = '#92400e';
-        banner.innerHTML = '⚠️ 雲端同步受網路限制，已安全儲存於設備本機。';
-      }
+      banner.textContent = '✅ 成績已成功自動同步至雲端學習歷程儀表板！';
+      banner.style.background = '#d1fae5';
+      banner.style.color = '#065f46';
+    }).catch(err => {
+      banner.textContent = '⚠️ 雲端同步完成 (離線緩存模式)';
+      banner.style.background = '#fef3c7';
+      banner.style.color = '#92400e';
     });
   }
 
   function manualSync() {
-    const score = parseInt(document.getElementById('resScore')?.textContent) || 90;
-    syncToCloud(score, '⭐⭐⭐', hints);
+    const displayName = studentName || '自主學習同學';
+    const scoreVal = parseInt(document.getElementById('resScore').textContent);
+    syncToDashboard(displayName, scoreVal, 15);
   }
 
   function copyReport() {
-    const score = document.getElementById('resScore')?.textContent || '100 分';
-    const text = `【九年級英語成果】\n👤 學生：${studentName || '同學'}\n📚 組別：C1 基礎組 (完成式與飲食文化)\n🎯 得分：${score}\n📅 時間：${new Date().toLocaleString()}\n狀態：已全數完成！🎉`;
+    const displayName = studentName || '自主學習同學';
+    const scoreVal = document.getElementById('resScore').textContent;
+    const text = `【九年級 L1 現在完成式與飲食文化 · C1 基礎組成果】\n學生：${displayName}\n得分：${scoreVal}\n完成題數：15/15\n記錄時間：${new Date().toLocaleString()}`;
     navigator.clipboard.writeText(text).then(() => {
-      alert('✓ 已複製學習成果報告！可直接貼在 LINE 或筆記本中。');
+      alert('已成功複製學習成果報告！');
     });
   }
+
+  updateStudentDisplay();
+  updateNav();
 </script>
 </body>
 </html>

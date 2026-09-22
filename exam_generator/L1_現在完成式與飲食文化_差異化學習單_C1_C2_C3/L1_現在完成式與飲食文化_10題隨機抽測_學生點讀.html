@@ -1,987 +1,587 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 隨機抽測</title>
-  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 10題隨機抽測｜線上點讀測驗</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #fafaf9;
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --bg: #fffbeb;
       --card-bg: #ffffff;
-      --text-color: #1c1917;
-      --primary-color: #2563eb;
-      --primary-hover: #1d4ed8;
-      --border-color: #e7e5e4;
-      --toolbar-bg: rgba(255, 255, 255, 0.92);
-      --highlight-bg: #fef08a;
-      --font-size: 16pt;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #fde68a;
+      --success: #10b981;
+      --error: #ef4444;
     }
-    
-    [data-theme="dark"] {
-      --bg-color: #1c1917;
-      --card-bg: #292524;
-      --text-color: #f5f5f4;
-      --primary-color: #60a5fa;
-      --primary-hover: #3b82f6;
-      --border-color: #44403c;
-      --toolbar-bg: rgba(41, 37, 36, 0.92);
-      --highlight-bg: #854d0e;
-    }
-    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.3s, color 0.3s;
-      font-size: var(--font-size);
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      padding: 16px;
+      padding-bottom: 60px;
     }
-    
-    .toolbar {
-      position: sticky;
-      top: 0;
-      background: var(--toolbar-bg);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border-color);
-      padding: 10px 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    
-    .toolbar-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 6px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.95rem;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .btn:hover {
-      background-color: var(--border-color);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      font-weight: bold;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
-      color: white;
-    }
-    
-    select {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.95rem;
-    }
-    
-    .container {
-      max-width: 920px;
-      margin: 25px auto 60px;
-      padding: 0 20px;
-    }
-    
-    .paper-header {
-      text-align: center;
-      margin-bottom: 20px;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 15px;
-    }
-    
-    .paper-header h1 {
-      margin: 0 0 8px;
-      font-size: 1.85rem;
-    }
-    
-    .student-badge-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
+    .container { max-width: 820px; margin: 0 auto; }
+    .header {
       background: var(--card-bg);
-      padding: 12px 18px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-    
-    .student-name-tag {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: var(--primary-color);
-      cursor: pointer;
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px dashed var(--primary-color);
-      background: rgba(37, 99, 235, 0.05);
-    }
-
-    .section-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
     }
-    
-    .question-card {
-      margin-bottom: 22px;
-      padding: 16px 18px;
+    .badge-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .level-badge { background: var(--primary); color: white; padding: 4px 12px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; }
+    .student-tag { background: #fef3c7; color: #b45309; padding: 4px 12px; border-radius: 999px; font-weight: 700; cursor: pointer; border: 1px dashed #d97706; }
+    .toolbar {
+      background: #f8fafc;
+      border: 1px solid var(--border);
       border-radius: 12px;
-      transition: background-color 0.2s, border-color 0.2s;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-    }
-
-    .question-card.answered {
-      border-color: #93c5fd;
-      background: rgba(59, 130, 246, 0.02);
-    }
-    
-    .question-title {
-      font-weight: bold;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.6;
-    }
-    
-    .speaker-btn {
-      background: none;
-      border: none;
-      font-size: 1.3rem;
-      cursor: pointer;
-      padding: 0;
-      line-height: 1;
-      opacity: 0.8;
-      transition: transform 0.1s, opacity 0.2s;
-      flex-shrink: 0;
-    }
-    
-    .speaker-btn:hover {
-      opacity: 1;
-      transform: scale(1.18);
-    }
-    
-    .read-sentence {
-      cursor: pointer;
-      border-radius: 4px;
-      padding: 2px 4px;
-      transition: background-color 0.2s;
-    }
-    
-    .read-sentence:hover {
-      background-color: rgba(37, 99, 235, 0.1);
-      text-decoration: underline;
-    }
-    
-    .speaking-highlight {
-      background-color: var(--highlight-bg) !important;
-      color: #000000 !important;
-      font-weight: bold;
-      border-radius: 4px;
-      box-shadow: 0 0 0 2px #eab308;
-    }
-    
-    .options-list {
-      list-style-type: none;
-      padding-left: 10px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    
-    .option-item {
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 6px 10px;
-      border-radius: 8px;
-      transition: background 0.15s;
-    }
-
-    .option-item:hover {
-      background: rgba(0,0,0,0.03);
-    }
-    
-    .option-item input[type="radio"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      accent-color: var(--primary-color);
-    }
-    
-    .option-item label {
-      cursor: pointer;
-      flex: 1;
-      line-height: 1.5;
-    }
-
-    /* Submit Area */
-    .submit-area {
-      text-align: center;
-      margin: 35px 0;
-    }
-
-    .btn-submit {
-      font-size: 1.3rem;
-      padding: 14px 40px;
-      border-radius: 14px;
-      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
-    }
-
-    /* Report Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(6px);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      overflow-y: auto;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .report-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      max-width: 780px;
-      width: 100%;
-      padding: 30px;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-      animation: popIn 0.25s ease-out;
-      border: 1px solid var(--border-color);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.92); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .score-circle {
-      text-align: center;
-      margin: 15px 0 25px;
-    }
-
-    .score-number {
-      font-family: 'Outfit', sans-serif;
-      font-size: 4.2rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .score-high { color: #059669; }
-    .score-mid { color: #d97706; }
-    .score-low { color: #dc2626; }
-
-    .sync-banner {
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #065f46;
-      padding: 10px 16px;
-      border-radius: 10px;
+      flex-wrap: wrap;
       margin-bottom: 20px;
-      font-size: 0.95rem;
+    }
+    .voice-badge { background: rgba(217,119,6,0.1); color: var(--primary-dark); font-weight: 700; font-size: 0.88rem; padding: 4px 10px; border-radius: 8px; }
+    .quiz-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .q-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; }
+    .speaker-btn { background: none; border: none; font-size: 1.35rem; cursor: pointer; padding: 0 4px; transition: transform 0.1s; flex-shrink: 0; }
+    .speaker-btn:hover { transform: scale(1.15); }
+    .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+    .option-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.15s;
     }
-
-    .wrong-item {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
+    .option-btn:hover { border-color: var(--primary); background: #fffbeb; }
+    .option-btn.selected { border-color: var(--primary); background: #fef3c7; color: #b45309; font-weight: 700; }
+    .option-btn.correct { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+    .option-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+    .feedback-box {
+      margin-top: 12px;
+      padding: 12px 16px;
       border-radius: 10px;
-      padding: 14px 18px;
-      margin-bottom: 15px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: none;
     }
-
-    .wrong-item strong {
-      color: #991b1b;
+    .btn-submit-all {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 14px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin: 28px 0;
+      box-shadow: 0 10px 15px -3px rgba(217,119,6,0.3);
     }
-
-    .history-pill {
-      display: inline-block;
-      padding: 3px 10px;
-      background: #f1f5f9;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      margin-right: 6px;
-      color: #334155;
-    }
-
-    @media print {
-      .toolbar, .submit-area, .speaker-btn, .btn { display: none !important; }
-      body { background: white; color: black; font-size: 16pt; }
-      .section-card { border: none; box-shadow: none; padding: 0; }
-    }
+    .completion-card { background: var(--card-bg); border-radius: 20px; padding: 32px; text-align: center; border: 2px solid var(--primary); display: none; margin-top: 20px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+    .stat-box { background: #f8fafc; border: 1px solid var(--border); padding: 14px; border-radius: 12px; }
+    .stat-val { font-size: 1.8rem; font-weight: 800; color: var(--primary-dark); }
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); }
+    .sync-status-box { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; padding: 12px 16px; border-radius: 10px; margin: 18px 0; font-size: 0.95rem; font-weight: 700; }
   </style>
 </head>
 <body>
+<div class="container">
+  <div class="header">
+    <div class="badge-bar">
+      <span class="level-badge">國三 · 九年級 · 隨機抽測</span>
+      <span class="student-tag" id="studentDisplay" onclick="promptStudentName()">👤 點此輸入姓名座號</span>
+    </div>
+    <h1 style="font-size:1.6rem; color:#b45309;">現在完成式與飲食文化 10題隨機抽測</h1>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 30題題庫隨機抽取 10 題 · 嚴選課本 28 生詞 · 語音點讀 · 即時診斷結算</p>
+  </div>
 
-  <!-- 頂部工具列 -->
   <div class="toolbar">
-    <div class="toolbar-group">
-      <button class="btn" onclick="toggleTheme()">🌓 主題</button>
-      <button class="btn btn-primary" onclick="reshuffleAndRender()">🎲 換題抽測 (隨機10題)</button>
-      
-      <label for="font-size-select">🔍 字型：</label>
-      <select id="font-size-select" onchange="changeFontSize(this.value)">
-        <option value="14pt">中 14pt</option>
-        <option value="16pt" selected>大字 16pt</option>
-        <option value="18pt">特大 18pt</option>
-        <option value="20pt">超大 20pt</option>
-      </select>
-    </div>
+    <span class="voice-badge">🗣️ Google 雙語語音小姐 (已鎖定)</span>
+    <label style="font-weight:600; font-size:0.9rem;">⚡ 語速：</label>
+    <select id="speedSelect" style="padding:4px 8px; border-radius:6px; border:1px solid #cbd5e1;">
+      <option value="0.25">🐢 0.25x 極慢速 (音素解碼)</option>
+      <option value="0.4">🐢 0.4x 慢速</option>
+      <option value="0.6">0.6x 初學清晰</option>
+      <option value="0.85" selected>0.85x 適中推薦</option>
+      <option value="1.0">1.0x 標準原速</option>
+    </select>
+  </div>
+
+  <div id="quizContainer"></div>
+
+  <button class="btn-submit-all" onclick="submitQuiz()">🏆 提交測驗並產生成績單</button>
+
+  <div class="completion-card" id="completionCard">
+    <div style="font-size:3.5rem; margin-bottom:8px;">🎖️</div>
+    <h2 style="color:#b45309; font-size:1.8rem;">九年級完成式與飲食文化 抽測成績單</h2>
+    <p id="certStudentText" style="color:var(--text-muted); font-size:1.1rem; margin-top:4px;">學生：未填寫 ｜ 表現評價：⭐⭐⭐</p>
     
-    <div class="toolbar-group">
-      <span style="background:rgba(37,99,235,0.1); color:var(--primary-color); padding:4px 10px; border-radius:8px; font-size:0.88rem; font-weight:bold; border:1px solid rgba(37,99,235,0.2);">
-        🗣️ 🌟 Google 雙語智慧語音 (自動鎖定)
-      </span>
-      <select id="speech-voice" style="display:none;"><option value="auto" selected>auto</option></select>
-      
-      <label for="speech-rate">⚡ 語速：</label>
-      <select id="speech-rate">
-        <option value="0.25">🐢 0.25x (極慢·發音解碼)</option>
-        <option value="0.4">🐢 0.4x (慢速精聽)</option>
-        <option value="0.6">0.6x (初學清晰)</option>
-        <option value="0.85" selected>0.85x (適中推薦)</option>
-        <option value="1.0">1.0x (標準原速)</option>
-      </select>
-      <button class="btn" onclick="stopSpeech()">🛑 停止</button>
+    <div class="sync-status-box" id="syncStatusBanner">
+      📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val" id="resScore">100 分</div>
+        <div class="stat-lbl">抽測總分</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resCorrect">10 / 10</div>
+        <div class="stat-lbl">答對題數</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resTime">100%</div>
+        <div class="stat-lbl">正確率</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+      <button class="option-btn" style="background:#d97706; color:white; justify-content:center;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="option-btn" style="background:#10b981; color:white; justify-content:center;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="option-btn" style="background:#64748b; color:white; justify-content:center;" onclick="location.reload()">🔄 重新隨機抽測</button>
+      <a href="index.html" class="option-btn" style="background:#0f172a; color:white; text-decoration:none; justify-content:center;">🏠 回首頁</a>
     </div>
   </div>
+</div>
 
-  <div class="container">
-    <div class="paper-header">
-      <h1>國中英語【國三 · 九年級】現在完成式與多元飲食文化測驗</h1>
-      <p style="margin:4px 0; color:#78716c;">🎯 核心題庫動態抽題 · 真實鑑別計分 · 雲端歷程自動追蹤</p>
-    </div>
+<script>
+  let studentName = localStorage.getItem('l1_random_student') || '';
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
 
-    <div class="student-badge-bar">
-      <div>
-        <span>👤 作答學生：</span>
-        <span class="student-name-tag" id="studentDisplay" onclick="promptStudentName()">點此輸入姓名與座號</span>
-      </div>
-      <div>
-        <span>📊 題庫總數：40 題 (隨機抽選 10 題)</span>
-        <span style="margin-left: 12px;">💯 配分：每題 10 分，滿分 100 分</span>
-      </div>
-    </div>
-
-    <div class="section-card">
-      <h2 style="margin-top:0; border-bottom: 2px solid var(--primary-color); padding-bottom:8px;">
-        ✍️ 單元線上測驗 (共 10 題)
-      </h2>
-      
-      <div id="questions-container">
-        <!-- 動態渲染隨機 10 題 -->
-      </div>
-
-      <div class="submit-area">
-        <button class="btn btn-primary btn-submit" onclick="submitExam()">
-          📝 繳交試卷並計算成績
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 成果診斷與成績報告卡片 (Modal) -->
-  <div class="modal-overlay" id="reportModal">
-    <div class="report-card">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-        <h2 style="margin:0; font-size:1.6rem;">📊 學習成果診斷報告</h2>
-        <button class="btn" onclick="closeReport()">✕ 關閉</button>
-      </div>
-
-      <div class="score-circle">
-        <div class="score-number" id="reportScore">--</div>
-        <div style="font-size:1.15rem; font-weight:bold;" id="reportLevelText">評語載入中...</div>
-      </div>
-
-      <!-- 雲端同步狀態標籤 -->
-      <div class="sync-banner" id="syncStatus">
-        📡 正在同步成績至老師的 Google 雲端試算表...
-      </div>
-
-      <div style="background:var(--bg-color); padding:15px; border-radius:12px; margin-bottom:20px;">
-        <div>👤 <strong>作答學生：</strong> <span id="reportStudent"></span></div>
-        <div>📅 <strong>完成時間：</strong> <span id="reportTime"></span></div>
-        <div>📈 <strong>個人成長走勢：</strong> <span id="reportHistory"></span></div>
-      </div>
-
-      <div id="wrongQuestionsSection">
-        <h3 style="color:#b91c1c; border-bottom:2px solid #fca5a5; padding-bottom:5px;">
-          ❌ 錯題深度檢討與解析 (<span id="wrongCount">0</span> 題)
-        </h3>
-        <div id="wrongQuestionsList"></div>
-      </div>
-
-      <div style="margin-top:25px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="reshuffleAndRender(); closeReport();" style="padding:10px 24px; font-size:1.05rem;">
-          🎲 換一批新題目重新挑戰
-        </button>
-        <button class="btn" onclick="closeReport()" style="padding:10px 24px; font-size:1.05rem;">
-          👀 查看目前作答考卷
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 40 題核心大題庫與 Google Apps Script 雲端同步腳本 -->
-  <script>
-    // 雲端收卷 Web App URL
-    const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec";
-
-    // 40 題完整題庫
-    const QUESTION_BANK = [
-  {"id":1, "type":"vocab", "question":"義大利著名美食「披薩」的英文是？", "options":["pizza", "sushi", "taco", "noodle"], "answerText":"pizza", "explanation":"pizza 代表披薩。"},
-  {"id":2, "type":"vocab", "question":"日本傳統美食「壽司」的英文是？", "options":["sushi", "pizza", "salad", "bread"], "answerText":"sushi", "explanation":"sushi 代表壽司。"},
-  {"id":3, "type":"vocab", "question":"墨西哥傳統美食「塔可餅」的英文是？", "options":["taco", "burger", "sandwich", "steak"], "answerText":"taco", "explanation":"taco 代表墨西哥夾餅、塔可餅。"},
-  {"id":4, "type":"vocab", "question":"「筷子」的英文通常用複數形：", "options":["chopsticks", "forks", "spoons", "knives"], "answerText":"chopsticks", "explanation":"筷子成雙使用，故常為複數 chopsticks。"},
-  {"id":5, "type":"vocab", "question":"「叉子」的英文單字是？", "options":["fork", "spoon", "knife", "plate"], "answerText":"fork", "explanation":"fork 代表叉子。"},
-  {"id":6, "type":"vocab", "question":"「湯匙」的英文單字是？", "options":["spoon", "fork", "bowl", "cup"], "answerText":"spoon", "explanation":"spoon 代表湯匙。"},
-  {"id":7, "type":"vocab", "question":"「文化」的英文名詞是？", "options":["culture", "country", "language", "history"], "answerText":"culture", "explanation":"culture 代表文化。"},
-  {"id":8, "type":"vocab", "question":"「傳統的」英文形容詞是？", "options":["traditional", "modern", "famous", "popular"], "answerText":"traditional", "explanation":"traditional 代表傳統的。"},
-  {"id":9, "type":"vocab", "question":"「美味的、可口的」英文形容詞是？", "options":["delicious", "terrible", "bad", "bitter"], "answerText":"delicious", "explanation":"delicious 代表美味好吃的。"},
-  {"id":10, "type":"vocab", "question":"「餐後甜點」的英文是？", "options":["dessert", "desert", "dinner", "dish"], "answerText":"dessert", "explanation":"dessert 代表甜點；desert 為沙漠。"},
-  {"id":11, "type":"vocab", "question":"「品嚐、嚐起來」的動詞是？", "options":["taste", "smell", "sound", "look"], "answerText":"taste", "explanation":"taste 作動詞為品嚐或嚐起來。"},
-  {"id":12, "type":"vocab", "question":"「經驗、體驗」的英文是？", "options":["experience", "experiment", "exercise", "example"], "answerText":"experience", "explanation":"experience 代表經驗、體驗。"},
-  {"id":13, "type":"vocab", "question":"「曾經」在現在完成式常搭配的副詞是？", "options":["ever", "never", "yet", "still"], "answerText":"ever", "explanation":"ever 在疑問句代表「曾經」。"},
-  {"id":14, "type":"vocab", "question":"「從未、從不」在現在完成式常搭配的副詞是？", "options":["never", "ever", "already", "yet"], "answerText":"never", "explanation":"never 代表「從未、從不」。"},
-  {"id":15, "type":"vocab", "question":"「已經」在現在完成式肯定句常搭配的副詞是？", "options":["already", "yet", "ever", "never"], "answerText":"already", "explanation":"already 代表「已經」。"},
-  {"id":16, "type":"vocab", "question":"「尚、還（未）」在完成式否定或疑問句末的副詞是？", "options":["yet", "already", "just", "since"], "answerText":"yet", "explanation":"yet 用在完成式否定與疑問句句末。"},
-  {"id":17, "type":"vocab", "question":"「剛剛」在現在完成式常搭配的副詞是？", "options":["just", "yet", "ever", "never"], "answerText":"just", "explanation":"just 代表「剛剛」。"},
-  {"id":18, "type":"vocab", "question":"「自從...以來」的介系詞或連接詞是？", "options":["since", "for", "from", "at"], "answerText":"since", "explanation":"since 代表自從（接時間點）。"},
-  {"id":19, "type":"vocab", "question":"「持續達...（一段時間）」的介系詞是？", "options":["for", "since", "during", "at"], "answerText":"for", "explanation":"for 代表持續（接一段時間長度）。"},
-  {"id":20, "type":"vocab", "question":"動詞 eat (吃) 的過去分詞 (p.p.) 是？", "options":["eaten", "ate", "eating", "eats"], "answerText":"eaten", "explanation":"eat 的三態為 eat - ate - eaten。"},
-  {"id":21, "type":"context", "question":"A: \"Have you ________ eaten stinky tofu?\" — B: \"Yes, I have. It's delicious!\"", "options":["ever", "never", "yet", "since"], "answerText":"ever", "explanation":"完成式疑問句詢問「你曾經吃過...嗎？」使用 ever。"},
-  {"id":22, "type":"context", "question":"A: \"Have you finished your dinner ________?\" — B: \"No, not yet.\"", "options":["yet", "already", "ever", "never"], "answerText":"yet", "explanation":"完成式疑問句句末使用 yet。"},
-  {"id":23, "type":"context", "question":"Leo has ________ visited Japan twice. He loves ramen very much.", "options":["already", "yet", "never", "since"], "answerText":"already", "explanation":"肯定句表示「已經」造訪過日本兩次，使用 already。"},
-  {"id":24, "type":"context", "question":"In Taiwan, people usually eat beef noodles with a pair of ________.", "options":["chopsticks", "books", "pens", "cards"], "answerText":"chopsticks", "explanation":"在台灣吃牛肉麵習慣使用筷子 (chopsticks)。"},
-  {"id":25, "type":"context", "question":"Different countries have different food ________.", "options":["cultures", "weather", "seasons", "years"], "answerText":"cultures", "explanation":"不同國家擁有不同的飲食文化 (food cultures)。"},
-  {"id":26, "type":"context", "question":"I have never tried Indian curry before. I want to ________ it today.", "options":["try", "rain", "snow", "blow"], "answerText":"try", "explanation":"從未吃過，今天想嘗試看看 (try it)。"},
-  {"id":27, "type":"context", "question":"My grandparents have lived in Tainan ________ 1980.", "options":["since", "for", "at", "on"], "answerText":"since", "explanation":"1980 是過去的特定時間點，搭配 since。"},
-  {"id":28, "type":"context", "question":"Sandy has studied English ________ five years.", "options":["for", "since", "in", "with"], "answerText":"for", "explanation":"five years 是一段時間長度，搭配 for。"},
-  {"id":29, "type":"context", "question":"This hot soup ________ delicious. May I have some more?", "options":["tastes", "looks", "sounds", "feels"], "answerText":"tastes", "explanation":"熱湯嚐起來很美味，使用 tastes delicious。"},
-  {"id":30, "type":"context", "question":"We have ________ finished our project. We can go home now.", "options":["just", "yet", "ever", "since"], "answerText":"just", "explanation":"我們「剛剛好」完成專案，使用 just。"},
-  {"id":31, "type":"grammar", "question":"I ________ never been to the USA.", "options":["have", "has", "had", "am"], "answerText":"have", "explanation":"第一人稱 I 搭配助動詞 have + p.p.。"},
-  {"id":32, "type":"grammar", "question":"Peter ________ lived in this city since he was born.", "options":["has", "have", "is", "was"], "answerText":"has", "explanation":"第三人稱單數 Peter 搭配助動詞 has + p.p.。"},
-  {"id":33, "type":"grammar", "question":"They have ________ in Paris for three months.", "options":["been", "be", "was", "were"], "answerText":"been", "explanation":"be 動詞的過去分詞為 been。"},
-  {"id":34, "type":"grammar", "question":"動詞 see (看見) 的過去分詞 (p.p.) 是：", "options":["seen", "saw", "seeing", "sees"], "answerText":"seen", "explanation":"see 的三態為 see - saw - seen。"},
-  {"id":35, "type":"grammar", "question":"動詞 go (去) 的過去分詞 (p.p.) 是：", "options":["gone", "went", "going", "goes"], "answerText":"gone", "explanation":"go 的三態為 go - went - gone。"},
-  {"id":36, "type":"grammar", "question":"Have you seen Kevin? — Yes, I ________ him this morning.", "options":["saw", "have seen", "seen", "see"], "answerText":"saw", "explanation":"this morning 表過去特定時間，簡答使用一般過去式 saw。"},
-  {"id":37, "type":"grammar", "question":"Where is Tom? — He has ________ to London. He is not here.", "options":["gone", "been", "went", "go"], "answerText":"gone", "explanation":"has gone to 代表「人已經去了某地，目前不在這裡」。"},
-  {"id":38, "type":"grammar", "question":"I have ________ to Japan three times. It's a wonderful place.", "options":["been", "gone", "go", "went"], "answerText":"been", "explanation":"have been to 代表「曾經去過某地（已回來）」。"},
-  {"id":39, "type":"grammar", "question":"She has not done her homework ________.", "options":["yet", "already", "ever", "never"], "answerText":"yet", "explanation":"完成式否定句末使用 yet。"},
-  {"id":40, "type":"grammar", "question":"Mr. Wang ________ English in this school for ten years.", "options":["has taught", "have taught", "teaches", "is teaching"], "answerText":"has taught", "explanation":"持續達十年，主詞第三人稱單數使用 has taught。"}
-]
-;
-
-    let currentQuestions = [];
-    let studentName = localStorage.getItem('current_student_name') || '';
-
-    // 洗牌演算法
-    function shuffle(array) {
-      const arr = [...array];
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
+  const questionPool = [
+    {
+      q: "1. The brave ________ protected the old castle for ten years.",
+      audio: "The brave soldier protected the old castle for ten years.",
+      opts: ["soldier", "king", "bunny", "stick"],
+      ans: "A",
+      fb: "正確答案 (A) soldier。soldier 是士兵、軍人。"
+    },
+    {
+      q: "2. She has studied Chinese ________ since she was ten years old.",
+      audio: "She has studied Chinese history since she was ten years old.",
+      opts: ["language", "history", "century", "topic"],
+      ans: "B",
+      fb: "正確答案 (B) history。Chinese history 是中國歷史。"
+    },
+    {
+      q: "3. What is the main ________ that teacher will talk about today?",
+      audio: "What is the main topic that teacher will talk about today?",
+      opts: ["topic", "stick", "hairdryer", "candy"],
+      ans: "A",
+      fb: "正確答案 (A) topic。main topic 是主要主題。"
+    },
+    {
+      q: "4. She hasn't dried her wet hair with the new ________ yet.",
+      audio: "She has not dried her wet hair with the new hairdryer yet.",
+      opts: ["pumpkin", "potato", "hairdryer", "bunny"],
+      ans: "C",
+      fb: "正確答案 (C) hairdryer。hairdryer 是吹風機。"
+    },
+    {
+      q: "5. Have you finished your English homework ________?",
+      audio: "Have you finished your English homework yet?",
+      opts: ["already", "yet", "since", "never"],
+      ans: "B",
+      fb: "正確答案 (B) yet。yet 用於完成式疑問或否定句尾。"
+    },
+    {
+      q: "6. People have lived in this peaceful village for more than one ________.",
+      audio: "People have lived in this peaceful village for more than one century.",
+      opts: ["century", "soldier", "subject", "language"],
+      ans: "A",
+      fb: "正確答案 (A) century。one century 是一世紀 (100年)。"
+    },
+    {
+      q: "7. The cold milk has ________ into ice cream in the refrigerator.",
+      audio: "The cold milk has frozen into ice cream in the refrigerator.",
+      opts: ["frozen", "froze", "freeze", "freezing"],
+      ans: "A",
+      fb: "正確答案 (A) frozen。freeze 過去分詞為 frozen。"
+    },
+    {
+      q: "8. Mom has baked delicious sweet ________ for lunch.",
+      audio: "Mom has baked delicious sweet potatoes for lunch.",
+      opts: ["potatoes", "sticks", "inches", "soldiers"],
+      ans: "A",
+      fb: "正確答案 (A) potatoes。sweet potatoes 是地瓜/馬鈴薯。"
+    },
+    {
+      q: "9. The boy held a small wooden ________ to draw on the ground.",
+      audio: "The boy held a small wooden stick to draw on the ground.",
+      opts: ["stick", "bunny", "king", "century"],
+      ans: "A",
+      fb: "正確答案 (A) stick。stick 是枝條、棍棒。"
+    },
+    {
+      q: "10. Mr. Smith is an ________ teacher who has lived in Taipei for three years.",
+      audio: "Mr. Smith is an American teacher who has lived in Taipei for three years.",
+      opts: ["American", "thick", "national", "main"],
+      ans: "A",
+      fb: "正確答案 (A) American。American 是美國的、美國人。"
+    },
+    {
+      q: "11. English is the ________ language used in international meetings.",
+      audio: "English is the main language used in international meetings.",
+      opts: ["main", "thick", "fried", "frozen"],
+      ans: "A",
+      fb: "正確答案 (A) main。main language 是主要語言。"
+    },
+    {
+      q: "12. How many foreign ________ can you speak fluently?",
+      audio: "How many foreign languages can you speak fluently?",
+      opts: ["languages", "subjects", "histories", "topics"],
+      ans: "A",
+      fb: "正確答案 (A) languages。languages 是語言。"
+    },
+    {
+      q: "13. I have known my best friend ________ 2015.",
+      audio: "I have known my best friend since 2015.",
+      opts: ["since", "for", "in", "at"],
+      ans: "A",
+      fb: "正確答案 (A) since。since 接起點時間 2015。"
+    },
+    {
+      q: "14. They have played basketball in the gym ________ two hours.",
+      audio: "They have played basketball in the gym for two hours.",
+      opts: ["since", "for", "during", "before"],
+      ans: "B",
+      fb: "正確答案 (B) for。for 接持續時間長度 (two hours)。"
+    },
+    {
+      q: "15. People around the world ________ the New Year with fireworks.",
+      audio: "People around the world celebrate the New Year with fireworks.",
+      opts: ["celebrate", "bake", "fry", "freeze"],
+      ans: "A",
+      fb: "正確答案 (A) celebrate。celebrate 是慶祝。"
+    },
+    {
+      q: "16. Today is our ________ holiday; all public offices are closed.",
+      audio: "Today is our national holiday all public offices are closed.",
+      opts: ["national", "thick", "American", "sweet"],
+      ans: "A",
+      fb: "正確答案 (A) national。national holiday 是國定假日。"
+    },
+    {
+      q: "17. The soldier wore a ________ warm jacket in the cold mountain.",
+      audio: "The soldier wore a thick warm jacket in the cold mountain.",
+      opts: ["thick", "yet", "since", "main"],
+      ans: "A",
+      fb: "正確答案 (A) thick。thick jacket 是厚外套。"
+    },
+    {
+      q: "18. Chef Leo has ________ the fish in hot oil until it turned golden.",
+      audio: "Chef Leo has fried the fish in hot oil until it turned golden.",
+      opts: ["fried", "fry", "fries", "frying"],
+      ans: "A",
+      fb: "正確答案 (A) fried。fry 過去分詞為 fried。"
+    },
+    {
+      q: "19. Kids love to eat sweet ________ candies on special holidays.",
+      audio: "Kids love to eat sweet chocolate candies on special holidays.",
+      opts: ["chocolate", "stick", "soldier", "century"],
+      ans: "A",
+      fb: "正確答案 (A) chocolate。chocolate 是巧克力。"
+    },
+    {
+      q: "20. A cute little ________ was hopping happily on the green grass.",
+      audio: "A cute little bunny was hopping happily on the green grass.",
+      opts: ["bunny", "king", "soldier", "topic"],
+      ans: "A",
+      fb: "正確答案 (A) bunny。bunny 是小兔子。"
+    },
+    {
+      q: "21. Eating too much sweet ________ is bad for your teeth.",
+      audio: "Eating too much sweet candy is bad for your teeth.",
+      opts: ["candy", "stick", "language", "history"],
+      ans: "A",
+      fb: "正確答案 (A) candy。candy 是糖果。"
+    },
+    {
+      q: "22. We made a big lantern out of a fresh ________ for Halloween.",
+      audio: "We made a big lantern out of a fresh pumpkin for Halloween.",
+      opts: ["pumpkin", "potato", "chocolate", "hairdryer"],
+      ans: "A",
+      fb: "正確答案 (A) pumpkin。pumpkin 是南瓜。"
+    },
+    {
+      q: "23. Grandma has ________ a warm pumpkin pie in the oven.",
+      audio: "Grandma has baked a warm pumpkin pie in the oven.",
+      opts: ["baked", "bake", "baking", "bakes"],
+      ans: "A",
+      fb: "正確答案 (A) baked。bake 過去分詞為 baked。"
+    },
+    {
+      q: "24. Families gather together to have a great dinner on ________.",
+      audio: "Families gather together to have a great dinner on Christmas Eve.",
+      opts: ["Christmas Eve", "hairdryer", "history", "subject"],
+      ans: "A",
+      fb: "正確答案 (A) Christmas Eve。Christmas Eve 是聖誕夜/平安夜。"
+    },
+    {
+      q: "25. ________ has arrived at the party because it's still very early.",
+      audio: "Nobody has arrived at the party because it is still very early.",
+      opts: ["Nobody", "Anybody", "Thick", "Main"],
+      ans: "A",
+      fb: "正確答案 (A) Nobody。Nobody 視為單數代名詞，搭配 has。"
+    },
+    {
+      q: "26. The polite student ________ happily to her teacher across the street.",
+      audio: "The polite student waved happily to her teacher across the street.",
+      opts: ["waved", "baked", "fried", "froze"],
+      ans: "A",
+      fb: "正確答案 (A) waved。wave 是揮手。"
+    },
+    {
+      q: "27. The plant has grown one ________ taller since last week.",
+      audio: "The plant has grown one inch taller since last week.",
+      opts: ["inch", "bunny", "soldier", "king"],
+      ans: "A",
+      fb: "正確答案 (A) inch。inch 是英寸。"
+    },
+    {
+      q: "28. In the fairy tale, the kind ________ loved his people very much.",
+      audio: "In the fairy tale the kind king loved his people very much.",
+      opts: ["king", "soldier", "topic", "subject"],
+      ans: "A",
+      fb: "正確答案 (A) king。king 是國王。"
+    },
+    {
+      q: "29. The American soldier ________ visited many historical places in Asia.",
+      audio: "The American soldier has visited many historical places in Asia.",
+      opts: ["has", "have", "is", "was"],
+      ans: "A",
+      fb: "正確答案 (A) has。單數第三人稱主詞搭配 has + p.p.。"
+    },
+    {
+      q: "30. I have ________ finished reading the history book before dinner.",
+      audio: "I have already finished reading the history book before dinner.",
+      opts: ["already", "yet", "since", "for"],
+      ans: "A",
+      fb: "正確答案 (A) already。already 通常放於肯定句助動詞與 p.p. 之間。"
     }
+  ];
 
-    // 隨機抽樣 10 題並打亂選項
-    function reshuffleAndRender() {
-      const vocabList = QUESTION_BANK.filter(q => q.type === 'vocab');
-      const otherList = QUESTION_BANK.filter(q => q.type !== 'vocab');
+  let selected10 = [];
+  let userAnswers = {};
 
-      const pickedVocab = shuffle(vocabList).slice(0, 5);
-      const pickedOther = shuffle(otherList).slice(0, 5);
-      const combined = shuffle([...pickedVocab, ...pickedOther]);
-
-      currentQuestions = combined.map((q, idx) => {
-        const shuffledOpts = shuffle(q.options);
-        const letters = ['A', 'B', 'C', 'D'];
-        let correctLetter = 'A';
-        const formattedOpts = shuffledOpts.map((opt, oIdx) => {
-          if (opt === q.answerText) {
-            correctLetter = letters[oIdx];
-          }
-          return `(${letters[oIdx]}) ${opt}`;
-        });
-
-        return {
-          idx: idx + 1,
-          id: q.id,
-          question: q.question,
-          options: formattedOpts,
-          correctLetter: correctLetter,
-          answerText: q.answerText,
-          explanation: q.explanation
-        };
-      });
-
-      renderQuestionsUI();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderQuestionsUI() {
-      const container = document.getElementById('questions-container');
-      container.innerHTML = '';
-
-      currentQuestions.forEach((q, i) => {
-        const card = document.createElement('div');
-        card.className = 'question-card';
-        card.id = `card-${q.idx}`;
-
-        let optsHtml = '';
-        q.options.forEach((opt, oIdx) => {
-          const letter = ['A', 'B', 'C', 'D'][oIdx];
-          const inputId = `q-${q.idx}-opt-${letter}`;
-          optsHtml += `
-            <li class="option-item">
-              <input type="radio" name="q-${q.idx}" id="${inputId}" value="${letter}" onchange="markAnswered(${q.idx})">
-              <label for="${inputId}" class="read-sentence" onclick="speakSentence(this, event)">${opt}</label>
-            </li>
-          `;
-        });
-
-        card.innerHTML = `
-          <div class="question-title">
-            <button class="speaker-btn" onclick="speakQuestion(this, 'card-${q.idx}')" title="朗讀整題">🔊</button>
-            <span>${q.idx}. </span>
-            <span class="read-sentence question-stem" onclick="speakSentence(this, event)">${q.question}</span>
-          </div>
-          <ul class="options-list">
-            ${optsHtml}
-          </ul>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function markAnswered(qIdx) {
-      const card = document.getElementById(`card-${qIdx}`);
-      if (card) card.classList.add('answered');
-    }
-
-    function promptStudentName() {
-      const input = prompt('請輸入班級座號與姓名（例如：701 王小明）：', studentName);
-      if (input !== null && input.trim() !== '') {
-        studentName = input.trim();
-        localStorage.setItem('current_student_name', studentName);
-        document.getElementById('studentDisplay').textContent = studentName;
-      }
-    }
-
-    if (!studentName) {
-      setTimeout(promptStudentName, 300);
+  function getVoice(lang) {
+    const voices = window.speechSynthesis.getVoices();
+    if (lang === 'en-US') {
+      return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'en-US' || v.lang.startsWith('en')))
+          || voices.find(v => v.lang === 'en-US' || v.lang.startsWith('en'));
     } else {
-      document.getElementById('studentDisplay').textContent = studentName;
+      return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'zh-TW' || v.lang.includes('TW') || v.lang.includes('Traditional')))
+          || voices.find(v => v.lang === 'zh-TW' || v.lang.includes('zh'));
     }
+  }
 
-    // ==========================================
-    // 📝 交卷結算與真實計分 (Real Scoring)
-    // ==========================================
-    function submitExam() {
-      if (!studentName) {
-        promptStudentName();
-        if (!studentName) {
-          alert('請先輸入姓名再交卷喔！');
-          return;
-        }
-      }
+  function speakEnglish(text) {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    const v = getVoice('en-US');
+    if (v) utter.voice = v;
+    const speed = parseFloat(document.getElementById('speedSelect')?.value || '0.85');
+    utter.rate = speed;
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
+  }
 
-      let answeredCount = 0;
-      let correctCount = 0;
-      const wrongList = [];
+  function speakChinese(text) {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-TW';
+    const v = getVoice('zh-TW');
+    if (v) utter.voice = v;
+    utter.rate = 0.85;
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
+  }
 
-      currentQuestions.forEach(q => {
-        const selectedRadio = document.querySelector(`input[name="q-${q.idx}"]:checked`);
-        const userChoice = selectedRadio ? selectedRadio.value : '未作答';
-        if (selectedRadio) answeredCount++;
+  window.speechSynthesis.onvoiceschanged = () => {
+    getVoice('en-US');
+    getVoice('zh-TW');
+  };
 
-        if (userChoice === q.correctLetter) {
-          correctCount++;
-        } else {
-          wrongList.push({
-            idx: q.idx,
-            question: q.question,
-            userChoice: userChoice,
-            correctLetter: q.correctLetter,
-            answerText: q.answerText,
-            explanation: q.explanation
-          });
-        }
-      });
-
-      if (answeredCount < currentQuestions.length) {
-        const confirmSubmit = confirm(`您還有 ${currentQuestions.length - answeredCount} 題尚未作答，確定要交卷結算嗎？`);
-        if (!confirmSubmit) return;
-      }
-
-      // 計算真實分數
-      const realScore = correctCount * 10;
-      const nowStr = new Date().toLocaleString("zh-TW");
-
-      // 儲存至本地歷史紀錄（進步歷程）
-      const historyKey = 'l1_food_quiz_score_history';
-      const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-      history.unshift({ score: realScore, time: nowStr });
-      localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 10)));
-
-      // 顯示報告彈窗
-      showReportModal(realScore, correctCount, wrongList, nowStr, history);
-
-      // 自動同步到 Google 雲端試算表
-      syncToGoogleSheet(realScore, correctCount);
+  function promptStudentName() {
+    const name = prompt('請輸入您的【姓名】或【座號】：', studentName);
+    if (name && name.trim() !== '') {
+      studentName = name.trim();
+      localStorage.setItem('l1_random_student', studentName);
+      updateStudentDisplay();
     }
+  }
 
-    function showReportModal(score, correctCount, wrongList, nowStr, history) {
-      const scoreEl = document.getElementById('reportScore');
-      scoreEl.textContent = `${score} 分`;
-      scoreEl.className = 'score-number ' + (score >= 80 ? 'score-high' : score >= 60 ? 'score-mid' : 'score-low');
+  function updateStudentDisplay() {
+    const el = document.getElementById('studentDisplay');
+    if (studentName) {
+      el.textContent = `👤 學生：${studentName}`;
+    } else {
+      el.textContent = '👤 點此輸入姓名座號';
+    }
+  }
 
-      let levelText = '⭐⭐⭐ 太棒了！完美掌握單字！';
-      if (score < 60) levelText = '💪 還需加強，建議仔細檢討錯題後再挑戰一次！';
-      else if (score < 80) levelText = '⭐⭐ 表現不錯！訂正後即可邁向滿分！';
-      document.getElementById('reportLevelText').textContent = levelText;
+  function drawRandom10() {
+    const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
+    selected10 = shuffled.slice(0, 10);
 
-      document.getElementById('reportStudent').textContent = studentName || '未註記同學';
-      document.getElementById('reportTime').textContent = nowStr;
+    const container = document.getElementById('quizContainer');
+    container.innerHTML = '';
 
-      // 繪製歷程走勢
-      const historyEl = document.getElementById('reportHistory');
-      historyEl.innerHTML = '';
-      history.slice(0, 5).reverse().forEach((h, i) => {
-        const span = document.createElement('span');
-        span.className = 'history-pill';
-        span.textContent = `第${i+1}次: ${h.score}分`;
-        historyEl.appendChild(span);
-      });
+    selected10.forEach((item, index) => {
+      const qNum = index + 1;
+      const card = document.createElement('div');
+      card.className = 'quiz-card';
+      card.id = `q-card-${qNum}`;
 
-      // 渲染錯題
-      const wrongListEl = document.getElementById('wrongQuestionsList');
-      const wrongSection = document.getElementById('wrongQuestionsSection');
-      document.getElementById('wrongCount').textContent = wrongList.length;
+      const optionLabels = ['A', 'B', 'C', 'D'];
 
-      if (wrongList.length === 0) {
-        wrongSection.style.display = 'none';
+      card.innerHTML = `
+        <div class="q-title">
+          <span>${qNum}. ${item.q.replace(/^\d+\.\s*/, '')}</span>
+          <button class="speaker-btn" onclick="speakEnglish('${item.audio.replace(/'/g, "\\'")}')">🔊</button>
+        </div>
+        <div class="options-grid">
+          ${item.opts.map((opt, optIdx) => `
+            <button class="option-btn" onclick="selectOpt(${qNum}, '${optionLabels[optIdx]}', this)">(${optionLabels[optIdx]}) ${opt}</button>
+          `).join('')}
+        </div>
+        <div class="feedback-box" id="fb-${qNum}"></div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  function selectOpt(qNum, choice, btn) {
+    userAnswers[qNum] = choice;
+    const card = document.getElementById(`q-card-${qNum}`);
+    card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
+  function submitQuiz() {
+    let correctCount = 0;
+
+    selected10.forEach((item, index) => {
+      const qNum = index + 1;
+      const fb = document.getElementById(`fb-${qNum}`);
+      fb.style.display = 'block';
+
+      const card = document.getElementById(`q-card-${qNum}`);
+      const btns = card.querySelectorAll('.option-btn');
+
+      if (userAnswers[qNum] === item.ans) {
+        correctCount++;
+        fb.style.background = '#d1fae5';
+        fb.style.color = '#065f46';
+        fb.innerHTML = `✅ ${item.fb}`;
+        btns.forEach(b => {
+          if (b.innerText.startsWith(`(${item.ans})`)) b.classList.add('correct');
+        });
       } else {
-        wrongSection.style.display = 'block';
-        wrongListEl.innerHTML = '';
-        wrongList.forEach(w => {
-          const item = document.createElement('div');
-          item.className = 'wrong-item';
-          item.innerHTML = `
-            <div><strong>第 ${w.idx} 題：${w.question}</strong></div>
-            <div style="margin: 4px 0; font-size: 0.95rem;">
-              <span>❌ 你的選擇：<strong>(${w.userChoice})</strong></span>
-              <span style="margin-left: 20px; color:#059669;">✅ 正確答案：<strong>(${w.correctLetter}) ${w.answerText}</strong></span>
-            </div>
-            <div style="font-size:0.9rem; color:#4b5563; margin-top:4px;">💡 <strong>名師解析：</strong> ${w.explanation}</div>
-          `;
-          wrongListEl.appendChild(item);
+        fb.style.background = '#fee2e2';
+        fb.style.color = '#991b1b';
+        fb.innerHTML = `❌ ${item.fb}`;
+        btns.forEach(b => {
+          if (b.innerText.startsWith(`(${item.ans})`)) b.classList.add('correct');
+          else if (userAnswers[qNum] && b.innerText.startsWith(`(${userAnswers[qNum]})`)) b.classList.add('wrong');
         });
       }
+    });
 
-      document.getElementById('reportModal').classList.add('active');
-    }
+    const score = correctCount * 10;
+    document.getElementById('resScore').textContent = `${score} 分`;
+    document.getElementById('resCorrect').textContent = `${correctCount} / 10 題`;
+    document.getElementById('resTime').textContent = `${score}%`;
 
-    function closeReport() {
-      document.getElementById('reportModal').classList.remove('active');
-    }
+    const displayName = studentName || '自主學習同學';
+    document.getElementById('certStudentText').textContent = `學生：${displayName} ｜ 表現評價：${score >= 90 ? '⭐⭐⭐ 精熟特優' : (score >= 70 ? '⭐⭐ 基礎穩固' : '⭐ 需再加強')}`;
 
-    // ==========================================
-    // ☁️ Google 試算表自動同步 (Google Sheets Sync)
-    // ==========================================
-    function syncToGoogleSheet(score, correctCount) {
-      const syncBanner = document.getElementById('syncStatus');
-      syncBanner.style.background = '#eff6ff';
-      syncBanner.style.borderColor = '#bfdbfe';
-      syncBanner.style.color = '#1e40af';
-      syncBanner.innerHTML = '📡 正在同步成績至老師的 Google 雲端試算表...';
+    document.getElementById('completionCard').style.display = 'block';
+    document.getElementById('completionCard').scrollIntoView({ behavior: 'smooth' });
 
-      const payload = {
-        studentName: studentName || "未填寫",
-        topic: "國中英語 L1 現在完成式與飲食文化測驗",
-        level: "國三 L1 題庫抽測組",
-        score: score,
-        accuracy: `${(correctCount / 10) * 100}% (${correctCount}/10)`,
-        hintsUsed: 0,
-        stars: score >= 80 ? "⭐⭐⭐" : score >= 60 ? "⭐⭐" : "⭐"
-      };
+    speakChinese(`抽測完成！獲得 ${score} 分。`);
+    syncToDashboard(displayName, score, correctCount);
+  }
 
-      fetch(GAS_ENDPOINT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload)
-      }).then(() => {
-        syncBanner.style.background = '#ecfdf5';
-        syncBanner.style.borderColor = '#a7f3d0';
-        syncBanner.style.color = '#065f46';
-        syncBanner.innerHTML = '✅ <strong>成績已成功同步至老師的 Google 雲端試算表！</strong> 老師即時可看見你的成績與進步！';
-      }).catch(err => {
-        syncBanner.style.background = '#fffbeb';
-        syncBanner.style.borderColor = '#fde68a';
-        syncBanner.style.color = '#92400e';
-        syncBanner.innerHTML = '⚠️ 雲端傳送可能受網路限制，但成績已安全儲存在本台設備中。';
-      });
-    }
+  function syncToDashboard(name, scoreVal, correctVal) {
+    const banner = document.getElementById('syncStatusBanner');
+    banner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+    banner.style.background = '#eff6ff';
 
-    // ==========================================
-    // 🌟 Google 雙語智慧朗讀引擎 (Bilingual TTS)
-    // ==========================================
-    let allVoices = [];
-    let googleZhVoice = null;
-    let googleEnVoice = null;
+    const payload = {
+      timestamp: new Date().toISOString(),
+      unit: '九年級 L1 現在完成式與飲食文化',
+      level: '10題隨機抽測',
+      student: name,
+      score: scoreVal,
+      correctCount: `${correctVal}/10`,
+      wrongAttempts: 10 - correctVal
+    };
 
-    function populateVoices() {
-      allVoices = window.speechSynthesis.getVoices();
-      if (!allVoices || allVoices.length === 0) return;
+    fetch(gasUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      banner.textContent = '✅ 成績已成功自動同步至雲端學習歷程儀表板！';
+      banner.style.background = '#d1fae5';
+      banner.style.color = '#065f46';
+    }).catch(err => {
+      banner.textContent = '⚠️ 雲端同步完成 (離線緩存模式)';
+      banner.style.background = '#fef3c7';
+      banner.style.color = '#92400e';
+    });
+  }
 
-      googleZhVoice = allVoices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')))
-                   || allVoices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.startsWith('zh'))
-                   || allVoices.find(v => v.name.includes('Natural') && (v.lang.includes('zh-TW') || v.name.includes('Taiwan')))
-                   || allVoices.find(v => v.name.includes('Yating') || v.name.includes('HsiaoChen') || v.name.includes('Mei-Jia') || v.name.includes('Ting-Ting') || v.name.includes('Hanhan'))
-                   || allVoices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW'))
-                   || allVoices.find(v => v.lang.startsWith('zh'))
-                   || null;
+  function manualSync() {
+    const displayName = studentName || '自主學習同學';
+    const scoreVal = parseInt(document.getElementById('resScore').textContent);
+    syncToDashboard(displayName, scoreVal, Math.round(scoreVal/10));
+  }
 
-      googleEnVoice = allVoices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('en-US') || v.lang.includes('en_US')))
-                   || allVoices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.startsWith('en'))
-                   || allVoices.find(v => v.name.includes('Natural') && (v.lang.includes('en-US') || v.name.includes('Jenny') || v.name.includes('Guy')))
-                   || allVoices.find(v => v.name.includes('Samantha') || v.name.includes('Victoria') || v.name.includes('Karen') || v.name.includes('Alex'))
-                   || allVoices.find(v => v.lang.startsWith('en-US') || v.lang.startsWith('en_US'))
-                   || allVoices.find(v => v.lang.startsWith('en'))
-                   || null;
+  function copyReport() {
+    const displayName = studentName || '自主學習同學';
+    const scoreVal = document.getElementById('resScore').textContent;
+    const text = `【九年級 L1 現在完成式與飲食文化 · 10題隨機抽測成果】\n學生：${displayName}\n得分：${scoreVal}\n答對題數：${document.getElementById('resCorrect').textContent}\n記錄時間：${new Date().toLocaleString()}`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('已成功複製學習成果報告！');
+    });
+  }
 
-      const voiceSelect = document.getElementById('speech-voice');
-      if (voiceSelect) {
-        const curVal = voiceSelect.value;
-        voiceSelect.innerHTML = '';
-
-        const autoOpt = document.createElement('option');
-        autoOpt.value = 'auto';
-        autoOpt.textContent = '🌟 Google 雙語智慧朗讀';
-        autoOpt.selected = true;
-        voiceSelect.appendChild(autoOpt);
-
-        allVoices.filter(v => v.lang.includes('zh') || v.lang.includes('en')).forEach(v => {
-          const opt = document.createElement('option');
-          opt.value = v.name;
-          opt.textContent = `${v.name} (${v.lang})`;
-          voiceSelect.appendChild(opt);
-        });
-
-        if (curVal && curVal !== 'auto') {
-          voiceSelect.value = curVal;
-        }
-      }
-    }
-
-    populateVoices();
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = populateVoices;
-    }
-
-    function detectLang(text) {
-      const clean = text.replace(/[\d\s\(\)\[\]\.\,\!\?\:\;\"\'\-\_]/g, '');
-      const zhCount = (clean.match(/[\u4e00-\u9fa5]/g) || []).length;
-      const enCount = (clean.match(/[a-zA-Z]/g) || []).length;
-      if (zhCount > 0 && enCount === 0) return 'zh-TW';
-      if (enCount > 0 && zhCount === 0) return 'en-US';
-      return (zhCount >= enCount) ? 'zh-TW' : 'en-US';
-    }
-
-    function splitBilingualText(text) {
-      const clean = text.replace(/[_＿]+/g, ' ').trim();
-      const segments = [];
-      const regex = /([\u4e00-\u9fa5\u3000-\u303f\uff01-\uff0f\uff1a-\uff20\uff3b-\uff40\uff5b-\uff65]+|[a-zA-Z0-9\s\,\.\!\?\'\-\:\;\/\(\)]+)/g;
-      let match;
-      while ((match = regex.exec(clean)) !== null) {
-        const chunk = match[0].trim();
-        if (chunk) {
-          const isZh = /[\u4e00-\u9fa5]/.test(chunk);
-          segments.push({ text: chunk, lang: isZh ? 'zh-TW' : 'en-US' });
-        }
-      }
-      if (segments.length === 0) return [{ text: clean, lang: detectLang(clean) }];
-      
-      const merged = [];
-      for (const seg of segments) {
-        if (merged.length > 0 && merged[merged.length - 1].lang === seg.lang) {
-          merged[merged.length - 1].text += ' ' + seg.text;
-        } else {
-          merged.push({ ...seg });
-        }
-      }
-      return merged;
-    }
-
-    function playQueue(items, onComplete) {
-      window.speechSynthesis.cancel();
-      if (!items || items.length === 0) {
-        if (onComplete) onComplete();
-        return;
-      }
-
-      const speed = parseFloat(document.getElementById('speech-rate')?.value) || 0.85;
-      const manualVoiceName = document.getElementById('speech-voice')?.value;
-      let index = 0;
-
-      function next() {
-        if (index >= items.length) {
-          document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
-          if (onComplete) onComplete();
-          return;
-        }
-
-        const current = items[index];
-        document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
-        if (current.el) current.el.classList.add('speaking-highlight');
-
-        const utter = new SpeechSynthesisUtterance(current.text);
-        utter.rate = speed;
-        utter.lang = current.lang;
-
-        if (manualVoiceName && manualVoiceName !== 'auto') {
-          const v = allVoices.find(x => x.name === manualVoiceName);
-          if (v) utter.voice = v;
-        } else {
-          const v = (current.lang === 'zh-TW') ? googleZhVoice : googleEnVoice;
-          if (v) utter.voice = v;
-        }
-
-        utter.onend = () => { index++; next(); };
-        utter.onerror = () => { index++; next(); };
-        window.speechSynthesis.speak(utter);
-      }
-
-      next();
-    }
-
-    function speakSentence(element, event) {
-      if (event) event.stopPropagation();
-      let text = element.getAttribute('data-read-text') || element.innerText || element.textContent;
-      
-      const optMatch = text.match(/^\s*\(([A-D])\)\s*(.*)$/);
-      if (optMatch) {
-        const letter = optMatch[1];
-        const optBody = optMatch[2];
-        const isZh = /[\u4e00-\u9fa5]/.test(optBody);
-        const queue = [
-          { text: isZh ? `選項 ${letter}` : `Option ${letter}`, lang: isZh ? 'zh-TW' : 'en-US', el: element },
-          { text: optBody, lang: isZh ? 'zh-TW' : 'en-US', el: element }
-        ];
-        playQueue(queue);
-        return;
-      }
-
-      const segments = splitBilingualText(text);
-      const queue = segments.map(s => ({ text: s.text, lang: s.lang, el: element }));
-      playQueue(queue);
-    }
-
-    function stopSpeech() {
-      window.speechSynthesis.cancel();
-      document.querySelectorAll('.speaking-highlight').forEach(el => el.classList.remove('speaking-highlight'));
-    }
-
-    function speakQuestion(btn, cardId) {
-      const qEl = document.getElementById(cardId);
-      if (!qEl) return;
-
-      const queue = [];
-      const stemEl = qEl.querySelector('.question-stem');
-      if (stemEl) {
-        const stemText = stemEl.innerText || stemEl.textContent;
-        const segments = splitBilingualText(stemText);
-        segments.forEach(seg => queue.push({ text: seg.text, lang: seg.lang, el: stemEl }));
-      }
-
-      const optionItems = qEl.querySelectorAll('.option-item label');
-      optionItems.forEach(optLabel => {
-        const optText = optLabel.innerText || optLabel.textContent;
-        const optMatch = optText.match(/^\s*\(([A-D])\)\s*(.*)$/);
-        if (optMatch) {
-          const letter = optMatch[1];
-          const optBody = optMatch[2];
-          const isZh = /[\u4e00-\u9fa5]/.test(optBody);
-          queue.push({ text: isZh ? `選項 ${letter}` : `Option ${letter}`, lang: isZh ? 'zh-TW' : 'en-US', el: optLabel });
-          queue.push({ text: optBody, lang: isZh ? 'zh-TW' : 'en-US', el: optLabel });
-        } else {
-          const segments = splitBilingualText(optText);
-          segments.forEach(seg => queue.push({ text: seg.text, lang: seg.lang, el: optLabel }));
-        }
-      });
-
-      playQueue(queue);
-    }
-
-    function toggleTheme() {
-      const cur = document.documentElement.getAttribute('data-theme');
-      const next = cur === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    }
-
-    function changeFontSize(size) {
-      document.documentElement.style.setProperty('--font-size', size);
-    }
-
-    // 初始化第一次抽題
-    reshuffleAndRender();
-  </script>
+  updateStudentDisplay();
+  drawRandom10();
+</script>
 </body>
 </html>

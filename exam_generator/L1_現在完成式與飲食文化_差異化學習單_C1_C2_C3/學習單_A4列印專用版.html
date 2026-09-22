@@ -1,382 +1,273 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 差異化學習單｜A4 紙本列印專用版 (C1/C2/C3 & 教師解答)</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 差異化學習單 (A4 列印專用版)</title>
   <style>
+    @page {
+      size: A4 portrait;
+      margin: 15mm 15mm 15mm 15mm;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
-      background: #e2e8f0;
-      color: #0f172a;
+      font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      color: #111827;
+      background: #ffffff;
       line-height: 1.5;
-      padding: 20px 0;
+      padding: 10px;
     }
-
-    .no-print-bar {
+    .print-container {
       max-width: 800px;
-      margin: 0 auto 20px;
-      background: white;
-      padding: 16px 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
+      margin: 0 auto;
     }
-
-    .btn-print {
-      background: #7c3aed;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-
-    .btn-print:hover { background: #6d28d9; }
-
-    .a4-page {
-      background: white;
-      width: 210mm;
-      min-height: 297mm;
-      margin: 0 auto 25px;
-      padding: 18mm 18mm 18mm 18mm;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
     .header-box {
-      border-bottom: 2px solid #0f172a;
+      border-bottom: 2px solid #000;
       padding-bottom: 8px;
       margin-bottom: 12px;
-    }
-
-    .header-flex {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
     }
-
-    .sheet-title {
+    .header-title h1 {
       font-size: 1.35rem;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.5px;
     }
-
-    .level-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
+    .header-title p {
       font-size: 0.85rem;
-      font-weight: 700;
-      color: white;
-      margin-left: 6px;
+      color: #4b5563;
+      margin-top: 2px;
     }
-
-    .badge-c1 { background: #059669; }
-    .badge-c2 { background: #d97706; }
-    .badge-c3 { background: #dc2626; }
-    .badge-ans { background: #4f46e5; }
-
     .student-info-grid {
-      display: flex;
-      gap: 20px;
-      font-size: 0.95rem;
-      margin-top: 6px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      border: 1px solid #9ca3af;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
     }
-
+    .section-box {
+      margin-bottom: 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 10px 14px;
+      page-break-inside: avoid;
+    }
     .section-title {
       font-size: 1.05rem;
       font-weight: 700;
-      background: #f1f5f9;
-      padding: 4px 8px;
-      border-left: 4px solid #0f172a;
-      margin: 10px 0 8px;
-    }
-
-    .q-box {
+      color: #b45309;
+      border-bottom: 1.5px solid #fde68a;
+      padding-bottom: 4px;
       margin-bottom: 8px;
-      font-size: 0.98rem;
+      display: flex;
+      justify-content: space-between;
     }
-
-    .four-line-grid {
-      border-bottom: 1px solid #94a3b8;
-      height: 28px;
-      position: relative;
-      margin: 6px 0;
+    .q-item {
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+      line-height: 1.6;
     }
-
-    .four-line-grid::before {
-      content: '';
-      position: absolute;
-      top: 9px;
-      left: 0;
-      right: 0;
-      border-top: 1px dashed #cbd5e1;
+    .q-item strong {
+      color: #0f172a;
     }
-
-    .four-line-grid::after {
-      content: '';
-      position: absolute;
-      top: 18px;
-      left: 0;
-      right: 0;
-      border-top: 1px dashed #cbd5e1;
+    .opts-line {
+      display: flex;
+      gap: 16px;
+      margin-left: 18px;
+      font-size: 0.9rem;
+      color: #374151;
+      flex-wrap: wrap;
     }
-
-    .footer-note {
-      font-size: 0.8rem;
-      color: #64748b;
-      text-align: center;
-      border-top: 1px solid #e2e8f0;
-      padding-top: 6px;
+    .write-area {
+      border-bottom: 1px dashed #6b7280;
+      min-height: 24px;
+      margin-top: 4px;
+      margin-bottom: 8px;
     }
-
+    .page-break {
+      page-break-after: always;
+    }
+    .answer-key-box {
+      border: 1px dashed #9ca3af;
+      background: #f9fafb;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-top: 14px;
+    }
     @media print {
-      body { background: white; padding: 0; }
-      .no-print-bar { display: none; }
-      .a4-page {
-        margin: 0;
-        box-shadow: none;
-        page-break-after: always;
-        width: 100%;
-        min-height: 100vh;
-        padding: 15mm;
-      }
+      .no-print { display: none; }
+      body { padding: 0; }
     }
   </style>
 </head>
 <body>
 
-  <div class="no-print-bar">
-    <div>
-      <h2 style="font-size:1.15rem; color:#0f172a;">🖨️ Lesson 1 差異化紙本學習單（共 4 頁）</h2>
-      <p style="font-size:0.85rem; color:#64748b;">標準 A4 尺寸，包含 C1 基礎組、C2 應用組、C3 表達組與教師完整解答卷</p>
-    </div>
-    <button class="btn-print" onclick="window.print()">🖨️ 列印學習單 (Print)</button>
+<div class="print-container">
+  <div class="no-print" style="background:#fef3c7; border:1px solid #fde68a; padding:10px 16px; border-radius:8px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-weight:700; color:#b45309;">🖨️ 列印小提示：請直接按 Ctrl + P（或 Command + P）進行 A4 白紙純淨列印。</span>
+    <button onclick="window.print()" style="background:#d97706; color:white; border:none; padding:6px 14px; border-radius:6px; font-weight:700; cursor:pointer;">立即列印 🖨️</button>
   </div>
 
-  <!-- ==================== Page 1: C1 基礎組 ==================== -->
-  <div class="a4-page">
-    <div>
-      <div class="header-box">
-        <div class="header-flex">
-          <div class="sheet-title">國中英語 L1 差異化學習單 <span class="level-badge badge-c1">C1 基礎組</span></div>
-          <div style="font-size:0.85rem; color:#64748b;">S4/S3 高度鷹架</div>
-        </div>
-        <div class="student-info-grid">
-          <div>九年 _____ 班</div>
-          <div>座號：________</div>
-          <div>姓名：__________________</div>
-          <div>得分：__________</div>
-        </div>
-      </div>
-
-      <div class="section-title">一、節慶與美食單字解碼二選一 (請圈選正確英文單字)</div>
-      
-      <div class="q-box">
-        <strong>1.</strong> 🥚 🐰 復活節點心「巧克力蛋」：( <strong>chocolate eggs</strong>　/　<strong>pumpkin pie</strong> )
-      </div>
-      <div class="q-box">
-        <strong>2.</strong> 🥧 🎃 感恩節常烤的「南瓜派」：( <strong>pumpkin pie</strong>　/　<strong>candy apples</strong> )
-      </div>
-      <div class="q-box">
-        <strong>3.</strong> 🍟 🥔 炸馬鈴薯條「薯條」：( <strong>French fries</strong>　/　<strong>fried fish</strong> )
-      </div>
-      <div class="q-box">
-        <strong>4.</strong> 🍽️ 😋 吃 (eat) 的過去分詞 p.p.：( <strong>eaten</strong>　/　<strong>eating</strong> )
-      </div>
-
-      <div class="section-title">二、核心經驗句型二選一 (請圈選正確代號)</div>
-
-      <div class="q-box">
-        <strong>5.</strong> 詢問經驗與回答：<br>
-        　　👧 Emily: "Have you ever eaten candy apples?"<br>
-        　　👦 Tom: "Yes, I ________." ➔ ( A. <strong>have</strong>　/　B. <strong>am</strong> )
-      </div>
-
-      <div class="q-box">
-        <strong>6.</strong> 我「從未」看過雪：<br>
-        　　I have ________ seen snow before. ➔ ( A. <strong>never</strong>　/　B. <strong>ever</strong> )
-      </div>
-
-      <div class="section-title">三、薯條歷史閱讀理解 (圈選正確答案)</div>
-
-      <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:8px 12px; border-radius:6px; margin-bottom:8px; font-size:0.92rem;">
-        🇧🇪 <strong>Fact:</strong> "The earliest French fries were from <strong>Belgium</strong> along the river."
-      </div>
-      <div class="q-box">
-        <strong>7.</strong> 根據短文，最早的薯條發源於哪個國家？( <strong>Belgium</strong>　/　<strong>France</strong> )
-      </div>
-
-      <div class="section-title">四、大聲朗讀與抄寫 (Speaking & Handwriting)</div>
-      <div class="q-box">
-        <strong>8.</strong> 請跟著老師大聲朗讀並工整抄寫句子一次：<br>
-        <span style="font-family:'Fredoka',sans-serif; font-size:1.1rem; color:#059669;">"Have you ever eaten French fries? Yes, I have."</span>
-        <div class="four-line-grid"></div>
-      </div>
+  <div class="header-box">
+    <div class="header-title">
+      <h1>國中英語【國三 · 九年級】現在完成式與飲食文化 學習單</h1>
+      <p>🎯 鎖定課本官方 28 核心生詞 · 現在完成式 have/has + p.p. 語法結構</p>
     </div>
-
-    <div class="footer-note">Lesson 1 Present Perfect Tense & Food History ｜ C1 基礎組 學習單</div>
+    <div style="font-size:0.85rem; text-align:right; color:#4b5563;">
+      資源班 / 特教班 差異化專用卷
+    </div>
   </div>
 
-  <!-- ==================== Page 2: C2 應用組 ==================== -->
-  <div class="a4-page">
-    <div>
-      <div class="header-box">
-        <div class="header-flex">
-          <div class="sheet-title">國中英語 L1 差異化學習單 <span class="level-badge badge-c2">C2 應用組</span></div>
-          <div style="font-size:0.85rem; color:#64748b;">S3/S2 中度鷹架</div>
-        </div>
-        <div class="student-info-grid">
-          <div>九年 _____ 班</div>
-          <div>座號：________</div>
-          <div>姓名：__________________</div>
-          <div>得分：__________</div>
-        </div>
-      </div>
-
-      <div class="section-title">一、過去分詞 (p.p.) 選字填空 (Word Bank)</div>
-      <div style="background:#fffbeb; border:1px dashed #d97706; padding:6px 12px; border-radius:6px; margin-bottom:8px; font-size:0.92rem;">
-        單字庫：<strong>[ eaten / baked / seen / tried / made ]</strong>
-      </div>
-      <div class="q-box">
-        1. 🍎 Have you ever ________________ candy apples before?<br>
-        2. 🥧 Jenny has never ________________ pumpkin pies on Thanksgiving.<br>
-        3. ❄️ We have ________________ snow in the mountains once.
-      </div>
-
-      <div class="section-title">二、時間介系詞填空 (請填入 for 或 since)</div>
-      <div style="font-size:0.85rem; color:#64748b; margin-bottom:4px;">
-        💡 提示：一段持續時間 (長度) 用 <code>for</code>；過去的時間點/起點用 <code>since</code>。
-      </div>
-      <div class="q-box">
-        1. 📚 Rick has worked in the library ________ a month.<br>
-        2. 🤝 Jay and Cate have been friends ________ 2000.<br>
-        3. 📺 They have watched TV ________ two hours.
-      </div>
-
-      <div class="section-title">三、短文閱讀理解 (Reading Comprehension)</div>
-      <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:8px 12px; border-radius:6px; margin-bottom:8px; font-size:0.92rem; line-height:1.6;">
-        The earliest French fries were from <strong>Belgium</strong>. When the river froze in winter and people could not catch fish, they cut <strong>potatoes</strong> into thin sticks and fried them. During World War I, American soldiers tasted them and called them "French fries".
-      </div>
-      <div class="q-box">
-        1. Where were the earliest French fries from? ➔ ________________________<br>
-        2. Why did people in Belgium fry potato sticks? ➔ Because the river ________________________.
-      </div>
-    </div>
-
-    <div class="footer-note">Lesson 1 Present Perfect Tense & Food History ｜ C2 應用組 學習單</div>
+  <div class="student-info-grid">
+    <div>九年 _____ 班</div>
+    <div>座號：________</div>
+    <div>姓名：________________</div>
+    <div>得分：________________</div>
   </div>
 
-  <!-- ==================== Page 3: C3 表達組 ==================== -->
-  <div class="a4-page">
-    <div>
-      <div class="header-box">
-        <div class="header-flex">
-          <div class="sheet-title">國中英語 L1 差異化學習單 <span class="level-badge badge-c3">C3 表達組</span></div>
-          <div style="font-size:0.85rem; color:#64748b;">S2/S1 低度鷹架</div>
-        </div>
-        <div class="student-info-grid">
-          <div>九年 _____ 班</div>
-          <div>座號：________</div>
-          <div>姓名：__________________</div>
-          <div>得分：__________</div>
-        </div>
-      </div>
-
-      <div class="section-title">一、現在完成式句型改寫 (Present Perfect Transformation)</div>
-      <div class="q-box">
-        1. <code>Jay and Cate became friends in 2000. (They are still friends now.)</code><br>
-        　➔ = Jay and Cate __________________________________________________<br>
-        2. <code>Rick started working in the library a month ago.</code><br>
-        　➔ = Rick __________________________________________________________<br>
-        3. <code>Have you ever made candy apples before? (以肯定的完整句回答)</code><br>
-        　➔ = _______________________________________________________________
-      </div>
-
-      <div class="section-title">二、長文閱讀理解 (Passage Reading Comprehension)</div>
-      <div style="background:#fdf4ff; border:1px solid #f0abfc; padding:10px 14px; border-radius:6px; margin-bottom:8px; font-size:0.92rem; line-height:1.7;">
-        The French gave the world the first hairdryer and bikini, but they didn't give the world French fries. The earliest French fries were from Belgium along the Meuse River. In winter, the river froze and people could not catch fish, so they cut potatoes into sticks and fried them. During World War I, American soldiers tasted them and called them "French fries" because French was the main language there.
-      </div>
-      <div class="q-box">
-        1. What is the reading mainly about?<br>
-        　➔ ____________________________________________________________________<br>
-        2. Why did American soldiers call the fried potatoes "French fries"?<br>
-        　➔ ____________________________________________________________________
-      </div>
-
-      <div class="section-title">三、情境自主表達：分享個人節慶美食經驗 (Writing Output)</div>
-      <div class="q-box">
-        請運用現在完成式（have/has + p.p.）完成個人飲食經驗自述：<br>
-        <div style="background:#f8fafc; padding:8px; border:1px solid #e2e8f0; border-radius:6px; line-height:1.8; margin-top:4px;">
-          I have tried many delicious festival foods in my life. For example, I have eaten ______________________ before. However, I have never tried ______________________ yet. My favorite food is ______________________ because it is very delicious! I have loved it for ______________________.
-        </div>
-      </div>
+  <!-- 第一部分：C1 基礎組 -->
+  <div class="section-box">
+    <div class="section-title">
+      <span>一、 C1 基礎組｜生詞辨識與完成式基礎 (共 15 題，防猜誘答設計)</span>
+      <span style="font-size:0.85rem; color:#6b7280;">每題 2 分，共 30 分</span>
     </div>
 
-    <div class="footer-note">Lesson 1 Present Perfect Tense & Food History ｜ C3 表達組 學習單</div>
+    <div class="q-item">1. ( &nbsp; ) 穿著軍服保衛國家的「士兵；軍人」： [ s _ _ _ _ _ r ]<br>
+      <div class="opts-line"><span>(A) soldier</span> <span>(B) sister</span> <span>(C) subject</span> <span>(D) sugar</span></div>
+    </div>
+    <div class="q-item">2. ( &nbsp; ) 學校裡探索過去事件的「歷史」學科： [ h _ _ _ _ _ y ]<br>
+      <div class="opts-line"><span>(A) hungry</span> <span>(B) history</span> <span>(C) holiday</span> <span>(D) hairdryer</span></div>
+    </div>
+    <div class="q-item">3. ( &nbsp; ) 洗完頭髮用來吹乾的「吹風機」： [ h _ _ _ _ _ _ _ r ]<br>
+      <div class="opts-line"><span>(A) hamburger</span> <span>(B) helper</span> <span>(C) hairdryer</span> <span>(D) history</span></div>
+    </div>
+    <div class="q-item">4. ( &nbsp; ) 節慶或生日時大家一起「慶祝」： [ c _ _ _ _ _ _ _ e ]<br>
+      <div class="opts-line"><span>(A) celebrate</span> <span>(B) chocolate</span> <span>(C) climate</span> <span>(D) century</span></div>
+    </div>
+    <div class="q-item">5. ( &nbsp; ) 人與人溝通說話的「語言」： [ l _ _ _ _ _ e ]<br>
+      <div class="opts-line"><span>(A) luggage</span> <span>(B) leave</span> <span>(C) language</span> <span>(D) large</span></div>
+    </div>
+    <div class="q-item">6. ( &nbsp; ) 在烤箱裡「烘烤」麵包蛋糕： [ b _ _ e ]<br>
+      <div class="opts-line"><span>(A) bike</span> <span>(B) bake</span> <span>(C) bite</span> <span>(D) bunny</span></div>
+    </div>
+    <div class="q-item">7. ( &nbsp; ) 萬聖節常見的橘黃色大「南瓜」： [ p _ _ _ _ _ n ]<br>
+      <div class="opts-line"><span>(A) popcorn</span> <span>(B) pumpkin</span> <span>(C) potato</span> <span>(D) person</span></div>
+    </div>
+    <div class="q-item">8. ( &nbsp; ) 甜甜濃郁、大家喜愛的「巧克力」： [ c _ _ _ _ _ _ _ _ e ]<br>
+      <div class="opts-line"><span>(A) chocolate</span> <span>(B) celebrate</span> <span>(C) cheese</span> <span>(D) choice</span></div>
+    </div>
+    <div class="q-item">9. ( &nbsp; ) The American soldier ________ lived in Taiwan for two years. (A) has &nbsp;&nbsp; (B) have &nbsp;&nbsp; (C) is</div>
+    <div class="q-item">10. ( &nbsp; ) Mom has already ________ some chocolate cakes. (A) baked &nbsp;&nbsp; (B) bake &nbsp;&nbsp; (C) baking</div>
+    <div class="q-item">11. ( &nbsp; ) The water in the lake has ________ into thick ice. (A) frozen &nbsp;&nbsp; (B) froze &nbsp;&nbsp; (C) freezes</div>
+    <div class="q-item">12. ( &nbsp; ) He has studied the history of Taiwan ________ 2018. (A) since &nbsp;&nbsp; (B) for &nbsp;&nbsp; (C) at</div>
+    <div class="q-item">13. ( &nbsp; ) We have celebrated Christmas Eve together ________ five years. (A) for &nbsp;&nbsp; (B) since &nbsp;&nbsp; (C) in</div>
+    <div class="q-item">14. ( &nbsp; ) The king hasn't eaten the pumpkin pie ________. (A) yet &nbsp;&nbsp; (B) already &nbsp;&nbsp; (C) never</div>
+    <div class="q-item">15. ( &nbsp; ) ________ has fried the potatoes yet. (A) Nobody &nbsp;&nbsp; (B) Anybody &nbsp;&nbsp; (C) Thick</div>
   </div>
 
-  <!-- ==================== Page 4: 教師解析卷 ==================== -->
-  <div class="a4-page">
-    <div>
-      <div class="header-box">
-        <div class="header-flex">
-          <div class="sheet-title">國中英語 L1 教師解答與評量指引 <span class="level-badge badge-ans">TEACHER KEY</span></div>
-          <div style="font-size:0.85rem; color:#64748b;">IEP 評量與教學對照</div>
-        </div>
-      </div>
+  <div class="page-break"></div>
 
-      <div class="section-title">🌱 C1 基礎組 標準答案</div>
-      <div class="q-box" style="font-size:0.92rem; line-height:1.8;">
-        1. <strong>chocolate eggs</strong> ｜ 2. <strong>pumpkin pie</strong> ｜ 3. <strong>French fries</strong> ｜ 4. <strong>eaten</strong><br>
-        5. <strong>A. have</strong> ｜ 6. <strong>A. never</strong> ｜ 7. <strong>Belgium</strong> ｜ 8. (抄寫評分：標點大小寫正確得滿分)
-      </div>
+  <!-- 第二部分：C2 應用組 -->
+  <div class="section-box">
+    <div class="section-title">
+      <span>二、 C2 應用組｜重組句子與文法應用 (共 10 題)</span>
+      <span style="font-size:0.85rem; color:#6b7280;">每題 3 分，共 30 分</span>
+    </div>
+    <div class="q-item">1. 那位美國士兵自從 2020 年就住在這裡。<br>
+      ( lived / 2020 / soldier / since / The / has / American / here / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">2. 我們慶祝平安夜已經好多年了。<br>
+      ( celebrated / for / We / Eve / many / Christmas / have / years / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">3. 廚房裡還沒有人油炸馬鈴薯。<br>
+      ( yet / fried / potatoes / Nobody / kitchen / the / in / has / the / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">4. 媽媽已經烘烤好一個美味的南瓜派了。<br>
+      ( already / baked / Mom / pumpkin / has / delicious / a / pie / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">5. 湖裡的水已經凍結成厚厚的冰了。<br>
+      ( frozen / ice / thick / has / lake / into / water / in / The / the / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">6. 國王已經向人民揮手長達十分鐘了。<br>
+      ( waved / king / for / The / to / has / minutes / people / the / ten / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">7. 你曾經研讀過巧克力的歷史嗎？<br>
+      ( studied / history / Have / chocolate / ever / the / you / of / ? )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">8. 英語是這所美國學校的主要語言。<br>
+      ( main / American / English / the / language / is / school / in / the / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">9. 自從上週日以來，她就買了一支新吹風機。<br>
+      ( hairdryer / bought / since / She / Sunday / a / has / last / new / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">10. 小兔子吃了枝條上的甜糖果。<br>
+      ( bunny / eaten / stick / The / sweet / has / on / candy / little / a / . )<br>
+      ➔ <div class="write-area"></div>
+    </div>
+  </div>
 
-      <div class="section-title">🌿 C2 應用組 標準答案</div>
-      <div class="q-box" style="font-size:0.92rem; line-height:1.8;">
-        一、1. <strong>eaten / tried</strong> ｜ 2. <strong>baked / eaten</strong> ｜ 3. <strong>seen</strong><br>
-        二、1. <strong>for</strong> ｜ 2. <strong>since</strong> ｜ 3. <strong>for</strong><br>
-        三、1. <strong>Belgium</strong> ｜ 2. <strong>froze (could not catch fish)</strong>
-      </div>
-
-      <div class="section-title">🌳 C3 表達組 標準答案</div>
-      <div class="q-box" style="font-size:0.92rem; line-height:1.8;">
-        一、1. <strong>have been friends since 2000.</strong><br>
-        　　2. <strong>has worked in the library for a month.</strong><br>
-        　　3. <strong>Yes, I have made candy apples before.</strong><br>
-        二、1. <strong>The history of French fries.</strong><br>
-        　　2. <strong>Because French was the main language there.</strong><br>
-        三、(參考) <strong>chocolate eggs / pumpkin pie</strong> ; <strong>candy apples</strong> ; <strong>French fries</strong> ; <strong>five years</strong>
-      </div>
-
-      <div class="section-title">📊 特殊教育 IEP 評量與增強建議</div>
-      <div class="q-box" style="font-size:0.88rem; color:#334155; line-height:1.7;">
-        • <strong>C1 學生</strong>：側重於聽音解碼與字首拼讀，移除選項中的中文直譯，促使學生辨認英文發音與單字拼寫。<br>
-        • <strong>C2 學生</strong>：側重於完成式動詞三態 p.p. 與 `for (一段時間)` vs `since (時間點)` 規則判斷。<br>
-        • <strong>C3 學生</strong>：評量「完成式與介系詞雙向句型改寫能力」與「長文細節理解」，鼓勵自主描述生活經驗。
-      </div>
+  <!-- 第三部分：C3 表達組 -->
+  <div class="section-box">
+    <div class="section-title">
+      <span>三、 C3 表達組｜段考選擇與翻譯寫作 (共 10 題)</span>
+      <span style="font-size:0.85rem; color:#6b7280;">共 40 分</span>
+    </div>
+    <div class="q-item">1. ( &nbsp; ) The soldier has studied the history of this old castle ________ he was a young boy.<br>
+      <div class="opts-line"><span>(A) since</span> <span>(B) for</span> <span>(C) during</span> <span>(D) before</span></div>
+    </div>
+    <div class="q-item">2. ( &nbsp; ) We haven't celebrated the national festival in our town ________.<br>
+      <div class="opts-line"><span>(A) already</span> <span>(B) yet</span> <span>(C) since</span> <span>(D) ever</span></div>
+    </div>
+    <div class="q-item">3. ( &nbsp; ) A: "Look! The lake is completely white." B: "Yes, the water ________ into ice because of the cold weather."<br>
+      <div class="opts-line"><span>(A) has frozen</span> <span>(B) was freezing</span> <span>(C) freeze</span> <span>(D) is frozen</span></div>
+    </div>
+    <div class="q-item">4. ( &nbsp; ) Uncle Tom has worked as a chef and ________ thick potatoes for thirty years.<br>
+      <div class="opts-line"><span>(A) fries</span> <span>(B) fry</span> <span>(C) fried</span> <span>(D) frying</span></div>
+    </div>
+    <div class="q-item">5. ( &nbsp; ) ________ has ever seen the mysterious king in the national palace.<br>
+      <div class="opts-line"><span>(A) Nobody</span> <span>(B) Anybody</span> <span>(C) Thick</span> <span>(D) Inch</span></div>
+    </div>
+    <div class="q-item">6. ( &nbsp; ) My sister has already ________ sweet pumpkin cookies for Christmas Eve.<br>
+      <div class="opts-line"><span>(A) bake</span> <span>(B) baked</span> <span>(C) bakes</span> <span>(D) baking</span></div>
+    </div>
+    <div class="q-item">7. ( &nbsp; ) Which is the main ________ that you want to talk about in today's English class?<br>
+      <div class="opts-line"><span>(A) topic</span> <span>(B) stick</span> <span>(C) bunny</span> <span>(D) hairdryer</span></div>
     </div>
 
-    <div class="footer-note">Lesson 1 Present Perfect Tense & Food History ｜ 教師完整解答與評量指引卷</div>
+    <div style="font-weight:700; color:#b45309; margin:10px 0 6px;">✍️ 句子翻譯寫作 (每題 5 分)：</div>
+    <div class="q-item">8. 那位美國士兵自從去年就一直住在這個國家。<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">9. 我們還沒有烘烤那些南瓜派。<br>
+      ➔ <div class="write-area"></div>
+    </div>
+    <div class="q-item">10. 沒有人炸過那些馬鈴薯。<br>
+      ➔ <div class="write-area"></div>
+    </div>
   </div>
+
+  <div class="answer-key-box">
+    <strong>📋 參考解答與解析速查：</strong><br>
+    • <strong>C1 選擇：</strong> 1. (A) &nbsp; 2. (B) &nbsp; 3. (C) &nbsp; 4. (A) &nbsp; 5. (C) &nbsp; 6. (B) &nbsp; 7. (B) &nbsp; 8. (A) &nbsp; 9. (A) &nbsp; 10. (A) &nbsp; 11. (A) &nbsp; 12. (A) &nbsp; 13. (A) &nbsp; 14. (A) &nbsp; 15. (A)<br>
+    • <strong>C2 組句：</strong> 1. The American soldier has lived here since 2020. 2. We have celebrated Christmas Eve for many years. 3. Nobody has fried the potatoes in the kitchen yet. 4. Mom has already baked a delicious pumpkin pie. 5. The water in the lake has frozen into thick ice. 6. The king has waved to the people for ten minutes. 7. Have you ever studied the history of chocolate? 8. English is the main language in the American school. 9. She has bought a new hairdryer since last Sunday. 10. The little bunny has eaten sweet candy on a stick.<br>
+    • <strong>C3 選擇：</strong> 1. (A) &nbsp; 2. (B) &nbsp; 3. (A) &nbsp; 4. (C) &nbsp; 5. (A) &nbsp; 6. (B) &nbsp; 7. (A)<br>
+    • <strong>C3 翻譯：</strong> 8. The American soldier has lived in this country since last year. 9. We have not baked the pumpkin pies yet. 10. Nobody has fried the potatoes.
+  </div>
+</div>
 
 </body>
 </html>

@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】現在完成式與多元飲食文化 教師講解簡報</title>
+  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 教師逐題講解簡報</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -101,23 +101,23 @@
     }
 
     .btn-tool:hover {
-      background: var(--accent);
-      color: white;
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .btn-tool.active {
-      background: #e11d48;
+      background: var(--accent);
       color: white;
-      border-color: #be123c;
+      border-color: var(--accent);
     }
 
     main {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
       position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
     .slide-frame {
@@ -126,67 +126,95 @@
       border-radius: 20px;
       width: 100%;
       max-width: 1100px;
-      height: 78vh;
+      height: 82vh;
+      padding: 28px 36px;
       display: none;
       flex-direction: column;
-      padding: 36px 48px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
       position: relative;
       overflow-y: auto;
     }
 
     .slide-frame.active {
       display: flex;
-      animation: popSlide 0.25s ease-out;
-    }
-
-    @keyframes popSlide {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .slide-page-num {
-      position: absolute;
-      top: 24px;
-      right: 32px;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-muted);
     }
 
     .slide-title {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-gold);
       border-bottom: 2px solid var(--border);
       padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .slide-page-num {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 8px;
+      border-radius: 4px;
     }
 
     .slide-content {
-      font-size: 1.2rem;
-      line-height: 1.9;
+      font-size: 1.15rem;
+      line-height: 1.8;
       flex: 1;
     }
 
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    .vocab-table th, .vocab-table td {
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      text-align: left;
+    }
+
+    .vocab-table th {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .btn-sound-mini {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0 4px;
+    }
+
+    .core-1200-tag {
+      background: #10b981;
+      color: white;
+      font-size: 0.75rem;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
     .ans-box {
-      background: rgba(99, 102, 241, 0.15);
-      border-left: 6px solid #6366f1;
-      border-radius: 10px;
-      padding: 14px 20px;
-      margin-top: 18px;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px dashed var(--accent-gold);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 14px;
       display: none;
+      font-size: 1.05rem;
     }
 
     .ans-box.show {
       display: block;
-      animation: fadeIn 0.3s ease;
     }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     #whiteboardCanvas {
       position: absolute;
@@ -222,11 +250,6 @@
       font-family: monospace;
       font-size: 0.8rem;
     }
-
-    body.light-mode .key-badge {
-      background: #e2e8f0;
-      color: #334155;
-    }
   </style>
 </head>
 <body>
@@ -234,18 +257,22 @@
   <header>
     <div class="brand-title">
       <span class="badge-unit">國三 · 九年級</span>
-      <span>現在完成式與飲食文化 教師講解簡報</span>
+      <span>現在完成式與飲食文化 教師逐題講解簡報</span>
     </div>
 
     <div class="slide-controls">
       <label style="font-size:0.88rem; font-weight:600;">📑 跳頁：</label>
       <select id="slideSelect" class="tool-select" onchange="jumpToSlide(parseInt(this.value))">
-        <option value="0">第 1 頁：共同核心鎖定 (Common Core)</option>
-        <option value="1">第 2 頁：C1 基礎組 - 現在完成式結構 have/has + p.p.</option>
-        <option value="2">第 3 頁：C1 基礎組 - 不規則過去分詞 (p.p.)</option>
-        <option value="3">第 4 頁：C2 應用組 - 時間副詞 since vs. for</option>
-        <option value="4">第 5 頁：C2 應用組 - have been to vs. have gone to</option>
-        <option value="5">第 6 頁：C3 表達組 - 異國飲食文化與寫作</option>
+        <option value="0">第 1 頁：課本官方 28 個核心單字點讀全覽表</option>
+        <option value="1">第 2 頁：現在完成式核心結構 have/has + p.p.</option>
+        <option value="2">第 3 頁：核心動詞三態變化表 (freeze/bake/fry/eat)</option>
+        <option value="3">第 4 頁：時間介系詞 since (起點) vs. for (長度)</option>
+        <option value="4">第 5 頁：完成式副詞 already / yet / ever / never</option>
+        <option value="5">第 6 頁：C1 基礎組題型精析 (生詞辨認與字形遮罩)</option>
+        <option value="6">第 7 頁：C2 應用組題型精析 (積木組句與語序)</option>
+        <option value="7">第 8 頁：C3 表達組題型精析 (段考選擇與歷屆考點)</option>
+        <option value="8">第 9 頁：中翻英寫作診斷與常見扣分盲點</option>
+        <option value="9">第 10 頁：單元學習成果結算與自我檢核</option>
       </select>
 
       <label style="font-size:0.88rem; font-weight:600; margin-left:4px;">⚡ 語速：</label>
@@ -258,7 +285,7 @@
       </select>
 
       <button class="btn-tool" onclick="prevSlide()">◀ 上一頁</button>
-      <span id="slideIndicator" style="font-weight:700; padding:0 6px;">1 / 6</span>
+      <span id="slideIndicator" style="font-weight:700; padding:0 6px;">1 / 10</span>
       <button class="btn-tool" onclick="nextSlide()">下一頁 ▶</button>
       <button class="btn-tool" id="btnAns" onclick="toggleAnswer()">💡 答案解析 (Space)</button>
       <button class="btn-tool" id="btnBoard" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
@@ -272,289 +299,451 @@
   <main>
     <canvas id="whiteboardCanvas"></canvas>
 
-    <!-- Slide 1: 共同學習核心鎖定 -->
+    <!-- Slide 1: 28 Core Vocab Table -->
     <div class="slide-frame active" id="slide-0">
-      <div class="slide-page-num">1 / 6</div>
-      <div class="slide-title">🎯 L1 共同學習核心鎖定 (Common Core)</div>
+      <div class="slide-title">
+        <span>🎯 Slide 1: 課本官方 28 個核心單字點讀全覽表</span>
+        <span class="slide-page-num">1 / 10</span>
+      </div>
       <div class="slide-content">
-        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
-          <strong style="color:var(--accent-gold);">【核心單字 1200 聚焦】</strong><br>
-          culture (文化), delicious (美味的), experience (經驗), popular (受歡迎的), traditional (傳統的), try (品嚐/嘗試), eat-ate-eaten (吃), see-saw-seen (看), visit (參訪), already (已經), yet (尚未), since (自從), for (長達)
-        </div>
-        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
-          <strong style="color:var(--accent-gold);">【核心文法結構】</strong><br>
-          1. <strong>現在完成式公式：</strong> 主詞 + have / has + 過去分詞 (p.p.)<br>
-          2. <strong>經驗用法：</strong> Have you ever eaten sushi? - Yes, I have. / No, I haven't.<br>
-          3. <strong>持續用法 (since / for)：</strong><br>
-             &nbsp;&nbsp;• <code>since + 起點時間點</code> (e.g., since 2020, since yesterday)<br>
-             &nbsp;&nbsp;• <code>for + 一段時間長度</code> (e.g., for three years, for two hours)
+        <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:8px;">💡 點擊 🔊 圖示即可聽取發音（已鎖定 Google 雙語語音）。綠色標籤代表<strong>教育部 1200 核心字彙</strong>。</p>
+        <div style="max-height:60vh; overflow-y:auto;">
+          <table class="vocab-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>單字</th>
+                <th>詞性</th>
+                <th>音標</th>
+                <th>中文釋義</th>
+                <th>分類標籤</th>
+                <th>點讀</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td><strong>subject</strong></td><td>n.</td><td>[ˋsʌbdʒɪkt]</td><td>學科；科目</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('subject')">🔊</button></td></tr>
+              <tr><td>2</td><td><strong>history</strong></td><td>n.</td><td>[ˋhɪstərɪ]</td><td>歷史</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('history')">🔊</button></td></tr>
+              <tr><td>3</td><td><strong>topic</strong></td><td>n.</td><td>[ˋtɑpɪk]</td><td>主題</td><td><span>2000擴充</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('topic')">🔊</button></td></tr>
+              <tr><td>4</td><td><strong>hairdryer</strong></td><td>n.</td><td>[ˋhɛr͵draɪɚ]</td><td>吹風機</td><td><span>生活複合字</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('hairdryer')">🔊</button></td></tr>
+              <tr><td>5</td><td><strong>yet</strong></td><td>adv.</td><td>[jɛt]</td><td>還(沒)；尚(未)</td><td><span class="core-1200-tag">1200核心·文法</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('yet')">🔊</button></td></tr>
+              <tr><td>6</td><td><strong>century</strong></td><td>n.</td><td>[ˋsɛntʃərɪ]</td><td>世紀</td><td><span>認識字彙</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('century')">🔊</button></td></tr>
+              <tr><td>7</td><td><strong>freeze / froze</strong></td><td>v.</td><td>[friz] / [froz]</td><td>凍結；結冰</td><td><span>三態考點</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('freeze, froze, frozen')">🔊</button></td></tr>
+              <tr><td>8</td><td><strong>potato</strong></td><td>n.</td><td>[pəˋteto]</td><td>馬鈴薯</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('potato, potatoes')">🔊</button></td></tr>
+              <tr><td>9</td><td><strong>stick</strong></td><td>n.</td><td>[stɪk]</td><td>枝條；棍棒</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('stick')">🔊</button></td></tr>
+              <tr><td>10</td><td><strong>American</strong></td><td>adj./n.</td><td>[əˋmɛrɪkən]</td><td>美國的；美國人</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('American')">🔊</button></td></tr>
+              <tr><td>11</td><td><strong>soldier</strong></td><td>n.</td><td>[ˋsoldʒɚ]</td><td>士兵；軍人</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('soldier')">🔊</button></td></tr>
+              <tr><td>12</td><td><strong>main</strong></td><td>adj.</td><td>[men]</td><td>主要的</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('main')">🔊</button></td></tr>
+              <tr><td>13</td><td><strong>language</strong></td><td>n.</td><td>[ˋlæŋgwɪdʒ]</td><td>語言</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('language')">🔊</button></td></tr>
+              <tr><td>14</td><td><strong>since</strong></td><td>prep./conj.</td><td>[sɪns]</td><td>自……以來</td><td><span class="core-1200-tag">1200核心·文法</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('since')">🔊</button></td></tr>
+              <tr><td>15</td><td><strong>celebrate</strong></td><td>v.</td><td>[ˋsɛlə͵bret]</td><td>慶祝</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('celebrate')">🔊</button></td></tr>
+              <tr><td>16</td><td><strong>national</strong></td><td>adj.</td><td>[ˋnæʃən!]</td><td>國家的；國立的</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('national')">🔊</button></td></tr>
+              <tr><td>17</td><td><strong>thick</strong></td><td>adj.</td><td>[θɪk]</td><td>粗的；厚的</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('thick')">🔊</button></td></tr>
+              <tr><td>18</td><td><strong>fry</strong></td><td>v.</td><td>[fraɪ]</td><td>油炸；油煎</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('fry, fried')">🔊</button></td></tr>
+              <tr><td>19</td><td><strong>chocolate</strong></td><td>n.</td><td>[ˋtʃɑkəlɪt]</td><td>巧克力</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('chocolate')">🔊</button></td></tr>
+              <tr><td>20</td><td><strong>bunny</strong></td><td>n.</td><td>[ˋbʌnɪ]</td><td>小兔子</td><td><span>Word Bank</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('bunny')">🔊</button></td></tr>
+              <tr><td>21</td><td><strong>candy</strong></td><td>n.</td><td>[ˋkændɪ]</td><td>糖果</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('candy')">🔊</button></td></tr>
+              <tr><td>22</td><td><strong>pumpkin</strong></td><td>n.</td><td>[ˋpʌmpkɪn]</td><td>南瓜</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('pumpkin')">🔊</button></td></tr>
+              <tr><td>23</td><td><strong>bake</strong></td><td>v.</td><td>[bek]</td><td>烘烤</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('bake, baked')">🔊</button></td></tr>
+              <tr><td>24</td><td><strong>Christmas Eve</strong></td><td>片語</td><td>[͵krɪsməs `iv]</td><td>聖誕夜；平安夜</td><td><span>節慶片語</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('Christmas Eve')">🔊</button></td></tr>
+              <tr><td>25</td><td><strong>nobody</strong></td><td>pron.</td><td>[ˋnobɑdɪ]</td><td>沒有人</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('nobody')">🔊</button></td></tr>
+              <tr><td>26</td><td><strong>wave</strong></td><td>v.</td><td>[wev]</td><td>揮(手)</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('wave, waved')">🔊</button></td></tr>
+              <tr><td>27</td><td><strong>inch</strong></td><td>n.</td><td>[ɪntʃ]</td><td>英寸</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('inch')">🔊</button></td></tr>
+              <tr><td>28</td><td><strong>king</strong></td><td>n.</td><td>[kɪŋ]</td><td>國王；王者</td><td><span class="core-1200-tag">1200核心</span></td><td><button class="btn-sound-mini" onclick="speakEnglish('king')">🔊</button></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2: C1 基礎組 - 結構與基本句型 -->
+    <!-- Slide 2: Present Perfect Structure -->
     <div class="slide-frame" id="slide-1">
-      <div class="slide-page-num">2 / 6</div>
-      <div class="slide-title">🍜 Slide 2: C1 基礎組 - 現在完成式公式</div>
+      <div class="slide-title">
+        <span>⚙️ Slide 2: 現在完成式核心結構 (have / has + p.p.)</span>
+        <span class="slide-page-num">2 / 10</span>
+      </div>
       <div class="slide-content">
-        <div style="margin-bottom:16px;">
-          <strong>【助動詞 have / has 選擇依據】</strong><br>
-          • <strong>I / You / We / They</strong> + <strong style="color:var(--accent);">have</strong> + p.p.<br>
-          • <strong>He / She / It / 單數主詞</strong> + <strong style="color:var(--accent-gold);">has</strong> + p.p.
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong style="color:var(--accent-gold);">【現在完成式公式】</strong><br>
+          <code>主詞 + have / has + 過去分詞 (p.p.)</code>
         </div>
-        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
-          <strong>【例句示範】</strong><br>
-          • I <strong>have eaten</strong> stinky tofu before. (我以前吃過臭豆腐。)<br>
-          • She <strong>has lived</strong> in Tainan for five years. (她在台南住了五年。)
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div style="background:rgba(99,102,241,0.1); padding:14px; border-radius:10px; border:1px solid #6366f1;">
+            <strong>🔹 搭配 have：</strong><br>
+            • <strong>I / You / We / They</strong><br>
+            • 複數名詞 (e.g., The soldiers)<br>
+            <em>例句：We <strong>have lived</strong> here since 2015.</em>
+          </div>
+          <div style="background:rgba(217,119,6,0.1); padding:14px; border-radius:10px; border:1px solid #d97706;">
+            <strong>🔸 搭配 has：</strong><br>
+            • <strong>He / She / It</strong><br>
+            • 單數名詞 / 不定代名詞 (Nobody, Everyone)<br>
+            <em>例句：The soldier <strong>has baked</strong> a pumpkin pie.</em>
+          </div>
         </div>
       </div>
       <div class="ans-box" id="ans-1">
-        💡 <strong>教學引導：</strong> 否定句只要在助動詞後加 <code>not</code>：<code>have not (haven't)</code> / <code>has not (hasn't)</code>。
+        💡 <strong>教學關鍵：</strong> 否定句只要在助動詞後方加上 <code>not</code>：<code>have not (haven't)</code> / <code>has not (hasn't)</code>。
       </div>
     </div>
 
-    <!-- Slide 3: C1 基礎組 - 不規則動詞三態記憶 -->
+    <!-- Slide 3: Verb Forms -->
     <div class="slide-frame" id="slide-2">
-      <div class="slide-page-num">3 / 6</div>
-      <div class="slide-title">🔤 Slide 3: C1 基礎組 - 必背 1200 動詞三態 (p.p.)</div>
+      <div class="slide-title">
+        <span>🔤 Slide 3: 核心動詞三態變化表 (p.p.)</span>
+        <span class="slide-page-num">3 / 10</span>
+      </div>
       <div class="slide-content">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:1.1rem;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:1.05rem;">
           <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
-            <strong>• eat ➔ ate ➔ <span style="color:var(--accent);">eaten</span></strong><br>
-            <strong>• see ➔ saw ➔ <span style="color:var(--accent);">seen</span></strong><br>
-            <strong>• go ➔ went ➔ <span style="color:var(--accent);">gone / been</span></strong>
+            <strong style="color:var(--accent-gold);">【規則動詞 (+d/+ed)】</strong><br>
+            • bake ➔ baked ➔ <span style="color:var(--accent);">baked</span> (烘烤)<br>
+            • celebrate ➔ celebrated ➔ <span style="color:var(--accent);">celebrated</span> (慶祝)<br>
+            • live ➔ lived ➔ <span style="color:var(--accent);">lived</span> (居住)<br>
+            • wave ➔ waved ➔ <span style="color:var(--accent);">waved</span> (揮手)
           </div>
           <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
-            <strong>• do ➔ did ➔ <span style="color:var(--accent);">done</span></strong><br>
-            <strong>• write ➔ wrote ➔ <span style="color:var(--accent);">written</span></strong><br>
-            <strong>• buy ➔ bought ➔ <span style="color:var(--accent);">bought</span></strong>
+            <strong style="color:var(--accent-gold);">【不規則與特殊變化】</strong><br>
+            • freeze ➔ froze ➔ <span style="color:var(--accent);">frozen</span> (結冰/凍結)<br>
+            • fry ➔ fried ➔ <span style="color:var(--accent);">fried</span> (去y加ied 油炸)<br>
+            • eat ➔ ate ➔ <span style="color:var(--accent);">eaten</span> (吃)<br>
+            • see ➔ saw ➔ <span style="color:var(--accent);">seen</span> (看見)
           </div>
         </div>
       </div>
       <div class="ans-box" id="ans-2">
-        💡 <strong>記憶技巧：</strong> 過去分詞 (p.p.) 絕不能單獨當主要動詞，前方必須有 <code>have</code> 或 <code>has</code> 輔助！
+        💡 <strong>特教鷹架提示：</strong> 過去分詞 (p.p.) 不能單獨當主要動詞，前方一定要有 <code>have</code> 或 <code>has</code> 帶領！
       </div>
     </div>
 
-    <!-- Slide 4: C2 應用組 - 時間副詞 since vs. for -->
+    <!-- Slide 4: since vs for -->
     <div class="slide-frame" id="slide-3">
-      <div class="slide-page-num">4 / 6</div>
-      <div class="slide-title">⏳ Slide 4: C2 應用組 - 時間副詞判斷 (since vs. for)</div>
+      <div class="slide-title">
+        <span>⏳ Slide 4: 時間介系詞判斷：since vs. for</span>
+        <span class="slide-page-num">4 / 10</span>
+      </div>
       <div class="slide-content">
-        <div style="margin-bottom:16px;">
-          <strong>【判斷原則】</strong><br>
-          • <strong style="color:var(--accent);">since + 起點 (時間點/過去式子句)</strong><br>
-            &nbsp;&nbsp;➔ since 2018 / since last night / since I was a child<br>
-          • <strong style="color:var(--accent-gold);">for + 長度 (一段時間)</strong><br>
-            &nbsp;&nbsp;➔ for three days / for ten minutes / for a long time
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:14px;">
+          <strong style="color:var(--accent);">📍 since ＋ 起點（時間點／過去式子句）</strong><br>
+          • <code>since 2018</code> (自2018年以來)<br>
+          • <code>since last year</code> (自去年以來)<br>
+          • <code>since he was a young boy</code> (自從他是個小男孩以來)
         </div>
         <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
-          <strong>【即時判斷】</strong><br>
-          1. We have known each other ______ ten years. (since / for)<br>
-          2. Amy has studied English ______ 2021. (since / for)
+          <strong style="color:var(--accent-gold);">⏱️ for ＋ 長度（持續的一段時間）</strong><br>
+          • <code>for two hours</code> (長達兩小時)<br>
+          • <code>for ten years</code> (長達十年)<br>
+          • <code>for a long time</code> (好長一段時間)
         </div>
       </div>
       <div class="ans-box" id="ans-3">
-        💡 <strong>答案解析：</strong><br>
-        1. <strong>for</strong> (ten years 為一段時間長度)<br>
-        2. <strong>since</strong> (2021 為明確起點時間點)
+        💡 <strong>秒殺口訣：</strong> 看到「特定年份、過去時間、子句」選 <code>since</code>；看到「數字＋時間單位」選 <code>for</code>！
       </div>
     </div>
 
-    <!-- Slide 5: C2 應用組 - have been to vs. have gone to -->
+    <!-- Slide 5: Adverbs -->
     <div class="slide-frame" id="slide-4">
-      <div class="slide-page-num">5 / 6</div>
-      <div class="slide-title">✈️ Slide 5: C2 應用組 - have been to vs. have gone to</div>
+      <div class="slide-title">
+        <span>📌 Slide 5: 完成式關鍵副詞位置剖析</span>
+        <span class="slide-page-num">5 / 10</span>
+      </div>
       <div class="slide-content">
-        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
-          <strong>【極高頻會考重點】</strong><br>
-          • <strong style="color:var(--accent);">have / has been to + 地點</strong>：去過某地 (<strong>人已回來</strong>，表人生經驗)<br>
-            &nbsp;&nbsp;• <em>I have been to Japan twice.</em> (我去過日本兩次。)<br><br>
-          • <strong style="color:#e11d48;">have / has gone to + 地點</strong>：去某地了 (<strong>人還在當地</strong>或途中)<br>
-            &nbsp;&nbsp;• <em>Tom is not here; he has gone to Japan.</em> (湯姆不在，他去日本了。)
-        </div>
+        <ul style="padding-left:20px; line-height:2;">
+          <li><strong>already (已經)：</strong> 通常用於肯定句，放在助動詞與 p.p. 之間或句尾。<br>
+            <em>例句：Mom has <strong>already</strong> baked the pumpkin pie.</em></li>
+          <li><strong>yet (尚未/已經)：</strong> 專門用於<strong>否定句</strong>與<strong>疑問句</strong>的句尾。<br>
+            <em>例句：Nobody has fried the potatoes <strong>yet</strong>.</em></li>
+          <li><strong>ever (曾經) / never (從未)：</strong> 用於經驗句型，放在 p.p. 之前。<br>
+            <em>例句：Have you <strong>ever</strong> studied the history of chocolate?</em></li>
+        </ul>
       </div>
       <div class="ans-box" id="ans-4">
-        💡 <strong>陷阱提醒：</strong> 第一人稱 <code>I</code> 和第二人稱 <code>You</code> 正在對話，因此通常不能說 <code>I have gone to...</code> (除非在靈魂出竅或特殊語境)。
+        💡 <strong>重點考點：</strong> 否定句句尾出現空格，優先考慮 <code>yet</code>！
       </div>
     </div>
 
-    <!-- Slide 6: C3 表達組 - 異國飲食文化與寫作 -->
+    <!-- Slide 6: C1 Breakdown -->
     <div class="slide-frame" id="slide-5">
-      <div class="slide-page-num">6 / 6</div>
-      <div class="slide-title">🌮 Slide 6: C3 表達組 - 異國美食經驗寫作</div>
+      <div class="slide-title">
+        <span>🌱 Slide 6: C1 基礎組題型精析 (生詞辨認與字形遮罩)</span>
+        <span class="slide-page-num">6 / 10</span>
+      </div>
       <div class="slide-content">
-        <div style="background:rgba(255,255,255,0.05); padding:18px; border-radius:12px; margin-bottom:16px;">
-          <strong>【寫作範文示例 (Food Culture & Experience)】</strong><br>
-          "Taiwan is famous for its delicious night market snacks. I have tried <strong>pearl milk tea</strong> and <strong>stinky tofu</strong> many times. My family has lived in Taipei <strong>for ten years</strong>, and we love exploring different food cultures together!"
+        <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px; margin-bottom:12px;">
+          <strong>🪖 士兵：soldier</strong> ➔ 提示遮罩：<code>[ s _ _ _ _ _ r ]</code><br>
+          <strong>📜 歷史：history</strong> ➔ 提示遮罩：<code>[ h _ _ _ _ _ y ]</code><br>
+          <strong>🎉 慶祝：celebrate</strong> ➔ 提示遮罩：<code>[ c _ _ _ _ _ _ _ e ]</code>
         </div>
-        <div>
-          <strong>【書寫表達三大指標】</strong><br>
-          1. 熟練使用現在完成式 (have tried / has lived).<br>
-          2. 正確搭配時間副詞 (for ten years / since childhood / before).<br>
-          3. 詞彙與拼字精準度。
-        </div>
+        <p>💡 <strong>教學引導：</strong> 運用「字首 + 字尾」雙重音素引導特教學生拼讀，絕不直接公佈答案，建立學習成就感。</p>
       </div>
       <div class="ans-box" id="ans-5">
-        💡 <strong>教學評量指引：</strong><br>
-        鼓勵學生以第一人稱 <code>I have...</code> 描述自己的真實生活經驗，強化語言與生活的連結。
+        💡 <strong>C1 核心理念：</strong> 透過 5 層鷹架（中文情境 ➔ 遮罩 ➔ 點讀語音 ➔ 即時診斷 ➔ 鼓勵回饋）建立基礎識字力。
+      </div>
+    </div>
+
+    <!-- Slide 7: C2 Breakdown -->
+    <div class="slide-frame" id="slide-6">
+      <div class="slide-title">
+        <span>🧩 Slide 7: C2 應用組題型精析 (積木組句與語序)</span>
+        <span class="slide-page-num">7 / 10</span>
+      </div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px; margin-bottom:12px;">
+          <strong>【句型標準語序】</strong><br>
+          <code>[ 主詞 ] + [ have / has ] + [ p.p. ] + [ 受詞/地點 ] + [ since / for + 時間 ] .</code>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+          <strong>【實戰積木範例】</strong><br>
+          <code>The American soldier</code> ➔ <code>has lived</code> ➔ <code>here</code> ➔ <code>since 2020</code> ➔ <code>.</code>
+        </div>
+      </div>
+      <div class="ans-box" id="ans-6">
+        💡 <strong>C2 教學橋樑：</strong> 點擊積木卡片可即時發音，完成後進行全句語法診斷，強化語感記憶。
+      </div>
+    </div>
+
+    <!-- Slide 8: C3 Breakdown -->
+    <div class="slide-frame" id="slide-7">
+      <div class="slide-title">
+        <span>🏆 Slide 8: C3 表達組題型精析 (段考選擇與歷屆考點)</span>
+        <span class="slide-page-num">8 / 10</span>
+      </div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px; margin-bottom:12px;">
+          <strong>經典考題：</strong><br>
+          <em>The soldier has studied the history of this old castle ________ he was a young boy.</em><br>
+          (A) since &nbsp;&nbsp; (B) for &nbsp;&nbsp; (C) during &nbsp;&nbsp; (D) before
+        </div>
+        <p><strong>解析：</strong> 空格後方為「過去式子句 (he was a young boy)」，代表事件起點，故答案選 <strong>(A) since</strong>。</p>
+      </div>
+      <div class="ans-box" id="ans-7">
+        💡 <strong>歷屆命題趨勢：</strong> 會考極常考 since 接過去式子句的句型結構，務必引導學生圈出 <code>was</code> 過去式動詞！
+      </div>
+    </div>
+
+    <!-- Slide 9: Writing Diagnostics -->
+    <div class="slide-frame" id="slide-8">
+      <div class="slide-title">
+        <span>✍️ Slide 9: 中翻英寫作診斷與常見扣分盲點</span>
+        <span class="slide-page-num">9 / 10</span>
+      </div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px; margin-bottom:12px;">
+          <strong>題目：那位美國士兵自從去年就一直住在這個國家。</strong><br>
+          • <strong>正確寫法：</strong> <code>The American soldier has lived in this country since last year.</code><br>
+          • ❌ 常見錯誤 1：漏寫助動詞 (The American soldier lived...) ➔ 缺少完成式含義<br>
+          • ❌ 常見錯誤 2：助動詞用錯 (The American soldier have lived...) ➔ 單數主詞需用 has
+        </div>
+      </div>
+      <div class="ans-box" id="ans-8">
+        💡 <strong>智能診斷機制：</strong> 系統會自動檢查關鍵字 (soldier, has lived, since last year)，即時給予防呆與修正建議！
+      </div>
+    </div>
+
+    <!-- Slide 10: Summary -->
+    <div class="slide-frame" id="slide-9">
+      <div class="slide-title">
+        <span>🌟 Slide 10: 單元學習成果結算與自我檢核</span>
+        <span class="slide-page-num">10 / 10</span>
+      </div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong style="color:var(--accent-gold);">【自我檢核清單】</strong><br>
+            ☑️ 熟記課本 28 個核心生詞發音與字義<br>
+            ☑️ 能正確判斷 have / has 助動詞<br>
+            ☑️ 熟練 freeze, bake, fry, eat 等動詞 p.p.<br>
+            ☑️ 準確分辨 since (起點) 與 for (長度)
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong style="color:var(--accent);">【多元學習資源】</strong><br>
+            • C1 基礎組點讀：15 題 5 層鷹架練習<br>
+            • C2 應用組點讀：10 題積木組句任務<br>
+            • C3 表達組評量：7 題段考 + 3 題寫作<br>
+            • 30 題隨機題庫：高頻抽測精熟
+          </div>
+        </div>
+      </div>
+      <div class="ans-box" id="ans-9">
+        🎉 <strong>全課總結：</strong> 恭喜完成九年級第一課現在完成式與飲食文化教學！
       </div>
     </div>
   </main>
 
   <footer>
-    <div class="key-hints">
-      <span><span class="key-badge">Space</span> 答案開關</span>
-      <span><span class="key-badge">◀</span> / <span class="key-badge">▶</span> 換頁</span>
-      <span><span class="key-badge">W</span> 電子白板</span>
-      <span><span class="key-badge">C</span> 清除筆跡</span>
-      <span><span class="key-badge">R</span> 語音朗讀</span>
-    </div>
-    <div>國中英語差異化教學團隊 · 國三 (九年級) 教師專用</div>
+    <div>快捷鍵提示：<span class="key-badge">Space</span> 答案解析 ｜ <span class="key-badge">W</span> 電子白板 ｜ <span class="key-badge">C</span> 清除 ｜ <span class="key-badge">R</span> 朗讀 ｜ <span class="key-badge">◀ / ▶</span> 切換頁面</div>
+    <div id="footerStatus">頁面：1 / 10</div>
   </footer>
 
   <script>
+    const totalSlides = 10;
     let currentSlide = 0;
-    const totalSlides = 6;
-    let whiteboardActive = false;
+    let isWhiteboardActive = false;
+    let canvas, ctx;
     let isDrawing = false;
-    let ctx = null;
 
-    let bestEnVoice = null;
-    let bestZhVoice = null;
-
-    function initVoices() {
+    function getVoice(lang) {
       const voices = window.speechSynthesis.getVoices();
-      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
-                 || voices.find(v => v.lang.startsWith('en')) || null;
-      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
-                 || voices.find(v => v.lang.startsWith('zh')) || null;
-    }
-
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = initVoices;
-      initVoices();
-    }
-
-    function showSlide(idx) {
-      if (idx < 0) idx = 0;
-      if (idx >= totalSlides) idx = totalSlides - 1;
-      currentSlide = idx;
-
-      for (let i = 0; i < totalSlides; i++) {
-        const slide = document.getElementById('slide-' + i);
-        if (slide) {
-          if (i === currentSlide) slide.classList.add('active');
-          else slide.classList.remove('active');
-        }
-      }
-
-      document.getElementById('slideIndicator').textContent = (currentSlide + 1) + ' / ' + totalSlides;
-      document.getElementById('slideSelect').value = currentSlide;
-      
-      const currentAns = document.getElementById('ans-' + currentSlide);
-      const btnAns = document.getElementById('btnAns');
-      if (currentAns && currentAns.classList.contains('show')) {
-        btnAns.classList.add('active');
+      if (lang === 'en-US') {
+        return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'en-US' || v.lang.startsWith('en')))
+            || voices.find(v => v.lang === 'en-US' || v.lang.startsWith('en'));
       } else {
-        btnAns.classList.remove('active');
+        return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'zh-TW' || v.lang.includes('TW') || v.lang.includes('Traditional')))
+            || voices.find(v => v.lang === 'zh-TW' || v.lang.includes('zh'));
+      }
+    }
+
+    function speakEnglish(text) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      const v = getVoice('en-US');
+      if (v) utter.voice = v;
+      const speed = parseFloat(document.getElementById('speedSelect')?.value || '0.85');
+      utter.rate = speed;
+      utter.pitch = 1.0;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakChinese(text) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      const v = getVoice('zh-TW');
+      if (v) utter.voice = v;
+      utter.rate = 0.85;
+      utter.pitch = 1.0;
+      window.speechSynthesis.speak(utter);
+    }
+
+    window.speechSynthesis.onvoiceschanged = () => {
+      getVoice('en-US');
+      getVoice('zh-TW');
+    };
+
+    function updateSlide() {
+      document.querySelectorAll('.slide-frame').forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      document.getElementById('slideSelect').value = currentSlide;
+      document.getElementById('slideIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
+      document.getElementById('footerStatus').textContent = `頁面：${currentSlide + 1} / ${totalSlides}`;
+      clearWhiteboard();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
       }
     }
 
     function jumpToSlide(idx) {
-      showSlide(idx);
-    }
-
-    function nextSlide() {
-      if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-      if (currentSlide > 0) showSlide(currentSlide - 1);
+      if (idx >= 0 && idx < totalSlides) {
+        currentSlide = idx;
+        updateSlide();
+      }
     }
 
     function toggleAnswer() {
-      const ans = document.getElementById('ans-' + currentSlide);
-      const btn = document.getElementById('btnAns');
+      const ans = document.getElementById(`ans-${currentSlide}`);
       if (ans) {
         ans.classList.toggle('show');
-        btn.classList.toggle('active', ans.classList.contains('show'));
       }
     }
 
     function speakCurrentSlide() {
-      if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
+      const activeFrame = document.querySelector('.slide-frame.active');
+      if (activeFrame) {
+        const text = activeFrame.innerText;
+        speakChinese(text);
+      }
+    }
 
-      const activeSlide = document.getElementById('slide-' + currentSlide);
-      if (!activeSlide) return;
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
 
-      const title = activeSlide.querySelector('.slide-title').innerText;
-      const content = activeSlide.querySelector('.slide-content').innerText;
-      const fullText = title + '。' + content;
+    function initWhiteboard() {
+      canvas = document.getElementById('whiteboardCanvas');
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
 
-      const spRate = parseFloat(document.getElementById('speedSelect').value) || 0.85;
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseout', stopDrawing);
 
-      const chunks = fullText.split(/[\n。！？]/).map(s => s.trim()).filter(Boolean);
-      chunks.forEach(ch => {
-        const hasEn = /[a-zA-Z]/.test(ch);
-        const utt = new SpeechSynthesisUtterance(ch);
-        utt.rate = spRate;
-        if (hasEn) {
-          if (bestEnVoice) utt.voice = bestEnVoice;
-          utt.lang = 'en-US';
-        } else {
-          if (bestZhVoice) utt.voice = bestZhVoice;
-          utt.lang = 'zh-TW';
-        }
-        window.speechSynthesis.speak(utt);
+      canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', { clientX: touch.clientX, clientY: touch.clientY });
+        canvas.dispatchEvent(mouseEvent);
+      });
+      canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY });
+        canvas.dispatchEvent(mouseEvent);
+      });
+      canvas.addEventListener('touchend', (e) => {
+        const mouseEvent = new MouseEvent('mouseup', {});
+        canvas.dispatchEvent(mouseEvent);
       });
     }
 
-    // 電子白板
-    const canvas = document.getElementById('whiteboardCanvas');
     function resizeCanvas() {
       canvas.width = canvas.parentElement.clientWidth;
       canvas.height = canvas.parentElement.clientHeight;
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    ctx = canvas.getContext('2d');
-    ctx.lineWidth = 4;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#e11d48';
 
     function toggleWhiteboard() {
-      whiteboardActive = !whiteboardActive;
-      canvas.classList.toggle('drawing-active', whiteboardActive);
-      document.getElementById('btnBoard').classList.toggle('active', whiteboardActive);
+      isWhiteboardActive = !isWhiteboardActive;
+      canvas.classList.toggle('drawing-active', isWhiteboardActive);
+      document.getElementById('btnBoard').classList.toggle('active', isWhiteboardActive);
+    }
+
+    function startDrawing(e) {
+      if (!isWhiteboardActive) return;
+      isDrawing = true;
+      ctx.beginPath();
+      const rect = canvas.getBoundingClientRect();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function draw(e) {
+      if (!isDrawing || !isWhiteboardActive) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.strokeStyle = '#fbbf24';
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.stroke();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
     }
 
     function clearWhiteboard() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
     }
 
-    canvas.addEventListener('mousedown', e => {
-      if (!whiteboardActive) return;
-      isDrawing = true;
-      const rect = canvas.getBoundingClientRect();
-      ctx.beginPath();
-      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-    });
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
 
-    canvas.addEventListener('mousemove', e => {
-      if (!whiteboardActive || !isDrawing) return;
-      const rect = canvas.getBoundingClientRect();
-      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-      ctx.stroke();
-    });
-
-    canvas.addEventListener('mouseup', () => isDrawing = false);
-    canvas.addEventListener('mouseleave', () => isDrawing = false);
-
-    window.addEventListener('keydown', e => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
       if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
       else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
       else if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggleAnswer(); }
@@ -563,11 +752,10 @@
       else if (e.key === 'r' || e.key === 'R') speakCurrentSlide();
     });
 
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-    }
-
-    showSlide(0);
+    window.onload = () => {
+      initWhiteboard();
+      updateSlide();
+    };
   </script>
 </body>
 </html>

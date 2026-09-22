@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -356,10 +356,10 @@ const vocabQuestions = [
     visual: '👩 溫柔慈愛 · 家庭核心支柱 ➔ [ m _ _ _ _ r ]',
     tts: 'My mother is very kind.',
     hint: '提示：母親是 mother 喔！',
-    options: ['mother', 'father', 'brother', 'sister'],
+    options: ['mother', 'member', 'master', 'maker'],
     ans: 0,
     expCorrect: '答對了！mother 代表母親。',
-    expWrong: '不對喔！father 是父親，母親是 mother。'
+    expWrong: '不對喔！member 是成員，master 是大師，母親是 mother。'
   },
   {
     id: 'v2',
@@ -368,10 +368,10 @@ const vocabQuestions = [
     visual: '👨 堅強守護 · 撐起家庭的支柱 ➔ [ f _ _ _ _ r ]',
     tts: 'My father is a doctor.',
     hint: '提示：父親是 father 喔！',
-    options: ['brother', 'sister', 'father', 'mother'],
+    options: ['farmer', 'feather', 'father', 'fighter'],
     ans: 2,
     expCorrect: '答對了！father 代表父親。',
-    expWrong: '再想想看！brother 是兄弟，父親是 father。'
+    expWrong: '再想想看！farmer 是農夫，feather 是羽毛，父親是 father。'
   },
   {
     id: 'v3',
@@ -380,10 +380,10 @@ const vocabQuestions = [
     visual: '🌾 辛勤耕種 · 在農場(farm)工作 ➔ [ f _ _ _ _ r ]',
     tts: 'My grandfather is a farmer.',
     hint: '提示：農場是 farm，字尾加 er 就是農夫 farmer 喔！',
-    options: ['clerk', 'farmer', 'actress', 'doctor'],
+    options: ['father', 'farmer', 'fighter', 'finder'],
     ans: 1,
     expCorrect: '答對了！farmer 代表農夫。',
-    expWrong: '不對喔！clerk 是職員，農夫是 farmer。'
+    expWrong: '不對喔！father 是父親，fighter 是戰士，農夫是 farmer。'
   },
   {
     id: 'v4',
@@ -392,10 +392,10 @@ const vocabQuestions = [
     visual: '👨‍⚕️ 白袍天使 · 在醫院救治病人 ➔ [ d _ _ _ _ r ]',
     tts: 'The doctor helps sick people.',
     hint: '提示：在醫院診斷治療的是 doctor 喔！',
-    options: ['doctor', 'nurse', 'cook', 'teacher'],
+    options: ['doctor', 'dancer', 'driver', 'drawer'],
     ans: 0,
     expCorrect: '太棒了！doctor 代表醫生。',
-    expWrong: '再想想看！nurse 是護理師，醫生是 doctor。'
+    expWrong: '再想想看！dancer 是舞者，driver 是司機，醫生是 doctor。'
   },
   {
     id: 'v5',
@@ -404,10 +404,10 @@ const vocabQuestions = [
     visual: '👩‍⚕️ 愛心照顧 · 協助病患量體溫 ➔ [ n _ _ _ e ]',
     tts: 'Her sister is a nurse.',
     hint: '提示：在醫院給予細心照護的是 nurse 喔！',
-    options: ['farmer', 'nurse', 'clerk', 'driver'],
+    options: ['nose', 'nurse', 'notice', 'niece'],
     ans: 1,
     expCorrect: '正確！nurse 代表護理師。',
-    expWrong: '不對喔！driver 是司機，護理師是 nurse。'
+    expWrong: '不對喔！nose 是鼻子，notice 是通知，護理師是 nurse。'
   },
   {
     id: 'v6',
@@ -416,10 +416,10 @@ const vocabQuestions = [
     visual: '👮 打擊犯罪 · 維護社會治安 ➔ [ p _ _ _ _ e  o _ _ _ _ _ r ]',
     tts: 'His uncle is a police officer.',
     hint: '提示：人民的保姆是 police officer 喔！',
-    options: ['police officer', 'cook', 'teacher', 'actor'],
+    options: ['police officer', 'post officer', 'public officer', 'patrol officer'],
     ans: 0,
     expCorrect: '太棒了！police officer 代表警察。',
-    expWrong: '再想想看！cook 是廚師，警察是 police officer。'
+    expWrong: '再想想看！police officer 是警察。'
   },
   {
     id: 'v7',
@@ -428,10 +428,10 @@ const vocabQuestions = [
     visual: '👨‍🍳 烹飪美食 · 餐廳掌廚大師 ➔ [ c _ _ k ]',
     tts: 'The cook makes delicious food.',
     hint: '提示：烹飪料理的大師是 cook 喔！',
-    options: ['clerk', 'cook', 'farmer', 'nurse'],
+    options: ['clerk', 'cook', 'chalk', 'clock'],
     ans: 1,
     expCorrect: '答對了！cook 代表廚師。',
-    expWrong: '不對喔！farmer 是農夫，廚師是 cook。'
+    expWrong: '不對喔！clerk 是職員，chalk 是粉筆，廚師是 cook。'
   },
   {
     id: 'v8',
@@ -440,10 +440,10 @@ const vocabQuestions = [
     visual: '👨‍💼 辦公室內勤 · 處理文書業務 ➔ [ c _ _ _ k ]',
     tts: 'My aunt is a clerk.',
     hint: '提示：辦公室或店鋪職員是 clerk 喔！',
-    options: ['doctor', 'clerk', 'actor', 'farmer'],
+    options: ['clock', 'clerk', 'check', 'cook'],
     ans: 1,
     expCorrect: '正確！clerk 代表職員。',
-    expWrong: '不對喔！doctor 是醫生，職員是 clerk。'
+    expWrong: '不對喔！clock 是時鐘，cook 是廚師，職員是 clerk。'
   }
 ];
 const grammarQuestions = [
@@ -651,7 +651,7 @@ function speakEnglish(text) {
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'en-US';
-  utter.rate = currentSpeed;
+  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
   const voices = window.speechSynthesis.getVoices();
   const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
                   voices.find(v => v.lang.startsWith('en')) || voices[0];

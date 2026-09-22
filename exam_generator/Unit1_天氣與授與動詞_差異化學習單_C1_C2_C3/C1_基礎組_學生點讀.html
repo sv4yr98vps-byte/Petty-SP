@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -122,7 +122,7 @@
   </div>
 
   <div id="quizContainer">
-    <!-- Q1 (4選1): 天氣晴朗 -->
+    <!-- Q1 (4選1): 晴天 -->
     <div class="question-card active" data-q="1">
       <div class="q-meta">
         <span class="module-tag">MODULE A｜天氣形容詞 (4選1)</span>
@@ -132,12 +132,12 @@
         1. 看到圖示「☀️ 太陽大晴天」，對應的英文天氣形容詞是？
         <button class="speaker-btn" onclick="speakEnglish('sunny')" title="發音">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#d97706;">☀️ 陽光普照 · 大晴天</span></div>
+      <div class="visual-box"><span style="font-size:2rem; color:#d97706;">☀️ 陽光普照 · 大晴天 ➔ [ s _ _ _ y ]</span></div>
       <div class="options-grid-4">
         <button class="option-btn" onclick="checkAnswer(this, true, 1, '答對了！sunny 代表晴朗的。')">(A) sunny</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'rainy 是下雨的喔！')">(B) rainy</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'cloudy 是多雲陰天的喔！')">(C) cloudy</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'snowy 是下雪的喔！')">(D) snowy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'snowy 是下雪的喔！')">(B) snowy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'stormy 是暴風雨的喔！')">(C) stormy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'starry 是滿天星斗的喔！')">(D) starry</button>
       </div>
       <div class="feedback-box" id="fb-1"></div>
     </div>
@@ -152,12 +152,12 @@
         2. 出門需要帶雨傘的「🌧️ 雨天」，英文是哪一個？
         <button class="speaker-btn" onclick="speakEnglish('rainy')" title="發音">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#2563eb;">🌧️ 雨水綿綿 · 下雨天</span></div>
+      <div class="visual-box"><span style="font-size:2rem; color:#2563eb;">🌧️ 雨水綿綿 · 下雨天 ➔ [ r _ _ _ y ]</span></div>
       <div class="options-grid-4">
-        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'windy 是多風的喔！')">(A) windy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'ready 是準備好的喔！')">(A) ready</button>
         <button class="option-btn" onclick="checkAnswer(this, true, 2, '太棒了！rainy 代表下雨的。')">(B) rainy</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'sunny 是晴天的喔！')">(C) sunny</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'cold 是寒冷的喔！')">(D) cold</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'rosy 是玫瑰色的喔！')">(C) rosy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'roomy 是寬敞的喔！')">(D) roomy</button>
       </div>
       <div class="feedback-box" id="fb-2"></div>
     </div>
@@ -172,12 +172,12 @@
         3. 百花盛開、天氣溫暖的「🌸 春天」，英文是？
         <button class="speaker-btn" onclick="speakEnglish('spring')" title="發音">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#059669;">🌸 溫暖百花開 · 春天</span></div>
+      <div class="visual-box"><span style="font-size:2rem; color:#059669;">🌸 溫暖百花開 · 春天 ➔ [ s _ _ _ _ g ]</span></div>
       <div class="options-grid-4">
         <button class="option-btn" onclick="checkAnswer(this, true, 3, '正確！spring 是春天。')">(A) spring</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'summer 是夏天喔！')">(B) summer</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'autumn 是秋天喔！')">(C) autumn</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'winter 是冬天喔！')">(D) winter</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'string 是細繩喔！')">(B) string</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'strong 是強壯的喔！')">(C) strong</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'singing 是唱歌喔！')">(D) singing</button>
       </div>
       <div class="feedback-box" id="fb-3"></div>
     </div>
@@ -192,11 +192,11 @@
         4. 天氣寒冷、山上會下雪的「⛄ 冬天」，英文是？
         <button class="speaker-btn" onclick="speakEnglish('winter')" title="發音">🔊</button>
       </div>
-      <div class="visual-box"><span style="font-size:2rem; color:#0284c7;">⛄ 寒冷下雪 · 冬天</span></div>
+      <div class="visual-box"><span style="font-size:2rem; color:#0284c7;">⛄ 寒冷下雪 · 冬天 ➔ [ w _ _ _ _ r ]</span></div>
       <div class="options-grid-4">
-        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'spring 是春天。')">(A) spring</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'summer 是夏天。')">(B) summer</button>
-        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'fall 是秋天。')">(C) fall</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'water 是水喔！')">(A) water</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'waiter 是服務生喔！')">(B) waiter</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'weather 是天氣喔！')">(C) weather</button>
         <button class="option-btn" onclick="checkAnswer(this, true, 4, '答對了！winter 是冬天。')">(D) winter</button>
       </div>
       <div class="feedback-box" id="fb-4"></div>
@@ -362,30 +362,32 @@
   }
 
   function speakEnglish(text) {
-    if (!synth) return;
-    synth.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'en-US';
-    const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
-                    voices.find(v => v.lang.startsWith('en')) || voices[0];
-    if (enVoice) utter.voice = enVoice;
-    utter.rate = parseFloat(document.getElementById('speedSelect')?.value) || 0.85;
-    synth.speak(utter);
-  }
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                  voices.find(v => v.lang.startsWith('en')) || voices[0];
+  if (enVoice) utter.voice = enVoice;
+  window.speechSynthesis.speak(utter);
+}
 
-  function speakChinese(text) {
-    if (!synth) return;
-    synth.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'zh-TW';
-    const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
-                    voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
-    if (zhVoice) utter.voice = zhVoice;
-    utter.rate = 0.85;
-    synth.speak(utter);
-  }
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'zh-TW';
+  utter.rate = 0.85;
+  const voices = window.speechSynthesis.getVoices();
+  const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                  voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+  if (zhVoice) utter.voice = zhVoice;
+  window.speechSynthesis.speak(utter);
+}
 
-  function showHint(q) {
+function showHint(q) {
     hints++;
     const hintMap = {
       1: '提示：太陽是 sun，晴天是 sunny。',

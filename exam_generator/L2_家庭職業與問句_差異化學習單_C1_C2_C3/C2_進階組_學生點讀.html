@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -498,7 +498,7 @@ function speakEnglish(text) {
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'en-US';
-  utter.rate = currentSpeed;
+  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
   const voices = window.speechSynthesis.getVoices();
   const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
                   voices.find(v => v.lang.startsWith('en')) || voices[0];

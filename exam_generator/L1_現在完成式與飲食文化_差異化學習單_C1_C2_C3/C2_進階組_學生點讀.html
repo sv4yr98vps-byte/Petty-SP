@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 差異化學習單｜C2 應用組</title>
+  <title>國中英語【國三 · 九年級】現在完成式與飲食文化 差異化學習單｜C2 進階組</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -144,10 +144,10 @@
 <div class="container">
   <div class="header">
     <div class="badge-bar">
-      <span class="level-badge">國三 · 九年級 · C2 應用組</span>
+      <span class="level-badge">國三 · 九年級 · C2 進階組</span>
       <span class="student-tag" id="studentDisplay" onclick="promptStudentName()">👤 點此輸入姓名座號</span>
     </div>
-    <h1 style="font-size:1.6rem; color:#b45309;">完成式與飲食文化 步步練｜積木組句與文法應用</h1>
+    <h1 style="font-size:1.6rem; color:#b45309;">完成式與飲食文化 步步練｜積木組句與進階文法應用</h1>
     <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 點擊單字積木組句 · 嚴選課本 28 生詞 · 現在完成式 have/has + p.p. 應用</p>
   </div>
 
@@ -183,7 +183,7 @@
 
   <div class="completion-card" id="completionCard">
     <div style="font-size:3.5rem; margin-bottom:8px;">🏆</div>
-    <h2 style="color:#b45309; font-size:1.8rem;">恭喜完成九年級完成式與飲食文化 C2 應用任務！</h2>
+    <h2 style="color:#b45309; font-size:1.8rem;">恭喜完成九年級完成式與飲食文化 C2 進階任務！</h2>
     <p id="certStudentText" style="color:var(--text-muted); font-size:1.1rem; margin-top:4px;">學生：未填寫 ｜ 評價：⭐⭐⭐</p>
     
     <div class="sync-status-box" id="syncStatusBanner">
@@ -216,7 +216,7 @@
 
 <script>
   const synth = window.speechSynthesis;
-  let studentName = localStorage.getItem('l1_c2_student') || '';
+  let studentName = localStorage.getItem('l1_c2_adv_student') || '';
   let totalChecks = 0;
 
   const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
@@ -331,7 +331,7 @@
     const name = prompt('請輸入您的【姓名】或【座號】：', studentName);
     if (name && name.trim() !== '') {
       studentName = name.trim();
-      localStorage.setItem('l1_c2_student', studentName);
+      localStorage.setItem('l1_c2_adv_student', studentName);
       updateStudentDisplay();
     }
   }
@@ -486,7 +486,7 @@
     const payload = {
       timestamp: new Date().toISOString(),
       unit: '九年級 L1 現在完成式與飲食文化',
-      level: 'C2 應用組',
+      level: 'C2 進階組',
       student: name,
       score: scoreVal,
       correctCount: `${correctVal}/${exercises.length}`,
@@ -518,7 +518,7 @@
   function copyReport() {
     const displayName = studentName || '自主學習同學';
     const scoreVal = document.getElementById('resScore').textContent;
-    const text = `【九年級 L1 現在完成式與飲食文化 · C2 應用組成果】\n學生：${displayName}\n得分：${scoreVal}\n完成題數：10/10\n檢查次數：${totalChecks}\n記錄時間：${new Date().toLocaleString()}`;
+    const text = `【九年級 L1 現在完成式與飲食文化 · C2 進階組成果】\n學生：${displayName}\n得分：${scoreVal}\n完成題數：10/10\n檢查次數：${totalChecks}\n記錄時間：${new Date().toLocaleString()}`;
     navigator.clipboard.writeText(text).then(() => {
       alert('已成功複製學習成果報告！');
     });
