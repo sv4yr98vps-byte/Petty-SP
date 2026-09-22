@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -355,11 +355,11 @@ const vocabQuestions = [
     zhTitle: '1. Yuki 想要參加「🏊‍♂️ 水上運動社團」，「社團」英文是哪一個？',
     visual: '🏊‍♂️ 水上運動與活動組織 ➔ water sports [ c _ _ b ]',
     tts: 'Yuki decided to join the water sports club.',
-    hint: '提示：學校社團是 club 喔！',
-    options: ['club', 'climb', 'crab', 'comb'],
+    hint: '提示：學校社團是 club，water sports club 是水上運動社。',
+    options: ['club', 'subject', 'camera', 'sandwich'],
     ans: 0,
     expCorrect: '太棒了！club 代表社團，water sports club 是水上運動社。',
-    expWrong: '不對喔！climb 是攀爬，crab 是螃蟹，社團是 club。'
+    expWrong: '不對喔！subject 是學科，camera 是相機，社團是 club。'
   },
   {
     id: 'v2',
@@ -367,11 +367,11 @@ const vocabQuestions = [
     zhTitle: '2. 電腦對 Cody 來說「💡 非常有趣」，「有趣的」英文是？',
     visual: '💡 電腦科學吸引人 · 充滿吸引力 ➔ very [ i _ _ _ _ _ _ _ _ _ g ]',
     tts: 'Computer science is very interesting to Cody. He likes it.',
-    hint: '提示：interesting 是有趣的喔！',
-    options: ['inspiring', 'interesting', 'inviting', 'important'],
+    hint: '提示：interesting 是有趣的；poor 是差的。',
+    options: ['poor', 'interesting', 'wrong', 'same'],
     ans: 1,
     expCorrect: '答對了！interesting 代表有趣的，對某人有趣是 interesting to sb。',
-    expWrong: '再想想看！important 是重要的，有趣的是 interesting。'
+    expWrong: '再想想看！poor 是差的，wrong 是錯誤的，有趣的是 interesting。'
   },
   {
     id: 'v3',
@@ -380,22 +380,22 @@ const vocabQuestions = [
     visual: '📞 "May I speak to Meg?" ➔ "Yes, please [ ______ ]."',
     tts: 'May I speak to Meg, please? Yes, please hold on.',
     hint: '提示：Please hold on. 代表請稍候、請不要掛斷電話。',
-    options: ['hang on', 'hold on', 'have on', 'hear on'],
+    options: ['look for', 'hold on', 'sign up', 'pull leg'],
     ans: 1,
     expCorrect: '答對了！Please hold on. 是電話用語「請稍候一下」。',
-    expWrong: '不對喔！請稍候是 hold on。'
+    expWrong: '不對喔！look for 是尋找，sign up 是報名，請稍候是 hold on。'
   },
   {
     id: 'v4',
     module: 'MODULE B｜電話常用語 Phone Calls (4選1)',
     zhTitle: '4. 陌生人打電話來時，回答「❌ 你打錯了」，「錯誤的」英文是？',
-    visual: '❌ 撥錯電話號碼 ➔ You have the [ w _ _ _ g ] number.',
+    visual: '❌ 撥錯電話號碼 ➔ You have the [ ______ ] number.',
     tts: 'Sorry, you have the wrong number. Nobody named Marsha lives here.',
     hint: '提示：wrong 代表錯誤的，wrong number 是打錯電話。',
-    options: ['wrong', 'write', 'wrap', 'wrist'],
+    options: ['wrong', 'same', 'interesting', 'poor'],
     ans: 0,
     expCorrect: '答對了！wrong number 代表打錯電話或撥錯號碼。',
-    expWrong: '再想想看！write 是寫字，wrong 才是錯誤的喔！'
+    expWrong: '再想想看！same 是相同，wrong 才是錯誤的喔！'
   },
   {
     id: 'v5',
@@ -404,10 +404,10 @@ const vocabQuestions = [
     visual: '❓ "[ ______ ] camera is this on the table?" ➔ "It is mine."',
     tts: 'Whose camera is this on the table? It is mine.',
     hint: '提示：Whose 詢問「誰的」，後面接名詞 camera。',
-    options: ['Whose', 'Where', 'When', 'Which'],
+    options: ['Whose', 'Where', 'When', 'Who'],
     ans: 0,
     expCorrect: '答對了！Whose 詢問「誰的」，Whose camera 代表誰的相機。',
-    expWrong: '不對喔！Where 是哪裡，Which 是哪一個，Whose 才是「誰的」。'
+    expWrong: '不對喔！Who 是誰，Where 是哪裡，Whose 才是「誰的」。'
   },
   {
     id: 'v6',
@@ -416,36 +416,37 @@ const vocabQuestions = [
     visual: '💻 電腦科學程式領域 ➔ computer [ s _ _ _ _ _ e ]',
     tts: 'Computer science is Cody\'s favorite subject.',
     hint: '提示：science 是科學，computer science 是電腦科學。',
-    options: ['service', 'science', 'silence', 'surface'],
+    options: ['club', 'science', 'camera', 'violin'],
     ans: 1,
     expCorrect: '太棒了！science 是科學，computer science 是電腦科學。',
-    expWrong: '再想想看！service 是服務，science 才是科學領域喔！'
+    expWrong: '再想想看！club 是社團，science 才是科學領域喔！'
   },
   {
     id: 'v7',
     module: 'MODULE A｜動作過去式 Verbs (4選1)',
     zhTitle: '7. 昨天 Shin「🗣️ 告訴」Yuki 社團的事情，tell 的過去式是？',
-    visual: '🗣️ 昨天告訴某人某事 ➔ Shin [ t _ _ d ] Yuki yesterday.',
+    visual: '🗣️ 昨天告訴某人某事 ➔ Shin [ ______ ] Yuki yesterday.',
     tts: 'Shin told Yuki about the water sports club yesterday.',
     hint: '提示：tell（告訴）過去式是不規則變化 told。',
-    options: ['took', 'talked', 'told', 'tasted'],
+    options: ['heard', 'called', 'told', 'signed'],
     ans: 2,
     expCorrect: '正確！tell 過去式是 told，句型為 tell sb about sth。',
-    expWrong: '不對喔！took 是拿取，talked 是講話，tell 過去式是 told。'
+    expWrong: '不對喔！heard 是聽見，called 是打電話，tell 過去式是 told。'
   },
   {
     id: 'v8',
     module: 'MODULE A｜形容詞語境 Adjectives (4選1)',
     zhTitle: '8. Shin 去年還是個「🏊 游得很差的泳者」，「差的/拙劣的」英文是？',
-    visual: '🏊 去年技術不佳 ➔ a [ p _ _ r ] swimmer',
+    visual: '🏊 去年技術不佳 ➔ a [ ______ ] swimmer',
     tts: 'Shin was a poor swimmer last year, but now he swims like a fish.',
     hint: '提示：poor 除貧窮外，形容技術時表示「差的、拙劣的」。',
-    options: ['pure', 'plain', 'poor', 'proud'],
+    options: ['same', 'wrong', 'poor', 'cute'],
     ans: 2,
     expCorrect: '答對了！poor swimmer 代表游得很差的泳者。',
-    expWrong: '不對喔！pure 是純潔，proud 是驕傲，差的是 poor。'
+    expWrong: '不對喔！same 是相同，cute 是可愛，差的是 poor。'
   }
 ];
+
 const grammarQuestions = [
   {
     id: 'g1',
@@ -534,98 +535,57 @@ const grammarQuestions = [
 ];
 
 let userAnswers = {};
-
-function renderQuestions() {
-  const vContainer = document.getElementById('vocab-container');
-  const gContainer = document.getElementById('grammar-container');
-
-  vocabQuestions.forEach((q, idx) => {
-    vContainer.appendChild(createQuestionCard(q, idx, 4));
-  });
-
-  grammarQuestions.forEach((q, idx) => {
-    gContainer.appendChild(createQuestionCard(q, idx + vocabQuestions.length, 3));
-  });
-}
-
-function createQuestionCard(q, index, optCount) {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.id = 'card-' + q.id;
-
-  const meta = document.createElement('div');
-  meta.className = 'q-meta';
-  meta.innerHTML = `
-    <span class="module-tag">${q.module}</span>
-    <button type="button" class="hint-btn" onclick="showHint('${q.id}', '${escapeQuotes(q.hint)}')">💡 提示</button>
-  `;
-  card.appendChild(meta);
-
-  const title = document.createElement('div');
-  title.className = 'q-title';
-  title.innerHTML = `
-    <span>${q.zhTitle}</span>
-    <button type="button" class="speaker-btn" onclick="speakEnglish('${escapeQuotes(q.tts)}')">🔊 英文朗讀</button>
-  `;
-  card.appendChild(title);
-
-  const visual = document.createElement('div');
-  visual.className = 'visual-box';
-  visual.innerHTML = q.visual;
-  card.appendChild(visual);
-
-  const grid = document.createElement('div');
-  grid.className = optCount === 4 ? 'options-grid-4' : 'options-grid-3';
-
-  const letters = ['(A)', '(B)', '(C)', '(D)'];
-  q.options.forEach((opt, optIdx) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'opt-btn';
-    btn.id = `btn-${q.id}-${optIdx}`;
-    btn.innerHTML = `<strong>${letters[optIdx]}</strong> ${opt}`;
-    btn.onclick = () => selectOption(q, optIdx);
-    grid.appendChild(btn);
-  });
-  card.appendChild(grid);
-
-  const feedback = document.createElement('div');
-  feedback.className = 'feedback-box';
-  feedback.id = 'fb-' + q.id;
-  card.appendChild(feedback);
-
-  return card;
-}
-
-function escapeQuotes(str) {
-  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-}
+let attemptsPerQ = {};
+let answeredLocked = {};
+let totalErrors = 0;
 
 function selectOption(q, selectedIdx) {
-  userAnswers[q.id] = selectedIdx;
-
-  for (let i = 0; i < q.options.length; i++) {
-    const btn = document.getElementById(`btn-${q.id}-${i}`);
-    if (btn) btn.className = 'opt-btn';
-  }
+  if (answeredLocked[q.id]) return;
+  if (attemptsPerQ[q.id] === undefined) attemptsPerQ[q.id] = 0;
 
   const selectedBtn = document.getElementById(`btn-${q.id}-${selectedIdx}`);
   const fb = document.getElementById('fb-' + q.id);
   fb.style.display = 'block';
 
   if (selectedIdx === q.ans) {
+    answeredLocked[q.id] = true;
+    userAnswers[q.id] = selectedIdx;
     if (selectedBtn) selectedBtn.classList.add('correct');
+
+    const errCount = attemptsPerQ[q.id];
+    let badgeText = '🥇 首次即答對！';
+    if (errCount === 1) {
+      badgeText = '⚠️ 試錯 1 次後答對 (得分 70%)';
+    } else if (errCount === 2) {
+      badgeText = '⚠️ 試錯 2 次後答對 (得分 40%)';
+    } else if (errCount >= 3) {
+      badgeText = '❌ 試錯多次後答對 (鼓勵分 10%)';
+    }
+
     fb.style.background = '#dcfce7';
     fb.style.border = '1px solid #86efac';
     fb.style.color = '#15803d';
-    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect}`;
+    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
     speakChinese(q.expCorrect);
+
+    for (let i = 0; i < q.options.length; i++) {
+      const btn = document.getElementById(`btn-${q.id}-${i}`);
+      if (btn && i !== selectedIdx) {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+      }
+    }
   } else {
-    if (selectedBtn) selectedBtn.classList.add('wrong');
+    attemptsPerQ[q.id]++;
+    totalErrors++;
+    if (selectedBtn) {
+      selectedBtn.classList.add('wrong');
+      selectedBtn.disabled = true;
+    }
     fb.style.background = '#fee2e2';
     fb.style.border = '1px solid #fca5a5';
     fb.style.color = '#b91c1c';
-    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong}`;
+    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[q.id]} 次)</span>`;
     speakChinese(q.expWrong);
   }
 }
@@ -674,28 +634,65 @@ function speakChinese(text) {
 
 function submitExam() {
   const allQs = [...vocabQuestions, ...grammarQuestions];
-  let correctCount = 0;
+  let totalScore = 0;
+  let firstTryCorrect = 0;
+  let detailsList = [];
+  const basePts = 100.0 / allQs.length;
 
-  allQs.forEach(q => {
-    if (userAnswers[q.id] === q.ans) {
-      correctCount++;
+  allQs.forEach((q, idx) => {
+    const errs = attemptsPerQ[q.id] || 0;
+    const isAnswered = answeredLocked[q.id];
+    let multiplier = 0;
+    let badge = '❌ 未作答';
+
+    if (isAnswered) {
+      if (errs === 0) {
+        multiplier = 1.0;
+        firstTryCorrect++;
+        badge = '🥇 首次即答對 (滿分)';
+      } else if (errs === 1) {
+        multiplier = 0.7;
+        badge = '⚠️ 試錯 1 次 (70% 分數)';
+      } else if (errs === 2) {
+        multiplier = 0.4;
+        badge = '⚠️ 試錯 2 次 (40% 分數)';
+      } else {
+        multiplier = 0.1;
+        badge = '❌ 試錯多次 (10% 鼓勵分)';
+      }
     }
+    totalScore += basePts * multiplier;
+    detailsList.push(`第 ${idx + 1} 題: ${badge}`);
   });
 
-  const finalScore = Math.round((correctCount / allQs.length) * 100);
+  const finalScore = Math.max(10, Math.round(totalScore));
+  const firstTryRate = Math.round((firstTryCorrect / allQs.length) * 100);
   const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
 
-  document.getElementById('scoreText').innerText = finalScore;
+  document.getElementById('scoreText').innerText = `${finalScore} 分`;
+  document.getElementById('firstTryText').innerText = `${firstTryCorrect} / ${allQs.length} 題 (${firstTryRate}%)`;
+  document.getElementById('attemptsText').innerText = `${totalErrors} 次`;
+  document.getElementById('certStudentText').innerText = `學生：${sName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 精熟特優' : (finalScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
+
+  const detailBox = document.getElementById('resDetailsContainer');
+  if (detailBox) {
+    detailBox.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+  }
+
   document.getElementById('scoreBanner').style.display = 'block';
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
+  speakChinese(`評量完成！最終得分 ${finalScore} 分，首次答對 ${firstTryCorrect} 題。`);
+
   const payload = {
-    unit: '國二 Unit 2 時間連接詞與所有格代名詞',
+    unit: document.title || '國中英語差異化學習單',
     level: 'C1 基礎組',
     name: sName,
     score: finalScore,
-    totalQuestions: allQs.length,
-    correctCount: correctCount,
+    firstTryRate: `${firstTryRate}%`,
+    firstTryCorrect: `${firstTryCorrect}/${allQs.length}`,
+    wrongAttempts: totalErrors,
+    details: detailsList.join('; '),
     timestamp: new Date().toISOString()
   };
 
@@ -705,9 +702,22 @@ function submitExam() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).then(() => {
-    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師後台！';
+    document.getElementById('syncStatus').innerText = '✅ 成績與作答歷程已成功同步至教師後台！';
+    document.getElementById('syncStatus').style.background = '#d1fae5';
+    document.getElementById('syncStatus').style.color = '#065f46';
   }).catch(() => {
-    document.getElementById('syncStatus').innerText = '⚠️ 成績已計算（離線暫存模式）。';
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已記錄（離線暫存模式）。';
+  });
+}
+
+function copyReport() {
+  const sName = document.getElementById('studentName').value.trim() || '自主學習同學';
+  const finalScore = document.getElementById('scoreText').innerText;
+  const firstTry = document.getElementById('firstTryText').innerText;
+  const errs = document.getElementById('attemptsText').innerText;
+  const text = `【${document.title} · C1 基礎組成果】\n👤 學生：${sName}\n🏆 得分：${finalScore}\n🎯 首次答對率：${firstTry}\n🔄 累計試錯次數：${errs}\n📅 記錄時間：${new Date().toLocaleString()}`;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('已成功複製學習成果報告！可直接貼在 LINE 或筆記本中。');
   });
 }
 
@@ -717,6 +727,7 @@ window.onload = () => {
     window.speechSynthesis.getVoices();
   }
 };
+
 </script>
 
 </body>

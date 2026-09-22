@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -322,37 +322,53 @@
   <button class="btn-submit-all" onclick="submitAssessment()">🏆 提交整份試卷並產生成績單</button>
 
   <div class="completion-card" id="completionCard">
-    <div style="font-size:3.5rem; margin-bottom:8px;">🎖️</div>
-    <h2 style="color:#b45309; font-size:1.8rem;">九年級完成式與飲食文化 C3 表達組 評量結算</h2>
-    <p id="certStudentText" style="color:var(--text-muted); font-size:1.1rem; margin-top:4px;">學生：未填寫 ｜ 綜合評價：⭐⭐⭐</p>
-    
-    <div class="sync-status-box" id="syncStatusBanner">
-      📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
-    </div>
+    <div style="font-size:3.2rem; line-height:1;">🏆</div>
+    <h2 style="font-size:1.6rem; color:#4f46e5; margin:10px 0 4px;">恭喜完成 C3 表達組綜合任務！</h2>
+    <div id="certStudentText" style="font-weight:700; color:var(--text); margin-bottom:18px; font-size:1.05rem;">學生：自主學習同學 ｜ 表現評價：⭐⭐⭐</div>
 
     <div class="stat-grid">
       <div class="stat-box">
-        <div class="stat-val" id="resScore">100 分</div>
-        <div class="stat-lbl">綜合得分</div>
+        <div class="stat-val" id="resScore">-- 分</div>
+        <div class="stat-lbl">🏆 結算總分 (含寫作評析)</div>
       </div>
       <div class="stat-box">
-        <div class="stat-val" id="resMC">7 / 7</div>
-        <div class="stat-lbl">選擇題得分</div>
+        <div class="stat-val" id="resMC">-- / --</div>
+        <div class="stat-lbl">🎯 選擇與閱讀理解</div>
       </div>
       <div class="stat-box">
-        <div class="stat-val" id="resWrite">3 / 3</div>
-        <div class="stat-lbl">寫作診斷得分</div>
+        <div class="stat-val" id="resWrite">-- / --</div>
+        <div class="stat-lbl">✍️ 表達與造句評分</div>
       </div>
     </div>
 
+    <div class="sync-status-box" id="syncStatusBanner">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+
     <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
-      <button class="btn-check-write" style="padding:10px 20px; font-size:1rem;" onclick="manualSync()">☁️ 重新同步儀表板</button>
-      <button class="btn-check-write" style="background:#10b981; padding:10px 20px; font-size:1rem;" onclick="copyReport()">📋 一鍵複製成果</button>
-      <button class="btn-check-write" style="background:#64748b; padding:10px 20px; font-size:1rem;" onclick="location.reload()">🔄 重新評量</button>
-      <a href="index.html" class="btn-check-write" style="background:#0f172a; text-decoration:none; padding:10px 20px; font-size:1rem;">🏠 回首頁</a>
+      <button class="btn-nav" style="background:#4f46e5;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="btn-nav" style="background:#10b981;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" class="btn-nav" style="text-decoration:none; background:#0f172a; display:inline-block;">🏠 回首頁</a>
     </div>
   </div>
-</div>
+      <div class="stat-box">
+        <div class="stat-val" id="resMC">-- / --</div>
+        <div class="stat-lbl">🎯 選擇與閱讀理解</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resWrite">-- / --</div>
+        <div class="stat-lbl">✍️ 表達與造句評分</div>
+      </div>
+    </div>
+
+    <div class="sync-status-box" id="syncStatusBanner">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+      <button class="btn-nav" style="background:#4f46e5;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="btn-nav" style="background:#10b981;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" class="btn-nav" style="text-decoration:none; background:#0f172a; display:inline-block;">🏠 回首頁</a>
+    </div>
+  </div>
 
 <script>
   let studentName = localStorage.getItem('l1_c3_student') || '';

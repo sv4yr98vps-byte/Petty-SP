@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -356,10 +356,10 @@ const vocabQuestions = [
     visual: '👩 溫柔慈愛 · 家庭核心支柱 ➔ [ m _ _ _ _ r ]',
     tts: 'My mother is very kind.',
     hint: '提示：母親是 mother 喔！',
-    options: ['mother', 'member', 'master', 'maker'],
+    options: ['mother', 'father', 'brother', 'sister'],
     ans: 0,
     expCorrect: '答對了！mother 代表母親。',
-    expWrong: '不對喔！member 是成員，master 是大師，母親是 mother。'
+    expWrong: '不對喔！father 是父親，母親是 mother。'
   },
   {
     id: 'v2',
@@ -368,10 +368,10 @@ const vocabQuestions = [
     visual: '👨 堅強守護 · 撐起家庭的支柱 ➔ [ f _ _ _ _ r ]',
     tts: 'My father is a doctor.',
     hint: '提示：父親是 father 喔！',
-    options: ['farmer', 'feather', 'father', 'fighter'],
+    options: ['brother', 'sister', 'father', 'mother'],
     ans: 2,
     expCorrect: '答對了！father 代表父親。',
-    expWrong: '再想想看！farmer 是農夫，feather 是羽毛，父親是 father。'
+    expWrong: '再想想看！brother 是兄弟，父親是 father。'
   },
   {
     id: 'v3',
@@ -380,10 +380,10 @@ const vocabQuestions = [
     visual: '🌾 辛勤耕種 · 在農場(farm)工作 ➔ [ f _ _ _ _ r ]',
     tts: 'My grandfather is a farmer.',
     hint: '提示：農場是 farm，字尾加 er 就是農夫 farmer 喔！',
-    options: ['father', 'farmer', 'fighter', 'finder'],
+    options: ['clerk', 'farmer', 'actress', 'doctor'],
     ans: 1,
     expCorrect: '答對了！farmer 代表農夫。',
-    expWrong: '不對喔！father 是父親，fighter 是戰士，農夫是 farmer。'
+    expWrong: '不對喔！clerk 是職員，農夫是 farmer。'
   },
   {
     id: 'v4',
@@ -392,10 +392,10 @@ const vocabQuestions = [
     visual: '👨‍⚕️ 白袍天使 · 在醫院救治病人 ➔ [ d _ _ _ _ r ]',
     tts: 'The doctor helps sick people.',
     hint: '提示：在醫院診斷治療的是 doctor 喔！',
-    options: ['doctor', 'dancer', 'driver', 'drawer'],
+    options: ['doctor', 'nurse', 'cook', 'teacher'],
     ans: 0,
     expCorrect: '太棒了！doctor 代表醫生。',
-    expWrong: '再想想看！dancer 是舞者，driver 是司機，醫生是 doctor。'
+    expWrong: '再想想看！nurse 是護理師，醫生是 doctor。'
   },
   {
     id: 'v5',
@@ -404,10 +404,10 @@ const vocabQuestions = [
     visual: '👩‍⚕️ 愛心照顧 · 協助病患量體溫 ➔ [ n _ _ _ e ]',
     tts: 'Her sister is a nurse.',
     hint: '提示：在醫院給予細心照護的是 nurse 喔！',
-    options: ['nose', 'nurse', 'notice', 'niece'],
+    options: ['farmer', 'nurse', 'clerk', 'driver'],
     ans: 1,
     expCorrect: '正確！nurse 代表護理師。',
-    expWrong: '不對喔！nose 是鼻子，notice 是通知，護理師是 nurse。'
+    expWrong: '不對喔！driver 是司機，護理師是 nurse。'
   },
   {
     id: 'v6',
@@ -416,10 +416,10 @@ const vocabQuestions = [
     visual: '👮 打擊犯罪 · 維護社會治安 ➔ [ p _ _ _ _ e  o _ _ _ _ _ r ]',
     tts: 'His uncle is a police officer.',
     hint: '提示：人民的保姆是 police officer 喔！',
-    options: ['police officer', 'post officer', 'public officer', 'patrol officer'],
+    options: ['police officer', 'cook', 'teacher', 'actor'],
     ans: 0,
     expCorrect: '太棒了！police officer 代表警察。',
-    expWrong: '再想想看！police officer 是警察。'
+    expWrong: '再想想看！cook 是廚師，警察是 police officer。'
   },
   {
     id: 'v7',
@@ -428,10 +428,10 @@ const vocabQuestions = [
     visual: '👨‍🍳 烹飪美食 · 餐廳掌廚大師 ➔ [ c _ _ k ]',
     tts: 'The cook makes delicious food.',
     hint: '提示：烹飪料理的大師是 cook 喔！',
-    options: ['clerk', 'cook', 'chalk', 'clock'],
+    options: ['clerk', 'cook', 'farmer', 'nurse'],
     ans: 1,
     expCorrect: '答對了！cook 代表廚師。',
-    expWrong: '不對喔！clerk 是職員，chalk 是粉筆，廚師是 cook。'
+    expWrong: '不對喔！farmer 是農夫，廚師是 cook。'
   },
   {
     id: 'v8',
@@ -440,12 +440,13 @@ const vocabQuestions = [
     visual: '👨‍💼 辦公室內勤 · 處理文書業務 ➔ [ c _ _ _ k ]',
     tts: 'My aunt is a clerk.',
     hint: '提示：辦公室或店鋪職員是 clerk 喔！',
-    options: ['clock', 'clerk', 'check', 'cook'],
+    options: ['doctor', 'clerk', 'actor', 'farmer'],
     ans: 1,
     expCorrect: '正確！clerk 代表職員。',
-    expWrong: '不對喔！clock 是時鐘，cook 是廚師，職員是 clerk。'
+    expWrong: '不對喔！doctor 是醫生，職員是 clerk。'
   }
 ];
+
 const grammarQuestions = [
   {
     id: 'g1',
@@ -534,98 +535,57 @@ const grammarQuestions = [
 ];
 
 let userAnswers = {};
-
-function renderQuestions() {
-  const vContainer = document.getElementById('vocab-container');
-  const gContainer = document.getElementById('grammar-container');
-
-  vocabQuestions.forEach((q, idx) => {
-    vContainer.appendChild(createQuestionCard(q, idx, 4));
-  });
-
-  grammarQuestions.forEach((q, idx) => {
-    gContainer.appendChild(createQuestionCard(q, idx + vocabQuestions.length, 3));
-  });
-}
-
-function createQuestionCard(q, index, optCount) {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.id = 'card-' + q.id;
-
-  const meta = document.createElement('div');
-  meta.className = 'q-meta';
-  meta.innerHTML = `
-    <span class="module-tag">${q.module}</span>
-    <button type="button" class="hint-btn" onclick="showHint('${q.id}', '${escapeQuotes(q.hint)}')">💡 提示</button>
-  `;
-  card.appendChild(meta);
-
-  const title = document.createElement('div');
-  title.className = 'q-title';
-  title.innerHTML = `
-    <span>${q.zhTitle}</span>
-    <button type="button" class="speaker-btn" onclick="speakEnglish('${escapeQuotes(q.tts)}')">🔊 英文朗讀</button>
-  `;
-  card.appendChild(title);
-
-  const visual = document.createElement('div');
-  visual.className = 'visual-box';
-  visual.innerHTML = q.visual;
-  card.appendChild(visual);
-
-  const grid = document.createElement('div');
-  grid.className = optCount === 4 ? 'options-grid-4' : 'options-grid-3';
-
-  const letters = ['(A)', '(B)', '(C)', '(D)'];
-  q.options.forEach((opt, optIdx) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'opt-btn';
-    btn.id = `btn-${q.id}-${optIdx}`;
-    btn.innerHTML = `<strong>${letters[optIdx]}</strong> ${opt}`;
-    btn.onclick = () => selectOption(q, optIdx);
-    grid.appendChild(btn);
-  });
-  card.appendChild(grid);
-
-  const feedback = document.createElement('div');
-  feedback.className = 'feedback-box';
-  feedback.id = 'fb-' + q.id;
-  card.appendChild(feedback);
-
-  return card;
-}
-
-function escapeQuotes(str) {
-  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-}
+let attemptsPerQ = {};
+let answeredLocked = {};
+let totalErrors = 0;
 
 function selectOption(q, selectedIdx) {
-  userAnswers[q.id] = selectedIdx;
-
-  for (let i = 0; i < q.options.length; i++) {
-    const btn = document.getElementById(`btn-${q.id}-${i}`);
-    if (btn) btn.className = 'opt-btn';
-  }
+  if (answeredLocked[q.id]) return;
+  if (attemptsPerQ[q.id] === undefined) attemptsPerQ[q.id] = 0;
 
   const selectedBtn = document.getElementById(`btn-${q.id}-${selectedIdx}`);
   const fb = document.getElementById('fb-' + q.id);
   fb.style.display = 'block';
 
   if (selectedIdx === q.ans) {
+    answeredLocked[q.id] = true;
+    userAnswers[q.id] = selectedIdx;
     if (selectedBtn) selectedBtn.classList.add('correct');
+
+    const errCount = attemptsPerQ[q.id];
+    let badgeText = '🥇 首次即答對！';
+    if (errCount === 1) {
+      badgeText = '⚠️ 試錯 1 次後答對 (得分 70%)';
+    } else if (errCount === 2) {
+      badgeText = '⚠️ 試錯 2 次後答對 (得分 40%)';
+    } else if (errCount >= 3) {
+      badgeText = '❌ 試錯多次後答對 (鼓勵分 10%)';
+    }
+
     fb.style.background = '#dcfce7';
     fb.style.border = '1px solid #86efac';
     fb.style.color = '#15803d';
-    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect}`;
+    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
     speakChinese(q.expCorrect);
+
+    for (let i = 0; i < q.options.length; i++) {
+      const btn = document.getElementById(`btn-${q.id}-${i}`);
+      if (btn && i !== selectedIdx) {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+      }
+    }
   } else {
-    if (selectedBtn) selectedBtn.classList.add('wrong');
+    attemptsPerQ[q.id]++;
+    totalErrors++;
+    if (selectedBtn) {
+      selectedBtn.classList.add('wrong');
+      selectedBtn.disabled = true;
+    }
     fb.style.background = '#fee2e2';
     fb.style.border = '1px solid #fca5a5';
     fb.style.color = '#b91c1c';
-    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong}`;
+    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[q.id]} 次)</span>`;
     speakChinese(q.expWrong);
   }
 }
@@ -674,28 +634,65 @@ function speakChinese(text) {
 
 function submitExam() {
   const allQs = [...vocabQuestions, ...grammarQuestions];
-  let correctCount = 0;
+  let totalScore = 0;
+  let firstTryCorrect = 0;
+  let detailsList = [];
+  const basePts = 100.0 / allQs.length;
 
-  allQs.forEach(q => {
-    if (userAnswers[q.id] === q.ans) {
-      correctCount++;
+  allQs.forEach((q, idx) => {
+    const errs = attemptsPerQ[q.id] || 0;
+    const isAnswered = answeredLocked[q.id];
+    let multiplier = 0;
+    let badge = '❌ 未作答';
+
+    if (isAnswered) {
+      if (errs === 0) {
+        multiplier = 1.0;
+        firstTryCorrect++;
+        badge = '🥇 首次即答對 (滿分)';
+      } else if (errs === 1) {
+        multiplier = 0.7;
+        badge = '⚠️ 試錯 1 次 (70% 分數)';
+      } else if (errs === 2) {
+        multiplier = 0.4;
+        badge = '⚠️ 試錯 2 次 (40% 分數)';
+      } else {
+        multiplier = 0.1;
+        badge = '❌ 試錯多次 (10% 鼓勵分)';
+      }
     }
+    totalScore += basePts * multiplier;
+    detailsList.push(`第 ${idx + 1} 題: ${badge}`);
   });
 
-  const finalScore = Math.round((correctCount / allQs.length) * 100);
+  const finalScore = Math.max(10, Math.round(totalScore));
+  const firstTryRate = Math.round((firstTryCorrect / allQs.length) * 100);
   const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
 
-  document.getElementById('scoreText').innerText = finalScore;
+  document.getElementById('scoreText').innerText = `${finalScore} 分`;
+  document.getElementById('firstTryText').innerText = `${firstTryCorrect} / ${allQs.length} 題 (${firstTryRate}%)`;
+  document.getElementById('attemptsText').innerText = `${totalErrors} 次`;
+  document.getElementById('certStudentText').innerText = `學生：${sName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 精熟特優' : (finalScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
+
+  const detailBox = document.getElementById('resDetailsContainer');
+  if (detailBox) {
+    detailBox.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+  }
+
   document.getElementById('scoreBanner').style.display = 'block';
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
+  speakChinese(`評量完成！最終得分 ${finalScore} 分，首次答對 ${firstTryCorrect} 題。`);
+
   const payload = {
-    unit: '國一 L2 家庭職業與問句',
+    unit: document.title || '國中英語差異化學習單',
     level: 'C1 基礎組',
     name: sName,
     score: finalScore,
-    totalQuestions: allQs.length,
-    correctCount: correctCount,
+    firstTryRate: `${firstTryRate}%`,
+    firstTryCorrect: `${firstTryCorrect}/${allQs.length}`,
+    wrongAttempts: totalErrors,
+    details: detailsList.join('; '),
     timestamp: new Date().toISOString()
   };
 
@@ -705,9 +702,22 @@ function submitExam() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).then(() => {
-    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師後台！';
+    document.getElementById('syncStatus').innerText = '✅ 成績與作答歷程已成功同步至教師後台！';
+    document.getElementById('syncStatus').style.background = '#d1fae5';
+    document.getElementById('syncStatus').style.color = '#065f46';
   }).catch(() => {
-    document.getElementById('syncStatus').innerText = '⚠️ 成績已計算（離線暫存模式）。';
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已記錄（離線暫存模式）。';
+  });
+}
+
+function copyReport() {
+  const sName = document.getElementById('studentName').value.trim() || '自主學習同學';
+  const finalScore = document.getElementById('scoreText').innerText;
+  const firstTry = document.getElementById('firstTryText').innerText;
+  const errs = document.getElementById('attemptsText').innerText;
+  const text = `【${document.title} · C1 基礎組成果】\n👤 學生：${sName}\n🏆 得分：${finalScore}\n🎯 首次答對率：${firstTry}\n🔄 累計試錯次數：${errs}\n📅 記錄時間：${new Date().toLocaleString()}`;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('已成功複製學習成果報告！可直接貼在 LINE 或筆記本中。');
   });
 }
 
@@ -717,6 +727,7 @@ window.onload = () => {
     window.speechSynthesis.getVoices();
   }
 };
+
 </script>
 
 </body>

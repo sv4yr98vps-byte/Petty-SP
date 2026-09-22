@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -355,11 +355,11 @@ const vocabQuestions = [
     zhTitle: '1. 萬獸之王「🦁 獅子」，英文是哪一個單字？',
     visual: '🦁 萬獸之王 · 威風凜凜 ➔ [ l _ _ n ]',
     tts: 'The lion is strong.',
-    hint: '提示：萬獸之王是 lion；lemon 是檸檬喔！',
-    options: ['lion', 'lemon', 'line', 'lesson'],
+    hint: '提示：萬獸之王是 lion；tiger 是老虎喔！',
+    options: ['lion', 'monkey', 'zebra', 'elephant'],
     ans: 0,
     expCorrect: '太棒了！lion 代表獅子。',
-    expWrong: '不對喔！lemon 是檸檬，line 是線條，獅子是 lion。'
+    expWrong: '不對喔！monkey 是猴子，zebra 是斑馬，獅子是 lion。'
   },
   {
     id: 'v2',
@@ -367,11 +367,11 @@ const vocabQuestions = [
     zhTitle: '2. 愛吃香蕉、在樹上盪來盪去的「🐒 猴子」，英文是？',
     visual: '🐒 靈活爬樹 · 愛吃香蕉 ➔ [ m _ _ _ _ y ]',
     tts: 'The monkey is in the tree.',
-    hint: '提示：在樹上盪來盪去的是 monkey；money 是金錢喔！',
-    options: ['money', 'monkey', 'monday', 'mouse'],
+    hint: '提示：在樹上盪來盪去的是 monkey 喔！',
+    options: ['bear', 'monkey', 'hippo', 'horse'],
     ans: 1,
     expCorrect: '答對了！monkey 代表猴子。',
-    expWrong: '再想想看！money 是金錢，monday 是星期一，猴子是 monkey。'
+    expWrong: '再想想看！bear 是熊，hippo 是河馬，猴子是 monkey。'
   },
   {
     id: 'v3',
@@ -380,10 +380,10 @@ const vocabQuestions = [
     visual: '🦓 黑白相間條紋 · 草原奔馳 ➔ [ z _ _ _ a ]',
     tts: 'The zebra is running.',
     hint: '提示：身上有黑白斑紋的是 zebra 喔！',
-    options: ['zebra', 'zero', 'zoo', 'zipper'],
-    ans: 0,
+    options: ['tiger', 'zebra', 'lion', 'fox'],
+    ans: 1,
     expCorrect: '答對了！zebra 代表斑馬。',
-    expWrong: '不對喔！zero 是數字零，zoo 是動物園，斑馬是 zebra。'
+    expWrong: '不對喔！tiger 是老虎，斑馬是 zebra。'
   },
   {
     id: 'v4',
@@ -392,10 +392,10 @@ const vocabQuestions = [
     visual: '🐘 龐大體型 · 擁有長鼻子 ➔ [ e _ _ _ _ _ _ t ]',
     tts: 'The elephant has a long nose.',
     hint: '提示：字首為母音 e，長鼻子的是 elephant 喔！',
-    options: ['eight', 'eggplant', 'elephant', 'earth'],
-    ans: 2,
+    options: ['elephant', 'giraffe', 'rabbit', 'koala'],
+    ans: 0,
     expCorrect: '答對了！elephant 代表大象。',
-    expWrong: '再想想看！eight 是數字八，eggplant 是茄子，大象是 elephant。'
+    expWrong: '再想想看！giraffe 是長頸鹿，大象是 elephant。'
   },
   {
     id: 'v5',
@@ -404,10 +404,10 @@ const vocabQuestions = [
     visual: '🦒 長長脖子 · 愛吃樹頂葉子 ➔ [ g _ _ _ _ _ e ]',
     tts: 'The giraffe is very tall.',
     hint: '提示：脖子最長的是 giraffe 喔！',
-    options: ['glue', 'giraffe', 'grape', 'globe'],
+    options: ['kangaroo', 'giraffe', 'hippo', 'bear'],
     ans: 1,
     expCorrect: '太棒了！giraffe 代表長頸鹿。',
-    expWrong: '不對喔！grape 是葡萄，globe 是地球儀，長頸鹿是 giraffe。'
+    expWrong: '不對喔！hippo 是河馬，長頸鹿是 giraffe。'
   },
   {
     id: 'v6',
@@ -415,11 +415,11 @@ const vocabQuestions = [
     zhTitle: '6. 兇猛強壯的森林霸主「🐯 老虎」，英文是？',
     visual: '🐯 森林霸主 · 橘黃黑條紋 ➔ [ t _ _ _ r ]',
     tts: 'The tiger is big and strong.',
-    hint: '提示：森林猛獸是 tiger 喔！',
-    options: ['teacher', 'tower', 'tiger', 'tailor'],
+    hint: '提示：森林猛獸是 tiger；lion 是獅子喔！',
+    options: ['lion', 'zebra', 'tiger', 'monkey'],
     ans: 2,
     expCorrect: '答對了！tiger 代表老虎。',
-    expWrong: '再想想看！teacher 是老師，tower 是塔，老虎是 tiger。'
+    expWrong: '再想想看！lion 是獅子，老虎是 tiger。'
   },
   {
     id: 'v7',
@@ -428,10 +428,10 @@ const vocabQuestions = [
     visual: '🦛 體型圓滾 · 喜歡泡在水裡 ➔ [ h _ _ _ o ]',
     tts: 'The hippo is in the water.',
     hint: '提示：常在泥水裡泡澡的大嘴動物是 hippo 喔！',
-    options: ['hippo', 'hero', 'hello', 'horse'],
+    options: ['hippo', 'bear', 'fox', 'horse'],
     ans: 0,
     expCorrect: '正確！hippo 代表河馬。',
-    expWrong: '不對喔！hero 是英雄，hello 是問候，河馬是 hippo。'
+    expWrong: '不對喔！bear 是熊，河馬是 hippo。'
   },
   {
     id: 'v8',
@@ -440,12 +440,13 @@ const vocabQuestions = [
     visual: '🐻 毛茸茸體型 · 冬天會冬眠 ➔ [ b _ _ r ]',
     tts: 'The bear is sleeping.',
     hint: '提示：體型龐大、毛茸茸的是 bear 喔！',
-    options: ['bird', 'bear', 'beer', 'butter'],
+    options: ['bird', 'bear', 'bug', 'bee'],
     ans: 1,
     expCorrect: '答對了！bear 代表熊。',
-    expWrong: '不對喔！bird 是鳥，beer 是啤酒，熊是 bear。'
+    expWrong: '不對喔！bird 是鳥，熊是 bear。'
   }
 ];
+
 const grammarQuestions = [
   {
     id: 'g1',
@@ -534,98 +535,57 @@ const grammarQuestions = [
 ];
 
 let userAnswers = {};
-
-function renderQuestions() {
-  const vContainer = document.getElementById('vocab-container');
-  const gContainer = document.getElementById('grammar-container');
-
-  vocabQuestions.forEach((q, idx) => {
-    vContainer.appendChild(createQuestionCard(q, idx, 4));
-  });
-
-  grammarQuestions.forEach((q, idx) => {
-    gContainer.appendChild(createQuestionCard(q, idx + vocabQuestions.length, 3));
-  });
-}
-
-function createQuestionCard(q, index, optCount) {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.id = 'card-' + q.id;
-
-  const meta = document.createElement('div');
-  meta.className = 'q-meta';
-  meta.innerHTML = `
-    <span class="module-tag">${q.module}</span>
-    <button type="button" class="hint-btn" onclick="showHint('${q.id}', '${escapeQuotes(q.hint)}')">💡 提示</button>
-  `;
-  card.appendChild(meta);
-
-  const title = document.createElement('div');
-  title.className = 'q-title';
-  title.innerHTML = `
-    <span>${q.zhTitle}</span>
-    <button type="button" class="speaker-btn" onclick="speakEnglish('${escapeQuotes(q.tts)}')">🔊 英文朗讀</button>
-  `;
-  card.appendChild(title);
-
-  const visual = document.createElement('div');
-  visual.className = 'visual-box';
-  visual.innerHTML = q.visual;
-  card.appendChild(visual);
-
-  const grid = document.createElement('div');
-  grid.className = optCount === 4 ? 'options-grid-4' : 'options-grid-3';
-
-  const letters = ['(A)', '(B)', '(C)', '(D)'];
-  q.options.forEach((opt, optIdx) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'opt-btn';
-    btn.id = `btn-${q.id}-${optIdx}`;
-    btn.innerHTML = `<strong>${letters[optIdx]}</strong> ${opt}`;
-    btn.onclick = () => selectOption(q, optIdx);
-    grid.appendChild(btn);
-  });
-  card.appendChild(grid);
-
-  const feedback = document.createElement('div');
-  feedback.className = 'feedback-box';
-  feedback.id = 'fb-' + q.id;
-  card.appendChild(feedback);
-
-  return card;
-}
-
-function escapeQuotes(str) {
-  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-}
+let attemptsPerQ = {};
+let answeredLocked = {};
+let totalErrors = 0;
 
 function selectOption(q, selectedIdx) {
-  userAnswers[q.id] = selectedIdx;
-
-  for (let i = 0; i < q.options.length; i++) {
-    const btn = document.getElementById(`btn-${q.id}-${i}`);
-    if (btn) btn.className = 'opt-btn';
-  }
+  if (answeredLocked[q.id]) return;
+  if (attemptsPerQ[q.id] === undefined) attemptsPerQ[q.id] = 0;
 
   const selectedBtn = document.getElementById(`btn-${q.id}-${selectedIdx}`);
   const fb = document.getElementById('fb-' + q.id);
   fb.style.display = 'block';
 
   if (selectedIdx === q.ans) {
+    answeredLocked[q.id] = true;
+    userAnswers[q.id] = selectedIdx;
     if (selectedBtn) selectedBtn.classList.add('correct');
+
+    const errCount = attemptsPerQ[q.id];
+    let badgeText = '🥇 首次即答對！';
+    if (errCount === 1) {
+      badgeText = '⚠️ 試錯 1 次後答對 (得分 70%)';
+    } else if (errCount === 2) {
+      badgeText = '⚠️ 試錯 2 次後答對 (得分 40%)';
+    } else if (errCount >= 3) {
+      badgeText = '❌ 試錯多次後答對 (鼓勵分 10%)';
+    }
+
     fb.style.background = '#dcfce7';
     fb.style.border = '1px solid #86efac';
     fb.style.color = '#15803d';
-    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect}`;
+    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
     speakChinese(q.expCorrect);
+
+    for (let i = 0; i < q.options.length; i++) {
+      const btn = document.getElementById(`btn-${q.id}-${i}`);
+      if (btn && i !== selectedIdx) {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+      }
+    }
   } else {
-    if (selectedBtn) selectedBtn.classList.add('wrong');
+    attemptsPerQ[q.id]++;
+    totalErrors++;
+    if (selectedBtn) {
+      selectedBtn.classList.add('wrong');
+      selectedBtn.disabled = true;
+    }
     fb.style.background = '#fee2e2';
     fb.style.border = '1px solid #fca5a5';
     fb.style.color = '#b91c1c';
-    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong}`;
+    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[q.id]} 次)</span>`;
     speakChinese(q.expWrong);
   }
 }
@@ -674,28 +634,65 @@ function speakChinese(text) {
 
 function submitExam() {
   const allQs = [...vocabQuestions, ...grammarQuestions];
-  let correctCount = 0;
+  let totalScore = 0;
+  let firstTryCorrect = 0;
+  let detailsList = [];
+  const basePts = 100.0 / allQs.length;
 
-  allQs.forEach(q => {
-    if (userAnswers[q.id] === q.ans) {
-      correctCount++;
+  allQs.forEach((q, idx) => {
+    const errs = attemptsPerQ[q.id] || 0;
+    const isAnswered = answeredLocked[q.id];
+    let multiplier = 0;
+    let badge = '❌ 未作答';
+
+    if (isAnswered) {
+      if (errs === 0) {
+        multiplier = 1.0;
+        firstTryCorrect++;
+        badge = '🥇 首次即答對 (滿分)';
+      } else if (errs === 1) {
+        multiplier = 0.7;
+        badge = '⚠️ 試錯 1 次 (70% 分數)';
+      } else if (errs === 2) {
+        multiplier = 0.4;
+        badge = '⚠️ 試錯 2 次 (40% 分數)';
+      } else {
+        multiplier = 0.1;
+        badge = '❌ 試錯多次 (10% 鼓勵分)';
+      }
     }
+    totalScore += basePts * multiplier;
+    detailsList.push(`第 ${idx + 1} 題: ${badge}`);
   });
 
-  const finalScore = Math.round((correctCount / allQs.length) * 100);
+  const finalScore = Math.max(10, Math.round(totalScore));
+  const firstTryRate = Math.round((firstTryCorrect / allQs.length) * 100);
   const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
 
-  document.getElementById('scoreText').innerText = finalScore;
+  document.getElementById('scoreText').innerText = `${finalScore} 分`;
+  document.getElementById('firstTryText').innerText = `${firstTryCorrect} / ${allQs.length} 題 (${firstTryRate}%)`;
+  document.getElementById('attemptsText').innerText = `${totalErrors} 次`;
+  document.getElementById('certStudentText').innerText = `學生：${sName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 精熟特優' : (finalScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
+
+  const detailBox = document.getElementById('resDetailsContainer');
+  if (detailBox) {
+    detailBox.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+  }
+
   document.getElementById('scoreBanner').style.display = 'block';
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
+  speakChinese(`評量完成！最終得分 ${finalScore} 分，首次答對 ${firstTryCorrect} 題。`);
+
   const payload = {
-    unit: '國一 L1 動物生詞與形容詞',
+    unit: document.title || '國中英語差異化學習單',
     level: 'C1 基礎組',
     name: sName,
     score: finalScore,
-    totalQuestions: allQs.length,
-    correctCount: correctCount,
+    firstTryRate: `${firstTryRate}%`,
+    firstTryCorrect: `${firstTryCorrect}/${allQs.length}`,
+    wrongAttempts: totalErrors,
+    details: detailsList.join('; '),
     timestamp: new Date().toISOString()
   };
 
@@ -705,9 +702,22 @@ function submitExam() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).then(() => {
-    document.getElementById('syncStatus').innerText = '✅ 成績已成功記錄並同步至教師後台！';
+    document.getElementById('syncStatus').innerText = '✅ 成績與作答歷程已成功同步至教師後台！';
+    document.getElementById('syncStatus').style.background = '#d1fae5';
+    document.getElementById('syncStatus').style.color = '#065f46';
   }).catch(() => {
-    document.getElementById('syncStatus').innerText = '⚠️ 成績已計算（離線暫存模式）。';
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已記錄（離線暫存模式）。';
+  });
+}
+
+function copyReport() {
+  const sName = document.getElementById('studentName').value.trim() || '自主學習同學';
+  const finalScore = document.getElementById('scoreText').innerText;
+  const firstTry = document.getElementById('firstTryText').innerText;
+  const errs = document.getElementById('attemptsText').innerText;
+  const text = `【${document.title} · C1 基礎組成果】\n👤 學生：${sName}\n🏆 得分：${finalScore}\n🎯 首次答對率：${firstTry}\n🔄 累計試錯次數：${errs}\n📅 記錄時間：${new Date().toLocaleString()}`;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('已成功複製學習成果報告！可直接貼在 LINE 或筆記本中。');
   });
 }
 
@@ -717,6 +727,7 @@ window.onload = () => {
     window.speechSynthesis.getVoices();
   }
 };
+
 </script>
 
 </body>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -182,37 +182,71 @@
   <button class="btn-submit-all" onclick="submitAllExercises()">🎉 完成並結算學習成績</button>
 
   <div class="completion-card" id="completionCard">
-    <div style="font-size:3.5rem; margin-bottom:8px;">🏆</div>
-    <h2 style="color:#b45309; font-size:1.8rem;">恭喜完成九年級完成式與飲食文化 C2 進階任務！</h2>
-    <p id="certStudentText" style="color:var(--text-muted); font-size:1.1rem; margin-top:4px;">學生：未填寫 ｜ 評價：⭐⭐⭐</p>
-    
-    <div class="sync-status-box" id="syncStatusBanner">
-      📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
-    </div>
+    <div style="font-size:3.2rem; line-height:1;">🏆</div>
+    <h2 style="font-size:1.6rem; color:#0369a1; margin:10px 0 4px;">恭喜完成 C2 應用組練習！</h2>
+    <div id="certStudentText" style="font-weight:700; color:var(--text); margin-bottom:18px; font-size:1.05rem;">學生：自主學習同學 ｜ 表現評價：⭐⭐⭐</div>
 
     <div class="stat-grid">
       <div class="stat-box">
-        <div class="stat-val" id="resScore">100 分</div>
-        <div class="stat-lbl">真實得分</div>
+        <div class="stat-val" id="resScore">-- 分</div>
+        <div class="stat-lbl">🏆 結算總分 (含試錯折算)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resFirstTry">-- / --</div>
+        <div class="stat-lbl">🎯 首次即組對率</div>
       </div>
       <div class="stat-box">
         <div class="stat-val" id="resAttempts">0 次</div>
-        <div class="stat-lbl">檢查嘗試次數</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="resCorrect">10 / 10</div>
-        <div class="stat-lbl">完成題數</div>
+        <div class="stat-lbl">🔄 累計試錯次數</div>
       </div>
     </div>
 
+    <!-- 逐題作答歷程診斷明細 -->
+    <div style="text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin:16px 0;">
+      <div style="font-weight:700; color:#334155; margin-bottom:10px; display:flex; align-items:center; gap:6px; font-size:0.95rem;">
+        <span>📋 逐題組句診斷明細</span>
+        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">(精確掌握學生首次組句 vs. 試錯歷程)</span>
+      </div>
+      <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto; padding-right:4px;"></div>
+    </div>
+
+    <div class="sync-status-box" id="syncStatusBanner">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+
     <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
-      <button class="btn-small" style="background:#d97706; color:white; padding:10px 20px; font-size:1rem; border:none; border-radius:8px;" onclick="manualSync()">☁️ 重新同步儀表板</button>
-      <button class="btn-small" style="background:#10b981; color:white; padding:10px 20px; font-size:1rem; border:none; border-radius:8px;" onclick="copyReport()">📋 一鍵複製成果</button>
-      <button class="btn-small" style="background:#64748b; color:white; padding:10px 20px; font-size:1rem; border:none; border-radius:8px;" onclick="location.reload()">🔄 重新練習</button>
-      <a href="index.html" class="btn-small" style="background:#0f172a; color:white; padding:10px 20px; font-size:1rem; text-decoration:none; border-radius:8px;">🏠 回首頁</a>
+      <button class="btn-nav" style="background:#0284c7;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="btn-nav" style="background:#10b981;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" class="btn-nav" style="text-decoration:none; background:#0f172a; display:inline-block;">🏠 回首頁</a>
     </div>
   </div>
-</div>
+      <div class="stat-box">
+        <div class="stat-val" id="resFirstTry">-- / --</div>
+        <div class="stat-lbl">🎯 首次即組對率</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resAttempts">0 次</div>
+        <div class="stat-lbl">🔄 累計試錯次數</div>
+      </div>
+    </div>
+
+    <!-- 逐題作答歷程診斷明細 -->
+    <div style="text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin:16px 0;">
+      <div style="font-weight:700; color:#334155; margin-bottom:10px; display:flex; align-items:center; gap:6px; font-size:0.95rem;">
+        <span>📋 逐題組句診斷明細</span>
+        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">(精確掌握學生首次組句 vs. 試錯歷程)</span>
+      </div>
+      <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto; padding-right:4px;"></div>
+    </div>
+
+    <div class="sync-status-box" id="syncStatusBanner">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+      <button class="btn-nav" style="background:#0284c7;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="btn-nav" style="background:#10b981;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" class="btn-nav" style="text-decoration:none; background:#0f172a; display:inline-block;">🏠 回首頁</a>
+    </div>
+  </div>
 
 <script>
   const synth = window.speechSynthesis;
@@ -432,65 +466,114 @@
     dropZone.className = 'drop-zone empty';
     dropZone.innerHTML = '';
   }
+  let attemptsPerEx = {};
+  let totalWrongChecks = 0;
 
-  function checkEx(exId) {
-    totalChecks++;
+function checkSentence(exId) {
+    if (attemptsPerEx[exId] === undefined) attemptsPerEx[exId] = 0;
     const ex = exercises.find(e => e.id === exId);
     const dropZone = document.getElementById(`drop-${exId}`);
-    const currentSentence = state[exId].selected.map(s => s.word).join(' ');
+    const selectedWords = (state[exId]?.selected || (typeof userState !== 'undefined' ? userState[exId]?.selected : []) || []).map(s => s.word).join(' ');
     const targetSentence = ex.target.join(' ');
 
-    if (currentSentence === targetSentence) {
+    if (selectedWords === targetSentence) {
       dropZone.classList.remove('incorrect');
       dropZone.classList.add('correct');
-      state[exId].completed = true;
-      speakChinese('太棒了！句子排列完全正確！');
-      setTimeout(() => speakEnglish(targetSentence), 1000);
+      
+      const errs = attemptsPerEx[exId];
+      let badge = '🥇 首次即組對！';
+      if (errs === 1) badge = '⚠️ 試錯 1 次後組對 (得分 70%)';
+      else if (errs === 2) badge = '⚠️ 試錯 2 次後組對 (得分 40%)';
+      else if (errs >= 3) badge = '❌ 試錯多次後組對 (鼓勵分 10%)';
+
+      speakChinese(`完全正確！太棒了！${badge}`);
+      setTimeout(() => speakEnglish(targetSentence), 600);
     } else {
+      attemptsPerEx[exId]++;
+      totalWrongChecks++;
       dropZone.classList.remove('correct');
       dropZone.classList.add('incorrect');
-      speakChinese('順序有誤，請再試一次喔！');
+      speakChinese(`順序有誤，請再試一次喔！(已試錯 ${attemptsPerEx[exId]} 次)`);
     }
   }
 
+  function checkEx(exId) {
+    checkSentence(exId);
+  }
+
   function submitAllExercises() {
-    let completedCount = 0;
-    exercises.forEach(ex => {
+    let totalScore = 0;
+    let firstTryCount = 0;
+    let detailsList = [];
+    const basePts = 100.0 / exercises.length;
+
+    exercises.forEach((ex, idx) => {
       const targetSentence = ex.target.join(' ');
-      const currentSentence = state[ex.id].selected.map(s => s.word).join(' ');
-      if (currentSentence === targetSentence) {
-        completedCount++;
+      const userSelected = (state[ex.id]?.selected || (typeof userState !== 'undefined' ? userState[ex.id]?.selected : []) || []).map(s => s.word).join(' ');
+      const isCorrect = (userSelected === targetSentence);
+      const errs = attemptsPerEx[ex.id] || 0;
+      let multiplier = 0;
+      let badge = '❌ 未完成';
+
+      if (isCorrect) {
+        if (errs === 0) {
+          multiplier = 1.0;
+          firstTryCount++;
+          badge = '🥇 首次即組對 (滿分)';
+        } else if (errs === 1) {
+          multiplier = 0.7;
+          badge = '⚠️ 試錯 1 次 (70% 分數)';
+        } else if (errs === 2) {
+          multiplier = 0.4;
+          badge = '⚠️ 試錯 2 次 (40% 分數)';
+        } else {
+          multiplier = 0.1;
+          badge = '❌ 試錯多次 (10% 鼓勵分)';
+        }
       }
+      totalScore += basePts * multiplier;
+      detailsList.push(`第 ${idx + 1} 題: ${badge}`);
     });
 
-    const score = Math.round((completedCount / exercises.length) * 100);
-    document.getElementById('resScore').textContent = `${score} 分`;
-    document.getElementById('resAttempts').textContent = `${totalChecks} 次`;
-    document.getElementById('resCorrect').textContent = `${completedCount} / ${exercises.length}`;
+    const finalScore = Math.max(10, Math.round(totalScore));
+    const firstTryRate = Math.round((firstTryCount / exercises.length) * 100);
+
+    document.getElementById('resScore').textContent = `${finalScore} 分`;
+    document.getElementById('resFirstTry').textContent = `${firstTryCount} / ${exercises.length} 題 (${firstTryRate}%)`;
+    document.getElementById('resAttempts').textContent = `${totalWrongChecks} 次`;
+
+    const detailBox = document.getElementById('resDetailsContainer');
+    if (detailBox) {
+      detailBox.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+    }
 
     const displayName = studentName || '自主學習同學';
-    document.getElementById('certStudentText').textContent = `學生：${displayName} ｜ 表現評價：${score >= 90 ? '⭐⭐⭐ 特優' : (score >= 70 ? '⭐⭐ 良好' : '⭐ 加油')}`;
+    document.getElementById('certStudentText').textContent = `學生：${displayName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 特優' : (finalScore >= 70 ? '⭐⭐ 良好' : '⭐ 加油')}`;
 
     document.getElementById('completionCard').style.display = 'block';
     document.getElementById('completionCard').scrollIntoView({ behavior: 'smooth' });
 
-    speakChinese(`任務完成！得分為 ${score} 分。`);
-    syncToDashboard(displayName, score, completedCount);
+    speakChinese(`任務完成！得分為 ${finalScore} 分，首次組對 ${firstTryCount} 題。`);
+    syncToDashboard(displayName, finalScore, firstTryCount, firstTryRate, totalWrongChecks, detailsList.join('; '));
   }
 
-  function syncToDashboard(name, scoreVal, correctVal) {
+  function syncToDashboard(name, scoreVal, firstTryVal, firstTryRateVal, wrongVal, detailsStr) {
     const banner = document.getElementById('syncStatusBanner');
-    banner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
-    banner.style.background = '#eff6ff';
+    if (banner) {
+      banner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+      banner.style.background = '#eff6ff';
+    }
 
     const payload = {
       timestamp: new Date().toISOString(),
-      unit: '九年級 L1 現在完成式與飲食文化',
-      level: 'C2 進階組',
+      unit: document.title || '國中英語差異化學習單',
+      level: 'C2 應用組',
       student: name,
       score: scoreVal,
-      correctCount: `${correctVal}/${exercises.length}`,
-      wrongAttempts: totalChecks - correctVal
+      firstTryRate: `${firstTryRateVal}%`,
+      firstTryCorrect: `${firstTryVal}/${exercises.length}`,
+      wrongAttempts: wrongVal,
+      details: detailsStr
     };
 
     fetch(gasUrl, {
@@ -499,33 +582,41 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).then(() => {
-      banner.textContent = '✅ 成績已成功自動同步至雲端學習歷程儀表板！';
-      banner.style.background = '#d1fae5';
-      banner.style.color = '#065f46';
+      if (banner) {
+        banner.textContent = '✅ 成績與作答歷程已成功同步至教師後台！';
+        banner.style.background = '#d1fae5';
+        banner.style.color = '#065f46';
+      }
     }).catch(err => {
-      banner.textContent = '⚠️ 雲端同步完成 (離線緩存模式)';
-      banner.style.background = '#fef3c7';
-      banner.style.color = '#92400e';
+      if (banner) {
+        banner.textContent = '⚠️ 雲端同步完成 (離線緩存模式)';
+        banner.style.background = '#fef3c7';
+        banner.style.color = '#92400e';
+      }
     });
   }
 
   function manualSync() {
     const displayName = studentName || '自主學習同學';
-    const scoreVal = parseInt(document.getElementById('resScore').textContent);
-    syncToDashboard(displayName, scoreVal, 10);
+    const scoreVal = parseInt(document.getElementById('resScore').textContent) || 90;
+    const firstTryVal = parseInt(document.getElementById('resFirstTry').textContent) || exercises.length;
+    const firstTryRateVal = Math.round((firstTryVal / exercises.length) * 100);
+    syncToDashboard(displayName, scoreVal, firstTryVal, firstTryRateVal, totalWrongChecks, '手動同步');
   }
 
   function copyReport() {
     const displayName = studentName || '自主學習同學';
     const scoreVal = document.getElementById('resScore').textContent;
-    const text = `【九年級 L1 現在完成式與飲食文化 · C2 進階組成果】\n學生：${displayName}\n得分：${scoreVal}\n完成題數：10/10\n檢查次數：${totalChecks}\n記錄時間：${new Date().toLocaleString()}`;
+    const firstTryVal = document.getElementById('resFirstTry').textContent;
+    const errVal = document.getElementById('resAttempts').textContent;
+    const text = `【${document.title} · C2 應用組成果】\n👤 學生：${displayName}\n🏆 得分：${scoreVal}\n🎯 首次組對率：${firstTryVal}\n🔄 累計試錯次數：${errVal}\n📅 記錄時間：${new Date().toLocaleString()}`;
     navigator.clipboard.writeText(text).then(() => {
       alert('已成功複製學習成果報告！');
     });
   }
 
-  updateStudentDisplay();
-  initExercises();
+  if (typeof renderExercises === 'function') renderExercises();
+
 </script>
 </body>
 </html>
