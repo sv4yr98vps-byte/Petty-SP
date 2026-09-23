@@ -3,119 +3,243 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】L2 外送平台與情緒形容詞 10題線上抽測</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>國中英語【國三 · 九年級】L2 外送平台與情緒形容詞 10題隨機抽測</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=LXGW+WenKai+TC&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0284c7;
-      --primary-hover: #0369a1;
-      --bg: #f0f9ff;
+      --bg-color: #f8fafc;
       --card-bg: #ffffff;
-      --text: #0c4a6e;
-      --border: #bae6fd;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --border-color: #e2e8f0;
+      --toolbar-bg: rgba(255, 255, 255, 0.94);
+      --font-size: 16pt;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --border-color: #334155;
+      --toolbar-bg: rgba(30, 41, 59, 0.94);
+    }
+    
     body {
-      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: var(--font-size);
       line-height: 1.6;
-      padding-bottom: 50px;
+      transition: background-color 0.2s, color 0.2s;
     }
-
-    header {
-      background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
-      color: white;
-      padding: 24px 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(2,132,199,0.15);
-    }
-
-    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
-    header p { font-size: 0.95rem; opacity: 0.95; }
-
-    .container {
-      max-width: 820px;
-      margin: 20px auto;
-      padding: 0 16px;
-    }
-
-    .info-bar {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
+    
+    .toolbar {
+      position: sticky;
+      top: 0;
+      background: var(--toolbar-bg);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
       gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-
-    .input-name {
-      padding: 7px 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-family: inherit;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-    }
-
-    .q-prompt {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
+    
+    .toolbar-group {
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
-
-    .btn-speak {
-      background: #e0f2fe;
-      border: 1px solid #7dd3fc;
-      color: #0369a1;
-      border-radius: 20px;
-      padding: 3px 10px;
-      font-size: 0.85rem;
+    
+    .btn {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 8px;
       cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .btn:hover {
+      background-color: var(--border-color);
+      transform: translateY(-1px);
     }
 
-    .btn-speak:hover { background: #0284c7; color: white; }
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      font-weight: 700;
+    }
 
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      color: white;
+    }
+    
+    select {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    
+    .container {
+      max-width: 920px;
+      margin: 25px auto 60px;
+      padding: 0 20px;
+    }
+    
+    .paper-header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+    
+    .paper-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.85rem;
+      color: var(--text-main);
+    }
+    
+    .student-badge-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: var(--card-bg);
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    
+    .student-name-tag {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px dashed var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .section-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+    }
+    
+    .question-card {
+      margin-bottom: 22px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      transition: background-color 0.2s, border-color 0.2s;
+      border: 1.5px solid var(--border-color);
+      background: var(--card-bg);
+    }
+
+    .question-card.answered {
+      border-color: #93c5fd;
+      background: rgba(59, 130, 246, 0.02);
+    }
+    
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.6;
+    }
+    
+    .speaker-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 20px;
+      line-height: 1;
+      transition: transform 0.1s, background 0.15s;
+      flex-shrink: 0;
+    }
+    
+    .speaker-btn:hover {
+      background: #e2e8f0;
+      transform: scale(1.08);
+    }
+    
+    .read-sentence {
+      cursor: pointer;
+      border-radius: 4px;
+      padding: 2px 4px;
+      transition: background-color 0.2s;
+    }
+    
+    .read-sentence:hover {
+      background-color: rgba(37, 99, 235, 0.1);
+      text-decoration: underline;
+    }
+    
     .options-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 10px;
       margin-top: 10px;
     }
-
-    @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
-
+    
     .opt-btn {
-      background: #f8fafc;
-      border: 1.5px solid #e2e8f0;
-      padding: 10px 14px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 16px;
       border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
       text-align: left;
-      font-size: 0.98rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .opt-btn:hover { background: #f1f5f9; }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.04);
+      transform: translateY(-1px);
+    }
 
     .opt-btn.correct {
       background: #dcfce7 !important;
@@ -128,237 +252,622 @@
       background: #fee2e2 !important;
       border-color: #ef4444 !important;
       color: #b91c1c !important;
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
-    .bottom-bar { text-align: center; margin-top: 30px; }
+    .feedback-box {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .submit-area {
+      text-align: center;
+      margin: 35px 0;
+    }
 
     .btn-submit {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px 36px;
-      border-radius: 30px;
-      font-size: 1.15rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(2,132,199,0.3);
+      font-size: 1.25rem;
+      padding: 14px 40px;
+      border-radius: 14px;
+      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
     }
 
-    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .report-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      max-width: 780px;
+      width: 100%;
+      padding: 30px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      border: 1px solid var(--border-color);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .score-circle {
+      text-align: center;
+      margin: 15px 0 25px;
+    }
+
+    .score-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4.2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .score-high { color: #059669; }
+    .score-mid { color: #d97706; }
+    .score-low { color: #dc2626; }
+
+    .sync-banner {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 10px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .history-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #f1f5f9;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-right: 6px;
+      color: #334155;
+    }
+
+    @media print {
+      .toolbar, .submit-area, .speaker-btn, .btn { display: none !important; }
+      body { background: white; color: black; font-size: 16pt; }
+      .section-card { border: none; box-shadow: none; padding: 0; }
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>國中英語【國三 · 九年級】L2 外送平台與情緒形容詞</h1>
-    <p>🎲 核心大題庫 · 線上隨機抽取 10 題 · Google 試算表即時同步</p>
-  </header>
+  <!-- 頂部工具列 -->
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <button class="btn" onclick="toggleTheme()">🌓 主題</button>
+      <button class="btn btn-primary" onclick="reshuffleAndRender()">🎲 換題抽測 (隨機10題)</button>
+      
+      <label for="font-size-select">🔍 字型：</label>
+      <select id="font-size-select" onchange="changeFontSize(this.value)">
+        <option value="14pt">中 14pt</option>
+        <option value="16pt" selected>大字 16pt</option>
+        <option value="18pt">特大 18pt</option>
+        <option value="20pt">超大 20pt</option>
+      </select>
+    </div>
+    
+    <div class="toolbar-group">
+      <span style="background:rgba(37,99,235,0.1); color:var(--primary); padding:4px 10px; border-radius:8px; font-size:0.88rem; font-weight:bold; border:1px solid rgba(37,99,235,0.2);">
+        🗣️ 🌟 Google 雙語智慧語音 (已鎖定)
+      </span>
+      
+      <label for="speech-rate">⚡ 語速：</label>
+      <select id="speech-rate">
+        <option value="0.25">🐢 0.25x (極慢·發音解碼)</option>
+        <option value="0.5">🐢 0.5x (慢速精聽)</option>
+        <option value="0.75">0.75x (清晰學習)</option>
+        <option value="0.85" selected>0.85x (適中推薦)</option>
+        <option value="1.0">1.0x (標準原速)</option>
+      </select>
+      <button class="btn" onclick="stopSpeech()">🛑 停止</button>
+    </div>
+  </div>
 
   <div class="container">
-    <div class="info-bar">
+    <div class="paper-header">
+      <h1>國中英語【國三 · 九年級】外送平台與情緒形容詞評量測驗</h1>
+      <p style="margin:4px 0; color:var(--text-muted);">🎯 40 題核心大題庫動態抽題 · 點選立即判定與試錯扣分 · 雲端歷程追蹤</p>
+    </div>
+
+    <div class="student-badge-bar">
       <div>
-        <label>👤 學生姓名 / 座號：</label>
-        <input type="text" id="studentName" class="input-name" placeholder="例：901 郭同學">
+        <span>👤 作答學生：</span>
+        <span class="student-name-tag" id="studentDisplay" onclick="promptStudentName()">點此輸入姓名與座號</span>
       </div>
       <div>
-        <label>⚡ 朗讀語速：</label>
-        <select id="speedSelect" style="padding:5px 8px; border-radius:6px; border:1px solid #cbd5e1;">
-          <option value="0.25">🐢 0.25x 極慢速</option>
-          <option value="0.4">🐢 0.4x 慢速</option>
-          <option value="0.6">0.6x 初學</option>
-          <option value="0.85" selected>0.85x 適中</option>
-          <option value="1.0">1.0x 標準</option>
-        </select>
-        <a href="index.html" style="text-decoration:none; margin-left:8px; color:var(--primary); font-weight:bold;">🏠 回單元首頁</a>
+        <span id="bankCountLabel">📊 題庫總數：40 題 (隨機抽選 10 題)</span>
+        <span style="margin-left: 12px;">💯 配分：每題 10 分，滿分 100 分</span>
       </div>
     </div>
 
-    <div id="quiz-container"></div>
+    <div class="section-card">
+      <h2 style="margin-top:0; border-bottom: 2px solid var(--primary); padding-bottom:8px; font-size:1.35rem;">
+        ✍️ 單元線上隨機測驗 (共 10 題 · 點選立即回饋)
+      </h2>
+      
+      <div id="questions-container">
+        <!-- 動態渲染隨機 10 題 -->
+      </div>
 
-    <div class="bottom-bar">
-      <button class="btn-submit" onclick="submitQuiz()" type="button">📤 交卷並同步至全班學習儀表板</button>
-      <div id="submit-status" style="margin-top:14px; font-weight:bold; font-size:1.05rem;"></div>
+      <div class="submit-area">
+        <button class="btn btn-primary btn-submit" onclick="submitExam()">
+          📝 繳交試卷並計算成績
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 成果診斷與成績報告卡片 (Modal) -->
+  <div class="modal-overlay" id="reportModal">
+    <div class="report-card">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <h2 style="margin:0; font-size:1.6rem; color:var(--text-main);">📊 學習成果診斷報告</h2>
+        <button class="btn" onclick="closeReport()">✕ 關閉</button>
+      </div>
+
+      <div class="score-circle">
+        <div class="score-number" id="reportScore">--</div>
+        <div style="font-size:1.15rem; font-weight:bold;" id="reportLevelText">評語載入中...</div>
+      </div>
+
+      <!-- 雲端同步狀態標籤 -->
+      <div class="sync-banner" id="syncStatus">
+        📡 正在同步成績至老師的 Google 雲端學習歷程儀表板...
+      </div>
+
+      <div style="background:rgba(0,0,0,0.03); padding:16px; border-radius:12px; margin-bottom:20px; font-size:0.95rem;">
+        <div>👤 <strong>作答學生：</strong> <span id="reportStudent"></span></div>
+        <div>📅 <strong>完成時間：</strong> <span id="reportTime"></span></div>
+        <div style="margin-top:4px;">📈 <strong>個人成長走勢：</strong> <span id="reportHistory"></span></div>
+      </div>
+
+      <div id="diagnosisSection" style="margin-top:15px;">
+        <h3 style="font-size:1.1rem; border-bottom:1.5px solid var(--border-color); padding-bottom:6px; margin-bottom:10px;">
+          📋 逐題作答診斷明細
+        </h3>
+        <div id="diagnosisList" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:0.88rem;"></div>
+      </div>
+
+      <div style="margin-top:25px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="reshuffleAndRender(); closeReport();" style="padding:10px 24px; font-size:1.05rem;">
+          🎲 換一批新題目重新挑戰
+        </button>
+        <button class="btn" onclick="closeReport()" style="padding:10px 24px; font-size:1.05rem;">
+          👀 查看目前作答考卷
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
-    
-    // 大題庫 (共 20 題供每次隨機抽取 10 題)
-    const questionBank = [
-      { q: 'What is the English word for "運送；遞送"?', opts: ['delivery', 'uniform', 'discount', 'reason'], ans: 0 },
-      { q: 'What is the English word for "制服"?', opts: ['couch', 'uniform', 'driver', 'chance'], ans: 1 },
-      { q: 'What is the English word for "折扣"?', opts: ['location', 'chart', 'discount', 'button'], ans: 2 },
-      { q: 'What is the English word for "感興趣的 (人感到...)"?', opts: ['interesting', 'interested', 'boring', 'tired'], ans: 1 },
-      { q: 'What is the English word for "令人興奮的 (事物令人...)"?', opts: ['excited', 'exciting', 'bored', 'tiring'], ans: 1 },
-      { q: 'The cartoon is very ________ to the children.', opts: ['interesting', 'interested', 'bored', 'tired'], ans: 0 },
-      { q: 'Peter is ________ with the boring lecture.', opts: ['bored', 'boring', 'exciting', 'surprising'], ans: 0 },
-      { q: 'We are all excited ________ our graduation trip.', opts: ['about', 'in', 'at', 'with'], ans: 0 },
-      { q: 'She was very surprised ________ the sudden news.', opts: ['at', 'in', 'about', 'with'], ans: 0 },
-      { q: 'Are you tired ________ doing the same homework every day?', opts: ['of', 'in', 'about', 'to'], ans: 0 },
-      { q: 'Many people believe ________ delivery apps save a lot of time.', opts: ['that', 'which', 'what', 'who'], ans: 0 },
-      { q: 'Jane told me that she ________ to the movies with me.', opts: ['could go', 'can go', 'is going', 'goes'], ans: 0 },
-      { q: 'Amy said that she ________ tired after working all day.', opts: ['was', 'is', 'be', 'are'], ans: 0 },
-      { q: 'Please check your delivery ________ on the map.', opts: ['location', 'reason', 'page', 'button'], ans: 0 },
-      { q: 'The app offers a 20% ________ for new users.', opts: ['discount', 'uniform', 'couch', 'driver'], ans: 0 },
-      { q: 'He gave the delivery driver a generous ________.', opts: ['tip', 'page', 'chart', 'list'], ans: 0 },
-      { q: 'What is the English word for "至少"?', opts: ['at least', 'in a word', 'first of all', 'what is more'], ans: 0 },
-      { q: 'What is the English word for "輕觸；輕點"?', opts: ['tap', 'mind', 'offer', 'age'], ans: 0 },
-      { q: 'The big dog is scary, and the boy is ________.', opts: ['scared', 'scary', 'boring', 'interested'], ans: 0 },
-      { q: 'Climbing up the stairs with five boxes is ________.', opts: ['tiring', 'tired', 'bored', 'surprised'], ans: 0 }
-    ];
+    const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
 
-    let currentQuiz = [];
-    const userAnswers = {};
+    const QUESTION_BANK = [
+  {"id":1, "type":"vocab", "question":"「外送平台」的英文是？", "options":["delivery platform", "traffic light", "railway station", "airport"], "answerText":"delivery platform", "explanation":"delivery platform 代表外送平台。"},
+  {"id":2, "type":"vocab", "question":"「感到興奮的（修飾人）」英文是？", "options":["excited", "exciting", "bored", "boring"], "answerText":"excited", "explanation":"excited 形容人感到興奮。"},
+  {"id":3, "type":"vocab", "question":"「令人興奮的（修飾事物）」英文是？", "options":["exciting", "excited", "tired", "tiring"], "answerText":"exciting", "explanation":"exciting 形容事物令人興奮。"},
+  {"id":4, "type":"vocab", "question":"「感到厭倦、無聊的（修飾人）」英文是？", "options":["bored", "boring", "surprised", "surprising"], "answerText":"bored", "explanation":"bored 形容人感到無聊。"},
+  {"id":5, "type":"vocab", "question":"「令人無聊乏味的（修飾事物）」英文是？", "options":["boring", "bored", "interested", "interesting"], "answerText":"boring", "explanation":"boring 形容事物無趣。"},
+  {"id":6, "type":"vocab", "question":"「感到疲憊的（修飾人）」英文是？", "options":["tired", "tiring", "scared", "scary"], "answerText":"tired", "explanation":"tired 形容人感到疲累。"},
+  {"id":7, "type":"vocab", "question":"「令人疲倦的（修飾事物）」英文是？", "options":["tiring", "tired", "excited", "exciting"], "answerText":"tiring", "explanation":"tiring 形容事物令人疲憊。"},
+  {"id":8, "type":"vocab", "question":"「感到驚訝的（修飾人）」英文是？", "options":["surprised", "surprising", "bored", "boring"], "answerText":"surprised", "explanation":"surprised 形容人感到驚訝。"},
+  {"id":9, "type":"vocab", "question":"「令人驚訝的（修飾事物）」英文是？", "options":["surprising", "surprised", "tired", "tiring"], "answerText":"surprising", "explanation":"surprising 形容事情令人驚訝。"},
+  {"id":10, "type":"vocab", "question":"「感到害怕的（修飾人）」英文是？", "options":["scared", "scary", "excited", "exciting"], "answerText":"scared", "explanation":"scared 形容人感到害怕。"},
+  {"id":11, "type":"vocab", "question":"「令人害怕的、恐怖的（修飾事物）」英文是？", "options":["scary", "scared", "bored", "boring"], "answerText":"scary", "explanation":"scary 形容事物可怕。"},
+  {"id":12, "type":"vocab", "question":"「訂購、下單」的動詞是？", "options":["order", "deliver", "pay", "cook"], "answerText":"order", "explanation":"order 代表點餐、訂購。"},
+  {"id":13, "type":"vocab", "question":"「運送、外送」的動詞是？", "options":["deliver", "order", "receive", "make"], "answerText":"deliver", "explanation":"deliver 代表遞送、外送。"},
+  {"id":14, "type":"vocab", "question":"「方便的、便利的」英文形容詞是？", "options":["convenient", "difficult", "traditional", "famous"], "answerText":"convenient", "explanation":"convenient 代表方便的。"},
+  {"id":15, "type":"vocab", "question":"「應用程式 (App)」的英文全名是？", "options":["application", "appetite", "apartment", "appointment"], "answerText":"application", "explanation":"app 為 application 之簡寫。"},
+  {"id":16, "type":"vocab", "question":"「外送員、外送司機」的英文是？", "options":["delivery driver", "taxi driver", "bus driver", "pilot"], "answerText":"delivery driver", "explanation":"delivery driver 代表外送員。"},
+  {"id":17, "type":"vocab", "question":"「線上、在網路上」的英文是？", "options":["online", "offline", "line", "inline"], "answerText":"online", "explanation":"online 代表在線上、在網路上。"},
+  {"id":18, "type":"vocab", "question":"「餐點」的英文名詞是？", "options":["meal", "food", "drink", "dish"], "answerText":"meal", "explanation":"meal 代表一餐、餐點。"},
+  {"id":19, "type":"vocab", "question":"「迅速地、快速地」英文副詞是？", "options":["quickly", "slowly", "hardly", "loudly"], "answerText":"quickly", "explanation":"quickly 代表迅速地。"},
+  {"id":20, "type":"vocab", "question":"「顧客、客人」的英文是？", "options":["customer", "driver", "waiter", "cook"], "answerText":"customer", "explanation":"customer 代表顧客。"},
+  {"id":21, "type":"context", "question":"Ordering food through mobile apps is very ________ for busy modern people.", "options":["convenient", "scary", "angry", "boring"], "answerText":"convenient", "explanation":"透過 App 訂餐非常便利 (convenient)。"},
+  {"id":22, "type":"context", "question":"The news about the typhoon made everyone ________.", "options":["worried", "worrying", "scary", "boring"], "answerText":"worried", "explanation":"颱風消息使大家感到擔憂 (worried)。"},
+  {"id":23, "type":"context", "question":"This science movie is very ________. I want to watch it again.", "options":["exciting", "excited", "tired", "tiring"], "answerText":"exciting", "explanation":"電影令人興奮精彩使用 exciting。"},
+  {"id":24, "type":"context", "question":"After working for ten hours, the delivery driver felt very ________.", "options":["tired", "tiring", "excited", "exciting"], "answerText":"tired", "explanation":"連續工作十小時後，感到非常疲累 (tired)。"},
+  {"id":25, "type":"context", "question":"The food delivery app helps customers get meals ________.", "options":["quickly", "slowly", "angrily", "sadly"], "answerText":"quickly", "explanation":"協助顧客迅速 (quickly) 取得餐點。"},
+  {"id":26, "type":"context", "question":"I am ________ in learning how to develop a smartphone application.", "options":["interested", "interesting", "bored", "boring"], "answerText":"interested", "explanation":"be interested in (對...感興趣)。"},
+  {"id":27, "type":"context", "question":"The sudden loud noise ________ all the students in the classroom.", "options":["scared", "tired", "bored", "excited"], "answerText":"scared", "explanation":"突然的巨響嚇到了 (scared) 學生。"},
+  {"id":28, "type":"context", "question":"My sister was ________ when she received a lovely birthday gift.", "options":["surprised", "surprising", "tiring", "boring"], "answerText":"surprised", "explanation":"收到禮物感到驚喜 (surprised)。"},
+  {"id":29, "type":"context", "question":"The long speech was so ________ that many people fell asleep.", "options":["boring", "bored", "excited", "scared"], "answerText":"boring", "explanation":"演講太令人無聊 (boring)，以致於很多人睡著了。"},
+  {"id":30, "type":"context", "question":"The roller coaster ride was really ________.", "options":["scary", "scared", "tired", "bored"], "answerText":"scary", "explanation":"雲霄飛車很嚇人恐怖 (scary)。"},
+  {"id":31, "type":"grammar", "question":"The funny clown made all the children ________ loudly.", "options":["laugh", "laughed", "laughing", "to laugh"], "answerText":"laugh", "explanation":"使役動詞 make + 受詞 + 原形動詞 laugh。"},
+  {"id":32, "type":"grammar", "question":"Mom let me ________ the video game for thirty minutes.", "options":["play", "played", "playing", "to play"], "answerText":"play", "explanation":"使役動詞 let + 受詞 + 原形動詞 play。"},
+  {"id":33, "type":"grammar", "question":"Dad had the mechanic ________ his broken car.", "options":["fix", "fixed", "fixing", "to fix"], "answerText":"fix", "explanation":"使役動詞 have + 人 + 原形動詞 fix。"},
+  {"id":34, "type":"grammar", "question":"I saw a delivery driver ________ his scooter in the heavy rain.", "options":["riding", "to ride", "ridden", "rides"], "answerText":"riding", "explanation":"感官動詞 see + 受詞 + V-ing (強調正在進行)。"},
+  {"id":35, "type":"grammar", "question":"We were all ________ by the surprising magic trick.", "options":["amazed", "amazing", "amaze", "amazes"], "answerText":"amazed", "explanation":"人感到驚訝使用被動/分詞 amazed。"},
+  {"id":36, "type":"grammar", "question":"The basketball game is so ________!", "options":["exciting", "excited", "excite", "excites"], "answerText":"exciting", "explanation":"修飾事物球賽用 exciting。"},
+  {"id":37, "type":"grammar", "question":"Peter feels ________ because he has nothing to do.", "options":["bored", "boring", "bore", "bores"], "answerText":"bored", "explanation":"人感到無聊用 bored。"},
+  {"id":38, "type":"grammar", "question":"Working as a delivery rider in hot summer is ________.", "options":["tiring", "tired", "tire", "tires"], "answerText":"tiring", "explanation":"外送工作令人疲憊用 tiring。"},
+  {"id":39, "type":"grammar", "question":"The dark forest looks very ________ at night.", "options":["scary", "scared", "scare", "scares"], "answerText":"scary", "explanation":"黑森林看起來可怕用 scary。"},
+  {"id":40, "type":"grammar", "question":"Are you ________ in joining our study group?", "options":["interested", "interesting", "interest", "interests"], "answerText":"interested", "explanation":"be interested in (對...有興趣)。"}
+];
 
-    let bestEnVoice = null;
-    let bestZhVoice = null;
+    let currentQuestions = [];
+    let attemptsPerQ = {};
+    let answeredLocked = {};
+    let totalErrors = 0;
+    let studentName = localStorage.getItem('current_student_name') || '';
 
-    function initVoices() {
-      const voices = window.speechSynthesis.getVoices();
-      bestEnVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'))
-                 || voices.find(v => v.lang.startsWith('en')) || null;
-      bestZhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Han')) && (v.lang.includes('TW') || v.lang.includes('zh')))
-                 || voices.find(v => v.lang.startsWith('zh')) || null;
+    if (studentName) {
+      const el = document.getElementById('studentDisplay');
+      if (el) el.textContent = studentName;
     }
 
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = initVoices;
-      initVoices();
-    }
-
-    function speakText(text) {
-      if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      const sp = parseFloat(document.getElementById('speedSelect').value) || 0.85;
-      const utt = new SpeechSynthesisUtterance(text);
-      utt.rate = sp;
-      if (/[a-zA-Z]/.test(text)) {
-        if (bestEnVoice) utt.voice = bestEnVoice;
-        utt.lang = 'en-US';
-      } else {
-        if (bestZhVoice) utt.voice = bestZhVoice;
-        utt.lang = 'zh-TW';
+    function promptStudentName() {
+      const name = prompt('請輸入您的姓名與座號（例如：701 05 王小明）：', studentName);
+      if (name !== null && name.trim() !== '') {
+        studentName = name.trim();
+        localStorage.setItem('current_student_name', studentName);
+        const el = document.getElementById('studentDisplay');
+        if (el) el.textContent = studentName;
       }
-      window.speechSynthesis.speak(utt);
     }
 
-    function initRandomQuiz() {
-      const shuffled = questionBank.slice().sort(() => Math.random() - 0.5);
-      currentQuiz = shuffled.slice(0, 10);
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
 
-      const container = document.getElementById('quiz-container');
+    function reshuffleAndRender() {
+      const vocabList = QUESTION_BANK.filter(q => q.type === 'vocab');
+      const otherList = QUESTION_BANK.filter(q => q.type !== 'vocab');
+
+      let picked = [];
+      if (vocabList.length >= 5 && otherList.length >= 5) {
+        picked = [...shuffle(vocabList).slice(0, 5), ...shuffle(otherList).slice(0, 5)];
+      } else {
+        picked = shuffle(QUESTION_BANK).slice(0, 10);
+      }
+      picked = shuffle(picked);
+
+      const letters = ['A', 'B', 'C', 'D'];
+      currentQuestions = picked.map((q, idx) => {
+        const rawOpts = q.options || q.opts;
+        const targetAns = q.answerText || (typeof q.ans === 'number' ? rawOpts[q.ans] : rawOpts[0]);
+        const shuffledOpts = shuffle(rawOpts);
+        let correctLetter = 'A';
+
+        const formattedOpts = shuffledOpts.map((opt, oIdx) => {
+          if (opt === targetAns) {
+            correctLetter = letters[oIdx];
+          }
+          return { letter: letters[oIdx], text: opt };
+        });
+
+        return {
+          idx: idx + 1,
+          id: q.id || idx + 1,
+          question: q.question || q.q,
+          options: formattedOpts,
+          correctLetter: correctLetter,
+          answerText: targetAns,
+          explanation: q.explanation || q.exp || ('正確答案是 ' + targetAns + '。')
+        };
+      });
+
+      attemptsPerQ = {};
+      answeredLocked = {};
+      totalErrors = 0;
+
+      renderQuestionsUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderQuestionsUI() {
+      const container = document.getElementById('questions-container');
+      if (!container) return;
       container.innerHTML = '';
 
-      currentQuiz.forEach((item, idx) => {
+      currentQuestions.forEach(q => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'question-card';
+        card.id = 'card-' + q.idx;
 
-        const prompt = document.createElement('div');
-        prompt.className = 'q-prompt';
-        prompt.innerHTML = '<span>' + (idx + 1) + '. ' + item.q + '</span>';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'question-title';
 
-        const speakBtn = document.createElement('button');
-        speakBtn.className = 'btn-speak';
-        speakBtn.textContent = '🔊 點讀';
-        speakBtn.onclick = () => speakText(item.q);
-        prompt.appendChild(speakBtn);
-        card.appendChild(prompt);
+        const spkBtn = document.createElement('button');
+        spkBtn.className = 'speaker-btn';
+        spkBtn.innerHTML = '🔊';
+        spkBtn.title = '朗讀題目';
+        spkBtn.onclick = () => speakQuestion(q.question);
+        titleDiv.appendChild(spkBtn);
+
+        const stemSpan = document.createElement('span');
+        stemSpan.className = 'read-sentence';
+        stemSpan.textContent = q.idx + '. ' + q.question;
+        stemSpan.onclick = () => speakSentence(q.question);
+        titleDiv.appendChild(stemSpan);
+
+        card.appendChild(titleDiv);
 
         const optsDiv = document.createElement('div');
         optsDiv.className = 'options-grid';
 
-        const labels = ['A', 'B', 'C', 'D'];
-        item.opts.forEach((optText, optIdx) => {
+        q.options.forEach(opt => {
           const btn = document.createElement('button');
           btn.className = 'opt-btn';
-          btn.textContent = '(' + labels[optIdx] + ') ' + optText;
-          btn.onclick = () => {
-            userAnswers[idx] = optIdx;
-            const siblings = optsDiv.querySelectorAll('.opt-btn');
-            siblings.forEach((s, sIdx) => {
-              s.disabled = true;
-              if (sIdx === item.ans) s.classList.add('correct');
-              else if (sIdx === optIdx && optIdx !== item.ans) s.classList.add('wrong');
-            });
-          };
+          btn.id = 'btn-' + q.idx + '-' + opt.letter;
+          btn.innerHTML = '<span>(' + opt.letter + ')</span> <span>' + opt.text + '</span>';
+          btn.onclick = () => checkOption(q.idx, opt.letter, q.explanation);
           optsDiv.appendChild(btn);
         });
 
         card.appendChild(optsDiv);
+
+        const fb = document.createElement('div');
+        fb.id = 'fb-' + q.idx;
+        fb.className = 'feedback-box';
+        card.appendChild(fb);
+
         container.appendChild(card);
       });
     }
 
-    function submitQuiz() {
-      const name = document.getElementById('studentName').value.trim() || '九年級隨機抽測學生';
-      let correct = 0;
-      currentQuiz.forEach((item, idx) => {
-        if (userAnswers[idx] === item.ans) correct++;
+    function checkOption(qIdx, selectedLetter, exp) {
+      if (answeredLocked[qIdx]) return;
+      if (attemptsPerQ[qIdx] === undefined) attemptsPerQ[qIdx] = 0;
+
+      const q = currentQuestions.find(item => item.idx === qIdx);
+      const fb = document.getElementById('fb-' + qIdx);
+      const card = document.getElementById('card-' + qIdx);
+      const btn = document.getElementById('btn-' + qIdx + '-' + selectedLetter);
+      if (!fb || !q) return;
+
+      fb.style.display = 'block';
+
+      if (selectedLetter === q.correctLetter) {
+        answeredLocked[qIdx] = true;
+        card.classList.add('answered');
+        if (btn) btn.classList.add('correct');
+
+        const errs = attemptsPerQ[qIdx];
+        let badge = '🥇 首次即答對！';
+        if (errs === 1) badge = '⚠️ 試錯 1 次後答對 (得分 70%)';
+        else if (errs === 2) badge = '⚠️ 試錯 2 次後答對 (得分 40%)';
+        else if (errs >= 3) badge = '❌ 試錯多次 (鼓勵分 10%)';
+
+        fb.style.background = '#dcfce7';
+        fb.style.border = '1px solid #86efac';
+        fb.style.color = '#15803d';
+        fb.innerHTML = '✅ <strong>答對了！</strong> ' + exp + '<div style="font-size:0.85rem; margin-top:4px; font-weight:700; color:#047857;">[' + badge + ']</div>';
+        speakChinese('答對了！' + exp);
+
+        ['A', 'B', 'C', 'D'].forEach(l => {
+          const b = document.getElementById('btn-' + qIdx + '-' + l);
+          if (b && l !== selectedLetter) {
+            b.disabled = true;
+            b.style.opacity = '0.4';
+          }
+        });
+      } else {
+        attemptsPerQ[qIdx]++;
+        totalErrors++;
+        if (btn) {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+        }
+
+        fb.style.background = '#fee2e2';
+        fb.style.border = '1px solid #fca5a5';
+        fb.style.color = '#b91c1c';
+        fb.innerHTML = '❌ <strong>再想想看：</strong> ' + exp + ' <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ' + attemptsPerQ[qIdx] + ' 次)</span>';
+        speakChinese('再想想看喔。' + exp);
+      }
+    }
+
+    function submitExam() {
+      if (!studentName) {
+        promptStudentName();
+        if (!studentName) {
+          alert('請先輸入姓名再交卷喔！');
+          return;
+        }
+      }
+
+      let answeredCount = 0;
+      let firstTryCorrect = 0;
+      let totalScore = 0;
+      const basePts = 100.0 / currentQuestions.length;
+      const detailsList = [];
+
+      currentQuestions.forEach(q => {
+        const isAnswered = answeredLocked[q.idx];
+        const errs = attemptsPerQ[q.idx] || 0;
+        let multiplier = 0;
+        let badge = '❌ 未作答';
+
+        if (isAnswered) {
+          answeredCount++;
+          if (errs === 0) {
+            multiplier = 1.0;
+            firstTryCorrect++;
+            badge = '🥇 首次即答對 (滿分)';
+          } else if (errs === 1) {
+            multiplier = 0.7;
+            badge = '⚠️ 試錯 1 次 (70% 分數)';
+          } else if (errs === 2) {
+            multiplier = 0.4;
+            badge = '⚠️ 試錯 2 次 (40% 分數)';
+          } else {
+            multiplier = 0.1;
+            badge = '❌ 試錯多次 (10% 鼓勵分)';
+          }
+        }
+        totalScore += basePts * multiplier;
+        detailsList.push('第 ' + q.idx + ' 題: ' + badge);
       });
 
-      const totalScore = correct * 10;
-      const accuracy = totalScore + '%';
-      let stars = '⭐⭐⭐';
-      if (totalScore < 60) stars = '⭐';
-      else if (totalScore < 85) stars = '⭐⭐';
+      if (answeredCount < currentQuestions.length) {
+        const proceed = confirm('您還有 ' + (currentQuestions.length - answeredCount) + ' 題尚未作答，確定要交卷結算嗎？');
+        if (!proceed) return;
+      }
 
-      const statusEl = document.getElementById('submit-status');
-      statusEl.style.color = '#0284c7';
-      statusEl.textContent = '📡 正在同步成績至老師的 Google 試算表...';
+      const finalScore = Math.max(10, Math.round(totalScore));
+      const firstTryRate = Math.round((firstTryCorrect / currentQuestions.length) * 100);
+      const nowStr = new Date().toLocaleString('zh-TW');
+
+      const historyKey = 'quiz_history_' + encodeURIComponent(document.title || 'quiz');
+      const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+      history.unshift({ score: finalScore, time: nowStr });
+      localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 10)));
+
+      showReportModal(finalScore, firstTryCorrect, firstTryRate, detailsList, nowStr, history);
+      syncToGoogleSheet(finalScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '));
+    }
+
+    function showReportModal(score, correctCount, firstTryRate, detailsList, nowStr, history) {
+      const scoreEl = document.getElementById('reportScore');
+      scoreEl.textContent = score + ' 分';
+      scoreEl.className = 'score-number ' + (score >= 85 ? 'score-high' : score >= 60 ? 'score-mid' : 'score-low');
+
+      let levelText = '⭐⭐⭐ 精熟特優！完美掌握核心題庫！';
+      if (score < 60) levelText = '💪 還需加強，建議仔細檢討錯題後再挑戰一次！';
+      else if (score < 85) levelText = '⭐⭐ 表現良好！訂正後即可邁向滿分！';
+      document.getElementById('reportLevelText').textContent = levelText;
+
+      document.getElementById('reportStudent').textContent = studentName || '未註記同學';
+      document.getElementById('reportTime').textContent = nowStr;
+
+      const historyEl = document.getElementById('reportHistory');
+      historyEl.innerHTML = '';
+      history.slice(0, 5).reverse().forEach((h, i) => {
+        const span = document.createElement('span');
+        span.className = 'history-pill';
+        span.textContent = '第' + (i+1) + '次: ' + h.score + '分';
+        historyEl.appendChild(span);
+      });
+
+      const diagListEl = document.getElementById('diagnosisList');
+      diagListEl.innerHTML = '';
+      detailsList.forEach(item => {
+        const div = document.createElement('div');
+        div.style.cssText = 'padding:6px 10px; background:rgba(0,0,0,0.03); border:1px solid var(--border-color); border-radius:8px;';
+        div.textContent = item;
+        diagListEl.appendChild(div);
+      });
+
+      document.getElementById('reportModal').classList.add('active');
+      speakChinese('評量完成！獲得 ' + score + ' 分，首次答對 ' + correctCount + ' 題。');
+    }
+
+    function closeReport() {
+      document.getElementById('reportModal').classList.remove('active');
+    }
+
+    function syncToGoogleSheet(score, correctCount, firstTryRateVal, wrongVal, detailsStr) {
+      const syncBanner = document.getElementById('syncStatus');
+      if (syncBanner) {
+        syncBanner.style.background = '#eff6ff';
+        syncBanner.style.borderColor = '#bfdbfe';
+        syncBanner.style.color = '#1e40af';
+        syncBanner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+      }
 
       const payload = {
-        timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
-        studentName: name,
-        unit: '國中英語九上 L2 外送平台與情緒形容詞',
-        level: '隨機抽測 10 題',
-        score: totalScore,
-        accuracy: accuracy,
-        stars: stars
+        timestamp: new Date().toISOString(),
+        unit: document.title || '國中英語差異化隨機抽測',
+        level: '10題隨機抽測',
+        student: studentName || '未填寫',
+        score: score,
+        firstTryRate: firstTryRateVal + '%',
+        firstTryCorrect: correctCount + '/' + currentQuestions.length,
+        wrongAttempts: wrongVal,
+        details: detailsStr
       };
 
-      fetch(GAS_URL, {
+      fetch(GAS_ENDPOINT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       }).then(() => {
-        statusEl.innerHTML = '🎉 <strong>交卷成功！</strong> 得分：<span style="color:#0284c7;">' + totalScore + ' 分</span> (' + accuracy + ')，已同步至全班學習儀表板！';
-        alert('🎉 交卷成功！\n學生：' + name + '\n得分：' + totalScore + ' 分 (' + accuracy + ')\n星級：' + stars);
+        if (syncBanner) {
+          syncBanner.style.background = '#d1fae5';
+          syncBanner.style.borderColor = '#86efac';
+          syncBanner.style.color = '#065f46';
+          syncBanner.textContent = '✅ 成績與作答歷程已成功同步至教師後台！';
+        }
       }).catch(err => {
-        statusEl.innerHTML = '🎉 作答完成！得分：' + totalScore + ' 分 (離線記錄)';
+        if (syncBanner) {
+          syncBanner.style.background = '#fef3c7';
+          syncBanner.style.borderColor = '#fde68a';
+          syncBanner.style.color = '#92400e';
+          syncBanner.textContent = '⚠️ 雲端同步完成 (離線暫存模式)';
+        }
       });
     }
 
-    initRandomQuiz();
-  
     function speakEnglish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'en-US';
-  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
-  const voices = window.speechSynthesis.getVoices();
-  const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
-                  voices.find(v => v.lang.startsWith('en')) || voices[0];
-  if (enVoice) utter.voice = enVoice;
-  window.speechSynthesis.speak(utter);
-}
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const sp = parseFloat(document.getElementById('speech-rate')?.value || '0.85');
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = sp;
+      const voices = window.speechSynthesis.getVoices();
+      const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                      voices.find(v => v.lang.startsWith('en')) || voices[0];
+      if (enVoice) utter.voice = enVoice;
+      window.speechSynthesis.speak(utter);
+    }
 
-function speakChinese(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'zh-TW';
-  utter.rate = 0.85;
-  const voices = window.speechSynthesis.getVoices();
-  const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
-                  voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
-  if (zhVoice) utter.voice = zhVoice;
-  window.speechSynthesis.speak(utter);
-}
+    function speakChinese(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      utter.rate = 0.85;
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                      voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+      if (zhVoice) utter.voice = zhVoice;
+      window.speechSynthesis.speak(utter);
+    }
 
-function speak(text) {
+    function speakQuestion(text) {
       if (/[\u4e00-\u9fa5]/.test(text)) {
         speakChinese(text);
       } else {
@@ -366,6 +875,31 @@ function speak(text) {
       }
     }
 
-</script>
+    function speakSentence(text) {
+      speakQuestion(text);
+    }
+
+    function stopSpeech() {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    function toggleTheme() {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    function changeFontSize(size) {
+      document.documentElement.style.setProperty('--font-size', size);
+    }
+
+    // Auto-init
+    reshuffleAndRender();
+
+    window.onload = () => {
+      if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
+    };
+  </script>
 </body>
 </html>

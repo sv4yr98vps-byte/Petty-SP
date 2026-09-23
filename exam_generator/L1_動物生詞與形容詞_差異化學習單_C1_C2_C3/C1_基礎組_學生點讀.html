@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國一 · 七年級】L1 動物生詞與性狀形容詞 差異化學習單｜C1 基礎組（鷹架點讀版）</title>
+  <title>L1 動物生詞與形容詞 · C1 基礎組（鷹架點讀版）</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -19,295 +19,42 @@
       --hint-bg: #fef3c7;
       --hint-text: #92400e;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 60px;
-    }
-
-    header {
-      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-      color: white;
-      padding: 24px 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(5,150,105,0.15);
-    }
-
+    body { font-family: 'Noto Sans TC', 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 24px 20px; text-align: center; box-shadow: 0 4px 12px rgba(5,150,105,0.15); }
     header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
     header p { font-size: 0.95rem; opacity: 0.95; }
-
-    .container {
-      max-width: 860px;
-      margin: 20px auto;
-      padding: 0 16px;
-    }
-
-    .info-bar {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .input-name {
-      padding: 7px 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-family: inherit;
-    }
-
-    .voice-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      background: #f0fdf4;
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 1px solid #bbf7d0;
-      color: #15803d;
-      font-weight: 600;
-    }
-
-    .speed-ctrl {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .speed-btn {
-      background: #f1f5f9;
-      color: #475569;
-      border: 1px solid #cbd5e1;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.15s;
-    }
-
-    .speed-btn.active {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      font-weight: bold;
-    }
-
-    .section-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #065f46;
-      margin: 24px 0 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
-      transition: border-color 0.2s;
-    }
-
-    .card:hover {
-      border-color: var(--primary);
-    }
-
-    .q-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .module-tag {
-      background: #d1fae5;
-      color: #065f46;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-
-    .hint-btn {
-      background: var(--hint-bg);
-      color: var(--hint-text);
-      border: 1px solid #fde68a;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: background 0.15s;
-    }
-
-    .hint-btn:hover { background: #fde68a; }
-
-    .q-title {
-      font-size: 1.12rem;
-      font-weight: 700;
-      color: #064e3b;
-      line-height: 1.5;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .speaker-btn {
-      background: #e0f2fe;
-      color: #0284c7;
-      border: 1px solid #bae6fd;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-family: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-      transition: background 0.15s;
-    }
-
-    .speaker-btn:hover { background: #bae6fd; }
-
-    .visual-box {
-      background: #f8fafc;
-      border: 1px dashed #94a3b8;
-      border-radius: 10px;
-      padding: 10px 14px;
-      margin-bottom: 14px;
-      text-align: center;
-      font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: #1e293b;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .options-grid-4 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
-    }
-
-    .options-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px;
-    }
-
-    .opt-btn {
-      background: #f8fafc;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: 1rem;
-      text-align: left;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.15s;
-      font-weight: 500;
-    }
-
-    .opt-btn:hover {
-      background: #f1f5f9;
-      border-color: #94a3b8;
-    }
-
-    .opt-btn.correct {
-      background: #dcfce7 !important;
-      border-color: #22c55e !important;
-      color: #15803d !important;
-      font-weight: bold;
-    }
-
-    .opt-btn.wrong {
-      background: #fee2e2 !important;
-      border-color: #ef4444 !important;
-      color: #b91c1c !important;
-    }
-
-    .feedback-box {
-      margin-top: 12px;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .submit-bar {
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    .btn-submit {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 14px 40px;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(5,150,105,0.3);
-      transition: background 0.2s, transform 0.1s;
-    }
-
-    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-1px); }
-
-    .score-banner {
-      display: none;
-      background: #ffffff;
-      border: 2px solid var(--primary);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      margin-top: 25px;
-      animation: fadeIn 0.4s ease;
-    }
-
-    .score-banner h2 { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
-    .score-banner p { font-size: 1.05rem; color: var(--text-muted); }
-
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .container { max-width: 860px; margin: 20px auto; padding: 0 16px; }
+    .info-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+    .input-name { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: inherit; }
+    .voice-status { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; background: #f0fdf4; padding: 6px 12px; border-radius: 20px; border: 1px solid #bbf7d0; color: #15803d; font-weight: 600; }
+    .speed-ctrl { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: var(--text-muted); }
+    .speed-btn { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; cursor: pointer; font-family: inherit; }
+    .speed-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #065f46; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .module-tag { background: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; }
+    .hint-btn { background: var(--hint-bg); color: var(--hint-text); border: 1px solid #fde68a; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .q-title { font-size: 1.12rem; font-weight: 700; color: #064e3b; line-height: 1.5; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .speaker-btn { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .visual-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; padding: 12px; text-align: center; margin-bottom: 14px; font-size: 1.05rem; font-weight: 600; }
+    .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .options-grid-3 { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .opt-btn { background: var(--card-bg); border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 14px; font-family: inherit; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.15s; }
+    .opt-btn:hover { border-color: var(--primary); background: #f0fdf4; }
+    .opt-btn.correct { background: #dcfce7 !important; border-color: #10b981 !important; color: #15803d !important; font-weight: bold; }
+    .opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    .feedback-box { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; display: none; }
+    .submit-bar { margin-top: 30px; text-align: center; }
+    .btn-submit { background: var(--primary); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>國中英語【國一 · 七年級】L1 動物生詞與性狀形容詞</h1>
-  <p>🎯 C1 基礎組：動物核心生詞 4 選 1 ＋ 性狀形容詞與句型 3 選 1（共 15 題 · 鷹架點讀版）</p>
+  <h1>L1 動物生詞與形容詞</h1>
+  <p>🎯 C1 基礎組：核心生詞 4 選 1 ＋ 文法句型 3 選 1（鷹架點讀版）</p>
 </header>
 
 <div class="container">
@@ -328,19 +75,46 @@
     </div>
   </div>
 
-  <div class="section-title">🦁 第一部分：核心生詞與語境理解（8 題 · 4 選 1）</div>
+  <div class="section-title">🦁 第一部分：核心生詞與語境理解（4 選 1）</div>
   <div id="vocab-container"></div>
 
-  <div class="section-title">✨ 第二部分：文法句型與情境應用（7 題 · 3 選 1）</div>
+  <div class="section-title">✨ 第二部分：文法句型與情境應用（3 選 1）</div>
   <div id="grammar-container"></div>
 
   <div class="submit-bar">
     <button class="btn-submit" onclick="submitExam()">送出答案並計算總分</button>
   </div>
 
-  <div class="score-banner" id="scoreBanner">
-    <h2>🎉 測驗完成！得分：<span id="scoreText">0</span> / 100</h2>
-    <p id="syncStatus">正在同步成績至雲端學習歷程資料庫...</p>
+  <div id="scoreBanner" style="display:none; margin-top:30px;">
+    <div class="card" style="border:3px solid #10b981; background:#f0fdf4; text-align:center; padding:28px 20px; border-radius:18px;">
+      <div style="font-size:3.2rem; line-height:1;">🏆</div>
+      <h2 style="font-size:1.6rem; color:#065f46; margin:10px 0 4px;">恭喜完成 C1 基礎組學習任務！</h2>
+      <div id="certStudentText" style="font-weight:700; color:#334155; margin-bottom:18px; font-size:1.05rem;">學生：未填寫 ｜ 表現評價：⭐⭐⭐</div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:16px 0;">
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#059669;" id="scoreText">--</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🏆 結算總分 (含試錯折算)</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#0284c7;" id="firstTryText">-- / --</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🎯 首次即答對率</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#d97706;" id="attemptsText">0 次</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🔄 累計試錯次數</div>
+        </div>
+      </div>
+      <div style="text-align:left; background:white; border:1px solid #cbd5e1; border-radius:12px; padding:16px; margin:16px 0;">
+        <div style="font-weight:700; color:#1e293b; margin-bottom:10px; font-size:0.95rem;">📋 逐題作答診斷明細</div>
+        <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto;"></div>
+      </div>
+      <div id="syncStatus" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
+        <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+        <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -539,6 +313,79 @@ let attemptsPerQ = {};
 let answeredLocked = {};
 let totalErrors = 0;
 
+function renderQuestions() {
+  const vContainer = document.getElementById('vocab-container');
+  const gContainer = document.getElementById('grammar-container');
+  if (vContainer) vContainer.innerHTML = '';
+  if (gContainer) gContainer.innerHTML = '';
+
+  if (typeof vocabQuestions !== 'undefined' && Array.isArray(vocabQuestions)) {
+    vocabQuestions.forEach((q, idx) => {
+      if (vContainer) vContainer.appendChild(createQuestionCard(q, idx, 4));
+    });
+  }
+
+  if (typeof grammarQuestions !== 'undefined' && Array.isArray(grammarQuestions)) {
+    grammarQuestions.forEach((q, idx) => {
+      const vLen = (typeof vocabQuestions !== 'undefined') ? vocabQuestions.length : 0;
+      if (gContainer) gContainer.appendChild(createQuestionCard(q, idx + vLen, 3));
+    });
+  }
+}
+
+function createQuestionCard(q, index, optCount) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card-' + q.id;
+
+  const meta = document.createElement('div');
+  meta.className = 'q-meta';
+  meta.innerHTML = `
+    <span class="module-tag">${q.module || '基礎題'}</span>
+    <button type="button" class="hint-btn" onclick="showHint('${q.id}', '${escapeQuotes(q.hint)}')">💡 提示</button>
+  `;
+  card.appendChild(meta);
+
+  const title = document.createElement('div');
+  title.className = 'q-title';
+  title.innerHTML = `
+    <span>${q.zhTitle}</span>
+    <button type="button" class="speaker-btn" onclick="speakEnglish('${escapeQuotes(q.tts || q.zhTitle)}')">🔊 英文朗讀</button>
+  `;
+  card.appendChild(title);
+
+  const visual = document.createElement('div');
+  visual.className = 'visual-box';
+  visual.innerHTML = q.visual || '';
+  card.appendChild(visual);
+
+  const grid = document.createElement('div');
+  grid.className = optCount === 4 ? 'options-grid-4' : 'options-grid-3';
+
+  const letters = ['(A)', '(B)', '(C)', '(D)'];
+  q.options.forEach((opt, optIdx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'opt-btn';
+    btn.id = `btn-${q.id}-${optIdx}`;
+    btn.innerHTML = `<strong>${letters[optIdx]}</strong> ${opt}`;
+    btn.onclick = () => selectOption(q, optIdx);
+    grid.appendChild(btn);
+  });
+  card.appendChild(grid);
+
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback-box';
+  feedback.id = 'fb-' + q.id;
+  card.appendChild(feedback);
+
+  return card;
+}
+
+function escapeQuotes(str) {
+  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
 function selectOption(q, selectedIdx) {
   if (answeredLocked[q.id]) return;
   if (attemptsPerQ[q.id] === undefined) attemptsPerQ[q.id] = 0;
@@ -565,8 +412,8 @@ function selectOption(q, selectedIdx) {
     fb.style.background = '#dcfce7';
     fb.style.border = '1px solid #86efac';
     fb.style.color = '#15803d';
-    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
-    speakChinese(q.expCorrect);
+    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect || '完全正確！'} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
+    speakChinese(q.expCorrect || '完全正確！');
 
     for (let i = 0; i < q.options.length; i++) {
       const btn = document.getElementById(`btn-${q.id}-${i}`);
@@ -585,8 +432,8 @@ function selectOption(q, selectedIdx) {
     fb.style.background = '#fee2e2';
     fb.style.border = '1px solid #fca5a5';
     fb.style.color = '#b91c1c';
-    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[q.id]} 次)</span>`;
-    speakChinese(q.expWrong);
+    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong || '請再思考看看喔！'} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[q.id]} 次)</span>`;
+    speakChinese(q.expWrong || '再想想看喔');
   }
 }
 
@@ -611,7 +458,7 @@ function speakEnglish(text) {
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'en-US';
-  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
+  utter.rate = currentSpeed;
   const voices = window.speechSynthesis.getVoices();
   const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
                   voices.find(v => v.lang.startsWith('en')) || voices[0];
@@ -633,11 +480,11 @@ function speakChinese(text) {
 }
 
 function submitExam() {
-  const allQs = [...vocabQuestions, ...grammarQuestions];
+  const allQs = [...(typeof vocabQuestions !== 'undefined' ? vocabQuestions : []), ...(typeof grammarQuestions !== 'undefined' ? grammarQuestions : [])];
   let totalScore = 0;
   let firstTryCorrect = 0;
   let detailsList = [];
-  const basePts = 100.0 / allQs.length;
+  const basePts = 100.0 / (allQs.length || 1);
 
   allQs.forEach((q, idx) => {
     const errs = attemptsPerQ[q.id] || 0;
@@ -666,8 +513,9 @@ function submitExam() {
   });
 
   const finalScore = Math.max(10, Math.round(totalScore));
-  const firstTryRate = Math.round((firstTryCorrect / allQs.length) * 100);
-  const sName = document.getElementById('studentName').value.trim() || '未填寫姓名';
+  const firstTryRate = Math.round((firstTryCorrect / (allQs.length || 1)) * 100);
+  const sNameEl = document.getElementById('studentName');
+  const sName = (sNameEl ? sNameEl.value.trim() : '') || '未填寫姓名';
 
   document.getElementById('scoreText').innerText = `${finalScore} 分`;
   document.getElementById('firstTryText').innerText = `${firstTryCorrect} / ${allQs.length} 題 (${firstTryRate}%)`;
@@ -710,25 +558,11 @@ function submitExam() {
   });
 }
 
-function copyReport() {
-  const sName = document.getElementById('studentName').value.trim() || '自主學習同學';
-  const finalScore = document.getElementById('scoreText').innerText;
-  const firstTry = document.getElementById('firstTryText').innerText;
-  const errs = document.getElementById('attemptsText').innerText;
-  const text = `【${document.title} · C1 基礎組成果】\n👤 學生：${sName}\n🏆 得分：${finalScore}\n🎯 首次答對率：${firstTry}\n🔄 累計試錯次數：${errs}\n📅 記錄時間：${new Date().toLocaleString()}`;
-  navigator.clipboard.writeText(text).then(() => {
-    alert('已成功複製學習成果報告！可直接貼在 LINE 或筆記本中。');
-  });
+// CRITICAL: Execute immediately so DOM renders without waiting for onload
+renderQuestions();
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.getVoices();
 }
-
-window.onload = () => {
-  renderQuestions();
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.getVoices();
-  }
-};
-
 </script>
-
 </body>
 </html>

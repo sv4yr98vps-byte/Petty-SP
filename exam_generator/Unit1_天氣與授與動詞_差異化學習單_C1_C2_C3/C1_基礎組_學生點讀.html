@@ -360,9 +360,12 @@
   const synth = window.speechSynthesis;
   let voices = [];
   let currentQ = 1;
-  const totalQ = 8;
-  let attempts = 0;
+  const totalQuestions = 8;
+  let answeredState = {};
+  let attemptsPerQ = {};
+  let totalErrors = 0;
   let hints = 0;
+  let currentSpeed = 0.25;
   let studentName = localStorage.getItem('unit1_c1_student') || '';
 
   const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
@@ -375,9 +378,9 @@
   }
   initVoices();
 
-  function updateStudentUI() {
+  function updateStudentDisplay() {
     const el = document.getElementById('studentDisplay');
-    if (el) el.textContent = studentName ? ('👤 ' + studentName) : '👤 點此輸入姓名座號';
+    if (el) el.textContent = studentName ? ('👤 學生：' + studentName) : '👤 點此輸入姓名座號';
   }
 
   function promptStudentName() {
@@ -385,53 +388,47 @@
     if (input !== null && input.trim() !== '') {
       studentName = input.trim();
       localStorage.setItem('unit1_c1_student', studentName);
-      updateStudentUI();
+      updateStudentDisplay();
     }
   }
 
-  if (!studentName) {
-    setTimeout(promptStudentName, 300);
-  } else {
-    updateStudentUI();
+  function speakEnglish(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
+    const voices = window.speechSynthesis.getVoices();
+    const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                    voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (enVoice) utter.voice = enVoice;
+    window.speechSynthesis.speak(utter);
   }
 
-  function speakEnglish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'en-US';
-  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
-  const voices = window.speechSynthesis.getVoices();
-  const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
-                  voices.find(v => v.lang.startsWith('en')) || voices[0];
-  if (enVoice) utter.voice = enVoice;
-  window.speechSynthesis.speak(utter);
-}
+  function speakChinese(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-TW';
+    utter.rate = 0.85;
+    const voices = window.speechSynthesis.getVoices();
+    const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                    voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+    if (zhVoice) utter.voice = zhVoice;
+    window.speechSynthesis.speak(utter);
+  }
 
-function speakChinese(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'zh-TW';
-  utter.rate = 0.85;
-  const voices = window.speechSynthesis.getVoices();
-  const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
-                  voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
-  if (zhVoice) utter.voice = zhVoice;
-  window.speechSynthesis.speak(utter);
-}
-
-function showHint(q) {
+  function showHint(q) {
     hints++;
     const hintMap = {
-      1: '提示：太陽是 sun，晴天是 sunny。',
-      2: '提示：雨水是 rain，下雨天是 rainy。',
-      3: '提示：春天花開溫暖是 spring。',
-      4: '提示：冬天寒冷是 winter。',
-      5: '提示：How is the weather? 詢問天氣。',
-      6: '提示：What is the weather like? 搭配 like。',
-      7: '提示：give 給予某人，搭配 to。',
-      8: '提示：buy 為某人買，搭配 for。'
+      1: '提示：太陽是 sun，晴天是 sunny；snowy 是下雪的。',
+      2: '提示：雨水是 rain，下雨天是 rainy；ready 是準備好的。',
+      3: '提示：春天花開溫暖是 spring；string 是細繩。',
+      4: '提示：冬天寒冷是 winter；water 是水。',
+      5: '提示：How is the weather? 詢問天氣狀況。',
+      6: '提示：What is the weather like? 搭配介系詞 like。',
+      7: '提示：give 給予某人事物，介系詞搭配 to。',
+      8: '提示：buy 為某人買某物，介系詞搭配 for。'
     };
     const fb = document.getElementById('fb-' + q);
     fb.style.display = 'block';
@@ -440,10 +437,8 @@ function showHint(q) {
     fb.innerHTML = '💡 ' + (hintMap[q] || '請再仔細看一次題目喔！');
     speakChinese(hintMap[q] || '仔細想想看喔');
   }
-  let attemptsPerQ = {};
-  let totalErrors = 0;
 
-function checkAnswer(btn, isCorrect, qNum, feedback) {
+  function checkAnswer(btn, isCorrect, qNum, feedback) {
     if (answeredState[qNum]) return;
     if (attemptsPerQ[qNum] === undefined) attemptsPerQ[qNum] = 0;
 
@@ -466,7 +461,7 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
 
       fb.style.background = '#d1fae5';
       fb.style.color = '#065f46';
-      fb.innerHTML = `✅ ${feedback} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
+      fb.innerHTML = `✅ <strong>答對了！</strong> ${feedback} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
       speakChinese(`答對了！${feedback}`);
 
       const buttons = btn.parentElement.querySelectorAll('.option-btn');
@@ -481,11 +476,10 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
       btn.disabled = true;
       attemptsPerQ[qNum]++;
       totalErrors++;
-      wrongAttempts = totalErrors;
 
       fb.style.background = '#fee2e2';
       fb.style.color = '#991b1b';
-      fb.innerHTML = `❌ 再試一次！${feedback} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qNum]} 次)</span>`;
+      fb.innerHTML = `❌ <strong>再試一次！</strong> ${feedback} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qNum]} 次)</span>`;
       speakChinese(`再想想看。${feedback}`);
     }
   }
@@ -576,10 +570,6 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
     syncToDashboard(displayName, calculatedScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '));
   }
 
-  function finishAll() {
-    showCompletion();
-  }
-
   function syncToDashboard(name, scoreVal, firstTryVal, firstTryRateVal, wrongVal, detailsStr) {
     const banner = document.getElementById('syncStatusBanner');
     if (banner) {
@@ -640,7 +630,6 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
 
   updateStudentDisplay();
   updateNav();
-
 </script>
 </body>
 </html>

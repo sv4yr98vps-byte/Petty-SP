@@ -545,83 +545,88 @@
   </div>
 
 <script>
-  const totalQuestions = 15;
+  const synth = window.speechSynthesis;
+  let voices = [];
   let currentQ = 1;
-  let score = 0;
-  let wrongAttempts = 0;
+  const totalQuestions = 8;
   let answeredState = {};
-  let studentName = localStorage.getItem('l1_c1_student') || '';
+  let attemptsPerQ = {};
+  let totalErrors = 0;
+  let hints = 0;
+  let currentSpeed = 0.25;
+  let studentName = localStorage.getItem('grade9_u1_c1_student') || '';
 
   const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
 
-  function getVoice(lang) {
-    const voices = window.speechSynthesis.getVoices();
-    if (lang === 'en-US') {
-      return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'en-US' || v.lang.startsWith('en')))
-          || voices.find(v => v.lang === 'en-US' || v.lang.startsWith('en'));
-    } else {
-      return voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && (v.lang === 'zh-TW' || v.lang.includes('TW') || v.lang.includes('Traditional')))
-          || voices.find(v => v.lang === 'zh-TW' || v.lang.includes('zh'));
-    }
+  function initVoices() {
+    voices = synth ? synth.getVoices() : [];
   }
-
-  function speakEnglish(text) {
-    if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'en-US';
-    const v = getVoice('en-US');
-    if (v) utter.voice = v;
-    const speed = parseFloat(document.getElementById('speedSelect')?.value || '0.25');
-    utter.rate = speed;
-    utter.pitch = 1.0;
-    window.speechSynthesis.speak(utter);
+  if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = initVoices;
   }
+  initVoices();
 
-  function speakChinese(text) {
-    if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'zh-TW';
-    const v = getVoice('zh-TW');
-    if (v) utter.voice = v;
-    utter.rate = 0.85;
-    utter.pitch = 1.0;
-    window.speechSynthesis.speak(utter);
+  function updateStudentDisplay() {
+    const el = document.getElementById('studentDisplay');
+    if (el) el.textContent = studentName ? ('👤 學生：' + studentName) : '👤 點此輸入姓名座號';
   }
-
-  window.speechSynthesis.onvoiceschanged = () => {
-    getVoice('en-US');
-    getVoice('zh-TW');
-  };
 
   function promptStudentName() {
-    const name = prompt('請輸入您的【姓名】或【座號】：', studentName);
-    if (name && name.trim() !== '') {
-      studentName = name.trim();
-      localStorage.setItem('l1_c1_student', studentName);
+    const input = prompt('請輸入你的班級座號與姓名（例如：901 王小明）：', studentName);
+    if (input !== null && input.trim() !== '') {
+      studentName = input.trim();
+      localStorage.setItem('grade9_u1_c1_student', studentName);
       updateStudentDisplay();
     }
   }
 
-  function updateStudentDisplay() {
-    const el = document.getElementById('studentDisplay');
-    if (studentName) {
-      el.textContent = `👤 學生：${studentName}`;
-    } else {
-      el.textContent = '👤 點此輸入姓名座號';
-    }
+  function speakEnglish(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
+    const voices = window.speechSynthesis.getVoices();
+    const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                    voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (enVoice) utter.voice = enVoice;
+    window.speechSynthesis.speak(utter);
   }
 
-  function showHint(qNum) {
-    const card = document.querySelector(`.question-card[data-q="${qNum}"]`);
-    const title = card.querySelector('.q-title').innerText;
-    speakChinese(`題目提示：${title}`);
+  function speakChinese(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-TW';
+    utter.rate = 0.85;
+    const voices = window.speechSynthesis.getVoices();
+    const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                    voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+    if (zhVoice) utter.voice = zhVoice;
+    window.speechSynthesis.speak(utter);
   }
-  let attemptsPerQ = {};
-  let totalErrors = 0;
 
-function checkAnswer(btn, isCorrect, qNum, feedback) {
+  function showHint(q) {
+    hints++;
+    const hintMap = {
+      1: '提示：experience 代表經歷或體驗；expensive 是昂貴的。',
+      2: '提示：delicious 表示美味可口的；delicate 是精緻的。',
+      3: '提示：menu 是餐廳的菜單；memory 是記憶。',
+      4: '提示：order 表示點餐；other 是其他的。',
+      5: '提示：現在完成式主詞為 I，搭配 have + p.p. (eaten)。',
+      6: '提示：主詞為 He，搭配 has + p.p. (visited)。',
+      7: '提示：ever 用於疑問句表示「曾經」；never 表示「從未」。',
+      8: '提示：since 搭配過去明確時間點 (since 2020)。'
+    };
+    const fb = document.getElementById('fb-' + q);
+    fb.style.display = 'block';
+    fb.style.background = '#fef3c7';
+    fb.style.color = '#92400e';
+    fb.innerHTML = '💡 ' + (hintMap[q] || '請再仔細看一次題目喔！');
+    speakChinese(hintMap[q] || '仔細想想看喔');
+  }
+
+  function checkAnswer(btn, isCorrect, qNum, feedback) {
     if (answeredState[qNum]) return;
     if (attemptsPerQ[qNum] === undefined) attemptsPerQ[qNum] = 0;
 
@@ -644,7 +649,7 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
 
       fb.style.background = '#d1fae5';
       fb.style.color = '#065f46';
-      fb.innerHTML = `✅ ${feedback} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
+      fb.innerHTML = `✅ <strong>答對了！</strong> ${feedback} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
       speakChinese(`答對了！${feedback}`);
 
       const buttons = btn.parentElement.querySelectorAll('.option-btn');
@@ -659,11 +664,10 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
       btn.disabled = true;
       attemptsPerQ[qNum]++;
       totalErrors++;
-      wrongAttempts = totalErrors;
 
       fb.style.background = '#fee2e2';
       fb.style.color = '#991b1b';
-      fb.innerHTML = `❌ 再試一次！${feedback} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qNum]} 次)</span>`;
+      fb.innerHTML = `❌ <strong>再試一次！</strong> ${feedback} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qNum]} 次)</span>`;
       speakChinese(`再想想看。${feedback}`);
     }
   }
@@ -754,10 +758,6 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
     syncToDashboard(displayName, calculatedScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '));
   }
 
-  function finishAll() {
-    showCompletion();
-  }
-
   function syncToDashboard(name, scoreVal, firstTryVal, firstTryRateVal, wrongVal, detailsStr) {
     const banner = document.getElementById('syncStatusBanner');
     if (banner) {
@@ -818,7 +818,6 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
 
   updateStudentDisplay();
   updateNav();
-
 </script>
 </body>
 </html>

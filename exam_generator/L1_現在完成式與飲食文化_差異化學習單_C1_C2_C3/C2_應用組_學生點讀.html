@@ -615,8 +615,11 @@ function checkSentence(exId) {
     });
   }
 
-  if (typeof renderExercises === 'function') renderExercises();
-
+  if (typeof initExercises === 'function') initExercises();
+  else if (typeof initExercises === 'function') initExercises();
+  else if (typeof initExercises === 'function') initExercises();
+  else if (typeof renderExercises === 'function') renderExercises();
+  if (typeof updateStudentDisplay === 'function') updateStudentDisplay();
 </script>
 </body>
 </html>

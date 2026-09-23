@@ -358,10 +358,12 @@
   const synth = window.speechSynthesis;
   let voices = [];
   let currentQ = 1;
-  const totalQ = 8;
-  let attempts = 0;
+  const totalQuestions = 8;
+  let answeredState = {};
+  let attemptsPerQ = {};
+  let totalErrors = 0;
   let hints = 0;
-  let correctCount = 0;
+  let currentSpeed = 0.25;
   let studentName = localStorage.getItem('starter_c1_student') || '';
 
   const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
@@ -388,39 +390,33 @@
     }
   }
 
-  if (!studentName) {
-    setTimeout(promptStudentName, 300);
-  } else {
-    updateStudentUI();
+  function speakEnglish(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = currentSpeed;
+    const voices = window.speechSynthesis.getVoices();
+    const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                    voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (enVoice) utter.voice = enVoice;
+    window.speechSynthesis.speak(utter);
   }
 
-  function speakEnglish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'en-US';
-  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
-  const voices = window.speechSynthesis.getVoices();
-  const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
-                  voices.find(v => v.lang.startsWith('en')) || voices[0];
-  if (enVoice) utter.voice = enVoice;
-  window.speechSynthesis.speak(utter);
-}
+  function speakChinese(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-TW';
+    utter.rate = 0.85;
+    const voices = window.speechSynthesis.getVoices();
+    const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                    voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+    if (zhVoice) utter.voice = zhVoice;
+    window.speechSynthesis.speak(utter);
+  }
 
-function speakChinese(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'zh-TW';
-  utter.rate = 0.85;
-  const voices = window.speechSynthesis.getVoices();
-  const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
-                  voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
-  if (zhVoice) utter.voice = zhVoice;
-  window.speechSynthesis.speak(utter);
-}
-
-function showHint(q) {
+  function showHint(q) {
     hints++;
     const hintMap = {
       1: '提示：🍎🍎🍎 是 3 個，英文以 th- 開頭。',
@@ -439,10 +435,8 @@ function showHint(q) {
     fb.innerHTML = '💡 ' + (hintMap[q] || '請再仔細看一次題目喔！');
     speakChinese(hintMap[q] || '仔細想想看喔');
   }
-  let attemptsPerQ = {};
-  let totalErrors = 0;
 
-function checkAnswer(btn, isCorrect, qNum, feedback) {
+  function checkAnswer(btn, isCorrect, qNum, feedback) {
     if (answeredState[qNum]) return;
     if (attemptsPerQ[qNum] === undefined) attemptsPerQ[qNum] = 0;
 
@@ -465,7 +459,7 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
 
       fb.style.background = '#d1fae5';
       fb.style.color = '#065f46';
-      fb.innerHTML = `✅ ${feedback} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
+      fb.innerHTML = `✅ <strong>答對了！</strong> ${feedback} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
       speakChinese(`答對了！${feedback}`);
 
       const buttons = btn.parentElement.querySelectorAll('.option-btn');
@@ -480,11 +474,10 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
       btn.disabled = true;
       attemptsPerQ[qNum]++;
       totalErrors++;
-      wrongAttempts = totalErrors;
 
       fb.style.background = '#fee2e2';
       fb.style.color = '#991b1b';
-      fb.innerHTML = `❌ 再試一次！${feedback} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qNum]} 次)</span>`;
+      fb.innerHTML = `❌ <strong>再試一次！</strong> ${feedback} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qNum]} 次)</span>`;
       speakChinese(`再想想看。${feedback}`);
     }
   }
@@ -494,13 +487,18 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
     const currentCard = document.querySelector(`.question-card[data-q="${currentQ}"]`);
     if (currentCard) currentCard.classList.add('active');
 
-    document.getElementById('prevBtn').disabled = (currentQ === 1);
-    document.getElementById('progressText').textContent = `第 ${currentQ} / ${totalQuestions} 題`;
+    const prevB = document.getElementById('prevBtn');
+    if (prevB) prevB.disabled = (currentQ === 1);
+    const progT = document.getElementById('progressText');
+    if (progT) progT.textContent = `第 ${currentQ} / ${totalQuestions} 題`;
 
-    if (currentQ === totalQuestions) {
-      document.getElementById('nextBtn').textContent = '完成結算 🏆';
-    } else {
-      document.getElementById('nextBtn').textContent = '下一題 ▶';
+    const nextB = document.getElementById('nextBtn');
+    if (nextB) {
+      if (currentQ === totalQuestions) {
+        nextB.textContent = '完成結算 🏆';
+      } else {
+        nextB.textContent = '下一題 ▶';
+      }
     }
   }
 
@@ -521,8 +519,10 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
   }
 
   function showCompletion() {
-    document.getElementById('quizContainer').style.display = 'none';
-    document.getElementById('navBar').style.display = 'none';
+    const qc = document.getElementById('quizContainer');
+    if (qc) qc.style.display = 'none';
+    const nb = document.getElementById('navBar');
+    if (nb) nb.style.display = 'none';
 
     let totalScore = 0;
     let firstTryCorrect = 0;
@@ -558,9 +558,12 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
     const calculatedScore = Math.max(10, Math.round(totalScore));
     const firstTryRate = Math.round((firstTryCorrect / totalQuestions) * 100);
 
-    document.getElementById('resScore').textContent = `${calculatedScore} 分`;
-    document.getElementById('resFirstTry').textContent = `${firstTryCorrect} / ${totalQuestions} 題 (${firstTryRate}%)`;
-    document.getElementById('resAttempts').textContent = `${totalErrors} 次`;
+    const rs = document.getElementById('resScore');
+    if (rs) rs.textContent = `${calculatedScore} 分`;
+    const rft = document.getElementById('resFirstTry');
+    if (rft) rft.textContent = `${firstTryCorrect} / ${totalQuestions} 題 (${firstTryRate}%)`;
+    const ra = document.getElementById('resAttempts');
+    if (ra) ra.textContent = `${totalErrors} 次`;
 
     const detailBox = document.getElementById('resDetailsContainer');
     if (detailBox) {
@@ -568,15 +571,14 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
     }
 
     const displayName = studentName || '自主學習同學';
-    document.getElementById('certStudentText').textContent = `學生：${displayName} ｜ 表現評價：${calculatedScore >= 90 ? '⭐⭐⭐ 精熟特優' : (calculatedScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
+    const cst = document.getElementById('certStudentText');
+    if (cst) cst.textContent = `學生：${displayName} ｜ 表現評價：${calculatedScore >= 90 ? '⭐⭐⭐ 精熟特優' : (calculatedScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
 
-    document.getElementById('completionCard').style.display = 'block';
+    const cc = document.getElementById('completionCard');
+    if (cc) cc.style.display = 'block';
+
     speakChinese(`恭喜完成！獲得 ${calculatedScore} 分，首次答對 ${firstTryCorrect} 題。`);
     syncToDashboard(displayName, calculatedScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '));
-  }
-
-  function finishAll() {
-    showCompletion();
   }
 
   function syncToDashboard(name, scoreVal, firstTryVal, firstTryRateVal, wrongVal, detailsStr) {
@@ -618,28 +620,8 @@ function checkAnswer(btn, isCorrect, qNum, feedback) {
     });
   }
 
-  function manualSync() {
-    const displayName = studentName || '自主學習同學';
-    const scoreVal = parseInt(document.getElementById('resScore').textContent) || 90;
-    const firstTryVal = parseInt(document.getElementById('resFirstTry').textContent) || totalQuestions;
-    const firstTryRateVal = Math.round((firstTryVal / totalQuestions) * 100);
-    syncToDashboard(displayName, scoreVal, firstTryVal, firstTryRateVal, totalErrors, '手動同步');
-  }
-
-  function copyReport() {
-    const displayName = studentName || '自主學習同學';
-    const scoreVal = document.getElementById('resScore').textContent;
-    const firstTryVal = document.getElementById('resFirstTry').textContent;
-    const errVal = document.getElementById('resAttempts').textContent;
-    const text = `【${document.title} · C1 基礎組成果】\n👤 學生：${displayName}\n🏆 得分：${scoreVal}\n🎯 首次答對率：${firstTryVal}\n🔄 累計試錯次數：${errVal}\n📅 記錄時間：${new Date().toLocaleString()}`;
-    navigator.clipboard.writeText(text).then(() => {
-      alert('已成功複製學習成果報告！可直接貼在 LINE 或筆記本中。');
-    });
-  }
-
-  updateStudentDisplay();
+  updateStudentUI();
   updateNav();
-
 </script>
 </body>
 </html>

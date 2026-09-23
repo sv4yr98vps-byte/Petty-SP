@@ -482,16 +482,28 @@ function renderExercises() {
   let attemptsPerEx = {};
   let totalWrongChecks = 0;
 
-function checkSentence(exId) {
+let attemptsPerEx = {};
+  let totalWrongChecks = 0;
+
+  let attemptsPerEx = {};
+  let totalWrongChecks = 0;
+
+  let attemptsPerEx = {};
+  let totalWrongChecks = 0;
+
+  function checkSentence(exId) {
     if (attemptsPerEx[exId] === undefined) attemptsPerEx[exId] = 0;
     const ex = exercises.find(e => e.id === exId);
     const dropZone = document.getElementById(`drop-${exId}`);
-    const selectedWords = (state[exId]?.selected || (typeof userState !== 'undefined' ? userState[exId]?.selected : []) || []).map(s => s.word).join(' ');
+    const selectedList = (typeof userState !== 'undefined' && userState[exId] ? userState[exId].selected : (typeof state !== 'undefined' && state[exId] ? state[exId].selected : []));
+    const selectedWords = selectedList.map(s => s.word).join(' ');
     const targetSentence = ex.target.join(' ');
 
     if (selectedWords === targetSentence) {
       dropZone.classList.remove('incorrect');
       dropZone.classList.add('correct');
+      if (typeof userState !== 'undefined' && userState[exId]) userState[exId].done = true;
+      if (typeof state !== 'undefined' && state[exId]) state[exId].done = true;
       
       const errs = attemptsPerEx[exId];
       let badge = '🥇 首次即組對！';
@@ -522,7 +534,8 @@ function checkSentence(exId) {
 
     exercises.forEach((ex, idx) => {
       const targetSentence = ex.target.join(' ');
-      const userSelected = (state[ex.id]?.selected || (typeof userState !== 'undefined' ? userState[ex.id]?.selected : []) || []).map(s => s.word).join(' ');
+      const selectedList = (typeof userState !== 'undefined' && userState[ex.id] ? userState[ex.id].selected : (typeof state !== 'undefined' && state[ex.id] ? state[ex.id].selected : []));
+      const userSelected = selectedList.map(s => s.word).join(' ');
       const isCorrect = (userSelected === targetSentence);
       const errs = attemptsPerEx[ex.id] || 0;
       let multiplier = 0;
@@ -628,8 +641,7 @@ function checkSentence(exId) {
     });
   }
 
-  if (typeof renderExercises === 'function') renderExercises();
-
+  renderExercises();
 </script>
 </body>
 </html>
