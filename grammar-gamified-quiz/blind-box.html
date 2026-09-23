@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>英語文法盲盒抽卡 - 魔法動物園</title>
+    <!-- 引入可愛圓體字型 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@300;500;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <!-- 引入 KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <style>
+        :root {
+            /* 馬卡龍色系 */
+            --bg-color: #fce4ec;       
+            --card-bg: #ffffff;
+            --primary-color: #ff8a80;  
+            --primary-dark: #f06292;
+            --secondary-color: #80deea; 
+            --secondary-dark: #00acc1;
+            --accent-yellow: #fff59d;  
+            --accent-purple: #b39ddb;  /* 奇幻紫 */
+            --text-color: #5d4037;     
+            --shadow-soft: 0 8px 24px rgba(149, 157, 165, 0.18);
+            --border-radius: 24px;
+        }
+
+        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Fredoka', 'Chiron GoRound TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fce4ec 0%, #ede7f6 50%, #e1bee7 100%);
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* 背景裝飾泡泡 */
+        .bubble {
+            position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.45);
+            animation: float 8s infinite ease-in-out; z-index: 0; pointer-events: none;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* 主遊戲容器 */
+        #game-container {
+            width: 92%; max-width: 1020px; height: 88vh; height: 88dvh;
+            margin-top: 36px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            display: flex; flex-direction: row; 
+            position: relative; z-index: 10; overflow: hidden;
+            border: 6px solid white;
+        }
+
+        /* 頂部切換導覽列 (大富翁 / 盲盒) */
+        .mode-toggle-bar {
+            position: fixed; top: 8px; z-index: 999;
+            background: rgba(255, 255, 255, 0.95); padding: 5px 14px; border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12); display: flex; gap: 8px; align-items: center;
+            backdrop-filter: blur(8px); border: 2px solid #fff;
+        }
+        .mode-link {
+            text-decoration: none; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;
+            font-weight: bold; transition: 0.2s; white-space: nowrap;
+        }
+        .mode-link.active { background: #f06292; color: #fff; box-shadow: 0 2px 6px rgba(240, 98, 146, 0.4); }
+        .mode-link:not(.active) { background: #fce4ec; color: #c2185b; }
+        .mode-link:not(.active):hover { background: #f8bbd0; }
+
+        /* --- 左側側邊欄 (桌機/平板) --- */
+        .sidebar {
+            width: 240px; background: #ffffff; border-right: 2px solid #f2f2f2;
+            padding: 25px 18px; display: flex; flex-direction: column; align-items: center;
+            z-index: 20; box-shadow: 4px 0 12px rgba(0,0,0,0.02); flex-shrink: 0;
+        }
+
+        .app-title {
+            font-size: 1.45rem; color: var(--text-color); font-weight: bold;
+            margin-bottom: 20px; text-align: center; line-height: 1.25;
+        }
+
+        .status-display {
+            background: #fff8e1; color: #f57c00;
+            padding: 10px 14px; border-radius: 16px;
+            font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 6px;
+            font-size: 1.05rem; border: 2px solid #ffe082;
+            width: 100%; margin-bottom: 25px;
+        }
+        .status-item { display: flex; align-items: center; gap: 8px; }
+
+        /* 導航按鈕樣式 */
+        .nav-menu { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 18px;
+            border-radius: 16px; color: #8d8d8d; cursor: pointer; transition: 0.25s;
+            font-size: 1.05rem; font-weight: bold; background: transparent;
+        }
+        .nav-item:hover { background: #f7f9fa; color: #555; }
+        .nav-item.active { 
+            background: #e0f7fa; color: #00838f;
+            box-shadow: 0 3px 10px rgba(128, 222, 234, 0.25);
+        }
+        .nav-icon { font-size: 1.4rem; }
+
+        /* --- 右側內容區域 --- */
+        .main-content {
+            flex: 1; overflow-y: auto; overflow-x: hidden;
+            padding: 24px; background: #fafafa; position: relative;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .hidden { display: none !important; }
+
+        /* --- 1. 首頁 (盲盒商店) --- */
+        .gacha-container {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100%; gap: 15px; text-align: center;
+        }
+        .gacha-machine {
+            width: 100%; max-width: 280px; height: 230px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='10' width='60' height='60' fill='%23ffccbc' rx='6'/%3E%3Ccircle cx='50' cy='40' r='20' fill='white' opacity='0.55'/%3E%3Cpath d='M30,80 L70,80 L65,95 L35,95 Z' fill='%23ef5350'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain; position: relative;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .machine-glass {
+            width: 110px; height: 110px; border-radius: 50%;
+            background: rgba(255,255,255,0.4); border: 4px solid rgba(255,255,255,0.7);
+            position: absolute; top: 32px; 
+            display: flex; justify-content: center; align-items: center; overflow: hidden;
+        }
+        .capsule { font-size: 1.8rem; position: absolute; }
+
+        .btn {
+            background: var(--primary-color); color: white;
+            border: none; padding: 12px 28px; font-size: 1.15rem;
+            border-radius: 50px; cursor: pointer; width: auto; min-width: 230px;
+            font-family: inherit; font-weight: 700;
+            box-shadow: 0 4px 12px rgba(255, 138, 128, 0.4);
+            transition: transform 0.15s, box-shadow 0.15s, background-color 0.2s;
+        }
+        .btn:hover:not(:disabled) { filter: brightness(1.05); }
+        .btn:active:not(:disabled) { transform: scale(0.96); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .btn-blue { background: var(--secondary-color); box-shadow: 0 4px 12px rgba(128, 222, 234, 0.4); color:#006064;}
+        .btn-purple { background: var(--accent-purple); box-shadow: 0 4px 12px rgba(179, 157, 219, 0.4); border: 2px solid #9575cd; color: #fff;}
+        .btn-purple:hover:not(:disabled) { background: #9575cd; }
+
+        /* --- 2. 答題挑戰區 --- */
+        .quiz-container {
+            max-width: 780px; margin: 0 auto;
+            min-height: 100%; display: flex; flex-direction: column; justify-content: center;
+        }
+        
+        .combo-area {
+            display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 12px;
+            background: #ffffff; padding: 8px 16px; border-radius: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+            border: 2px solid #fff59d; width: fit-content; margin-left: auto; margin-right: auto;
+        }
+        .combo-star { font-size: 1.8rem; color: #e0e0e0; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .combo-star.active { color: #ffca28; filter: drop-shadow(0 0 6px rgba(255,202,40,0.7)); transform: scale(1.2); }
+
+        .quiz-card {
+            background: white; border-radius: 20px; padding: 18px 22px; 
+            box-shadow: 0 4px 14px rgba(0,0,0,0.04); text-align: center; margin-bottom: 12px;
+            border: 2px solid #f0f0f0; position: relative;
+        }
+        .question-text { 
+            font-size: 1.55rem; color: var(--text-color); margin: 6px 0 14px 0; 
+            font-weight: bold; line-height: 1.6; letter-spacing: 0.5px; 
+        }
+        
+        #options-list {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%;
+        }
+
+        .option-btn {
+            background: white; border: 3px solid #ededed; color: #555; width: 100%; padding: 12px 16px; 
+            border-radius: 16px; font-size: 1.15rem; font-weight: 600; cursor: pointer; transition: 0.15s; 
+            text-align: left; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 3px 0 #ededed; min-height: 54px;
+        }
+        .option-btn:hover { border-color: var(--secondary-color); background: #e0f7fa; color: #006064; box-shadow: 0 3px 0 #b2ebf2; transform: translateY(-2px);}
+        .option-btn:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
+        
+        .option-btn.correct { background: #c8e6c9 !important; border-color: #4caf50 !important; color: #1b5e20 !important; box-shadow: 0 3px 0 #388e3c !important; }
+        .option-btn.wrong { background: #ffcdd2 !important; border-color: #ef5350 !important; color: #b71c1c !important; animation: shake 0.4s; box-shadow: 0 3px 0 #d32f2f !important; }
+        .option-btn.locked { cursor: default; pointer-events: none; }
+        .option-btn.locked.correct { opacity: 1; } 
+        .option-btn.locked:not(.correct):not(.wrong) { opacity: 0.45; background: #fafafa; border-color: #e0e0e0; box-shadow: none; }
+
+        .katex { font-size: 1.15em !important; margin: 0 3px; color: #0277bd; font-weight: bold; }
+
+        .speaker-icon {
+            font-size: 1.3rem; padding: 6px; border-radius: 50%;
+            background: #f0f0f0; cursor: pointer; color: #555; transition: 0.2s; pointer-events: auto;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .speaker-icon:hover { background: var(--accent-yellow); transform: scale(1.15); }
+
+        .quiz-nav-area { display: flex; justify-content: space-between; gap: 14px; margin-top: 14px; width: 100%; }
+        .quiz-nav-btn {
+            flex: 1; padding: 12px; border-radius: 16px;
+            background: white; border: 2px solid #ddd; color: #888; font-weight: bold; font-size: 1.1rem;
+            cursor: pointer; transition: 0.2s; box-shadow: 0 4px 0 #eee;
+        }
+        .quiz-nav-btn:hover:not(:disabled) { background: #f5f5f5; transform: translateY(-2px); box-shadow: 0 5px 0 #ddd; }
+        .quiz-nav-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
+        .quiz-nav-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; background: #f5f5f5;}
+        
+        .quiz-nav-btn.primary { background: var(--secondary-color); color: #006064; border: 2px solid #4dd0e1; box-shadow: 0 4px 0 #00acc1; }
+        .quiz-nav-btn.primary:hover:not(:disabled) { background: #4dd0e1; box-shadow: 0 5px 0 #00acc1; }
+        .quiz-nav-btn.primary:disabled { background: #e0e0e0; color: #9e9e9e; border-color: #ccc; box-shadow: none; cursor: not-allowed; }
+
+        /* --- 3. 搜集圖鑑 --- */
+        .collection-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap: 16px; padding-bottom: 20px;
+        }
+        .collection-item {
+            background: white; border-radius: 18px; aspect-ratio: 1;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.04); position: relative;
+            border: 3px solid transparent; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .collection-item:hover { transform: translateY(-4px); box-shadow: 0 8px 18px rgba(0,0,0,0.08); }
+        .collection-item.locked { background: #f0f0f0; opacity: 0.55; box-shadow: none; transform: none;}
+        .collection-item.locked .item-icon { filter: grayscale(100%) brightness(40%); opacity: 0.25; }
+        
+        .item-icon { font-size: 2.6rem; margin-bottom: 4px; transition: transform 0.2s; }
+        .item-name { font-size: 0.88rem; color: #666; font-weight: bold; text-align: center; }
+        
+        .rarity-badge {
+            position: absolute; top: 6px; left: 6px;
+            font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; color: white;
+            font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        .count-badge {
+            position: absolute; bottom: 6px; right: 6px;
+            font-size: 0.78rem; padding: 2px 7px; border-radius: 10px; background: #37474f; color: white;
+            font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        .count-badge.max { background: linear-gradient(45deg, #e91e63, #ff5722); }
+
+        .rarity-R { background: #29b6f6; } 
+        .rarity-SR { background: #ab47bc; } 
+        .rarity-SSR { background: linear-gradient(45deg, #fbc02d, #ff6f00); } 
+
+        /* --- 4. 教師後台表格 --- */
+        .teacher-table { width: 100%; border-collapse: collapse; text-align: left; background: white; border-radius: 12px; }
+        .teacher-table th, .teacher-table td { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; }
+        .teacher-table th { background: #fafafa; font-weight: bold; color: #555; }
+        .teacher-table tr:hover td { background: #f9fbe7; }
+        .teacher-table .alert-red { color: #d32f2f; font-weight: bold; }
+        .teacher-table .alert-green { color: #388e3c; font-weight: bold; }
+
+        /* --- 開箱動畫 Modal --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.72); z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            padding: 16px;
+        }
+        .box-container {
+            width: 240px; height: 240px; position: relative;
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+        }
+        .blind-box {
+            font-size: 9.5rem; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.4));
+            animation: bounce 2s infinite; cursor: pointer;
+        }
+        .blind-box.giant { font-size: 13rem; filter: drop-shadow(0 20px 25px rgba(179, 157, 219, 0.85)); }
+        .blind-box.shaking { animation: shake-box 0.45s infinite; }
+        .blind-box.opening { animation: pop-open 0.45s forwards; }
+
+        .prize-display {
+            background: white; padding: 36px 30px; border-radius: 36px;
+            text-align: center; animation: zoomIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 90%; max-width: 380px; max-height: 85vh; overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); position: relative; z-index: 101;
+        }
+        .prize-icon { font-size: 7.5rem; display: block; margin: 8px 0; filter: drop-shadow(0 8px 8px rgba(0,0,0,0.15)); }
+        .prize-title { font-size: 1.9rem; color: var(--primary-color); font-weight: bold; margin-bottom: 5px;}
+        .prize-rarity { font-size: 1.05rem; color: #666; margin-bottom: 5px; display: inline-block; padding: 5px 15px; background: #f0f0f0; border-radius: 15px;}
+        .prize-count-info { font-size: 1.05rem; color: #00838f; font-weight: bold; margin-bottom: 22px; }
+
+        .rays {
+            position: absolute; width: 600px; height: 600px;
+            background: repeating-conic-gradient(rgba(255,255,255,0.35) 0 15deg, transparent 15deg 30deg);
+            animation: rotate 10s linear infinite; z-index: -1; pointer-events: none;
+        }
+
+        /* --- 手機與窄螢幕適配 (Mobile Responsive) --- */
+        @media (max-width: 768px) {
+            #game-container { 
+                flex-direction: column; height: 96vh; height: 96dvh; width: 95%; max-width: 480px;
+                border-width: 4px;
+            }
+            .sidebar { 
+                order: 2; width: 100%; border-top: 2px solid #f0f0f0; border-right: none;
+                flex-direction: row; padding: 6px 10px; justify-content: space-around; flex-shrink: 0;
+                box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
+            }
+            .app-title, .status-display, #player-display { display: none !important; } 
+            
+            .nav-menu { flex-direction: row; gap: 4px; justify-content: space-around; width: 100%; }
+            .nav-item { flex-direction: column; gap: 3px; font-size: 0.78rem; padding: 6px 10px; border-radius: 12px; }
+            .nav-icon { font-size: 1.3rem; }
+            
+            /* 手機版頂部金幣狀態列 */
+            .mobile-top-bar { display: flex; }
+            .main-content { padding: 12px 14px; } 
+            .quiz-card { padding: 12px 14px; margin-bottom: 8px; }
+            .question-text { font-size: 1.35rem; margin: 4px 0 10px 0; }
+            
+            #options-list { grid-template-columns: 1fr; gap: 8px; } 
+            .option-btn { padding: 10px 14px; font-size: 1.05rem; min-height: 48px; }
+            #feedback-msg { margin-top: 8px !important; font-size: 1.05rem; height: 24px !important; line-height: 24px !important;}
+            .gacha-machine { height: 180px; }
+            .btn { min-width: 200px; font-size: 1.05rem; padding: 10px 20px; }
+            .blind-box { font-size: 8rem; }
+            .blind-box.giant { font-size: 10rem; }
+            .prize-icon { font-size: 6rem; }
+        }
+        
+        .mobile-top-bar {
+            display: none; width: 100%; padding: 8px 16px; justify-content: space-between; align-items: center;
+            background: white; border-bottom: 1px solid #f0f0f0; flex-shrink: 0;
+        }
+
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-5px);} 75% {transform: translateX(5px);} }
+        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
+        @keyframes shake-box { 0% {transform: rotate(0deg);} 25% {transform: rotate(-10deg);} 75% {transform: rotate(10deg);} }
+        @keyframes pop-open { 0% {transform: scale(1);} 50% {transform: scale(1.2);} 100% {transform: scale(0); opacity: 0;} }
+        @keyframes zoomIn { from {transform: scale(0);} to {transform: scale(1);} }
+        @keyframes rotate { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
+        @keyframes starPop { 0% {transform: scale(0);} 80% {transform: scale(1.4);} 100% {transform: scale(1);} }
+
+    </style>
+</head>
+<body>
+
+    <!-- 頂部遊戲模式切換 -->
+    <div class="mode-toggle-bar">
+        <span style="font-size:0.85rem; font-weight:bold; color:#777;">🎮 遊戲切換：</span>
+        <a href="index.html" class="mode-link">🎲 英語文法大富翁</a>
+        <a href="blind-box.html" class="mode-link active">🎁 盲盒抽卡養成</a>
+    </div>
+
+    <!-- 裝飾背景 -->
+    <div class="bubble" style="width: 90px; height: 90px; top: 10%; left: -20px;"></div>
+    <div class="bubble" style="width: 55px; height: 55px; bottom: 18%; right: -10px; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 75px; height: 75px; top: 38%; right: 18%; animation-delay: 4s;"></div>
+
+    <div id="game-container">
+        
+        <!-- 手機版專用頂部欄 -->
+        <div class="mobile-top-bar" id="mobile-header">
+            <div style="font-weight: bold; color: var(--text-color); font-size: 1rem;">Grammar Box 📦</div>
+            <div style="display:flex; gap:8px;">
+                <div class="status-display" style="width: auto; margin:0; padding: 4px 10px; font-size: 0.95rem; flex-direction:row; display:flex !important;">
+                    <span>🪙</span> <span id="mobile-coins">0</span>
+                </div>
+                <div class="status-display" style="width: auto; margin:0; padding: 4px 10px; font-size: 0.95rem; flex-direction:row; background:#ede7f6; color:#7e57c2; border-color:#d1c4e9; display:flex !important;">
+                    <span>🎫</span> <span id="mobile-tokens">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 左側側邊欄 -->
+        <div class="sidebar">
+            <div class="app-title">Grammar Box<br><span style="font-size:1.1rem; color: #aaa;">🐾 魔法動物園</span></div>
+            
+            <div id="player-display" style="font-weight: bold; color: var(--secondary-dark); margin-bottom: 10px; font-size: 1.05rem; display: none;">👤 <span id="player-name-label"></span></div>
+
+            <div class="status-display">
+                <div class="status-item"><span>🪙 金幣:</span> <span id="user-coins">0</span></div>
+                <div class="status-item" style="color: #7e57c2;"><span>🎫 特殊代幣:</span> <span id="user-tokens">0</span></div>
+            </div>
+
+            <div class="nav-menu">
+                <div class="nav-item" onclick="switchTab('home')" id="nav-home">
+                    <div class="nav-icon">🏪</div>
+                    <span>盲盒商店</span>
+                </div>
+                <div class="nav-item active" onclick="switchTab('quiz')" id="nav-quiz">
+                    <div class="nav-icon">📝</div>
+                    <span>數學挑戰</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('collection')" id="nav-collection">
+                    <div class="nav-icon">📒</div>
+                    <span>我的圖鑑</span>
+                </div>
+                <div class="nav-item" onclick="openTeacherLogin()" id="nav-teacher" style="color: #bbb;">
+                    <div class="nav-icon" style="font-size: 1.2rem;">👨‍🏫</div>
+                    <span>教師後台</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右側主要內容區 -->
+        <div class="main-content">
+            
+            <!-- 1. 商店畫面 -->
+            <div id="screen-home" class="content-area hidden">
+                <div class="gacha-container">
+                    <h2 style="color: var(--primary-color); margin: 0 0 5px 0; font-size: 1.8rem;">盲盒商店</h2>
+                    <p style="color: #888; font-size: 1.05rem; margin: 0 0 12px 0;">快來收集奇妙的魔法動物！(最多可重複 3 隻升至滿星)</p>
+                    
+                    <div class="gacha-machine">
+                        <div class="machine-glass">
+                            <div class="capsule" style="color: #ef5350; top: 18px; left: 24px; transform: rotate(-20deg);">🐾</div>
+                            <div class="capsule" style="color: #42a5f5; top: 46px; left: 45px; transform: rotate(45deg);">🐾</div>
+                            <div class="capsule" style="color: #ffca28; top: 26px; left: 65px; transform: rotate(10deg);">🐾</div>
+                        </div>
+                    </div>
+
+                    <button class="btn" onclick="tryOpenBox('normal')" id="draw-btn">
+                        普通盲盒 (100 🪙)
+                    </button>
+                    <button class="btn btn-purple" onclick="tryOpenBox('special')" id="special-draw-btn">
+                        ✨ 大型奇幻盲盒 (需 1 🎫)
+                    </button>
+                    
+                    <div style="margin-top: 8px; font-size: 0.9rem; color: #aaa; text-align:center; line-height: 1.4;">
+                        連對 3 題可獲取大型盲盒代幣🎫<br>內含稀有 SSR 幻獸！
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 挑戰畫面 -->
+            <div id="screen-quiz" class="content-area">
+                <div class="quiz-container">
+                    
+                    <div class="combo-area" id="combo-display">
+                        <span style="font-weight:bold; color:#795548; font-size: 0.95rem;">連對挑戰：</span>
+                        <div id="star-1" class="combo-star">☆</div>
+                        <div id="star-2" class="combo-star">☆</div>
+                        <div id="star-3" class="combo-star">☆</div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <div style="color: #aaa; font-size: 0.9rem; margin-bottom: 6px; font-weight: bold; letter-spacing: 1px;">
+                            QUESTION <span id="q-index">1</span>
+                        </div>
+                        <div class="question-text" id="q-text">題目載入中...</div>
+                        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 4px;">
+                            <div class="speaker-icon" onclick="playQuestionAudio()" title="播放題目語音">🔊 朗讀題幹</div>
+                        </div>
+                    </div>
+                    
+                    <div id="options-list"></div>
+                    <div id="feedback-msg" style="text-align: center; height: 28px; line-height: 28px; font-weight: bold; color: var(--primary-color); font-size: 1.15rem; margin-top: 10px;"></div>
+                    
+                    <div class="quiz-nav-area">
+                        <button class="quiz-nav-btn" id="prev-btn" onclick="prevQuestion()">◀ 上一題</button>
+                        <button class="quiz-nav-btn primary" id="next-btn" onclick="nextQuestion()" disabled>下一題 ▶</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 圖鑑畫面 -->
+            <div id="screen-collection" class="content-area hidden">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 style="color: var(--text-color); margin: 0; font-size: 1.6rem;">我的動物園</h2>
+                    <div style="background: white; padding: 5px 14px; border-radius: 14px; color: #777; font-weight: bold; box-shadow: 0 2px 6px rgba(0,0,0,0.04); font-size: 0.95rem;">
+                        進度: <span id="collected-count" style="color: var(--primary-color);">0</span> / <span id="total-count">0</span>
+                    </div>
+                </div>
+                <h3 style="color:#777; border-bottom: 2px dashed #eee; padding-bottom:5px; margin: 10px 0 14px 0; font-size: 1.1rem;">🐾 一般魔法動物</h3>
+                <div class="collection-grid" id="collection-grid-normal"></div>
+                <h3 style="color:#9575cd; border-bottom: 2px dashed #eee; padding-bottom:5px; margin: 20px 0 14px 0; font-size: 1.1rem;">✨ 史詩奇幻生物</h3>
+                <div class="collection-grid" id="collection-grid-special"></div>
+            </div>
+
+            <!-- 4. 教師後台畫面 -->
+            <div id="screen-teacher" class="content-area hidden">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 style="color: var(--text-color); margin: 0; font-size: 1.6rem;">👨‍🏫 教師後台：學習狀況總覽</h2>
+                    <button class="btn btn-blue" onclick="fetchTeacherData()" style="min-width: 100px; padding: 8px 14px; font-size: 0.95rem;">↻ 更新資料</button>
+                </div>
+                <div style="background: white; border-radius: 16px; padding: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); overflow-x: auto;">
+                    <table class="teacher-table">
+                        <thead>
+                            <tr>
+                                <th>學生姓名</th>
+                                <th>答題總數</th>
+                                <th>答對率</th>
+                                <th>錯題紀錄</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teacher-data-body">
+                            <tr><td colspan="4" style="text-align: center; color: #aaa;">點擊「更新資料」即可檢視全班或本機紀錄</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 開箱 Modal -->
+        <div id="unbox-modal" class="modal-overlay hidden">
+            <div class="rays hidden" id="rays"></div>
+            <div id="box-stage" class="box-container" onclick="openBoxAnimation()">
+                <div class="blind-box" id="blind-box-el">🎁</div>
+                <div style="position: absolute; bottom: -50px; color: white; font-weight: bold; width: 100%; text-align: center; font-size: 1.35rem; text-shadow: 0 2px 4px rgba(0,0,0,0.6);">點擊打開!</div>
+            </div>
+            <div id="prize-stage" class="prize-display hidden">
+                <div class="prize-rarity" id="prize-rarity-badge">RARE</div>
+                <div class="prize-icon" id="prize-icon">🦄</div>
+                <div class="prize-title" id="prize-name">獨角獸</div>
+                <div class="prize-count-info" id="prize-count-info">第 1 隻！</div>
+                <button class="btn btn-blue" onclick="closeModal()">太棒了！</button>
+            </div>
+        </div>
+
+        <!-- 首頁登入 Modal -->
+        <div id="login-modal" class="modal-overlay" style="z-index: 300;">
+            <div style="background: white; padding: 32px 24px; border-radius: 24px; text-align: center; width: 90%; max-width: 340px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <div style="font-size: 3rem; margin-bottom: 8px;">🐾</div>
+                <h2 style="color: var(--primary-color); margin: 0 0 8px 0; font-size: 1.6rem;">歡迎來到文法魔法動物園</h2>
+                <p style="color: #666; margin-bottom: 18px; font-size: 0.95rem; line-height: 1.5;">回答 <b>Grammar A、B、C</b> 文法題賺金幣，連對 3 題獲得代幣，抽取超萌稀有動物夥伴！</p>
+                <input type="text" id="player-name-input" placeholder="請輸入名字" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #eee; font-size: 1.15rem; margin-bottom: 18px; text-align: center; font-family: inherit;">
+                <button id="login-btn" class="btn btn-blue" onclick="loginAndLoad()" style="width: 100%;">進入遊戲</button>
+            </div>
+        </div>
+
+        <!-- 教師登入 Modal -->
+        <div id="teacher-pwd-modal" class="modal-overlay hidden" style="z-index: 350;">
+            <div style="background: white; padding: 26px 20px; border-radius: 20px; text-align: center; max-width: 300px; width: 90%;">
+                <h3 style="margin-top: 0; color: var(--text-color);">進入教師後台</h3>
+                <input type="password" id="teacher-pwd-input" placeholder="請輸入密碼 (預設: 0000)" style="width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #eee; font-size: 1.1rem; margin-bottom: 18px; text-align: center;">
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn" style="background: #ccc; box-shadow: 0 4px 0 #999; min-width: 90px; padding: 9px;" onclick="closeTeacherLogin()">取消</button>
+                    <button class="btn btn-blue" style="min-width: 90px; padding: 9px;" onclick="verifyTeacherLogin()">確定</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 錯題明細 Modal -->
+        <div id="wrong-detail-modal" class="modal-overlay hidden" style="z-index: 450;">
+            <div style="background: white; padding: 22px 18px; border-radius: 20px; text-align: left; max-width: 580px; width: 95%;">
+                <h3 id="wrong-detail-title" style="margin-top: 0; color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 8px; font-size: 1.3rem;">錯題紀錄</h3>
+                <div id="wrong-detail-content" style="max-height: 58vh; overflow-y: auto; margin-bottom: 18px; padding-right: 6px;">
+                    <!-- JS 生成錯題清單 -->
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-blue" onclick="closeWrongDetail()" style="min-width: 110px; padding: 9px 18px;">關閉</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 系統載入與提示 Modal -->
+        <div id="loading-overlay" class="modal-overlay hidden" style="z-index: 500;">
+            <div style="color: white; font-size: 1.35rem; font-weight: bold; animation: bounce 1s infinite;">
+                雲端資料存取中... ☁️
+            </div>
+        </div>
+
+        <div id="custom-alert-modal" class="modal-overlay hidden" style="z-index: 600;">
+            <div style="background: white; padding: 26px 20px; border-radius: 20px; text-align: center; max-width: 320px; width: 90%;">
+                <p id="custom-alert-text" style="font-size: 1.15rem; color: var(--text-color); margin-bottom: 18px; font-weight: bold; line-height:1.5;"></p>
+                <button class="btn" onclick="closeCustomAlert()" style="min-width: 110px; padding: 9px 18px;">確定</button>
+            </div>
+        </div>
+
+        <div id="custom-confirm-modal" class="modal-overlay hidden" style="z-index: 600;">
+            <div style="background: white; padding: 26px 20px; border-radius: 20px; text-align: center; max-width: 320px; width: 90%;">
+                <p id="custom-confirm-text" style="font-size: 1.15rem; color: var(--text-color); margin-bottom: 18px; font-weight: bold;"></p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn" style="background: #ccc; box-shadow: 0 4px 0 #999; min-width: 90px; padding: 9px;" onclick="closeCustomConfirm(false)">取消</button>
+                    <button class="btn btn-blue" style="min-width: 90px; padding: 9px;" onclick="closeCustomConfirm(true)">確定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 遊戲腳本 -->
+    <script>
+        // --- 填寫你的 Google Apps Script 網頁應用程式 URL (選填，未填則自動啟用本機 LocalStorage 儲存模式) ---
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbzoTang5JceMeNaETVaCY4m0pA89WtaBGb1OqXB-cYhJg6Y2lXy2RPy-MdOVsWHCbUbbg/exec";
+
+        let playerName = "";
+
+        // --- 1. 遊戲數據 ---
+        const questions = [
+            // --- Part 1: Grammar A (Be 動詞 am/is/are、縮寫、否定與簡答) ---
+            {
+                q: "I _____ a junior high school student. (我是國中生。)",
+                ans: "am",
+                options: ["am", "is", "are", "be"],
+                hint: "主詞是第一人稱單數 I，Be 動詞搭配 am。"
+            },
+            {
+                q: "_____ are Tina and Mike. (他們是 Tina 和 Mike。)",
+                ans: "They",
+                options: ["They", "He", "She", "It"],
+                hint: "Tina 和 Mike 是兩個人（複數第三人稱），代名詞用 They。"
+            },
+            {
+                q: "Q: Are you happy today?<br>A: Yes, _____.",
+                ans: "I am",
+                options: ["I am", "I'm", "you are", "you're"],
+                hint: "肯定簡答句末，代名詞與 Be 動詞不可縮寫，必須寫 Yes, I am.！"
+            },
+            {
+                q: "Q: Is he Joe?<br>A: No, he _____.",
+                ans: "isn't",
+                options: ["isn't", "aren't", "am not", "not is"],
+                hint: "主詞 he 為第三人稱單數，否定縮寫為 isn't (is not)。"
+            },
+            {
+                q: "下列哪一個 Be 動詞與否定的縮寫形式在英文中是「錯誤」的？",
+                ans: "amn't",
+                options: ["amn't", "isn't", "aren't", "he's"],
+                hint: "特別注意：am not 沒有縮寫形式，絕對不能寫成 amn't！"
+            },
+            {
+                q: "Look at David! _____ is tall and strong. (看大衛！他很高壯。)",
+                ans: "He",
+                options: ["He", "She", "It", "They"],
+                hint: "David 是男生單數，人稱代名詞用 He。"
+            },
+            {
+                q: "We _____ sad. We are very happy! (我們不傷心，我們很開心！)",
+                ans: "are not",
+                options: ["are not", "is not", "am not", "not are"],
+                hint: "主詞 We 是第一人稱複數，否定為 are not 或 aren't。"
+            },
+            {
+                q: "將句子中的「They are」改寫為縮寫形式：",
+                ans: "They're",
+                options: ["They're", "Their", "There", "The're"],
+                hint: "They are 的正確縮寫為 They're；Their 是「他們的」，There 是「那裡」。"
+            },
+            {
+                q: "Judy: \"Hello, I _____ Judy. Nice to meet you.\"",
+                ans: "am",
+                options: ["am", "is", "are", "be"],
+                hint: "自我介紹「I am Judy.」或「I'm Judy.」。"
+            },
+
+            // --- Part 2: Grammar B (This / That、What is...、a / an、不可縮寫陷阱) ---
+            {
+                q: "（指著手邊近處的一本書）「_____ is a book.」",
+                ans: "This",
+                options: ["This", "That", "These", "Those"],
+                hint: "指稱手邊近處單數事物用 This (這)；遠處用 That (那)。"
+            },
+            {
+                q: "（指著遠處講台上的一顆球）「_____ is a ball.」",
+                ans: "That",
+                options: ["That", "This", "These", "Those"],
+                hint: "指稱距離說話者遠處的單數事物用 That (那)。"
+            },
+            {
+                q: "This is _____ orange. (這是一顆柳橙。)",
+                ans: "an",
+                options: ["an", "a", "the", "one"],
+                hint: "orange 開頭為母音發音 [ɔ]，前面不定冠詞要用 an。"
+            },
+            {
+                q: "That is _____ elephant. (那是一隻大象。)",
+                ans: "an",
+                options: ["an", "a", "two", "the"],
+                hint: "elephant 開頭為母音發音 [ɛ]，前面不定冠詞用 an。"
+            },
+            {
+                q: "Q: What is that? (那是什麼？)<br>A: _____ is a monkey.",
+                ans: "It",
+                options: ["It", "They", "These", "Those"],
+                hint: "回答 What is this / that? 時，通常以代名詞 It (它是...) 回答。"
+            },
+            {
+                q: "下列哪一個組合在英文書寫中「不可縮寫」？",
+                ans: "This is",
+                options: ["This is", "That is", "What is", "It is"],
+                hint: "That is = That's, What is = What's, It is = It's，但 This is 不可縮寫！"
+            },
+            {
+                q: "將問句「What is this?」的前兩個字改寫為縮寫：",
+                ans: "What's this?",
+                options: ["What's this?", "What'is this?", "This's what?", "What is't?"],
+                hint: "What is 可以縮寫為 What's。"
+            },
+            {
+                q: "This is _____ egg, not a ball. (這是一顆蛋，不是球。)",
+                ans: "an",
+                options: ["an", "a", "two", "some"],
+                hint: "egg 是母音發音開頭的單數可數名詞，前面用 an。"
+            },
+
+            // --- Part 3: Grammar C (These / Those、名詞單複數 6 大規則、字尾發音) ---
+            {
+                q: "（指著手邊近處的幾顆蘋果）「_____ are apples.」",
+                ans: "These",
+                options: ["These", "Those", "This", "That"],
+                hint: "近處複數事物用 These (這些)，搭配 are。"
+            },
+            {
+                q: "（指著天空遠處的幾隻鳥）「_____ are birds.」",
+                ans: "Those",
+                options: ["Those", "These", "This", "That"],
+                hint: "遠處複數事物用 Those (那些)，搭配 are。"
+            },
+            {
+                q: "Q: What are these? (這些是什麼？)<br>A: _____ are rabbits.",
+                ans: "They",
+                options: ["They", "It", "This", "That"],
+                hint: "回答複數問句 What are these / those? 時，主詞用 They (牠們/他們)。"
+            },
+            {
+                q: "單數名詞「box」(盒子) 的複數形式為：",
+                ans: "boxes",
+                options: ["boxes", "boxs", "boxies", "boxves"],
+                hint: "字尾為 s, x, ch, sh 的名詞，變複數時字尾加 -es (如 boxes, buses, watches)。"
+            },
+            {
+                q: "單數名詞「bus」(公車) 的複數形式為：",
+                ans: "buses",
+                options: ["buses", "buss", "busies", "busves"],
+                hint: "bus 字尾為 s，變複數加 -es 成為 buses。"
+            },
+            {
+                q: "單數名詞「baby」(嬰兒) 的複數形式為：",
+                ans: "babies",
+                options: ["babies", "babys", "babyies", "babyves"],
+                hint: "字尾為「子音 + y」的名詞，變複數要「去 y 加 -ies」。"
+            },
+            {
+                q: "單數名詞「leaf」(樹葉) 的複數形式為：",
+                ans: "leaves",
+                options: ["leaves", "leafs", "leafes", "leafies"],
+                hint: "字尾為 f 或 fe 的名詞，變複數要「去 f/fe 加 -ves」(如 leaves, wives)。"
+            },
+            {
+                q: "單數名詞「goose」(鵝) 的不規則複數變化為：",
+                ans: "geese",
+                options: ["geese", "gooses", "goosies", "geeses"],
+                hint: "goose 為不規則變化名詞，複數形式為 geese (如同 foot -> feet)。"
+            },
+            {
+                q: "單數名詞「sheep」(綿羊) 的複數形式為：",
+                ans: "sheep",
+                options: ["sheep", "sheeps", "sheepes", "sheepies"],
+                hint: "sheep (綿羊) 與 fish (魚) 為「單複數同形」，複數依然是 sheep！"
+            },
+            {
+                q: "「watches」(手錶複數) 的字尾 -es 發音為下列哪一個？",
+                ans: "[ɪz]",
+                options: ["[ɪz]", "[s]", "[z]", "[t]"],
+                hint: "字尾為 ch, sh, s, x 等噝音後面的 -es，發音為 [ɪz] (如 watches, buses, brushes, oranges)。"
+            },
+            {
+                q: "「books」(書本複數) 的字尾 -s 發音為下列哪一個？",
+                ans: "[s]",
+                options: ["[s]", "[z]", "[ɪz]", "[d]"],
+                hint: "book 字尾 [k] 為無聲音，後面加的 -s 發無聲音 [s] (如 desks, cups, rabbits)。"
+            }
+        ];
+
+        const collectionDB = [
+            { id: 1, name: "魔法小狗", icon: "🐶", rarity: 1, pool: "normal" }, 
+            { id: 2, name: "星光小貓", icon: "🐱", rarity: 1, pool: "normal" },
+            { id: 3, name: "幸運小兔", icon: "🐰", rarity: 1, pool: "normal" }, 
+            { id: 4, name: "火花小鼠", icon: "🐭", rarity: 1, pool: "normal" },
+            { id: 5, name: "赤炎小狐", icon: "🦊", rarity: 2, pool: "normal" }, 
+            { id: 6, name: "大地幼熊", icon: "🐻", rarity: 2, pool: "normal" },
+            { id: 7, name: "竹林熊貓", icon: "🐼", rarity: 2, pool: "normal" }, 
+            { id: 8, name: "貪睡無尾熊", icon: "🐨", rarity: 2, pool: "normal" },
+            { id: 9, name: "小飛豬", icon: "🐷", rarity: 1, pool: "normal" }, 
+            { id: 10, name: "呱呱水怪", icon: "🐸", rarity: 1, pool: "normal" },
+            { id: 101, name: "彩虹獨角獸", icon: "🦄", rarity: 3, pool: "special" }, 
+            { id: 102, name: "霸王機甲龍", icon: "🦖", rarity: 3, pool: "special" },
+            { id: 103, name: "遠古神龍", icon: "🐉", rarity: 3, pool: "special" }, 
+            { id: 104, name: "深海大章魚", icon: "🐙", rarity: 3, pool: "special" },
+            { id: 105, name: "星際訪客", icon: "👽", rarity: 3, pool: "special" }, 
+            { id: 106, name: "智庫機器人", icon: "🤖", rarity: 3, pool: "special" }
+        ];
+
+        const MAX_COPIES = 3; 
+
+        // --- 2. 狀態變數 ---
+        let coins = 0;
+        let specialTokens = 0; 
+        let unlockedItems = []; 
+        let currentQIndex = 0;
+        let qList = []; 
+        let questionStates = []; 
+        let comboCount = 0; 
+        
+        // 學習追蹤數據
+        let totalAttempted = 0;
+        let totalCorrect = 0;
+        let wrongHistory = []; 
+
+        const BOX_COST = 100;
+        const REWARD_COINS = 50; 
+        let fetchedTeacherData = [];
+
+        // --- 3. 導航與 UI 控制 ---
+        window.switchTab = function(tabId) {
+            document.querySelectorAll('.content-area').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            const targetScreen = document.getElementById(`screen-${tabId}`);
+            if(targetScreen) targetScreen.classList.remove('hidden');
+            
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if(activeNav) activeNav.classList.add('active');
+            
+            if (tabId === 'collection') renderCollection();
+            if (tabId === 'home') updateStoreBtn();
+        }
+
+        function updateUI() {
+            document.getElementById('user-coins').innerText = coins;
+            document.getElementById('mobile-coins').innerText = coins;
+            document.getElementById('user-tokens').innerText = specialTokens;
+            document.getElementById('mobile-tokens').innerText = specialTokens;
+            updateStoreBtn();
+            updateComboUI();
+        }
+
+        function updateComboUI() {
+            for(let i = 1; i <= 3; i++) {
+                const star = document.getElementById(`star-${i}`);
+                if(i <= comboCount) {
+                    star.classList.add('active');
+                    star.innerText = "★";
+                    star.style.animation = "starPop 0.3s ease-out";
+                } else {
+                    star.classList.remove('active');
+                    star.innerText = "☆";
+                    star.style.animation = "none";
+                }
+            }
+        }
+
+        function updateStoreBtn() {
+            const btnNormal = document.getElementById('draw-btn');
+            if (coins < BOX_COST) {
+                btnNormal.style.background = "#e0e0e0"; btnNormal.style.color = "#aaa";
+                btnNormal.innerText = `金幣不足 (${coins}/${BOX_COST})`;
+                btnNormal.disabled = true; btnNormal.style.boxShadow = "none"; btnNormal.style.cursor = "not-allowed";
+            } else {
+                btnNormal.style.background = "var(--primary-color)"; btnNormal.style.color = "white";
+                btnNormal.innerText = `普通盲盒 (100 🪙)`;
+                btnNormal.disabled = false; btnNormal.style.boxShadow = "0 4px 10px rgba(255, 138, 128, 0.4)"; btnNormal.style.cursor = "pointer";
+            }
+
+            const btnSpecial = document.getElementById('special-draw-btn');
+            if (specialTokens < 1) {
+                btnSpecial.style.background = "#e0e0e0"; btnSpecial.style.color = "#aaa"; btnSpecial.style.borderColor = "#ccc";
+                btnSpecial.innerText = `大型奇幻盲盒 (需 1 🎫)`;
+                btnSpecial.disabled = true; btnSpecial.style.boxShadow = "none"; btnSpecial.style.cursor = "not-allowed";
+            } else {
+                btnSpecial.style.background = "var(--accent-purple)"; btnSpecial.style.color = "white"; btnSpecial.style.borderColor = "#9575cd";
+                btnSpecial.innerText = `✨ 大型奇幻盲盒 (擁有: ${specialTokens})`;
+                btnSpecial.disabled = false; btnSpecial.style.boxShadow = "0 4px 10px rgba(179, 157, 219, 0.4)"; btnSpecial.style.cursor = "pointer";
+            }
+        }
+
+        window.showCustomAlert = function(text) {
+            document.getElementById('custom-alert-text').innerHTML = text;
+            document.getElementById('custom-alert-modal').classList.remove('hidden');
+        }
+        window.closeCustomAlert = function() { document.getElementById('custom-alert-modal').classList.add('hidden'); }
+
+        let confirmCallback = null;
+        window.showCustomConfirm = function(text, callback) {
+            document.getElementById('custom-confirm-text').innerText = text;
+            document.getElementById('custom-confirm-modal').classList.remove('hidden');
+            confirmCallback = callback;
+        }
+        window.closeCustomConfirm = function(result) {
+            document.getElementById('custom-confirm-modal').classList.add('hidden');
+            if (confirmCallback) confirmCallback(result);
+            confirmCallback = null;
+        }
+
+        // --- 教師後台驗證 ---
+        window.openTeacherLogin = function() {
+            document.getElementById('teacher-pwd-input').value = "";
+            document.getElementById('teacher-pwd-modal').classList.remove('hidden');
+        }
+        window.closeTeacherLogin = function() {
+            document.getElementById('teacher-pwd-modal').classList.add('hidden');
+        }
+        window.verifyTeacherLogin = function() {
+            const pwd = document.getElementById('teacher-pwd-input').value.trim();
+            if(pwd === "0000" || pwd === "admin") {
+                closeTeacherLogin();
+                window.switchTab('teacher');
+                fetchTeacherData();
+            } else {
+                window.showCustomAlert("密碼錯誤，請重新輸入！(預設密碼為 0000)");
+            }
+        }
+        window.closeWrongDetail = function() {
+            document.getElementById('wrong-detail-modal').classList.add('hidden');
+        }
+
+        // --- 4. 登入與資料存取 (支援 GAS 雲端 + LocalStorage 離線持久化) ---
+        window.loginAndLoad = async function() {
+            const nameInput = document.getElementById('player-name-input').value.trim();
+            if (!nameInput) { window.showCustomAlert("請輸入名字才能為你記錄進度喔！"); return; }
+
+            playerName = nameInput; 
+            document.getElementById('player-name-label').innerText = nameInput;
+            document.getElementById('player-display').style.display = 'block';
+            document.getElementById('login-modal').classList.add('hidden');
+            document.getElementById('loading-overlay').classList.remove('hidden');
+
+            let loadedFromCloud = false;
+
+            // 1. 嘗試先從 LocalStorage 讀取本機紀錄
+            const localKey = "blindbox_player_" + playerName;
+            const savedLocal = localStorage.getItem(localKey);
+            if (savedLocal) {
+                try {
+                    const localData = JSON.parse(savedLocal);
+                    coins = localData.coins || 0;
+                    specialTokens = localData.specialTokens || 0;
+                    unlockedItems = localData.unlockedItems || [];
+                    totalAttempted = localData.totalAttempted || 0;
+                    totalCorrect = localData.totalCorrect || 0;
+                    wrongHistory = localData.wrongHistory || [];
+                } catch(e) {}
+            }
+
+            // 2. 若有 GAS 網址，嘗試與雲端同步
+            try {
+                if(GAS_URL && !GAS_URL.includes("你的_GAS")) {
+                    const response = await fetch(GAS_URL, {
+                        method: 'POST', redirect: 'follow',
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify({ action: 'load', playerName: playerName })
+                    });
+                    const resData = await response.json();
+
+                    if (resData.status === 'success' && resData.data) {
+                        coins = resData.data.coins || 0;
+                        specialTokens = resData.data.specialTokens || 0;
+                        unlockedItems = typeof resData.data.unlockedItems === 'string' ? JSON.parse(resData.data.unlockedItems) : (resData.data.unlockedItems || []);
+                        totalAttempted = resData.data.totalAttempted || 0;
+                        totalCorrect = resData.data.totalCorrect || 0;
+                        wrongHistory = typeof resData.data.wrongHistory === 'string' ? JSON.parse(resData.data.wrongHistory) : (resData.data.wrongHistory || []);
+                        loadedFromCloud = true;
+                        window.showCustomAlert(`歡迎回來，${nameInput}！已成功載入雲端紀錄。`);
+                    }
+                }
+            } catch (e) {
+                console.warn("GAS 雲端同步失敗，使用本機儲存模式", e);
+            } finally {
+                document.getElementById('loading-overlay').classList.add('hidden');
+            }
+
+            if (!loadedFromCloud) {
+                if (savedLocal) {
+                    window.showCustomAlert(`歡迎回來，${nameInput}！已載入你的本機進度。`);
+                } else {
+                    window.showCustomAlert(`歡迎加入，${nameInput}！連對 3 題可以拿到特殊盲盒代幣喔！`);
+                }
+            }
+
+            saveProgress();
+            initQuiz();
+            updateUI();
+            window.switchTab('quiz');
+        }
+
+        async function saveProgress() {
+            if (!playerName) return;
+            
+            const payloadData = {
+                playerName: playerName,
+                coins: coins,
+                specialTokens: specialTokens,
+                unlockedItems: unlockedItems,
+                totalAttempted: totalAttempted,
+                totalCorrect: totalCorrect,
+                wrongHistory: wrongHistory,
+                updatedAt: new Date().toISOString()
+            };
+
+            // 本機儲存
+            try {
+                localStorage.setItem("blindbox_player_" + playerName, JSON.stringify(payloadData));
+                // 儲存全班學生清單
+                let studentList = JSON.parse(localStorage.getItem("blindbox_students") || "[]");
+                if (!studentList.includes(playerName)) {
+                    studentList.push(playerName);
+                    localStorage.setItem("blindbox_students", JSON.stringify(studentList));
+                }
+            } catch(e) {}
+
+            // 雲端儲存
+            if (GAS_URL && !GAS_URL.includes("你的_GAS")) {
+                try {
+                    await fetch(GAS_URL, {
+                        method: 'POST', redirect: 'follow',
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify({
+                            action: 'save',
+                            playerName: playerName,
+                            data: payloadData
+                        })
+                    });
+                } catch(e) { console.error("雲端儲存失敗", e); }
+            }
+        }
+
+        // --- 教師獲取全班資料 ---
+        window.fetchTeacherData = async function() {
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            fetchedTeacherData = [];
+
+            // 先嘗試從雲端拉取
+            let cloudSuccess = false;
+            if(GAS_URL && !GAS_URL.includes("你的_GAS")) {
+                try {
+                    const response = await fetch(GAS_URL, {
+                        method: 'POST', redirect: 'follow',
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify({ action: 'getAllData' })
+                    });
+                    const res = await response.json();
+                    if(res.status === 'success' && Array.isArray(res.data)) {
+                        fetchedTeacherData = res.data;
+                        cloudSuccess = true;
+                    }
+                } catch (e) {
+                    console.warn("無法連接雲端，切換為本機紀錄", e);
+                }
+            }
+
+            // 若無雲端或連線失敗，讀取本機 LocalStorage 學生記錄
+            if (!cloudSuccess) {
+                try {
+                    const studentList = JSON.parse(localStorage.getItem("blindbox_students") || "[]");
+                    fetchedTeacherData = studentList.map(name => {
+                        const raw = localStorage.getItem("blindbox_player_" + name);
+                        return raw ? JSON.parse(raw) : null;
+                    }).filter(Boolean);
+                } catch(e) {}
+            }
+
+            document.getElementById('loading-overlay').classList.add('hidden');
+            renderTeacherTable();
+        }
+
+        function renderTeacherTable() {
+            const tbody = document.getElementById('teacher-data-body');
+            tbody.innerHTML = '';
+            if(!fetchedTeacherData || fetchedTeacherData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#888;">目前還沒有學生的答題資料</td></tr>';
+                return;
+            }
+
+            fetchedTeacherData.forEach(student => {
+                const tr = document.createElement('tr');
+                
+                let rate = 0;
+                const attempted = Number(student.totalAttempted) || 0;
+                const correct = Number(student.totalCorrect) || 0;
+                if(attempted > 0) {
+                    rate = Math.round((correct / attempted) * 100);
+                }
+                
+                let rateClass = "";
+                if(attempted > 0 && rate < 60) rateClass = "alert-red";
+                else if(rate >= 80) rateClass = "alert-green";
+
+                let wrongHtml = '';
+                try {
+                    const wrongs = typeof student.wrongHistory === 'string' ? JSON.parse(student.wrongHistory || "[]") : (student.wrongHistory || []);
+                    if(!wrongs || wrongs.length === 0) {
+                        wrongHtml = '<span style="color:#aaa;">太棒了，無錯題</span>';
+                    } else {
+                        wrongHtml = `<button class="btn" style="padding: 5px 12px; font-size: 0.88rem; min-width: auto; border-radius: 10px;" onclick="showStudentWrongs('${student.playerName}')">👀 查看錯題 (${wrongs.length})</button>`;
+                    }
+                } catch(e) { wrongHtml = '-'; }
+
+                tr.innerHTML = `
+                    <td style="font-weight:bold; color:var(--text-color);">${student.playerName}</td>
+                    <td>${attempted}</td>
+                    <td class="${rateClass}">${rate}%</td>
+                    <td>${wrongHtml}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.showStudentWrongs = function(studentName) {
+            const student = fetchedTeacherData.find(s => s.playerName === studentName);
+            if(!student) return;
+            
+            let wrongs = [];
+            try { wrongs = typeof student.wrongHistory === 'string' ? JSON.parse(student.wrongHistory || "[]") : (student.wrongHistory || []); } 
+            catch(e) {}
+
+            document.getElementById('wrong-detail-title').innerText = `📋 ${studentName} 的錯題紀錄`;
+            const contentDiv = document.getElementById('wrong-detail-content');
+            contentDiv.innerHTML = "";
+
+            if(!wrongs || wrongs.length === 0) {
+                contentDiv.innerHTML = "<p style='color:#666;'>這位學生目前沒有錯題紀錄喔！</p>";
+            } else {
+                const reversedWrongs = [...wrongs].reverse();
+                reversedWrongs.forEach((w, index) => {
+                    const item = document.createElement('div');
+                    item.style.cssText = "margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #e0e0e0;";
+                    
+                    item.innerHTML = `
+                        <div style="font-weight:bold; color:#333; margin-bottom:6px; line-height: 1.4;">Q${index + 1}: <span class="math-q">${w.q}</span></div>
+                        <div style="color:#d32f2f; margin-bottom:3px; font-size: 0.95rem;">❌ 學生選了：<span class="math-w">${w.wrongAns}</span></div>
+                        <div style="color:#388e3c; font-size: 0.95rem;">✅ 正確答案：<span class="math-c">${w.correctAns}</span></div>
+                    `;
+                    contentDiv.appendChild(item);
+                });
+
+                contentDiv.querySelectorAll('.math-q, .math-w, .math-c').forEach(el => {
+                    el.innerHTML = formatMathText(el.innerText);
+                });
+            }
+
+            document.getElementById('wrong-detail-modal').classList.remove('hidden');
+        }
+
+        // --- 5. 遊戲邏輯：測驗 ---
+        function formatMathText(text) {
+            if (!text) return "";
+            if (!window.katex) return text; 
+            return text.replace(/\$(.*?)\$/g, (match, math) => {
+                try { return katex.renderToString(math.trim(), { throwOnError: false, displayMode: false }); } 
+                catch (e) { return match; }
+            });
+        }
+
+        function formatSpokenText(text) {
+            if (!text) return "";
+            let res = text.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, "$2分之$1");
+            res = res.replace(/\\times/g, "乘以")
+                     .replace(/\\div/g, "除以")
+                     .replace(/\$/g, "")
+                     .replace(/:/g, "比")
+                     .replace(/=/g, "等於");
+            return res;
+        }
+
+        function initQuiz() {
+            const tempQList = [...questions].sort(() => Math.random() - 0.5);
+            qList = tempQList.map(q => {
+                const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+                return { ...q, displayOptions: shuffledOptions };
+            });
+            questionStates = new Array(qList.length).fill(null); 
+            currentQIndex = 0;
+            comboCount = 0; 
+            updateComboUI();
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = qList[currentQIndex];
+            const state = questionStates[currentQIndex];
+
+            document.getElementById('q-index').innerText = currentQIndex + 1;
+            document.getElementById('q-text').innerHTML = formatMathText(q.q);
+            
+            const feedbackEl = document.getElementById('feedback-msg');
+            if (state && state.isCorrect) {
+                feedbackEl.innerHTML = `<span style="color:#2e7d32;">🎉 本題已完成！💡 解析：${q.hint || ''}</span>`;
+            } else if (state && !state.isCorrect) {
+                feedbackEl.innerHTML = `<span style="color:#c62828;">上次選錯囉，正確答案是：【${formatMathText(q.ans)}】。💡 解析：${q.hint || ''}</span>`;
+            } else {
+                feedbackEl.innerText = "";
+            }
+
+            const listEl = document.getElementById('options-list');
+            listEl.innerHTML = '';
+
+            q.displayOptions.forEach((opt, idx) => {
+                const btn = document.createElement('div');
+                btn.className = 'option-btn';
+                btn.dataset.value = opt;
+                btn.dataset.index = idx;
+                
+                const txt = document.createElement('span');
+                txt.innerHTML = formatMathText(opt);
+                
+                const spk = document.createElement('span');
+                spk.className = 'speaker-icon'; spk.innerText = '🔊';
+                spk.title = "朗讀此選項";
+                spk.onclick = (e) => { e.stopPropagation(); speak(opt); };
+
+                btn.appendChild(txt); btn.appendChild(spk);
+
+                if (state) {
+                    btn.classList.add('locked');
+                    if (opt === q.ans) btn.classList.add('correct');
+                    else if (opt === state.selectedOpt && !state.isCorrect) btn.classList.add('wrong');
+                } else {
+                    btn.onclick = () => checkAnswer(opt, q.ans, btn);
+                }
+                listEl.appendChild(btn);
+            });
+
+            document.getElementById('prev-btn').disabled = (currentQIndex === 0);
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.innerText = (currentQIndex === qList.length - 1) ? "重新開始 ↻" : "下一題 ▶";
+            nextBtn.disabled = !state; 
+        }
+
+        function checkAnswer(selected, correct, btnEl) {
+            if (questionStates[currentQIndex]) return;
+
+            const isCorrect = (selected === correct);
+            const qData = qList[currentQIndex];
+            questionStates[currentQIndex] = { isCorrect: isCorrect, selectedOpt: selected };
+
+            totalAttempted++;
+
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.classList.add('locked'));
+            document.getElementById('next-btn').disabled = false;
+
+            if (isCorrect) {
+                totalCorrect++;
+                btnEl.classList.add('correct');
+                playSound('correct');
+                coins += REWARD_COINS;
+                comboCount++;
+                updateComboUI();
+                
+                if(comboCount === 3) {
+                    specialTokens += 1;
+                    playSound('win');
+                    setTimeout(()=> {
+                        window.showCustomAlert(`🎉 太棒了！連續答對 3 題！<br><br>獲得 <b style="color:var(--accent-purple)">1 個大型奇幻盲盒代幣🎫</b><br>快去商店抽大盲盒吧！`);
+                        comboCount = 0; 
+                        updateComboUI();
+                        saveProgress();
+                        updateUI();
+                    }, 400);
+                    document.getElementById('feedback-msg').innerHTML = `<span style="color:#2e7d32;">🔥 連擊達成！獲得 ${REWARD_COINS} 金幣與 1 個特殊代幣🎫！💡 ${qData.hint || ''}</span>`;
+                } else {
+                    document.getElementById('feedback-msg').innerHTML = `<span style="color:#2e7d32;">🎉 答對了！獲得 ${REWARD_COINS} 金幣！💡 ${qData.hint || ''}</span>`;
+                }
+
+                saveProgress();
+                updateUI();
+            } else {
+                wrongHistory.push({
+                    q: qData.q,
+                    wrongAns: selected,
+                    correctAns: correct
+                });
+
+                btnEl.classList.add('wrong');
+                playSound('wrong');
+                comboCount = 0; 
+                updateComboUI();
+
+                document.getElementById('feedback-msg').innerHTML = `<span style="color:#c62828;">哎呀！正確答案是：【${formatMathText(correct)}】。💡 ${qData.hint || ''}</span>`;
+                allBtns.forEach(b => { if (b.dataset.value === correct) b.classList.add('correct'); });
+
+                saveProgress();
+            }
+        }
+
+        window.prevQuestion = function() {
+            if (currentQIndex > 0) { currentQIndex--; loadQuestion(); }
+        }
+
+        window.nextQuestion = function() {
+            if (currentQIndex < qList.length - 1) {
+                currentQIndex++; loadQuestion();
+            } else {
+                window.showCustomConfirm("恭喜完成本輪所有題目！要重新洗牌開始挑戰嗎？", (res) => {
+                    if(res) initQuiz();
+                });
+            }
+        }
+
+        window.playQuestionAudio = function() {
+            if (!qList[currentQIndex]) return;
+            speak(formatSpokenText(qList[currentQIndex].q), 'zh-TW');
+        }
+
+        // --- 鍵盤快捷鍵支援 (大屏/電腦端) ---
+        window.addEventListener('keydown', (e) => {
+            if (document.getElementById('screen-quiz').classList.contains('hidden')) return;
+            if (['1', '2', '3', '4', 'a', 'b', 'c', 'd', 'A', 'B', 'C', 'D'].includes(e.key)) {
+                let idx = -1;
+                if (['1', 'a', 'A'].includes(e.key)) idx = 0;
+                if (['2', 'b', 'B'].includes(e.key)) idx = 1;
+                if (['3', 'c', 'C'].includes(e.key)) idx = 2;
+                if (['4', 'd', 'D'].includes(e.key)) idx = 3;
+                const optBtns = document.querySelectorAll('.option-btn');
+                if (optBtns[idx] && !optBtns[idx].classList.contains('locked')) {
+                    optBtns[idx].click();
+                }
+            } else if (e.key === 'Enter' || e.key === ' ') {
+                const nextBtn = document.getElementById('next-btn');
+                if (nextBtn && !nextBtn.disabled) nextBtn.click();
+            }
+        });
+
+        // --- 6. 盲盒抽取與圖鑑 ---
+        function getItemCount(id) {
+            return unlockedItems.filter(itemId => itemId === id).length;
+        }
+
+        window.tryOpenBox = function(boxType) {
+            if(boxType === 'normal') {
+                if (coins >= BOX_COST) {
+                    const newItem = drawRandomItem('normal');
+                    if(newItem === null) {
+                        window.showCustomAlert("太厲害了！你已經把「一般魔法動物」全數收集至滿星！"); return;
+                    }
+                    coins -= BOX_COST;
+                    processDrawResult(newItem, false);
+                }
+            } else if (boxType === 'special') {
+                if (specialTokens >= 1) {
+                    const newItem = drawRandomItem('special');
+                    if(newItem === null) {
+                        window.showCustomAlert("哇塞！你已經把傳說中的「史詩奇幻生物」全部收集完畢！"); return;
+                    }
+                    specialTokens -= 1;
+                    processDrawResult(newItem, true);
+                }
+            }
+        }
+
+        function processDrawResult(newItem, isGiantBox) {
+            unlockedItems.push(newItem.id); 
+            saveProgress();
+            updateUI();
+            showUnboxModal(newItem, isGiantBox);
+        }
+
+        function drawRandomItem(poolType) {
+            const availableItems = collectionDB.filter(item => item.pool === poolType && getItemCount(item.id) < MAX_COPIES);
+            if (availableItems.length === 0) return null; 
+            return availableItems[Math.floor(Math.random() * availableItems.length)];
+        }
+
+        function showUnboxModal(item, isGiantBox) {
+            const modal = document.getElementById('unbox-modal');
+            const boxStage = document.getElementById('box-stage');
+            const prizeStage = document.getElementById('prize-stage');
+            const rays = document.getElementById('rays');
+            const boxEl = document.getElementById('blind-box-el');
+
+            modal.classList.remove('hidden');
+            boxStage.classList.remove('hidden');
+            prizeStage.classList.add('hidden');
+            rays.classList.add('hidden');
+            
+            boxEl.className = 'blind-box';
+            if(isGiantBox) {
+                boxEl.classList.add('giant');
+                boxEl.innerText = "🌟🎁🌟"; 
+            } else {
+                boxEl.innerText = "🎁";
+            }
+
+            let rarityText = "COMMON"; let rarityClass = "";
+            if(item.rarity === 2) { rarityText = "RARE"; rarityClass = "rarity-R"; }
+            if(item.rarity === 3) { rarityText = "SSR LEGEND"; rarityClass = "rarity-SSR"; }
+
+            document.getElementById('prize-icon').innerText = item.icon;
+            document.getElementById('prize-name').innerText = item.name;
+            const badge = document.getElementById('prize-rarity-badge');
+            badge.innerText = rarityText; badge.className = `prize-rarity ${rarityClass}`;
+            
+            const currentCount = getItemCount(item.id);
+            const countInfo = document.getElementById('prize-count-info');
+            if(currentCount >= MAX_COPIES) {
+                countInfo.innerText = `太幸運了！這隻已達最高等級 (滿星)！`;
+            } else {
+                countInfo.innerText = `目前擁有: ${currentCount} 隻！`;
+            }
+
+            window.currentPrizeItem = item;
+            window.isGiantBoxAnimation = isGiantBox;
+        }
+
+        window.openBoxAnimation = function() {
+            const boxEl = document.getElementById('blind-box-el');
+            boxEl.classList.add('shaking');
+            playSound('shake');
+
+            setTimeout(() => {
+                boxEl.classList.remove('shaking');
+                boxEl.classList.add('opening');
+                playSound('open');
+
+                setTimeout(() => {
+                    document.getElementById('box-stage').classList.add('hidden');
+                    document.getElementById('prize-stage').classList.remove('hidden');
+                    if (window.currentPrizeItem && (window.currentPrizeItem.rarity >= 2 || window.isGiantBoxAnimation)) {
+                        document.getElementById('rays').classList.remove('hidden');
+                    }
+                    playSound('win');
+                }, 350);
+            }, 750);
+        }
+
+        window.closeModal = function() {
+            document.getElementById('unbox-modal').classList.add('hidden');
+            updateUI();
+        }
+
+        function renderCollection() {
+            const gridNormal = document.getElementById('collection-grid-normal');
+            const gridSpecial = document.getElementById('collection-grid-special');
+            gridNormal.innerHTML = ''; gridSpecial.innerHTML = '';
+            
+            const uniqueUnlockedIds = new Set(unlockedItems);
+            
+            collectionDB.forEach(item => {
+                const count = getItemCount(item.id);
+                const isUnlocked = count > 0;
+                
+                const el = document.createElement('div');
+                el.className = `collection-item ${isUnlocked ? '' : 'locked'}`;
+                
+                let rarityClass = ""; let rarityLabel = "N";
+                if(item.rarity === 2) { rarityClass = "rarity-R"; rarityLabel = "R"; }
+                if(item.rarity === 3) { rarityClass = "rarity-SSR"; rarityLabel = "SSR"; }
+
+                let countHtml = "";
+                if (isUnlocked) {
+                    if (count >= MAX_COPIES) {
+                        countHtml = `<div class="count-badge max">MAX</div>`;
+                    } else {
+                        countHtml = `<div class="count-badge">x${count}</div>`;
+                    }
+                }
+
+                el.innerHTML = `
+                    <div class="rarity-badge ${rarityClass}">${rarityLabel}</div>
+                    <div class="item-icon">${item.icon}</div>
+                    <div class="item-name">${isUnlocked ? item.name : "???"}</div>
+                    ${countHtml}
+                `;
+                
+                el.onclick = () => {
+                    if (isUnlocked) {
+                        playSound('correct');
+                        window.showCustomAlert(`✨ <b>${item.name}</b> (${rarityLabel})<br>目前擁有：${count} 隻 ${count >= MAX_COPIES ? '⭐ 滿星達成！' : ''}`);
+                    } else {
+                        window.showCustomAlert(item.pool === 'normal' ? "快去抽普通盲盒解鎖吧！" : "連對 3 題獲得特殊盲盒代幣來解鎖吧！");
+                    }
+                };
+                
+                if(item.pool === 'normal') gridNormal.appendChild(el);
+                else gridSpecial.appendChild(el);
+            });
+
+            document.getElementById('collected-count').innerText = uniqueUnlockedIds.size;
+            document.getElementById('total-count').innerText = collectionDB.length;
+        }
+
+        // --- 7. 多媒體工具：語音朗讀與 Web Audio 音效合成 ---
+        window.playQuestionAudio = function() {
+            if (!qList[currentQIndex]) return;
+            const rawQ = qList[currentQIndex].q.replace(/<[^>]*>/g, ' ').replace(/\$/g, '');
+            speak(rawQ);
+        };
+
+        function speak(text, lang = '') {
+            if (!window.speechSynthesis) return;
+            window.speechSynthesis.cancel();
+            const cleanText = text.replace(/<[^>]*>/g, ' ').replace(/\$/g, '').trim();
+            const u = new SpeechSynthesisUtterance(cleanText);
+            if (lang) {
+                u.lang = lang;
+            } else if (/[a-zA-Z]/.test(cleanText) && !/[\u4e00-\u9fa5]/.test(cleanText)) {
+                u.lang = 'en-US';
+                u.rate = 0.9;
+            } else {
+                u.lang = 'zh-TW';
+                u.rate = 1.0;
+            }
+            window.speechSynthesis.speak(u);
+        }
+
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        // 行動裝置觸控解鎖音效
+        document.addEventListener('touchstart', () => { getAudioContext(); }, { once: true });
+        document.addEventListener('click', () => { getAudioContext(); }, { once: true });
+
+        function playSound(type) {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                if (type === 'correct') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.12);
+                    gain.gain.setValueAtTime(0.25, now); gain.gain.linearRampToValueAtTime(0, now + 0.28);
+                    osc.start(now); osc.stop(now + 0.28);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth'; osc.frequency.setValueAtTime(196, now); osc.frequency.linearRampToValueAtTime(98, now + 0.25);
+                    gain.gain.setValueAtTime(0.25, now); gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                } else if (type === 'shake') {
+                    osc.type = 'square'; osc.frequency.setValueAtTime(110, now); gain.gain.setValueAtTime(0.08, now); gain.gain.linearRampToValueAtTime(0, now + 0.08);
+                    osc.start(now); osc.stop(now + 0.08);
+                } else if (type === 'open') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(220, now); osc.frequency.exponentialRampToValueAtTime(880, now + 0.18);
+                    gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0, now + 0.35);
+                    osc.start(now); osc.stop(now + 0.35);
+                } else if (type === 'win') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(440, now); osc.frequency.setValueAtTime(554.37, now + 0.09); osc.frequency.setValueAtTime(659.25, now + 0.18);
+                    gain.gain.setValueAtTime(0.25, now); gain.gain.linearRampToValueAtTime(0, now + 0.55);
+                    osc.start(now); osc.stop(now + 0.55);
+                }
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>數線穿梭：正負數極速狂飆 (Number Line Cyber Runner)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Three.js for 3D Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Tone.js for Procedural Audio -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Noto+Sans+TC:wght@500;700;900&display=swap');
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #020617;
+      font-family: 'Noto Sans TC', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+    .font-orbitron {
+      font-family: 'Orbitron', monospace;
+    }
+    .hud-glass {
+      background: rgba(10, 16, 31, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+    }
+    .question-glow {
+      box-shadow: 0 0 25px rgba(234, 179, 8, 0.35), inset 0 0 15px rgba(234, 179, 8, 0.15);
+    }
+    .active-lane-card {
+      border-color: #22d3ee !important;
+      background: rgba(6, 182, 212, 0.28) !important;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.6), inset 0 0 10px rgba(34, 211, 238, 0.3);
+      transform: translateY(-4px) scale(1.02);
+    }
+    @keyframes pulse-border {
+      0%, 100% { border-color: rgba(234, 179, 8, 0.9); }
+      50% { border-color: rgba(249, 115, 22, 0.6); }
+    }
+    .animate-pulse-border {
+      animation: pulse-border 2s infinite ease-in-out;
+    }
+
+    /* 頂部切換導覽列 */
+    .mode-toggle-bar {
+      position: fixed; top: 8px; z-index: 999; left: 50%; transform: translateX(-50%);
+      background: rgba(10, 16, 31, 0.9); padding: 5px 14px; border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; gap: 8px; align-items: center;
+      backdrop-filter: blur(10px); border: 1px solid rgba(6, 182, 212, 0.5);
+    }
+    .mode-link {
+      text-decoration: none; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;
+      font-weight: bold; transition: 0.2s; white-space: nowrap; color: #94a3b8;
+    }
+    .mode-link.active { background: #06b6d4; color: #020617; box-shadow: 0 0 10px rgba(6, 182, 212, 0.7); }
+    .mode-link:not(.active):hover { background: rgba(255,255,255,0.1); color: #fff; }
+  </style>
+</head>
+<body class="relative w-screen h-screen overflow-hidden text-white select-none">
+
+  <!-- 頂部遊戲模式切換導覽列 -->
+  <div class="mode-toggle-bar pointer-events-auto">
+    <span style="font-size:0.8rem; font-weight:bold; color:#67e8f9;">🎮 遊戲切換：</span>
+    <a href="index.html" class="mode-link">🎲 環形大富翁</a>
+    <a href="blind-box.html" class="mode-link">🎁 盲盒抽卡養成</a>
+    <a href="cyber-runner.html" class="mode-link active">🏎️ 3D 數線跑酷</a>
+  </div>
+
+  <!-- 3D WebGL Canvas Container -->
+  <div id="canvas-container" class="absolute inset-0 w-full h-full z-0"></div>
+
+  <!-- Primary In-Game HUD -->
+  <div id="game-hud" class="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-3 md:p-5 pt-12 transition-opacity duration-300">
+    
+    <!-- Top Bar: Status + Ultra Clear Question Center -->
+    <div class="w-full flex flex-col items-center gap-2 max-w-4xl mx-auto">
+      
+      <!-- Upper Status Row: Shield, Score, Combo -->
+      <div class="w-full flex justify-between items-center text-xs md:text-sm">
+        <!-- Shield -->
+        <div class="hud-glass border border-cyan-500/40 px-3.5 py-1.5 rounded-xl flex items-center gap-2 shadow-lg">
+          <span class="text-cyan-400 font-black tracking-wider uppercase">SHIELD</span>
+          <div class="w-20 md:w-28 h-3 bg-slate-800 rounded-full overflow-hidden p-0.5 border border-cyan-700/50">
+            <div id="shield-bar" class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transition-all duration-300 w-full"></div>
+          </div>
+          <span id="shield-text" class="font-orbitron text-xs text-cyan-300 font-bold">3/3</span>
+        </div>
+
+        <!-- Feedback Floating Bubble -->
+        <div id="feedback-toast" class="opacity-0 transition-all duration-300 transform -translate-y-2 pointer-events-none">
+          <div id="feedback-toast-inner" class="px-4 py-1.5 rounded-xl text-xs md:text-sm font-bold flex items-center gap-2 shadow-xl backdrop-blur-md">
+            <span id="feedback-icon">⚡</span>
+            <span id="feedback-msg">正確！</span>
+          </div>
+        </div>
+
+        <!-- Score & Combo -->
+        <div class="hud-glass border border-cyan-500/40 px-3.5 py-1.5 rounded-xl flex items-center gap-3 shadow-lg">
+          <div>
+            <span class="text-[10px] text-gray-400 block -mb-1">SCORE</span>
+            <span id="score-display" class="font-orbitron font-black text-cyan-300 text-sm md:text-base">0</span>
+          </div>
+          <div class="border-l border-cyan-500/30 pl-2.5">
+            <span class="text-[10px] text-yellow-400 block -mb-1">COMBO</span>
+            <span id="combo-display" class="font-orbitron font-black text-yellow-300 text-sm md:text-base">x0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROMINENT QUESTION DISPLAY POD (High Contrast, Big & Adaptive) -->
+      <div class="w-full hud-glass border-2 border-yellow-400/80 rounded-2xl px-5 py-3.5 question-glow text-center relative overflow-hidden animate-pulse-border">
+        <!-- Top Label & Distance gauge -->
+        <div class="flex justify-between items-center mb-1.5">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-md bg-yellow-400/20 text-yellow-300 text-[11px] md:text-xs font-black tracking-wider uppercase border border-yellow-400/40">
+              🎯 運算目標
+            </span>
+            <span id="question-category" class="text-xs text-slate-300 font-medium hidden sm:inline-block">正負數加減</span>
+          </div>
+          <!-- Live Gate Proximity Indicator -->
+          <div class="flex items-center gap-2 text-xs font-mono text-cyan-300">
+            <span>門距:</span>
+            <div class="w-16 md:w-24 h-2 bg-slate-800 rounded-full overflow-hidden border border-cyan-700/50">
+              <div id="gate-distance-bar" class="h-full bg-cyan-400 transition-all duration-75 w-full"></div>
+            </div>
+            <span id="gate-distance-text" class="text-[11px]">75m</span>
+          </div>
+        </div>
+
+        <!-- Main Question Text: Supports Multi-line and Long Word Problems -->
+        <div id="question-display" class="text-xl sm:text-2xl md:text-3xl font-black text-yellow-200 tracking-wide break-words py-1 leading-relaxed">
+          載入題目中...
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar: Instant Lane Answer HUD (學生無須瞇眼看遠方 3D 光門) -->
+    <div class="w-full max-w-4xl mx-auto flex flex-col gap-2 pb-1">
+      <div class="text-center">
+        <span class="text-[11px] md:text-xs font-bold text-cyan-300/90 bg-slate-950/80 px-3 py-1 rounded-full border border-cyan-500/30">
+          👇 選擇下方車道對應的正解 (鍵盤左右鍵 / 點擊卡片直接切換)
+        </span>
+      </div>
+
+      <!-- 3 Real-time Lane Option Cards -->
+      <div class="grid grid-cols-3 gap-2 md:gap-4 pointer-events-auto">
+        
+        <!-- Lane 0: Left -->
+        <div id="hud-lane-0" onclick="switchLaneDirect(0)" class="hud-glass border border-slate-700 hover:border-cyan-400 rounded-2xl p-2 md:p-3 text-center transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[76px] md:min-h-[92px]">
+          <div class="flex items-center justify-between text-[10px] md:text-xs font-bold text-gray-400">
+            <span class="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">◀ A / 左道</span>
+            <span id="tag-lane-0" class="text-[9px] text-cyan-400 hidden font-black tracking-tighter">【目前車道】</span>
+          </div>
+          <div id="text-lane-0" class="text-sm md:text-xl font-black text-white py-1 break-words leading-tight">
+            ---
+          </div>
+          <div class="text-[9px] md:text-[11px] text-gray-400 truncate" id="desc-lane-0">選項 A</div>
+        </div>
+
+        <!-- Lane 1: Center -->
+        <div id="hud-lane-1" onclick="switchLaneDirect(1)" class="hud-glass border border-slate-700 hover:border-cyan-400 rounded-2xl p-2 md:p-3 text-center transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[76px] md:min-h-[92px]">
+          <div class="flex items-center justify-between text-[10px] md:text-xs font-bold text-gray-400">
+            <span class="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">▲ W / 中道</span>
+            <span id="tag-lane-1" class="text-[9px] text-cyan-400 hidden font-black tracking-tighter">【目前車道】</span>
+          </div>
+          <div id="text-lane-1" class="text-sm md:text-xl font-black text-white py-1 break-words leading-tight">
+            ---
+          </div>
+          <div class="text-[9px] md:text-[11px] text-gray-400 truncate" id="desc-lane-1">選項 B</div>
+        </div>
+
+        <!-- Lane 2: Right -->
+        <div id="hud-lane-2" onclick="switchLaneDirect(2)" class="hud-glass border border-slate-700 hover:border-cyan-400 rounded-2xl p-2 md:p-3 text-center transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[76px] md:min-h-[92px]">
+          <div class="flex items-center justify-between text-[10px] md:text-xs font-bold text-gray-400">
+            <span class="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">▶ D / 右道</span>
+            <span id="tag-lane-2" class="text-[9px] text-cyan-400 hidden font-black tracking-tighter">【目前車道】</span>
+          </div>
+          <div id="text-lane-2" class="text-sm md:text-xl font-black text-white py-1 break-words leading-tight">
+            ---
+          </div>
+          <div class="text-[9px] md:text-[11px] text-gray-400 truncate" id="desc-lane-2">選項 C</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Start Screen Overlay -->
+  <div id="start-modal" class="absolute inset-0 z-30 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md transition-opacity duration-300">
+    <div class="hud-glass border border-cyan-500/50 rounded-3xl max-w-xl w-full p-6 md:p-8 text-center shadow-2xl relative overflow-hidden">
+      <div class="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-xs font-semibold mb-3">
+        <span>🚀</span> 沉浸式國中數學 3D 跑酷
+      </div>
+      
+      <h1 class="text-3xl md:text-5xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-pink-500 mb-3 font-orbitron">
+        數線穿梭<br><span class="text-2xl md:text-3xl text-white">正負數極速狂飆</span>
+      </h1>
+      
+      <p class="text-xs md:text-sm text-gray-300 leading-relaxed mb-5">
+        全新進化視界！上方為<span class="text-yellow-300 font-bold">高對比顯眼題目</span>，下方設有<span class="text-cyan-400 font-bold">即時車道指示儀</span>，即使文字再長、遠距穿梭也能輕鬆看清並冷靜心算！
+      </p>
+
+      <!-- Rules & Tips -->
+      <div class="grid grid-cols-2 gap-3 text-left mb-5 bg-slate-900/70 p-3.5 rounded-2xl border border-slate-700/60 text-xs">
+        <div class="flex items-start gap-2">
+          <span class="text-cyan-400 font-bold">🎯 操作：</span>
+          <span class="text-gray-300">方向鍵 <kbd class="px-1 bg-slate-800 rounded border border-slate-600">◀</kbd><kbd class="px-1 bg-slate-800 rounded border border-slate-600">▶</kbd> 或點擊底部卡片換道</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-pink-400 font-bold">💡 技巧：</span>
+          <span class="text-gray-300">減去負數等於加、同號相乘為正。綠盾耗盡前全力衝刺！</span>
+        </div>
+      </div>
+
+      <!-- Speed & Difficulty Selector -->
+      <div class="mb-6 text-left">
+        <label class="block text-xs font-bold text-cyan-300 mb-2 uppercase tracking-wider">選擇衝刺速度（難度）</label>
+        <div class="grid grid-cols-3 gap-2">
+          <button type="button" data-speed="10" data-dist="80" class="speed-btn px-3 py-2.5 rounded-xl border border-emerald-500 bg-emerald-500/20 text-emerald-300 font-bold text-xs md:text-sm text-center transition-all">
+            🌱 慢速新手<br><span class="text-[10px] font-normal text-gray-300">充足約 8 秒心算</span>
+          </button>
+          <button type="button" data-speed="15" data-dist="75" class="speed-btn px-3 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-gray-400 font-bold text-xs md:text-sm text-center transition-all hover:bg-slate-700">
+            🚀 標準巡航<br><span class="text-[10px] font-normal text-gray-400">適中約 5 秒快答</span>
+          </button>
+          <button type="button" data-speed="22" data-dist="70" class="speed-btn px-3 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-gray-400 font-bold text-xs md:text-sm text-center transition-all hover:bg-slate-700">
+            ⚡ 極速挑戰<br><span class="text-[10px] font-normal text-gray-400">直覺極限反應</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Start Button -->
+      <button id="btn-start" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-lg md:text-xl tracking-wider shadow-lg shadow-cyan-500/30 active:scale-98 transition-all flex items-center justify-center gap-2">
+        <span>⚡</span> 開始答題衝刺 (START)
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Over Screen Overlay -->
+  <div id="gameover-modal" class="absolute inset-0 z-30 hidden items-center justify-center p-4 bg-slate-950/90 backdrop-blur-lg">
+    <div class="hud-glass border-2 border-pink-500/60 rounded-3xl max-w-md w-full p-6 md:p-8 text-center shadow-2xl relative">
+      <div class="text-4xl mb-2">💥</div>
+      <h2 class="text-2xl md:text-3xl font-black text-pink-400 font-orbitron tracking-wider mb-1">RUN TERMINATED</h2>
+      <p class="text-xs text-gray-400 mb-5 uppercase tracking-widest">護盾能量耗盡，數據結算完畢</p>
+
+      <div class="space-y-2.5 mb-5 bg-slate-900/80 p-4 rounded-2xl border border-slate-700/60 text-sm">
+        <div class="flex justify-between items-center">
+          <span class="text-gray-400">最終得分</span>
+          <span id="final-score" class="font-orbitron font-bold text-cyan-300 text-xl">0</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-gray-400">最高連擊 (Max Combo)</span>
+          <span id="final-combo" class="font-orbitron font-bold text-yellow-300 text-lg">0</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-gray-400">成功破解題數</span>
+          <span id="final-solved" class="font-orbitron font-bold text-emerald-400 text-lg">0 題</span>
+        </div>
+      </div>
+
+      <div id="gameover-review" class="text-xs text-slate-300 bg-cyan-950/40 border border-cyan-800/50 p-3 rounded-xl mb-5 leading-relaxed text-left">
+        記憶小卡：正負數加減先看符號！同號相加維持原號，異號相加取絕對值大者之符號。
+      </div>
+
+      <button id="btn-restart" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-400 hover:to-cyan-400 text-slate-950 font-black text-lg shadow-lg shadow-pink-500/30 active:scale-98 transition-all">
+        🔄 再次挑戰 (RETRY)
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const AudioFX = {
+      isReady: false,
+      synthCorrect: null,
+      synthWrong: null,
+      synthMove: null,
+
+      init() {
+        if (this.isReady) return;
+        try {
+          this.synthCorrect = new Tone.PolySynth(Tone.Synth, {
+            oscillator: { type: "triangle" },
+            envelope: { attack: 0.01, decay: 0.1, sustain: 0.2, release: 0.3 }
+          }).toDestination();
+          this.synthCorrect.volume.value = -6;
+
+          this.synthWrong = new Tone.MembraneSynth({
+            pitchDecay: 0.08,
+            octaves: 4,
+            envelope: { attack: 0.001, decay: 0.35, sustain: 0.01, release: 0.3 }
+          }).toDestination();
+          this.synthWrong.volume.value = -4;
+
+          this.synthMove = new Tone.Synth({
+            oscillator: { type: "sine" },
+            envelope: { attack: 0.01, decay: 0.06, sustain: 0.01, release: 0.08 }
+          }).toDestination();
+          this.synthMove.volume.value = -12;
+
+          this.isReady = true;
+        } catch (e) {
+          console.warn("Audio init postponed:", e);
+        }
+      },
+
+      playCorrect() {
+        if (!this.isReady) return;
+        const now = Tone.now();
+        this.synthCorrect.triggerAttackRelease(["E5", "B5"], "16n", now);
+        this.synthCorrect.triggerAttackRelease(["G#5", "E6"], "8n", now + 0.08);
+      },
+
+      playWrong() {
+        if (!this.isReady) return;
+        this.synthWrong.triggerAttackRelease("C2", "8n");
+      },
+
+      playMove() {
+        if (!this.isReady) return;
+        this.synthMove.triggerAttackRelease("C4", "32n");
+      }
+    };
+
+    /**
+     * Supports both concise math expressions and longer narrative word problems
+     */
+    class MathProblemGenerator {
+      constructor() {
+        this.currentProblem = null;
+      }
+
+      getRandomInt(min, max, excludeZero = true) {
+        let val = 0;
+        while (val === 0 && excludeZero) {
+          val = Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        return val;
+      }
+
+      formatNumber(n) {
+        return n < 0 ? `(${n})` : `${n}`;
+      }
+
+      generate(level = 1) {
+        // Types:
+        // 0: Standard Addition/Subtraction
+        // 1: Subtraction with Negatives (Double Negatives)
+        // 2: Multiplication with Signs
+        // 3: Narrative Word Problems (Long Questions & Options testing)
+        // 4: Absolute Value / Distance
+        const availableTypes = [0, 1, 2];
+        if (level >= 2) availableTypes.push(3);
+        if (level >= 3) availableTypes.push(4);
+
+        const type = availableTypes[Math.floor(Math.random() * availableTypes.length)];
+        let promptText = "";
+        let category = "正負數運算";
+        let answer = 0;
+        let answerStr = "";
+        let explanation = "";
+        let wrongList = [];
+
+        switch (type) {
+          case 0: { // Standard Add/Subtract
+            category = "基本正負數加減";
+            const a = this.getRandomInt(-15, 15);
+            const b = this.getRandomInt(-15, 15);
+            const isAdd = Math.random() > 0.5;
+            if (isAdd) {
+              answer = a + b;
+              promptText = `計算：${this.formatNumber(a)} + ${this.formatNumber(b)} = ?`;
+              explanation = `${this.formatNumber(a)} + ${this.formatNumber(b)} = ${answer}`;
+            } else {
+              answer = a - b;
+              promptText = `計算：${this.formatNumber(a)} - ${this.formatNumber(b)} = ?`;
+              explanation = `${this.formatNumber(a)} - ${this.formatNumber(b)} = ${answer}`;
+            }
+            answerStr = `${answer}`;
+            wrongList = [answer + (Math.random() > 0.5 ? 2 : -2), -answer, answer + 10];
+            break;
+          }
+          case 1: { // Subtraction with Negatives: a - (-b)
+            category = "負負得正觀念";
+            const a = this.getRandomInt(-12, 12);
+            const b = this.getRandomInt(-10, -1);
+            answer = a - b;
+            promptText = `計算：${this.formatNumber(a)} - (${b}) = ?`;
+            explanation = `負負得正！減去負數等於加上正數：${this.formatNumber(a)} + ${Math.abs(b)} = ${answer}`;
+            answerStr = `${answer}`;
+            wrongList = [a + b, -(a - b), a - Math.abs(b)];
+            break;
+          }
+          case 2: { // Multiplication
+            category = "正負數乘法規則";
+            const a = this.getRandomInt(-9, 9);
+            const b = this.getRandomInt(-9, 9);
+            answer = a * b;
+            promptText = `計算：${this.formatNumber(a)} × ${this.formatNumber(b)} = ?`;
+            const sameSign = (a * b > 0);
+            explanation = sameSign ? `同號得正：${this.formatNumber(a)} × ${this.formatNumber(b)} = +${answer}` : `異號得負：${this.formatNumber(a)} × ${this.formatNumber(b)} = ${answer}`;
+            answerStr = `${answer}`;
+            wrongList = [-answer, answer + (Math.random() > 0.5 ? 4 : -4), answer + 1];
+            break;
+          }
+          case 3: { // Narrative Word Problems (Testing long text layout)
+            category = "生活情境數線應用";
+            const scenario = Math.floor(Math.random() * 3);
+            if (scenario === 0) {
+              const temp1 = this.getRandomInt(-6, -1);
+              const drop = this.getRandomInt(3, 8);
+              answer = temp1 - drop;
+              promptText = `某高山清晨氣溫為 ${temp1}°C，隨後驟降 ${drop}°C，此時氣溫是多少？`;
+              answerStr = `${answer}°C`;
+              explanation = `氣溫下降是減法：${temp1} - ${drop} = ${answer}°C`;
+              wrongList = [`${temp1 + drop}°C`, `${-(temp1 - drop)}°C`, `${drop - Math.abs(temp1)}°C`];
+            } else if (scenario === 1) {
+              const depth = this.getRandomInt(-40, -15);
+              const rise = this.getRandomInt(5, 20);
+              answer = depth + rise;
+              promptText = `潛水艇在海平面下 ${Math.abs(depth)} 公尺(${depth}m)，上升 ${rise} 公尺後的位置？`;
+              answerStr = `${answer} 公尺`;
+              explanation = `上升為加法：${depth} + ${rise} = ${answer} 公尺`;
+              wrongList = [`${depth - rise} 公尺`, `${Math.abs(answer)} 公尺`, `${-(depth + rise)} 公尺`];
+            } else {
+              const start = this.getRandomInt(-8, 8);
+              const dist = this.getRandomInt(4, 9);
+              answer = start - dist;
+              promptText = `在數線上從點 ${start} 開始，向左移動 ${dist} 個單位長，到達的點是？`;
+              answerStr = `點 ${answer}`;
+              explanation = `數線向左移動為減法：${start} - ${dist} = ${answer}`;
+              wrongList = [`點 ${start + dist}`, `點 ${-(start - dist)}`, `點 ${answer + 2}`];
+            }
+            break;
+          }
+          case 4: default: { // Absolute value / Opposite numbers
+            category = "相反數與絕對值";
+            const num = this.getRandomInt(-18, 18);
+            if (Math.random() > 0.5) {
+              answer = Math.abs(num);
+              promptText = `請問絕對值 |${this.formatNumber(num)}| 的計算結果為何？`;
+              answerStr = `${answer}`;
+              explanation = `任何數的絕對值代表與原點的距離，必為正數或零：|${num}| = ${answer}`;
+              wrongList = [`-${answer}`, `${answer + 2}`, `0`];
+            } else {
+              answer = -num;
+              promptText = `請問數值 ${this.formatNumber(num)} 的「相反數」是多少？`;
+              answerStr = `${answer}`;
+              explanation = `${this.formatNumber(num)} 的相反數只需變換正負號：${answer}`;
+              wrongList = [`${num}`, `${Math.abs(num) + 1}`, `0`];
+            }
+            break;
+          }
+        }
+
+        // Clean unique distractors
+        const filterWrongs = Array.from(new Set(wrongList.map(String))).filter(v => v !== String(answerStr));
+        while (filterWrongs.length < 2) {
+          filterWrongs.push(`${answer + (filterWrongs.length + 1) * 3}`);
+        }
+
+        const correctLane = Math.floor(Math.random() * 3);
+        const options = [];
+        let wrongIdx = 0;
+        for (let i = 0; i < 3; i++) {
+          if (i === correctLane) {
+            options.push(String(answerStr));
+          } else {
+            options.push(filterWrongs[wrongIdx++]);
+          }
+        }
+
+        this.currentProblem = {
+          category,
+          promptText,
+          answer: answerStr,
+          options,
+          correctLane,
+          explanation
+        };
+
+        return this.currentProblem;
+      }
+    }
+
+    const LANES = [-4.0, 0, 4.0]; // Extended lane spacing for comfortable visibility
+    let GAME_SPEED_BASE = 10;
+    let GATE_DISTANCE = 80;
+
+    const state = {
+      isRunning: false,
+      isPaused: false,
+      score: 0,
+      combo: 0,
+      maxCombo: 0,
+      solvedCount: 0,
+      shields: 3,
+      maxShields: 3,
+      currentLane: 1, // 0: Left, 1: Center, 2: Right
+      targetX: 0,
+      speed: GAME_SPEED_BASE,
+      level: 1
+    };
+
+    // Difficulty selection setup
+    const speedButtons = document.querySelectorAll('.speed-btn');
+    speedButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        speedButtons.forEach(b => {
+          b.className = "speed-btn px-3 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-gray-400 font-bold text-xs md:text-sm text-center transition-all hover:bg-slate-700";
+        });
+        btn.className = "speed-btn px-3 py-2.5 rounded-xl border border-cyan-400 bg-cyan-500/20 text-cyan-300 font-bold text-xs md:text-sm text-center transition-all shadow-lg shadow-cyan-500/20";
+        
+        GAME_SPEED_BASE = parseFloat(btn.dataset.speed);
+        GATE_DISTANCE = parseFloat(btn.dataset.dist);
+        state.speed = GAME_SPEED_BASE;
+      });
+    });
+
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x020617, 0.014);
+
+    const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 450);
+    camera.position.set(0, 3.8, 8.0);
+    camera.lookAt(0, 1.4, -15);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
+    container.appendChild(renderer.domElement);
+
+    // Dynamic Lighting
+    const ambientLight = new THREE.AmbientLight(0x38bdf8, 0.85);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.4);
+    dirLight.position.set(6, 20, 12);
+    scene.add(dirLight);
+
+    const pointLight = new THREE.PointLight(0x00f3ff, 2.5, 30);
+    pointLight.position.set(0, 4, 2);
+    scene.add(pointLight);
+
+    // Floor Track
+    const roadWidth = 16;
+    const roadLength = 220;
+    const roadGeo = new THREE.PlaneGeometry(roadWidth, roadLength, 15, 60);
+    const roadMat = new THREE.MeshStandardMaterial({
+      color: 0x050b18,
+      roughness: 0.25,
+      metalness: 0.85
+    });
+    const roadMesh1 = new THREE.Mesh(roadGeo, roadMat);
+    roadMesh1.rotation.x = -Math.PI / 2;
+    roadMesh1.position.z = -roadLength / 2;
+    scene.add(roadMesh1);
+
+    const roadMesh2 = new THREE.Mesh(roadGeo, roadMat);
+    roadMesh2.rotation.x = -Math.PI / 2;
+    roadMesh2.position.z = -roadLength * 1.5;
+    scene.add(roadMesh2);
+
+    // Track lane division guidelines
+    const laneLineGeo = new THREE.BufferGeometry();
+    const laneLinePositions = [];
+    [-2.0, 2.0, -6.0, 6.0].forEach(x => {
+      laneLinePositions.push(x, 0.06, 50, x, 0.06, -380);
+    });
+    laneLineGeo.setAttribute('position', new THREE.Float32BufferAttribute(laneLinePositions, 3));
+    const laneLineMat = new THREE.LineBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.55 });
+    const laneLines = new THREE.LineSegments(laneLineGeo, laneLineMat);
+    scene.add(laneLines);
+
+    // Cyber particle backdrop
+    const starCount = 500;
+    const starGeo = new THREE.BufferGeometry();
+    const starPos = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i += 3) {
+      starPos[i] = (Math.random() - 0.5) * 180;
+      starPos[i + 1] = Math.random() * 70 - 2;
+      starPos[i + 2] = -Math.random() * 280 + 30;
+    }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0x38bdf8, size: 0.8, transparent: true, opacity: 0.75 });
+    scene.add(new THREE.Points(starGeo, starMat));
+
+    /**
+     * High-res canvas texture generator that splits lines and scales font dynamically for long text
+     */
+    function createTextTexture(text) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1024;
+      canvas.height = 512;
+      const ctx = canvas.getContext('2d');
+
+      // High-contrast deep cyber plate
+      ctx.fillStyle = '#071126';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Neon double border
+      ctx.lineWidth = 18;
+      ctx.strokeStyle = '#06b6d4';
+      ctx.strokeRect(12, 12, canvas.width - 24, canvas.height - 24);
+
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = '#38bdf8';
+      ctx.strokeRect(26, 26, canvas.width - 52, canvas.height - 52);
+
+      // Auto-scale font according to text length
+      let fontSize = 110;
+      if (text.length > 6) fontSize = 80;
+      if (text.length > 12) fontSize = 60;
+      if (text.length > 20) fontSize = 48;
+
+      ctx.font = `900 ${fontSize}px 'Noto Sans TC', 'Orbitron', sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = '#00f3ff';
+      ctx.shadowBlur = 25;
+      ctx.fillStyle = '#ffffff';
+
+      // Auto-wrap text if too long
+      const maxLineWidth = canvas.width - 80;
+      const words = text.split(' ');
+      let lines = [];
+      let currentLine = '';
+
+      if (words.length > 1 && ctx.measureText(text).width > maxLineWidth) {
+        for (let i = 0; i < words.length; i++) {
+          const testLine = currentLine ? currentLine + ' ' + words[i] : words[i];
+          if (ctx.measureText(testLine).width > maxLineWidth && i > 0) {
+            lines.push(currentLine);
+            currentLine = words[i];
+          } else {
+            currentLine = testLine;
+          }
+        }
+        lines.push(currentLine);
+      } else {
+        lines = [text];
+      }
+
+      const lineHeight = fontSize * 1.25;
+      const startY = canvas.height / 2 - ((lines.length - 1) * lineHeight) / 2;
+      lines.forEach((l, index) => {
+        ctx.fillText(l, canvas.width / 2, startY + (index * lineHeight));
+      });
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.needsUpdate = true;
+      return texture;
+    }
+
+    const playerGroup = new THREE.Group();
+    scene.add(playerGroup);
+
+    // Spaceship body
+    const bodyGeo = new THREE.ConeGeometry(0.9, 2.7, 5);
+    const bodyMat = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      metalness: 0.9,
+      roughness: 0.2,
+      emissive: 0x0369a1,
+      emissiveIntensity: 0.45
+    });
+    const playerBody = new THREE.Mesh(bodyGeo, bodyMat);
+    playerBody.rotation.x = Math.PI / 2;
+    playerBody.rotation.z = Math.PI;
+    playerGroup.add(playerBody);
+
+    // Wings
+    const wingGeo = new THREE.BoxGeometry(2.6, 0.08, 1.2);
+    const wingMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.85, roughness: 0.3 });
+    const wings = new THREE.Mesh(wingGeo, wingMat);
+    wings.position.set(0, 0.05, 0.3);
+    playerGroup.add(wings);
+
+    // Thruster engine glow
+    const thrusterGeo = new THREE.CylinderGeometry(0.26, 0.36, 0.4, 12);
+    const thrusterMat = new THREE.MeshBasicMaterial({ color: 0xec4899 });
+    const thruster = new THREE.Mesh(thrusterGeo, thrusterMat);
+    thruster.rotation.x = Math.PI / 2;
+    thruster.position.set(0, 0, 1.35);
+    playerGroup.add(thruster);
+
+    const enginePointLight = new THREE.PointLight(0x06b6d4, 3, 7);
+    enginePointLight.position.set(0, 0, 1.8);
+    playerGroup.add(enginePointLight);
+
+    playerGroup.position.set(0, 0.8, 0);
+
+    const mathEngine = new MathProblemGenerator();
+    const activeGateGroups = [];
+
+    function buildGatePortal(valueText) {
+      const portalGroup = new THREE.Group();
+
+      const frameMat = new THREE.MeshStandardMaterial({
+        color: 0x1e293b,
+        metalness: 0.9,
+        roughness: 0.25
+      });
+
+      const postGeo = new THREE.BoxGeometry(0.35, 4.2, 0.35);
+      const leftPost = new THREE.Mesh(postGeo, frameMat);
+      leftPost.position.set(-1.6, 2.1, 0);
+
+      const rightPost = new THREE.Mesh(postGeo, frameMat);
+      rightPost.position.set(1.6, 2.1, 0);
+
+      const topBarGeo = new THREE.BoxGeometry(3.5, 0.4, 0.35);
+      const topBar = new THREE.Mesh(topBarGeo, frameMat);
+      topBar.position.set(0, 4.1, 0);
+
+      portalGroup.add(leftPost, rightPost, topBar);
+
+      // Light curtain
+      const veilGeo = new THREE.PlaneGeometry(2.8, 3.6);
+      const veilMat = new THREE.MeshBasicMaterial({
+        color: 0x00f3ff,
+        transparent: true,
+        opacity: 0.25,
+        side: THREE.DoubleSide
+      });
+      const veil = new THREE.Mesh(veilGeo, veilMat);
+      veil.position.set(0, 2.0, 0);
+      portalGroup.add(veil);
+
+      // Large crisp billboard sign
+      const texture = createTextTexture(valueText);
+      const signGeo = new THREE.PlaneGeometry(2.8, 1.4);
+      const signMat = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide
+      });
+      const sign = new THREE.Mesh(signGeo, signMat);
+      sign.position.set(0, 2.9, 0.05);
+      portalGroup.add(sign);
+
+      return portalGroup;
+    }
+
+    function spawnGateSet(zPos) {
+      const problem = mathEngine.generate(state.level);
+
+      const gateSetGroup = new THREE.Group();
+      gateSetGroup.position.z = zPos;
+
+      for (let laneIdx = 0; laneIdx < 3; laneIdx++) {
+        const optionVal = problem.options[laneIdx];
+        const portal = buildGatePortal(optionVal);
+        portal.position.x = LANES[laneIdx];
+        gateSetGroup.add(portal);
+      }
+
+      scene.add(gateSetGroup);
+      activeGateGroups.push({
+        group: gateSetGroup,
+        problem: problem,
+        passed: false,
+        z: zPos
+      });
+    }
+
+    const burstParticles = [];
+    function createFeedbackBurst(x, y, z, isSuccess) {
+      const count = 35;
+      const geo = new THREE.BufferGeometry();
+      const positions = new Float32Array(count * 3);
+      const velocities = [];
+
+      const color = isSuccess ? 0x00ffcc : 0xff0055;
+      for (let i = 0; i < count; i++) {
+        positions[i * 3] = x;
+        positions[i * 3 + 1] = y;
+        positions[i * 3 + 2] = z;
+
+        velocities.push(
+          (Math.random() - 0.5) * 8,
+          (Math.random() - 0.2) * 8 + 3,
+          (Math.random() - 0.5) * 8
+        );
+      }
+
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const mat = new THREE.PointsMaterial({ color: color, size: 0.5, transparent: true, opacity: 1 });
+      const pSystem = new THREE.Points(geo, mat);
+      scene.add(pSystem);
+
+      burstParticles.push({ system: pSystem, velocities: velocities, age: 0, maxAge: 0.65 });
+    }
+
+    function updateLaneSelectionUI() {
+      // Highlight currently selected lane card and show indicator badge
+      for (let i = 0; i < 3; i++) {
+        const card = document.getElementById(`hud-lane-${i}`);
+        const tag = document.getElementById(`tag-lane-${i}`);
+        if (i === state.currentLane) {
+          card.classList.add('active-lane-card');
+          tag.classList.remove('hidden');
+        } else {
+          card.classList.remove('active-lane-card');
+          tag.classList.add('hidden');
+        }
+      }
+    }
+
+    function switchLane(direction) {
+      if (!state.isRunning || state.isPaused) return;
+      const newLane = state.currentLane + direction;
+      if (newLane >= 0 && newLane <= 2) {
+        state.currentLane = newLane;
+        state.targetX = LANES[newLane];
+        AudioFX.playMove();
+        updateLaneSelectionUI();
+      }
+    }
+
+    function switchLaneDirect(laneIndex) {
+      if (!state.isRunning || state.isPaused) return;
+      if (laneIndex >= 0 && laneIndex <= 2) {
+        state.currentLane = laneIndex;
+        state.targetX = LANES[laneIndex];
+        AudioFX.playMove();
+        updateLaneSelectionUI();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        switchLane(-1);
+      } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        switchLane(1);
+      } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
+        switchLaneDirect(1);
+      }
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      if (e.changedTouches.length > 0) {
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        const diffY = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX > 0) switchLane(1);
+          else switchLane(-1);
+        }
+      }
+    }, { passive: true });
+
+    const questionDisplay = document.getElementById('question-display');
+    const questionCategory = document.getElementById('question-category');
+    const scoreDisplay = document.getElementById('score-display');
+    const comboDisplay = document.getElementById('combo-display');
+    const shieldBar = document.getElementById('shield-bar');
+    const shieldText = document.getElementById('shield-text');
+    const feedbackToast = document.getElementById('feedback-toast');
+    const feedbackToastInner = document.getElementById('feedback-toast-inner');
+    const feedbackMsg = document.getElementById('feedback-msg');
+    const feedbackIcon = document.getElementById('feedback-icon');
+    const gateDistanceBar = document.getElementById('gate-distance-bar');
+    const gateDistanceText = document.getElementById('gate-distance-text');
+
+    function updateQuestionAndOptionsHUD() {
+      const nextGate = activeGateGroups.find(g => !g.passed);
+      if (nextGate) {
+        questionDisplay.textContent = nextGate.problem.promptText;
+        questionCategory.textContent = nextGate.problem.category;
+
+        // Populate bottom 3-Lane Cards with clean text & auto layout
+        for (let i = 0; i < 3; i++) {
+          const textEl = document.getElementById(`text-lane-${i}`);
+          const descEl = document.getElementById(`desc-lane-${i}`);
+          const val = nextGate.problem.options[i];
+          textEl.textContent = val;
+          descEl.textContent = `車道 ${i === 0 ? 'A (左)' : i === 1 ? 'B (中)' : 'C (右)'}`;
+        }
+      }
+      updateLaneSelectionUI();
+    }
+
+    function showFeedback(isCorrect, message) {
+      feedbackToast.style.opacity = '1';
+      feedbackToast.style.transform = 'translateY(0px)';
+
+      if (isCorrect) {
+        feedbackToastInner.className = "px-4 py-1.5 rounded-xl text-xs md:text-sm font-bold flex items-center gap-2 shadow-xl backdrop-blur-md bg-emerald-950/90 border border-emerald-500/80 text-emerald-300";
+        feedbackIcon.textContent = "✨";
+      } else {
+        feedbackToastInner.className = "px-4 py-1.5 rounded-xl text-xs md:text-sm font-bold flex items-center gap-2 shadow-xl backdrop-blur-md bg-rose-950/90 border border-rose-500/80 text-rose-300";
+        feedbackIcon.textContent = "⚠️";
+      }
+      feedbackMsg.textContent = message;
+
+      setTimeout(() => {
+        feedbackToast.style.opacity = '0';
+        feedbackToast.style.transform = 'translateY(-8px)';
+      }, 2500);
+    }
+
+    function updateStatsHUD() {
+      scoreDisplay.textContent = state.score;
+      comboDisplay.textContent = `x${state.combo}`;
+      
+      const shieldPct = (state.shields / state.maxShields) * 100;
+      shieldBar.style.width = `${Math.max(0, shieldPct)}%`;
+      shieldText.textContent = `${state.shields}/${state.maxShields}`;
+
+      if (state.shields === 1) {
+        shieldBar.className = "h-full bg-gradient-to-r from-red-600 to-rose-500 rounded-full transition-all duration-300";
+      } else {
+        shieldBar.className = "h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transition-all duration-300";
+      }
+    }
+
+    function resolveGatePass(gateData) {
+      gateData.passed = true;
+      const isCorrect = (state.currentLane === gateData.problem.correctLane);
+
+      if (isCorrect) {
+        state.combo++;
+        if (state.combo > state.maxCombo) state.maxCombo = state.combo;
+        state.solvedCount++;
+
+        const comboBonus = Math.min(state.combo * 40, 350);
+        state.score += 150 + comboBonus;
+
+        // Very mild gentle speed increment
+        state.speed = Math.min(GAME_SPEED_BASE + 5, GAME_SPEED_BASE + (state.solvedCount * 0.25));
+        if (state.solvedCount > 4) state.level = 2;
+        if (state.solvedCount > 10) state.level = 3;
+
+        AudioFX.playCorrect();
+        createFeedbackBurst(playerGroup.position.x, playerGroup.position.y + 1, playerGroup.position.z, true);
+        showFeedback(true, `正確！${gateData.problem.explanation}`);
+      } else {
+        state.combo = 0;
+        state.shields--;
+        state.score = Math.max(0, state.score - 50);
+
+        AudioFX.playWrong();
+        createFeedbackBurst(playerGroup.position.x, playerGroup.position.y + 1, playerGroup.position.z, false);
+        showFeedback(false, `錯誤！正解是 ${gateData.problem.answer}。(${gateData.problem.explanation})`);
+
+        if (state.shields <= 0) {
+          triggerGameOver();
+          return;
+        }
+      }
+
+      updateStatsHUD();
+      updateQuestionAndOptionsHUD();
+    }
+
+    function resetGame() {
+      state.score = 0;
+      state.combo = 0;
+      state.maxCombo = 0;
+      state.solvedCount = 0;
+      state.shields = state.maxShields;
+      state.currentLane = 1;
+      state.targetX = 0;
+      state.speed = GAME_SPEED_BASE;
+      state.level = 1;
+
+      while (activeGateGroups.length > 0) {
+        const item = activeGateGroups.pop();
+        scene.remove(item.group);
+      }
+
+      spawnGateSet(-GATE_DISTANCE);
+      spawnGateSet(-GATE_DISTANCE * 2);
+
+      playerGroup.position.set(0, 0.8, 0);
+      updateStatsHUD();
+      updateQuestionAndOptionsHUD();
+    }
+
+    function startGame() {
+      AudioFX.init();
+      resetGame();
+      state.isRunning = true;
+      state.isPaused = false;
+      document.getElementById('start-modal').classList.add('hidden');
+      document.getElementById('gameover-modal').classList.add('hidden');
+      document.getElementById('gameover-modal').classList.remove('flex');
+    }
+
+    function triggerGameOver() {
+      state.isRunning = false;
+      document.getElementById('final-score').textContent = state.score;
+      document.getElementById('final-combo').textContent = `x${state.maxCombo}`;
+      document.getElementById('final-solved').textContent = `${state.solvedCount} 題`;
+
+      const reviewTip = document.getElementById('gameover-review');
+      if (state.solvedCount < 3) {
+        reviewTip.textContent = "觀念提醒：同號相乘為正，異號相乘為負；減去負數等於加上它的相反數！";
+      } else {
+        reviewTip.textContent = "超讚！你已經建立了對正負數數線、括號運算與長題意情境題的直覺判斷！";
+      }
+
+      const modal = document.getElementById('gameover-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    document.getElementById('btn-start').addEventListener('click', startGame);
+    document.getElementById('btn-restart').addEventListener('click', startGame);
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const delta = Math.min(clock.getDelta(), 0.1);
+
+      if (state.isRunning && !state.isPaused) {
+        const moveDist = state.speed * delta;
+
+        // Lerp player X
+        playerGroup.position.x += (state.targetX - playerGroup.position.x) * 14 * delta;
+        const rollAngle = (state.targetX - playerGroup.position.x) * -0.15;
+        playerGroup.rotation.z += (rollAngle - playerGroup.rotation.z) * 12 * delta;
+        playerGroup.position.y = 0.8 + Math.sin(clock.getElapsedTime() * 7) * 0.07;
+
+        // Move road meshes
+        roadMesh1.position.z += moveDist;
+        roadMesh2.position.z += moveDist;
+        if (roadMesh1.position.z > roadLength / 2) roadMesh1.position.z -= roadLength * 2;
+        if (roadMesh2.position.z > roadLength / 2) roadMesh2.position.z -= roadLength * 2;
+
+        // Update live gate distance gauge
+        const nextUpcomingGate = activeGateGroups.find(g => !g.passed);
+        if (nextUpcomingGate) {
+          const distRemaining = Math.max(0, -nextUpcomingGate.group.position.z);
+          gateDistanceText.textContent = `${Math.round(distRemaining)}m`;
+          const distPct = Math.min(100, (distRemaining / GATE_DISTANCE) * 100);
+          gateDistanceBar.style.width = `${distPct}%`;
+        }
+
+        // Move gates forward
+        for (let i = activeGateGroups.length - 1; i >= 0; i--) {
+          const item = activeGateGroups[i];
+          item.group.position.z += moveDist;
+
+          if (!item.passed && item.group.position.z >= 0) {
+            resolveGatePass(item);
+          }
+
+          if (item.group.position.z > 15) {
+            scene.remove(item.group);
+            activeGateGroups.splice(i, 1);
+
+            const furthestZ = activeGateGroups.reduce((min, g) => Math.min(min, g.group.position.z), 0);
+            spawnGateSet(furthestZ - GATE_DISTANCE);
+          }
+        }
+
+        // Particles
+        for (let i = burstParticles.length - 1; i >= 0; i--) {
+          const bp = burstParticles[i];
+          bp.age += delta;
+          const posAttr = bp.system.geometry.attributes.position;
+          for (let j = 0; j < posAttr.count; j++) {
+            posAttr.setX(j, posAttr.getX(j) + bp.velocities[j * 3] * delta);
+            posAttr.setY(j, posAttr.getY(j) + bp.velocities[j * 3 + 1] * delta);
+            posAttr.setZ(j, posAttr.getZ(j) + bp.velocities[j * 3 + 2] * delta);
+          }
+          posAttr.needsUpdate = true;
+          bp.system.material.opacity = 1 - (bp.age / bp.maxAge);
+
+          if (bp.age >= bp.maxAge) {
+            scene.remove(bp.system);
+            burstParticles.splice(i, 1);
+          }
+        }
+
+        // Camera follow
+        camera.position.x += (playerGroup.position.x * 0.45 - camera.position.x) * 6 * delta;
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    });
+
+    window.onload = function() {
+      animate();
+    };
+  </script>
+</body>
+</html>
