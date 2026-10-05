@@ -141,12 +141,30 @@
   </style>
 </head>
 <body>
+
+<!-- 學生姓名強制彈跳視窗 (Entry Modal) -->
+<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #38bdf8;">
+    <div style="font-size:3.2rem; margin-bottom:12px;">👋 📝</div>
+    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入英語互動學習！</h2>
+    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄學習歷程與成績：</p>
+    
+    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名 (例如: 王小明)" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; transition:border-color 0.2s; box-sizing:border-box;" onfocus="this.style.borderColor='#0284c7'" onblur="this.style.borderColor='#cbd5e1'" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
+    
+    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始作答喔！</div>
+    
+    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer; box-shadow:0 4px 14px rgba(2,132,199,0.35); transition:transform 0.1s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      🚀 確定並開始學習
+    </button>
+  </div>
+</div>
+
 <div class="container">
   <div class="header">
     <div class="badge-bar">
       <span class="level-badge">國三 · 九年級 · C2 進階組</span>
       <label for="studentName" style="font-weight:700; color:var(--text); margin-right:4px;">👤 學生姓名：</label>
-        <input type="text" id="studentName" placeholder="請輸入姓名與座號 (例：701 05 王小明)" style="padding:6px 12px; font-size:0.95rem; border:2px solid var(--primary); border-radius:8px; outline:none; font-weight:600; background:#ffffff; min-width:240px;">
+        <input type="text" id="studentName" onclick="promptStudentNameModal()" placeholder="請輸入姓名與座號 (例：701 05 王小明)" style="padding:6px 12px; font-size:0.95rem; border:2px solid var(--primary); border-radius:8px; outline:none; font-weight:600; background:#ffffff; min-width:240px;">
     </div>
     <h1 style="font-size:1.6rem; color:#b45309;">完成式與飲食文化 步步練｜積木組句與進階文法應用</h1>
     <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 點擊單字積木組句 · 嚴選課本 28 生詞 · 現在完成式 have/has + p.p. 應用</p>
@@ -663,6 +681,60 @@ function checkSentence(exId) {
   else if (typeof renderExercises === 'function') renderExercises();
   if (typeof updateStudentDisplay === 'function') updateStudentDisplay();
   if (typeof initStudentNameInput === 'function') initStudentNameInput();
+
+
+function initStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var pageInput = document.getElementById('studentName');
+  if (!modal || !modalInput) return;
+
+  var savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  if (savedName) {
+    modalInput.value = savedName;
+    if (pageInput) pageInput.value = savedName;
+  }
+  modal.style.display = 'flex';
+  setTimeout(function() { modalInput.focus(); modalInput.select(); }, 200);
+}
+
+function confirmStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var err = document.getElementById('modalNameError');
+  var pageInput = document.getElementById('studentName');
+  
+  var val = modalInput ? modalInput.value.trim() : '';
+  if (!val) {
+    if (err) err.style.display = 'block';
+    if (modalInput) {
+      modalInput.style.borderColor = '#ef4444';
+      modalInput.focus();
+    }
+    return;
+  }
+  if (err) err.style.display = 'none';
+  localStorage.setItem('student_global_name', val);
+  localStorage.setItem('current_student_name', val);
+  if (pageInput) pageInput.value = val;
+  if (modal) modal.style.display = 'none';
+}
+
+function promptStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var err = document.getElementById('modalNameError');
+  if (err) err.style.display = 'none';
+  var cur = (typeof getStudentName === 'function') ? getStudentName() : (localStorage.getItem('student_global_name') || '');
+  if (modalInput) modalInput.value = cur;
+  if (modal) {
+    modal.style.display = 'flex';
+    setTimeout(function() { modalInput.focus(); modalInput.select(); }, 150);
+  }
+}
+
+
+window.addEventListener('DOMContentLoaded', initStudentNameModal);
 </script>
 </body>
 </html>
