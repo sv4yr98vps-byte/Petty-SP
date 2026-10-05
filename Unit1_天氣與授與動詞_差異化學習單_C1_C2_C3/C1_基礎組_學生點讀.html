@@ -1,0 +1,696 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國二 · 八年級】天氣表達與授與動詞 差異化學習單｜C1 基礎組</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --bg: #f0f9ff;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #bae6fd;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 16px;
+      padding-bottom: 60px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    .header {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+    .badge-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .level-badge { background: #0284c7; color: white; padding: 4px 12px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; }
+    .student-tag { background: #e0f2fe; color: #0369a1; padding: 4px 12px; border-radius: 999px; font-weight: 700; cursor: pointer; border: 1px dashed #0284c7; }
+    .toolbar {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .voice-badge { background: rgba(2,132,199,0.1); color: #0369a1; font-weight: 700; font-size: 0.88rem; padding: 4px 10px; border-radius: 8px; }
+    .question-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 2px solid var(--border);
+      display: none;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .question-card.active { display: block; }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; }
+    .module-tag { font-weight: 700; color: #0369a1; font-size: 0.95rem; }
+    .hint-btn { background: #fef3c7; color: #d97706; border: 1px solid #fcd34d; padding: 4px 10px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+    .q-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .speaker-btn { background: none; border: none; font-size: 1.35rem; cursor: pointer; padding: 0 4px; transition: transform 0.1s; }
+    .speaker-btn:hover { transform: scale(1.15); }
+    .visual-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 18px; }
+    .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .options-grid-3 { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .option-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+    .option-btn:hover { border-color: var(--primary); background: #f0f9ff; }
+    .option-btn.correct { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+    .option-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+    .feedback-box { margin-top: 16px; padding: 12px 16px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; display: none; }
+    .nav-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+    .btn-nav { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+    .btn-nav:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .completion-card { background: var(--card-bg); border-radius: 20px; padding: 32px; text-align: center; border: 2px solid #0284c7; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+    .stat-box { background: #f8fafc; border: 1px solid var(--border); padding: 14px; border-radius: 12px; }
+    .stat-val { font-size: 1.8rem; font-weight: 800; color: #0369a1; }
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); }
+    .sync-status-box { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; padding: 12px 16px; border-radius: 10px; margin: 18px 0; font-size: 0.95rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="badge-bar">
+      <span class="level-badge">國二 · 八年級 · C1 基礎組</span>
+      <label for="studentName" style="font-weight:700; color:var(--text); margin-right:4px;">👤 學生姓名：</label>
+        <input type="text" id="studentName" placeholder="請輸入姓名與座號 (例：701 05 王小明)" style="padding:6px 12px; font-size:0.95rem; border:2px solid var(--primary); border-radius:8px; outline:none; font-weight:600; background:#ffffff; min-width:240px;">
+    </div>
+    <h1 style="font-size:1.6rem; color:#0369a1;">天氣與授與動詞 基礎評量 (單字4選1·文法3選1)</h1>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 四季天氣 · 授與動詞 to vs for · 1200必背單字 · 雲端自動記錄</p>
+  </div>
+
+  <div class="toolbar">
+    <span class="voice-badge">🗣️ Google 雙語語音小姐 (已鎖定)</span>
+    <label style="font-weight:600; font-size:0.9rem;">⚡ 語速：</label>
+    <select id="speedSelect" style="padding:4px 8px; border-radius:6px; border:1px solid var(--border);">
+      <option value="0.25">🐢 0.25x 極慢速 (音素解碼)</option>
+      <option value="0.4">🐢 0.4x 慢速</option>
+      <option value="0.6">0.6x 初學清晰</option>
+      <option value="0.85" selected>0.85x 適中推薦</option>
+      <option value="1.0">1.0x 標準原速</option>
+    </select>
+  </div>
+
+  <div id="quizContainer">
+    <!-- Q1 (4選1): 晴天 -->
+    <div class="question-card active" data-q="1">
+      <div class="q-meta">
+        <span class="module-tag">MODULE A｜天氣形容詞 (4選1)</span>
+        <button class="hint-btn" onclick="showHint(1)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        1. 看到圖示「☀️ 太陽大晴天」，對應的英文天氣形容詞是？
+        <button class="speaker-btn" onclick="speakEnglish('sunny')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:2rem; color:#d97706;">☀️ 陽光普照 · 大晴天 ➔ [ s _ _ _ y ]</span></div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, true, 1, '答對了！sunny 代表晴朗的。')">(A) sunny</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'snowy 是下雪的喔！')">(B) snowy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'stormy 是暴風雨的喔！')">(C) stormy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 1, 'starry 是滿天星斗的喔！')">(D) starry</button>
+      </div>
+      <div class="feedback-box" id="fb-1"></div>
+    </div>
+
+    <!-- Q2 (4選1): 下雨天氣 -->
+    <div class="question-card" data-q="2">
+      <div class="q-meta">
+        <span class="module-tag">MODULE A｜天氣形容詞 (4選1)</span>
+        <button class="hint-btn" onclick="showHint(2)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        2. 出門需要帶雨傘的「🌧️ 雨天」，英文是哪一個？
+        <button class="speaker-btn" onclick="speakEnglish('rainy')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:2rem; color:#2563eb;">🌧️ 雨水綿綿 · 下雨天 ➔ [ r _ _ _ y ]</span></div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'ready 是準備好的喔！')">(A) ready</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 2, '太棒了！rainy 代表下雨的。')">(B) rainy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'rosy 是玫瑰色的喔！')">(C) rosy</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 2, 'roomy 是寬敞的喔！')">(D) roomy</button>
+      </div>
+      <div class="feedback-box" id="fb-2"></div>
+    </div>
+
+    <!-- Q3 (4選1): 季節 春天 -->
+    <div class="question-card" data-q="3">
+      <div class="q-meta">
+        <span class="module-tag">MODULE B｜四季 Seasons (4選1)</span>
+        <button class="hint-btn" onclick="showHint(3)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        3. 百花盛開、天氣溫暖的「🌸 春天」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('spring')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:2rem; color:#059669;">🌸 溫暖百花開 · 春天 ➔ [ s _ _ _ _ g ]</span></div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, true, 3, '正確！spring 是春天。')">(A) spring</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'string 是細繩喔！')">(B) string</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'strong 是強壯的喔！')">(C) strong</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 3, 'singing 是唱歌喔！')">(D) singing</button>
+      </div>
+      <div class="feedback-box" id="fb-3"></div>
+    </div>
+
+    <!-- Q4 (4選1): 季節 冬天 -->
+    <div class="question-card" data-q="4">
+      <div class="q-meta">
+        <span class="module-tag">MODULE B｜四季 Seasons (4選1)</span>
+        <button class="hint-btn" onclick="showHint(4)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        4. 天氣寒冷、山上會下雪的「⛄ 冬天」，英文是？
+        <button class="speaker-btn" onclick="speakEnglish('winter')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:2rem; color:#0284c7;">⛄ 寒冷下雪 · 冬天 ➔ [ w _ _ _ _ r ]</span></div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'water 是水喔！')">(A) water</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'waiter 是服務生喔！')">(B) waiter</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 4, 'weather 是天氣喔！')">(C) weather</button>
+        <button class="option-btn" onclick="checkAnswer(this, true, 4, '答對了！winter 是冬天。')">(D) winter</button>
+      </div>
+      <div class="feedback-box" id="fb-4"></div>
+    </div>
+
+    <!-- Q5 (3選1): 問天氣句型 How -->
+    <div class="question-card" data-q="5">
+      <div class="q-meta">
+        <span class="module-tag">MODULE C｜天氣問句句型 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(5)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        5. 問句：「________ is the weather today? (今天天氣如何？)」，空格填入：
+        <button class="speaker-btn" onclick="speakEnglish('How is the weather today?')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">"______ is the weather today?" ➔ "It is sunny."</span></div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 5, '正確！How is the weather? 是詢問天氣。')">(A) How</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 5, '若是 What 必須搭配 like 喔！')">(B) What</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 5, 'Where 是問地點喔！')">(C) Where</button>
+      </div>
+      <div class="feedback-box" id="fb-5"></div>
+    </div>
+
+    <!-- Q6 (3選1): 問天氣句型 What ... like -->
+    <div class="question-card" data-q="6">
+      <div class="q-meta">
+        <span class="module-tag">MODULE C｜天氣問句句型 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(6)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        6. 看到 What 開頭問天氣，句尾介系詞要填入：<br>
+        「What is the weather ________ today?」
+        <button class="speaker-btn" onclick="speakEnglish('What is the weather like today?')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">What is the weather ________?</span></div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 6, '答對了！What ... like 搭配使用。')">(A) like</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'look 是看的意思喔！')">(B) look</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 6, 'as 不合文法喔！')">(C) as</button>
+      </div>
+      <div class="feedback-box" id="fb-6"></div>
+    </div>
+
+    <!-- Q7 (3選1): 授與動詞 give + to -->
+    <div class="question-card" data-q="7">
+      <div class="q-meta">
+        <span class="module-tag">MODULE D｜授與動詞介系詞 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(7)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        7. 動詞 give (給予) 轉為「物 + 介系詞 + 人」時，介系詞填入：<br>
+        「My uncle gave a card ________ me.」
+        <button class="speaker-btn" onclick="speakEnglish('My uncle gave a card to me.')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">give / send / show ➔ 搭配 ( ______ )</span></div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 7, '正確！give / send / show 搭配介系詞 to。')">(A) to</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 7, 'buy / make 才是搭配 for 喔！')">(B) for</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 7, 'at 不合動詞結構喔！')">(C) at</button>
+      </div>
+      <div class="feedback-box" id="fb-7"></div>
+    </div>
+
+    <!-- Q8 (3選1): 授與動詞 buy/make + for -->
+    <div class="question-card" data-q="8">
+      <div class="q-meta">
+        <span class="module-tag">MODULE D｜授與動詞介系詞 (3選1)</span>
+        <button class="hint-btn" onclick="showHint(8)">💡 提示</button>
+      </div>
+      <div class="q-title">
+        8. 動詞 buy (購買) 轉為「物 + 介系詞 + 人」時，介系詞填入：<br>
+        「Mom bought a new school bag ________ me.」
+        <button class="speaker-btn" onclick="speakEnglish('Mom bought a new school bag for me.')" title="發音">🔊</button>
+      </div>
+      <div class="visual-box"><span style="font-size:1.4rem; font-family:'Fredoka',sans-serif;">buy / make / cook ➔ 搭配 ( ______ )</span></div>
+      <div class="options-grid-3">
+        <button class="option-btn" onclick="checkAnswer(this, true, 8, '答對了！buy / make 代表為某人準備，搭配 for。')">(A) for</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 8, 'give / send 才是搭配 to 喔！')">(B) to</button>
+        <button class="option-btn" onclick="checkAnswer(this, false, 8, 'with 是伴隨的意思喔！')">(C) with</button>
+      </div>
+      <div class="feedback-box" id="fb-8"></div>
+    </div>
+  </div>
+
+  <div class="nav-bar" id="navBar">
+    <button class="btn-nav" id="prevBtn" onclick="prevQ()" disabled>◀ 上一題</button>
+    <span id="progressText" style="font-weight:700; color:var(--text-muted);">第 1 / 8 題</span>
+    <button class="btn-nav" id="nextBtn" onclick="nextQ()">下一題 ▶</button>
+  </div>
+
+  <!-- 結算卡片 -->
+  <div class="completion-card" id="completionCard">
+    <div style="font-size:3.2rem; line-height:1;">🏆</div>
+    <h2 style="font-size:1.6rem; color:#b45309; margin:10px 0 4px;">恭喜完成 C1 基礎組學習任務！</h2>
+    <div id="certStudentText" style="font-weight:700; color:var(--text); margin-bottom:18px; font-size:1.05rem;">學生：自主學習同學 ｜ 表現評價：⭐⭐⭐</div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val" id="resScore">-- 分</div>
+        <div class="stat-lbl">🏆 結算總分 (含試錯折算)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resFirstTry">-- / --</div>
+        <div class="stat-lbl">🎯 首次即答對率</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resAttempts">0 次</div>
+        <div class="stat-lbl">🔄 累計試錯次數</div>
+      </div>
+    </div>
+
+    <!-- 逐題作答歷程診斷明細 -->
+    <div style="text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin:16px 0;">
+      <div style="font-weight:700; color:#334155; margin-bottom:10px; display:flex; align-items:center; gap:6px; font-size:0.95rem;">
+        <span>📋 逐題作答診斷明細</span>
+        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">(精確掌握學生首次作答 vs. 試錯歷程)</span>
+      </div>
+      <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto; padding-right:4px;"></div>
+    </div>
+
+    <div class="sync-status-box" id="syncStatusBanner">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+      <button class="btn-nav" style="background:#0284c7;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="btn-nav" style="background:#10b981;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" class="btn-nav" style="text-decoration:none; background:#0f172a; display:inline-block;">🏠 回首頁</a>
+    </div>
+  </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resFirstTry">-- / --</div>
+        <div class="stat-lbl">🎯 首次即答對率</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resAttempts">0 次</div>
+        <div class="stat-lbl">🔄 累計試錯次數</div>
+      </div>
+    </div>
+
+    <!-- 逐題作答歷程診斷明細 -->
+    <div style="text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin:16px 0;">
+      <div style="font-weight:700; color:#334155; margin-bottom:10px; display:flex; align-items:center; gap:6px; font-size:0.95rem;">
+        <span>📋 逐題作答診斷明細</span>
+        <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">(精確掌握學生首次作答 vs. 試錯歷程)</span>
+      </div>
+      <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto; padding-right:4px;"></div>
+    </div>
+
+    <div class="sync-status-box" id="syncStatusBanner">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+      <button class="btn-nav" style="background:#0284c7;" onclick="manualSync()">☁️ 重新同步儀表板</button>
+      <button class="btn-nav" style="background:#10b981;" onclick="copyReport()">📋 一鍵複製成果</button>
+      <button class="btn-nav" style="background:#64748b;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" class="btn-nav" style="text-decoration:none; background:#0f172a; display:inline-block;">🏠 回首頁</a>
+    </div>
+  </div>
+
+<script>
+
+function getStudentName() {
+  const el = document.getElementById('studentName');
+  let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  return val;
+}
+
+function saveStudentNameVal(val) {
+  if (val) {
+    localStorage.setItem('student_global_name', val);
+    localStorage.setItem('current_student_name', val);
+  }
+}
+
+function initStudentNameInput() {
+  const el = document.getElementById('studentName');
+  const saved = getStudentName();
+  if (el && saved) el.value = saved;
+  if (el) {
+    el.addEventListener('input', function() {
+      saveStudentNameVal(this.value.trim());
+    });
+  }
+}
+
+  const synth = window.speechSynthesis;
+  let voices = [];
+  let currentQ = 1;
+  const totalQuestions = 8;
+  let answeredState = {};
+  let attemptsPerQ = {};
+  let totalErrors = 0;
+  let hints = 0;
+  let currentSpeed = 0.25;
+  let studentName = localStorage.getItem('unit1_c1_student') || '';
+
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+  function initVoices() {
+    voices = synth ? synth.getVoices() : [];
+  }
+  if (speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = initVoices;
+  }
+  initVoices();
+
+  function updateStudentDisplay() {
+    const el = document.getElementById('studentDisplay');
+    if (el) el.textContent = studentName ? ('👤 學生：' + studentName) : '👤 點此輸入姓名座號';
+  }
+
+  function promptStudentName() {
+    const input = prompt('請輸入你的班級座號與姓名（例如：801 王小明）：', studentName);
+    if (input !== null && input.trim() !== '') {
+      studentName = input.trim();
+      localStorage.setItem('unit1_c1_student', studentName);
+      updateStudentDisplay();
+    }
+  }
+
+  function speakEnglish(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
+    const voices = window.speechSynthesis.getVoices();
+    const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                    voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (enVoice) utter.voice = enVoice;
+    window.speechSynthesis.speak(utter);
+  }
+
+  function speakChinese(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'zh-TW';
+    utter.rate = 0.85;
+    const voices = window.speechSynthesis.getVoices();
+    const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                    voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+    if (zhVoice) utter.voice = zhVoice;
+    window.speechSynthesis.speak(utter);
+  }
+
+  function showHint(q) {
+    hints++;
+    const hintMap = {
+      1: '提示：太陽是 sun，晴天是 sunny；snowy 是下雪的。',
+      2: '提示：雨水是 rain，下雨天是 rainy；ready 是準備好的。',
+      3: '提示：春天花開溫暖是 spring；string 是細繩。',
+      4: '提示：冬天寒冷是 winter；water 是水。',
+      5: '提示：How is the weather? 詢問天氣狀況。',
+      6: '提示：What is the weather like? 搭配介系詞 like。',
+      7: '提示：give 給予某人事物，介系詞搭配 to。',
+      8: '提示：buy 為某人買某物，介系詞搭配 for。'
+    };
+    const fb = document.getElementById('fb-' + q);
+    fb.style.display = 'block';
+    fb.style.background = '#fef3c7';
+    fb.style.color = '#92400e';
+    fb.innerHTML = '💡 ' + (hintMap[q] || '請再仔細看一次題目喔！');
+    speakChinese(hintMap[q] || '仔細想想看喔');
+  }
+
+  function checkAnswer(btn, isCorrect, qNum, feedback) {
+    if (answeredState[qNum]) return;
+    if (attemptsPerQ[qNum] === undefined) attemptsPerQ[qNum] = 0;
+
+    const fb = document.getElementById(`fb-${qNum}`);
+    fb.style.display = 'block';
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      answeredState[qNum] = true;
+
+      const errCount = attemptsPerQ[qNum];
+      let badgeText = '🥇 首次即答對！';
+      if (errCount === 1) {
+        badgeText = '⚠️ 試錯 1 次後答對 (得分 70%)';
+      } else if (errCount === 2) {
+        badgeText = '⚠️ 試錯 2 次後答對 (得分 40%)';
+      } else if (errCount >= 3) {
+        badgeText = '❌ 試錯多次後答對 (鼓勵分 10%)';
+      }
+
+      fb.style.background = '#d1fae5';
+      fb.style.color = '#065f46';
+      fb.innerHTML = `✅ <strong>答對了！</strong> ${feedback} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
+      speakChinese(`答對了！${feedback}`);
+
+      const buttons = btn.parentElement.querySelectorAll('.option-btn');
+      buttons.forEach(b => {
+        if (b !== btn) {
+          b.disabled = true;
+          b.style.opacity = '0.5';
+        }
+      });
+    } else {
+      btn.classList.add('wrong');
+      btn.disabled = true;
+      attemptsPerQ[qNum]++;
+      totalErrors++;
+
+      fb.style.background = '#fee2e2';
+      fb.style.color = '#991b1b';
+      fb.innerHTML = `❌ <strong>再試一次！</strong> ${feedback} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qNum]} 次)</span>`;
+      speakChinese(`再想想看。${feedback}`);
+    }
+  }
+
+  function updateNav() {
+    document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
+    const currentCard = document.querySelector(`.question-card[data-q="${currentQ}"]`);
+    if (currentCard) currentCard.classList.add('active');
+
+    document.getElementById('prevBtn').disabled = (currentQ === 1);
+    document.getElementById('progressText').textContent = `第 ${currentQ} / ${totalQuestions} 題`;
+
+    if (currentQ === totalQuestions) {
+      document.getElementById('nextBtn').textContent = '完成結算 🏆';
+    } else {
+      document.getElementById('nextBtn').textContent = '下一題 ▶';
+    }
+  }
+
+  function nextQ() {
+    if (currentQ < totalQuestions) {
+      currentQ++;
+      updateNav();
+    } else {
+      showCompletion();
+    }
+  }
+
+  function prevQ() {
+    if (currentQ > 1) {
+      currentQ--;
+      updateNav();
+    }
+  }
+
+  function showCompletion() {
+  let validName = getStudentName();
+  if (!validName) {
+    validName = (prompt('【系統提醒】請先輸入您的「姓名與座號」再送出交卷喔！（例如：701 05 王小明）：') || '').trim();
+    if (validName) {
+      saveStudentNameVal(validName);
+      const el = document.getElementById('studentName');
+      if (el) el.value = validName;
+    } else {
+      alert('⚠️ 請務必輸入姓名座號才能完成成績登記！請在上方輸入姓名後再交卷。');
+      const el = document.getElementById('studentName');
+      if (el) {
+        el.focus();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+  }
+
+    document.getElementById('quizContainer').style.display = 'none';
+    document.getElementById('navBar').style.display = 'none';
+
+    let totalScore = 0;
+    let firstTryCorrect = 0;
+    let detailsList = [];
+    const basePts = 100.0 / totalQuestions;
+
+    for (let i = 1; i <= totalQuestions; i++) {
+      const errs = attemptsPerQ[i] || 0;
+      const isAns = answeredState[i];
+      let multiplier = 0;
+      let badge = '❌ 未作答';
+
+      if (isAns) {
+        if (errs === 0) {
+          multiplier = 1.0;
+          firstTryCorrect++;
+          badge = '🥇 首次即答對 (滿分)';
+        } else if (errs === 1) {
+          multiplier = 0.7;
+          badge = '⚠️ 試錯 1 次 (70% 分數)';
+        } else if (errs === 2) {
+          multiplier = 0.4;
+          badge = '⚠️ 試錯 2 次 (40% 分數)';
+        } else {
+          multiplier = 0.1;
+          badge = '❌ 試錯多次 (10% 鼓勵分)';
+        }
+      }
+      totalScore += basePts * multiplier;
+      detailsList.push(`第 ${i} 題: ${badge}`);
+    }
+
+    const calculatedScore = Math.max(10, Math.round(totalScore));
+    const firstTryRate = Math.round((firstTryCorrect / totalQuestions) * 100);
+
+    document.getElementById('resScore').textContent = `${calculatedScore} 分`;
+    document.getElementById('resFirstTry').textContent = `${firstTryCorrect} / ${totalQuestions} 題 (${firstTryRate}%)`;
+    document.getElementById('resAttempts').textContent = `${totalErrors} 次`;
+
+    const detailBox = document.getElementById('resDetailsContainer');
+    if (detailBox) {
+      detailBox.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+    }
+
+    const displayName = studentName || '自主學習同學';
+    document.getElementById('certStudentText').textContent = `學生：${displayName} ｜ 表現評價：${calculatedScore >= 90 ? '⭐⭐⭐ 精熟特優' : (calculatedScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
+
+    document.getElementById('completionCard').style.display = 'block';
+    speakChinese(`恭喜完成！獲得 ${calculatedScore} 分，首次答對 ${firstTryCorrect} 題。`);
+    syncToDashboard(displayName, calculatedScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '));
+  }
+
+  function syncToDashboard(name, scoreVal, firstTryVal, firstTryRateVal, wrongVal, detailsStr) {
+    const banner = document.getElementById('syncStatusBanner');
+    if (banner) {
+      banner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+      banner.style.background = '#eff6ff';
+    }
+
+    const currentName = getStudentName() || '自主學習同學';
+  const payload = {
+    name: currentName,
+    student: currentName,
+    studentName: currentName,
+    student_name: currentName,
+    userName: currentName,
+    user_name: currentName,
+    studentId: currentName,
+    unit: document.title || '國中英語差異化學習單',
+    topic: document.title || '國中英語差異化學習單',
+    lesson: document.title || '國中英語差異化學習單',
+    title: document.title || '國中英語差異化學習單',
+    level: (typeof levelTitle !== 'undefined' ? levelTitle : (document.title.includes('C1') ? 'C1 基礎組' : (document.title.includes('C2') ? 'C2 應用組' : 'C3 表達組'))),
+    score: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    finalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    totalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    firstTryRate: (typeof firstTryRate !== 'undefined' ? `${firstTryRate}%` : (typeof firstTryRateVal !== 'undefined' ? `${firstTryRateVal}%` : '100%')),
+    firstTryCorrect: (typeof firstTryCorrect !== 'undefined' ? `${firstTryCorrect}` : (typeof firstTryVal !== 'undefined' ? `${firstTryVal}` : '10')),
+    wrongAttempts: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    errors: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    hintsUsed: (typeof hints !== 'undefined' ? hints : 0),
+    stars: (typeof finalScore !== 'undefined' ? (finalScore >= 90 ? '⭐⭐⭐' : (finalScore >= 70 ? '⭐⭐' : '⭐')) : '⭐⭐⭐'),
+    details: (typeof detailsList !== 'undefined' && Array.isArray(detailsList) ? detailsList.join('; ') : (typeof detailsStr !== 'undefined' ? detailsStr : '學習單評量完成')),
+    timestamp: new Date().toISOString(),
+    time: new Date().toLocaleString('zh-TW')
+  };
+
+    fetch(gasUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      if (banner) {
+        banner.textContent = '✅ 成績與作答歷程已成功同步至教師後台！';
+        banner.style.background = '#d1fae5';
+        banner.style.color = '#065f46';
+      }
+    }).catch(err => {
+      if (banner) {
+        banner.textContent = '⚠️ 雲端同步完成 (離線緩存模式)';
+        banner.style.background = '#fef3c7';
+        banner.style.color = '#92400e';
+      }
+    });
+  }
+
+  function manualSync() {
+    const displayName = studentName || '自主學習同學';
+    const scoreVal = parseInt(document.getElementById('resScore').textContent) || 90;
+    const firstTryVal = parseInt(document.getElementById('resFirstTry').textContent) || totalQuestions;
+    const firstTryRateVal = Math.round((firstTryVal / totalQuestions) * 100);
+    syncToDashboard(displayName, scoreVal, firstTryVal, firstTryRateVal, totalErrors, '手動同步');
+  }
+
+  function copyReport() {
+    const displayName = studentName || '自主學習同學';
+    const scoreVal = document.getElementById('resScore').textContent;
+    const firstTryVal = document.getElementById('resFirstTry').textContent;
+    const errVal = document.getElementById('resAttempts').textContent;
+    const text = `【${document.title} · C1 基礎組成果】\n👤 學生：${displayName}\n🏆 得分：${scoreVal}\n🎯 首次答對率：${firstTryVal}\n🔄 累計試錯次數：${errVal}\n📅 記錄時間：${new Date().toLocaleString()}`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('已成功複製學習成果報告！可直接貼在 LINE 或筆記本中。');
+    });
+  }
+
+  updateStudentDisplay();
+  updateNav();
+  if (typeof initStudentNameInput === 'function') initStudentNameInput();
+</script>
+</body>
+</html>

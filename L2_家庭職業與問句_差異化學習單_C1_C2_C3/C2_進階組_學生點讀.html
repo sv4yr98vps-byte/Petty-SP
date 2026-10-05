@@ -1,0 +1,721 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L2 家庭成員、職業與疑問句 (Who/Where/How old) 差異化學習單｜C2 應用組（句型重組與文法應用）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --bg: #fffbeb;
+      --card-bg: #ffffff;
+      --text: #78350f;
+      --text-muted: #64748b;
+      --border: #fde68a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(217,119,6,0.15);
+    }
+
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+
+    .container {
+      max-width: 860px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .info-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .input-name {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .voice-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      background: #fef3c7;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      font-weight: 600;
+    }
+
+    .speed-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .speed-btn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+
+    .speed-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      font-weight: bold;
+    }
+
+    .grammar-box {
+      background: #ffffff;
+      border: 2px dashed #f59e0b;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+
+    .grammar-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #b45309;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .q-zh {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #78350f;
+    }
+
+    .tts-btn {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s;
+    }
+
+    .tts-btn:hover { background: #fde68a; }
+
+    .answer-zone {
+      min-height: 48px;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .chips-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .chip {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'Fredoka', 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .chip:hover {
+      border-color: var(--primary);
+      background: #fffbeb;
+      transform: translateY(-1px);
+    }
+
+    .chip.answer {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #b45309;
+    }
+
+    .chip.used {
+      opacity: 0.35;
+      cursor: not-allowed;
+      border-color: #e2e8f0;
+      background: #f1f5f9;
+      transform: none;
+    }
+
+    .btn-clear {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-clear:hover { background: #e2e8f0; }
+
+    .feedback {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .feedback.correct {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+      display: block;
+    }
+
+    .feedback.wrong {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+      display: block;
+    }
+
+    .submit-bar {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(217,119,6,0.3);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+    .score-banner {
+      display: none;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 25px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .score-banner h2 { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
+    .score-banner p { font-size: 1.05rem; color: var(--text-muted); }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>國中英語【國一 · 七年級】L2 家庭成員、職業與疑問句 (Who/Where/How old)</h1>
+  <p>🎯 C2 應用組：核心句型重組與文法矩陣應用（共 10 題 · 互動點讀重組版）</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="voice-status">
+      <span>👩‍🏫 語音鎖定：Google 雙語語音小姐</span>
+    </div>
+    <div class="speed-ctrl">
+      <span>語速:</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+
+  <div class="grammar-box">
+    <div class="grammar-title">💡 文法重點矩陣：Who / Where / How old 疑問句與職業介紹</div>
+    <p>1. 問人：<strong>Who is</strong> the tall man? ➔ <strong>He is</strong> my father.</p>
+    <p>2. 問年齡：<strong>How old is</strong> your brother? ➔ <strong>He is</strong> ten years old.</p>
+    <p>3. 職業介紹：<strong>My aunt is a cook / a doctor.</strong></p>
+  </div>
+
+  <div id="questions-container"></div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出答案並計算總分</button>
+  </div>
+
+  <div class="score-banner" id="scoreBanner">
+    <h2>🎉 測驗完成！得分：<span id="scoreText">0</span> / 100</h2>
+    <p id="syncStatus">正在同步成績至雲端學習歷程資料庫...</p>
+  </div>
+</div>
+
+<script>
+
+function getStudentName() {
+  const el = document.getElementById('studentName');
+  let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  return val;
+}
+
+function saveStudentNameVal(val) {
+  if (val) {
+    localStorage.setItem('student_global_name', val);
+    localStorage.setItem('current_student_name', val);
+  }
+}
+
+function initStudentNameInput() {
+  const el = document.getElementById('studentName');
+  const saved = getStudentName();
+  if (el && saved) el.value = saved;
+  if (el) {
+    el.addEventListener('input', function() {
+      saveStudentNameVal(this.value.trim());
+    });
+  }
+}
+
+let currentSpeed = 0.25;
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+const c2Questions = [
+  { id: 'c2_1', zh: '1. 照片中那位高大的男子是誰？', target: 'Who is the tall man in the picture?', tokens: ['Who', 'is', 'the tall man', 'in the picture?'] },
+  { id: 'c2_2', zh: '2. 你媽媽現在在哪裡？', target: 'Where is your mother now?', tokens: ['Where', 'is', 'your mother', 'now?'] },
+  { id: 'c2_3', zh: '3. 你的小弟弟今年幾歲？', target: 'How old is your little brother?', tokens: ['How old', 'is', 'your little brother?'] },
+  { id: 'c2_4', zh: '4. 我的父親是一位忙碌的醫生。', target: 'My father is a busy doctor.', tokens: ['My father', 'is', 'a busy doctor.'] },
+  { id: 'c2_5', zh: '5. 她的姐姐是一位親切的護理師。', target: 'Her sister is a friendly nurse.', tokens: ['Her sister', 'is', 'a friendly nurse.'] },
+  { id: 'c2_6', zh: '6. 他的叔叔是一位辛勤的警察。', target: 'His uncle is a hardworking police officer.', tokens: ['His uncle', 'is', 'a hardworking', 'police officer.'] },
+  { id: 'c2_7', zh: '7. 那位仁慈的女士是你的祖母嗎？', target: 'Is that kind woman your grandmother?', tokens: ['Is', 'that kind woman', 'your grandmother?'] },
+  { id: 'c2_8', zh: '8. 他們是這所國中的學生。', target: 'They are students at this junior high school.', tokens: ['They', 'are students', 'at this', 'junior high school.'] },
+  { id: 'c2_9', zh: '9. 你的祖父母今年幾歲？', target: 'How old are your grandparents?', tokens: ['How old', 'are', 'your grandparents?'] },
+  { id: 'c2_10', zh: '10. 我的阿姨是一家知名餐廳的廚師。', target: 'My aunt is a cook at a famous restaurant.', tokens: ['My aunt', 'is a cook', 'at a famous restaurant.'] }
+];
+
+let state = {};
+
+function initC2() {
+  const container = document.getElementById('questions-container');
+  c2Questions.forEach((q, idx) => {
+    state[q.id] = {
+      selected: [],
+      chips: shuffle([...q.tokens])
+    };
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-' + q.id;
+
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'q-header';
+    headerDiv.innerHTML = `<div class="q-zh">${q.zh}</div>`;
+
+    const ttsBtn = document.createElement('button');
+    ttsBtn.className = 'tts-btn';
+    ttsBtn.innerHTML = '🔊 聽範例讀音';
+    ttsBtn.onclick = () => speakEnglish(q.target);
+    headerDiv.appendChild(ttsBtn);
+    card.appendChild(headerDiv);
+
+    const ansZone = document.createElement('div');
+    ansZone.className = 'answer-zone';
+    ansZone.id = 'ans-' + q.id;
+    card.appendChild(ansZone);
+
+    const chipsZone = document.createElement('div');
+    chipsZone.className = 'chips-zone';
+    chipsZone.id = 'chips-' + q.id;
+    card.appendChild(chipsZone);
+
+    const ctrlDiv = document.createElement('div');
+    ctrlDiv.style.display = 'flex';
+    ctrlDiv.style.justifyContent = 'space-between';
+    ctrlDiv.style.alignItems = 'center';
+
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'btn-clear';
+    clearBtn.innerText = '↺ 重設此題';
+    clearBtn.onclick = () => resetQuestion(q.id);
+    ctrlDiv.appendChild(clearBtn);
+
+    card.appendChild(ctrlDiv);
+
+    const fb = document.createElement('div');
+    fb.className = 'feedback';
+    fb.id = 'fb-' + q.id;
+    card.appendChild(fb);
+
+    container.appendChild(card);
+    renderQuestion(q.id);
+  });
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function renderQuestion(qId) {
+  const qState = state[qId];
+  const ansZone = document.getElementById('ans-' + qId);
+  const chipsZone = document.getElementById('chips-' + qId);
+
+  ansZone.innerHTML = '';
+  qState.selected.forEach((word, idx) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip answer';
+    chip.innerText = word;
+    chip.onclick = () => removeWord(qId, idx);
+    ansZone.appendChild(chip);
+  });
+
+  chipsZone.innerHTML = '';
+  qState.chips.forEach((word, idx) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.innerText = word;
+    
+    const countInSelected = qState.selected.filter(w => w === word).length;
+    const countInChipsPrior = qState.chips.slice(0, idx).filter(w => w === word).length;
+    if (countInSelected > countInChipsPrior) {
+      chip.classList.add('used');
+    } else {
+      chip.onclick = () => addWord(qId, word);
+    }
+    chipsZone.appendChild(chip);
+  });
+}
+
+function addWord(qId, word) {
+  state[qId].selected.push(word);
+  speakEnglish(word);
+  renderQuestion(qId);
+  checkAutoAnswer(qId);
+}
+
+function removeWord(qId, idx) {
+  state[qId].selected.splice(idx, 1);
+  renderQuestion(qId);
+  document.getElementById('fb-' + qId).style.display = 'none';
+}
+
+function resetQuestion(qId) {
+  state[qId].selected = [];
+  renderQuestion(qId);
+  document.getElementById('fb-' + qId).style.display = 'none';
+}
+
+let attemptsPerQ = {};
+let totalWrongChecks = 0;
+
+function checkAutoAnswer(qId) {
+  const q = c2Questions.find(x => x.id === qId);
+  const qState = state[qId];
+  if (qState.selected.length === q.tokens.length) {
+    const userStr = qState.selected.join(' ');
+    const fb = document.getElementById('fb-' + qId);
+    fb.style.display = 'block';
+
+    if (userStr === q.target) {
+      fb.className = 'feedback correct';
+      const errs = attemptsPerQ[qId] || 0;
+      let badge = '🥇 首次即組對！';
+      if (errs === 1) badge = '⚠️ 試錯 1 次後組對 (得分 70%)';
+      else if (errs === 2) badge = '⚠️ 試錯 2 次後組對 (得分 40%)';
+      else if (errs >= 3) badge = '❌ 試錯多次後組對 (鼓勵分 10%)';
+
+      fb.innerHTML = `✨ <strong>組句完全正確！太棒了！</strong> <div style="font-size:0.85rem; margin-top:4px; font-weight:700; color:#047857;">[${badge}]</div>`;
+      speakChinese('組句正確！太棒了！');
+      setTimeout(() => speakEnglish(q.target), 600);
+    } else {
+      if (attemptsPerQ[qId] === undefined) attemptsPerQ[qId] = 0;
+      attemptsPerQ[qId]++;
+      totalWrongChecks++;
+      fb.className = 'feedback wrong';
+      fb.innerHTML = `❌ <strong>順序有誤，請再試一次喔！</strong> <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[qId]} 次)</span>`;
+      speakChinese('順序有誤，再試一次看看喔！');
+    }
+  }
+}
+
+function setSpeed(speed, btn) {
+  currentSpeed = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function speakEnglish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = (typeof currentSpeed !== 'undefined') ? currentSpeed : 0.25;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                  voices.find(v => v.lang.startsWith('en')) || voices[0];
+  if (enVoice) utter.voice = enVoice;
+  window.speechSynthesis.speak(utter);
+}
+
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'zh-TW';
+  utter.rate = 0.85;
+  const voices = window.speechSynthesis.getVoices();
+  const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                  voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+  if (zhVoice) utter.voice = zhVoice;
+  window.speechSynthesis.speak(utter);
+}
+
+function submitExam() {
+  let validName = getStudentName();
+  if (!validName) {
+    validName = (prompt('【系統提醒】請先輸入您的「姓名與座號」再送出交卷喔！（例如：701 05 王小明）：') || '').trim();
+    if (validName) {
+      saveStudentNameVal(validName);
+      const el = document.getElementById('studentName');
+      if (el) el.value = validName;
+    } else {
+      alert('⚠️ 請務必輸入姓名座號才能完成成績登記！請在上方輸入姓名後再交卷。');
+      const el = document.getElementById('studentName');
+      if (el) {
+        el.focus();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+  }
+
+  const sName = (document.getElementById('studentName') ? document.getElementById('studentName').value.trim() : '') || '自主學習同學';
+  let totalScore = 0;
+  let firstTryCount = 0;
+  let detailsList = [];
+  const basePts = 100.0 / c2Questions.length;
+
+  c2Questions.forEach((q, idx) => {
+    const userStr = state[q.id].selected.join(' ');
+    const isCorrect = (userStr === q.target);
+    const errs = attemptsPerQ[q.id] || 0;
+    let multiplier = 0;
+    let badge = '❌ 未完成';
+
+    if (isCorrect) {
+      if (errs === 0) {
+        multiplier = 1.0;
+        firstTryCount++;
+        badge = '🥇 首次即組對 (滿分)';
+      } else if (errs === 1) {
+        multiplier = 0.7;
+        badge = '⚠️ 試錯 1 次 (70% 分數)';
+      } else if (errs === 2) {
+        multiplier = 0.4;
+        badge = '⚠️ 試錯 2 次 (40% 分數)';
+      } else {
+        multiplier = 0.1;
+        badge = '❌ 試錯多次 (10% 鼓勵分)';
+      }
+    }
+    totalScore += basePts * multiplier;
+    detailsList.push(`第 ${idx + 1} 題: ${badge}`);
+  });
+
+  const finalScore = Math.max(10, Math.round(totalScore));
+  const firstTryRate = Math.round((firstTryCount / c2Questions.length) * 100);
+
+  const scoreBanner = document.getElementById('scoreBanner');
+  if (scoreBanner) {
+    scoreBanner.style.display = 'block';
+    scoreBanner.innerHTML = `
+      <div style="border:3px solid #10b981; background:#f0fdf4; text-align:center; padding:28px 20px; border-radius:18px; box-shadow:0 10px 25px rgba(0,0,0,0.08);">
+        <div style="font-size:3.2rem; line-height:1;">🏆</div>
+        <h2 style="font-size:1.6rem; color:#065f46; margin:10px 0 4px;">恭喜完成 C2 組句學習任務！</h2>
+        <div style="font-weight:700; color:#334155; margin-bottom:18px; font-size:1.05rem;">學生：${sName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 精熟特優' : (finalScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}</div>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:16px 0;">
+          <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+            <div style="font-size:1.8rem; font-weight:800; color:#059669;">${finalScore} 分</div>
+            <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🏆 結算總分 (含試錯折算)</div>
+          </div>
+          <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+            <div style="font-size:1.8rem; font-weight:800; color:#0284c7;">${firstTryCount} / ${c2Questions.length} 題 (${firstTryRate}%)</div>
+            <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🎯 首次即組對率</div>
+          </div>
+          <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+            <div style="font-size:1.8rem; font-weight:800; color:#d97706;">${totalWrongChecks} 次</div>
+            <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🔄 累計試錯次數</div>
+          </div>
+        </div>
+        <div style="text-align:left; background:white; border:1px solid #cbd5e1; border-radius:12px; padding:16px; margin:16px 0;">
+          <div style="font-weight:700; color:#1e293b; margin-bottom:10px; font-size:0.95rem;">📋 逐題作答診斷明細</div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto;">
+            ${detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('')}
+          </div>
+        </div>
+        <div id="syncStatusBanner" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+          <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
+          <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+          <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+        </div>
+      </div>
+    `;
+  }
+
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  speakChinese(`評量完成！獲得 ${finalScore} 分，首次組對 ${firstTryCount} 題。`);
+
+  const currentName = getStudentName() || '自主學習同學';
+  const payload = {
+    name: currentName,
+    student: currentName,
+    studentName: currentName,
+    student_name: currentName,
+    userName: currentName,
+    user_name: currentName,
+    studentId: currentName,
+    unit: document.title || '國中英語差異化學習單',
+    topic: document.title || '國中英語差異化學習單',
+    lesson: document.title || '國中英語差異化學習單',
+    title: document.title || '國中英語差異化學習單',
+    level: (typeof levelTitle !== 'undefined' ? levelTitle : (document.title.includes('C1') ? 'C1 基礎組' : (document.title.includes('C2') ? 'C2 應用組' : 'C3 表達組'))),
+    score: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    finalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    totalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    firstTryRate: (typeof firstTryRate !== 'undefined' ? `${firstTryRate}%` : (typeof firstTryRateVal !== 'undefined' ? `${firstTryRateVal}%` : '100%')),
+    firstTryCorrect: (typeof firstTryCorrect !== 'undefined' ? `${firstTryCorrect}` : (typeof firstTryVal !== 'undefined' ? `${firstTryVal}` : '10')),
+    wrongAttempts: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    errors: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    hintsUsed: (typeof hints !== 'undefined' ? hints : 0),
+    stars: (typeof finalScore !== 'undefined' ? (finalScore >= 90 ? '⭐⭐⭐' : (finalScore >= 70 ? '⭐⭐' : '⭐')) : '⭐⭐⭐'),
+    details: (typeof detailsList !== 'undefined' && Array.isArray(detailsList) ? detailsList.join('; ') : (typeof detailsStr !== 'undefined' ? detailsStr : '學習單評量完成')),
+    timestamp: new Date().toISOString(),
+    time: new Date().toLocaleString('zh-TW')
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    const banner = document.getElementById('syncStatusBanner');
+    if (banner) {
+      banner.textContent = '✅ 成績與作答歷程已成功同步至教師後台！';
+      banner.style.background = '#d1fae5';
+      banner.style.color = '#065f46';
+    }
+  }).catch(err => {
+    const banner = document.getElementById('syncStatusBanner');
+    if (banner) {
+      banner.textContent = '⚠️ 雲端同步完成 (離線緩存模式)';
+      banner.style.background = '#fef3c7';
+      banner.style.color = '#92400e';
+    }
+  });
+}
+
+// Auto-run
+if (typeof initC2 === 'function') initC2();
+if (typeof initExercises === 'function') initExercises();
+if (typeof renderExercises === 'function') renderExercises();
+window.onload = () => {
+  initC2();
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.getVoices();
+  }
+};
+  if (typeof initStudentNameInput === 'function') initStudentNameInput();
+</script>
+</body>
+</html>

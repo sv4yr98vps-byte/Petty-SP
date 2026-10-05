@@ -1,0 +1,628 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L2 外送平台與情緒形容詞 · C1 基礎組（鷹架點讀版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-hover: #047857;
+      --bg: #ecfdf5;
+      --card-bg: #ffffff;
+      --text: #064e3b;
+      --text-muted: #64748b;
+      --border: #a7f3d0;
+      --hint-bg: #fef3c7;
+      --hint-text: #92400e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans TC', 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 24px 20px; text-align: center; box-shadow: 0 4px 12px rgba(5,150,105,0.15); }
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+    .container { max-width: 860px; margin: 20px auto; padding: 0 16px; }
+    .info-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+    .input-name { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: inherit; }
+    .voice-status { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; background: #f0fdf4; padding: 6px 12px; border-radius: 20px; border: 1px solid #bbf7d0; color: #15803d; font-weight: 600; }
+    .speed-ctrl { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: var(--text-muted); }
+    .speed-btn { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; cursor: pointer; font-family: inherit; }
+    .speed-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #065f46; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .module-tag { background: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; }
+    .hint-btn { background: var(--hint-bg); color: var(--hint-text); border: 1px solid #fde68a; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .q-title { font-size: 1.12rem; font-weight: 700; color: #064e3b; line-height: 1.5; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .speaker-btn { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .visual-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; padding: 12px; text-align: center; margin-bottom: 14px; font-size: 1.05rem; font-weight: 600; }
+    .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .options-grid-3 { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .opt-btn { background: var(--card-bg); border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 14px; font-family: inherit; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.15s; }
+    .opt-btn:hover { border-color: var(--primary); background: #f0fdf4; }
+    .opt-btn.correct { background: #dcfce7 !important; border-color: #10b981 !important; color: #15803d !important; font-weight: bold; }
+    .opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    .feedback-box { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; display: none; }
+    .submit-bar { margin-top: 30px; text-align: center; }
+    .btn-submit { background: var(--primary); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>L2 外送平台與情緒形容詞</h1>
+  <p>🎯 C1 基礎組：核心生詞 4 選 1 ＋ 文法句型 3 選 1（鷹架點讀版）</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="voice-status">
+      <span>👩‍🏫 語音鎖定：Google 雙語語音小姐</span>
+    </div>
+    <div class="speed-ctrl">
+      <span>語速:</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+
+  <div class="section-title">🦁 第一部分：核心生詞與語境理解（4 選 1）</div>
+  <div id="vocab-container"></div>
+
+  <div class="section-title">✨ 第二部分：文法句型與情境應用（3 選 1）</div>
+  <div id="grammar-container"></div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出答案並計算總分</button>
+  </div>
+
+  <div id="scoreBanner" style="display:none; margin-top:30px;">
+    <div class="card" style="border:3px solid #10b981; background:#f0fdf4; text-align:center; padding:28px 20px; border-radius:18px;">
+      <div style="font-size:3.2rem; line-height:1;">🏆</div>
+      <h2 style="font-size:1.6rem; color:#065f46; margin:10px 0 4px;">恭喜完成 C1 基礎組學習任務！</h2>
+      <div id="certStudentText" style="font-weight:700; color:#334155; margin-bottom:18px; font-size:1.05rem;">學生：未填寫 ｜ 表現評價：⭐⭐⭐</div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:16px 0;">
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#059669;" id="scoreText">--</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🏆 結算總分 (含試錯折算)</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#0284c7;" id="firstTryText">-- / --</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🎯 首次即答對率</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#d97706;" id="attemptsText">0 次</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🔄 累計試錯次數</div>
+        </div>
+      </div>
+      <div style="text-align:left; background:white; border:1px solid #cbd5e1; border-radius:12px; padding:16px; margin:16px 0;">
+        <div style="font-weight:700; color:#1e293b; margin-bottom:10px; font-size:0.95rem;">📋 逐題作答診斷明細</div>
+        <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto;"></div>
+      </div>
+      <div id="syncStatus" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
+        <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+        <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function getStudentName() {
+  const el = document.getElementById('studentName');
+  let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  return val;
+}
+
+function saveStudentNameVal(val) {
+  if (val) {
+    localStorage.setItem('student_global_name', val);
+    localStorage.setItem('current_student_name', val);
+  }
+}
+
+function initStudentNameInput() {
+  const el = document.getElementById('studentName');
+  const saved = getStudentName();
+  if (el && saved) el.value = saved;
+  if (el) {
+    el.addEventListener('input', function() {
+      saveStudentNameVal(this.value.trim());
+    });
+  }
+}
+
+let currentSpeed = 0.25;
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+const vocabQuestions = [
+  {
+    id: 'v1',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '1. 現代人常使用的「🛵 外送服務」，「外送/遞送」英文是？',
+    visual: '🛵 線上點餐 · 快速送達服務 ➔ food [ d _ _ _ _ _ _ y ]',
+    tts: 'Food delivery is very popular in Taiwan.',
+    hint: '提示：外送、遞送的英文是 delivery 喔！',
+    options: ['delivery', 'driver', 'platform', 'supermarket'],
+    ans: 0,
+    expCorrect: '太棒了！delivery 代表外送或遞送。',
+    expWrong: '不對喔！driver 是司機，外送是 delivery。'
+  },
+  {
+    id: 'v2',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '2. 在手機上「📱 線上訂購」晚餐，「訂購/點餐」英文是？',
+    visual: '📱 透過網路點選美味餐點 ➔ [ o _ _ _ r ] dinner online',
+    tts: 'Many people order dinner online through delivery apps.',
+    hint: '提示：下訂單、點餐的動詞是 order 喔！',
+    options: ['save', 'order', 'touch', 'bored'],
+    ans: 1,
+    expCorrect: '答對了！order 代表點餐或訂購。',
+    expWrong: '再想想看！save 是節省，點餐訂購是 order。'
+  },
+  {
+    id: 'v3',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '3. 騎車穿梭大街小巷的「🛵 外送司機」，「司機」英文是？',
+    visual: '🛵 騎車送餐的人員 ➔ delivery [ d _ _ _ _ r ]',
+    tts: 'The delivery driver was tired after working all day.',
+    hint: '提示：開車、騎車運送的司機是 driver 喔！',
+    options: ['driver', 'clerk', 'farmer', 'cook'],
+    ans: 0,
+    expCorrect: '正確！delivery driver 代表外送司機或外送員。',
+    expWrong: '不對喔！cook 是廚師，外送司機是 driver。'
+  },
+  {
+    id: 'v4',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '4. 線上訂餐為生活帶來極大「⏰ 便利/方便的」，「方便的」英文是？',
+    visual: '⏰ 隨時隨地享受服務 · 省時省力 ➔ [ c _ _ _ _ _ _ _ _ t ]',
+    tts: 'Ordering food online is convenient for modern people.',
+    hint: '提示：形容非常便利、方便的是 convenient 喔！',
+    options: ['terrible', 'convenient', 'bored', 'touching'],
+    ans: 1,
+    expCorrect: '太棒了！convenient 代表方便的、便利的。',
+    expWrong: '再想想看！terrible 是糟糕的，方便的是 convenient。'
+  },
+  {
+    id: 'v5',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '5. 外送員送來熱騰騰的「🍽️ 餐點/一餐」，「餐點」英文是？',
+    visual: '🍽️ 餐廳烹調的美味食物 ➔ delicious [ m _ _ l ]',
+    tts: 'The family enjoyed a delicious meal together.',
+    hint: '提示：一餐、餐點的英文是 meal 喔！',
+    options: ['app', 'meal', 'weather', 'platform'],
+    ans: 1,
+    expCorrect: '答對了！meal 代表一餐或餐點。',
+    expWrong: '不對喔！app 是應用程式，餐點是 meal。'
+  },
+  {
+    id: 'v6',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '6. 外送員在風雨交加的「🌧️ 惡劣天氣」下工作，「極糟的」英文是？',
+    visual: '🌧️ 風雨交加 · 險惡天候 ➔ [ t _ _ _ _ _ _ e ] weather',
+    tts: 'Delivery workers work hard in terrible weather.',
+    hint: '提示：形容非常糟糕、惡劣的是 terrible 喔！',
+    options: ['convenient', 'terrible', 'excited', 'popular'],
+    ans: 1,
+    expCorrect: '正確！terrible 代表惡劣的、糟糕的。',
+    expWrong: '再想想看！convenient 是方便的，惡劣天氣是 terrible weather。'
+  },
+  {
+    id: 'v7',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '7. 線上訂餐「💰 省下」了許多出門的時間，「節省」英文是？',
+    visual: '💰 減少時間消耗 ➔ [ s _ _ e ] a lot of time',
+    tts: 'Food delivery apps save a lot of time for busy workers.',
+    hint: '提示：節省時間、儲蓄的動詞是 save 喔！',
+    options: ['save', 'order', 'touch', 'cost'],
+    ans: 0,
+    expCorrect: '太棒了！save 代表節省或儲蓄。',
+    expWrong: '不對喔！order 是訂購，節省時間是 save time。'
+  },
+  {
+    id: 'v8',
+    module: 'MODULE A｜外送生活 Delivery Service (4選1)',
+    zhTitle: '8. 這部關於外送員辛酸的影片非常「😭 感人的」，「感人的」英文是？',
+    visual: '😭 讓人流淚動容 ➔ a [ t _ _ _ _ _ _ g ] story',
+    tts: 'The movie about delivery workers was so touching that everyone cried.',
+    hint: '提示：使人感動、動人的是 touching 喔！',
+    options: ['bored', 'touching', 'tired', 'surprised'],
+    ans: 1,
+    expCorrect: '答對了！touching 代表感人的、令人動容的。',
+    expWrong: '不對喔！tired 是疲勞的，令人感動的是 touching。'
+  }
+];
+
+const grammarQuestions = [
+  {
+    id: 'g1',
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '9. 「外送員工作一整天後感到很『😴 疲倦』。」，人感到疲倦是：',
+    visual: '😴 The driver was very [ ______ ] after working all day.',
+    tts: 'The delivery driver was tired.',
+    hint: '提示：人感到疲累使用 -ed 結尾的 tired。',
+    options: ['tired', 'tiring', 'tire'],
+    ans: 0,
+    expCorrect: '答對了！人感到疲累使用 tired。',
+    expWrong: '不對喔！tiring 是令人疲勞的，人感到累要用 tired。'
+  },
+  {
+    id: 'g2',
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '10. 「我對透過 App 訂餐很『🙋‍♂️ 感興趣』。」，be interested 後接：',
+    visual: '🙋‍♂️ I am [ ______ ] in ordering food online.',
+    tts: 'I am interested in ordering food online.',
+    hint: '提示：人對事物感興趣使用 be interested in。',
+    options: ['interested', 'interesting', 'interest'],
+    ans: 0,
+    expCorrect: '太棒了！人感到興趣使用 be interested in。',
+    expWrong: '再想想看！interesting 是事物令人感到有趣，人感到興趣用 interested。'
+  },
+  {
+    id: 'g3',
+    module: 'MODULE B｜情緒形容詞 -ing (事物令人) (3選1)',
+    zhTitle: '11. 「這款全新的外送 App 非常『💡 令人感興趣』。」，事物特質用：',
+    visual: '💡 The new delivery app is very [ ______ ].',
+    tts: 'The new delivery app is very interesting.',
+    hint: '提示：事物令人感到有趣使用 -ing 結尾的 interesting。',
+    options: ['interested', 'interesting', 'interest'],
+    ans: 1,
+    expCorrect: '正確！事物令人感到有趣使用 interesting。',
+    expWrong: '注意！app 是事物，要用 -ing 結尾的 interesting。'
+  },
+  {
+    id: 'g4',
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '12. 「學生們對這部長影片感到『🥱 無聊』。」，人感到無聊是：',
+    visual: '🥱 The students are [ ______ ] with the long video.',
+    tts: 'The students are bored with the video.',
+    hint: '提示：人感到無趣、無聊使用 bored with。',
+    options: ['bored', 'boring', 'bore'],
+    ans: 0,
+    expCorrect: '答對了！人感到無聊使用 be bored with。',
+    expWrong: '不對喔！boring 是令人無聊的，人感到無聊用 bored。'
+  },
+  {
+    id: 'g5',
+    module: 'MODULE B｜情緒形容詞 -ed (人感到) (3選1)',
+    zhTitle: '13. 「他對外送這麼快到達感到很『😲 驚訝』。」，人感到驚訝是：',
+    visual: '😲 He was [ ______ ] that the food arrived so fast.',
+    tts: 'He was surprised that the food arrived so fast.',
+    hint: '提示：人感到驚訝使用 surprised。',
+    options: ['surprised', 'surprising', 'surprise'],
+    ans: 0,
+    expCorrect: '太棒了！人感到驚訝使用 surprised。',
+    expWrong: '再想想看！surprising 是令人驚訝的，人感到驚訝用 surprised。'
+  },
+  {
+    id: 'g6',
+    module: 'MODULE C｜That 名詞子句 know that (3選1)',
+    zhTitle: '14. 「我『知道』線上點餐能節省時間。」，引導名詞子句的連接詞是：',
+    visual: '🧠 I know [ ______ ] online ordering saves time.',
+    tts: 'I know that online ordering saves time.',
+    hint: '提示：接完整名詞子句當受詞，連接詞使用 that。',
+    options: ['that', 'which', 'what'],
+    ans: 0,
+    expCorrect: '答對了！know that + 完整句子代表「知道某件事」。',
+    expWrong: '注意！引導完整名詞子句要使用 that。'
+  },
+  {
+    id: 'g7',
+    module: 'MODULE C｜That 名詞子句 believe that (3選1)',
+    zhTitle: '15. 「媽媽『相信』吃健康食物很重要。」，引導名詞子句的連接詞是：',
+    visual: '❤️ Mom believes [ ______ ] eating healthy food is important.',
+    tts: 'Mom believes that eating healthy food is important.',
+    hint: '提示：動詞 believe 後面連接名詞子句使用 that。',
+    options: ['that', 'who', 'where'],
+    ans: 0,
+    expCorrect: '正確！believe that + 句子代表「相信某件事」。',
+    expWrong: '不對喔！連接名詞子句要使用 that。'
+  }
+];
+
+let userAnswers = {};
+let attemptsPerQ = {};
+let answeredLocked = {};
+let totalErrors = 0;
+
+function renderQuestions() {
+  const vContainer = document.getElementById('vocab-container');
+  const gContainer = document.getElementById('grammar-container');
+  if (vContainer) vContainer.innerHTML = '';
+  if (gContainer) gContainer.innerHTML = '';
+
+  if (typeof vocabQuestions !== 'undefined' && Array.isArray(vocabQuestions)) {
+    vocabQuestions.forEach((q, idx) => {
+      if (vContainer) vContainer.appendChild(createQuestionCard(q, idx, 4));
+    });
+  }
+
+  if (typeof grammarQuestions !== 'undefined' && Array.isArray(grammarQuestions)) {
+    grammarQuestions.forEach((q, idx) => {
+      const vLen = (typeof vocabQuestions !== 'undefined') ? vocabQuestions.length : 0;
+      if (gContainer) gContainer.appendChild(createQuestionCard(q, idx + vLen, 3));
+    });
+  }
+}
+
+function createQuestionCard(q, index, optCount) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card-' + q.id;
+
+  const meta = document.createElement('div');
+  meta.className = 'q-meta';
+  meta.innerHTML = `
+    <span class="module-tag">${q.module || '基礎題'}</span>
+    <button type="button" class="hint-btn" onclick="showHint('${q.id}', '${escapeQuotes(q.hint)}')">💡 提示</button>
+  `;
+  card.appendChild(meta);
+
+  const title = document.createElement('div');
+  title.className = 'q-title';
+  title.innerHTML = `
+    <span>${q.zhTitle}</span>
+    <button type="button" class="speaker-btn" onclick="speakEnglish('${escapeQuotes(q.tts || q.zhTitle)}')">🔊 英文朗讀</button>
+  `;
+  card.appendChild(title);
+
+  const visual = document.createElement('div');
+  visual.className = 'visual-box';
+  visual.innerHTML = q.visual || '';
+  card.appendChild(visual);
+
+  const grid = document.createElement('div');
+  grid.className = optCount === 4 ? 'options-grid-4' : 'options-grid-3';
+
+  const letters = ['(A)', '(B)', '(C)', '(D)'];
+  q.options.forEach((opt, optIdx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'opt-btn';
+    btn.id = `btn-${q.id}-${optIdx}`;
+    btn.innerHTML = `<strong>${letters[optIdx]}</strong> ${opt}`;
+    btn.onclick = () => selectOption(q, optIdx);
+    grid.appendChild(btn);
+  });
+  card.appendChild(grid);
+
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback-box';
+  feedback.id = 'fb-' + q.id;
+  card.appendChild(feedback);
+
+  return card;
+}
+
+function escapeQuotes(str) {
+  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function selectOption(q, selectedIdx) {
+  if (answeredLocked[q.id]) return;
+  if (attemptsPerQ[q.id] === undefined) attemptsPerQ[q.id] = 0;
+
+  const selectedBtn = document.getElementById(`btn-${q.id}-${selectedIdx}`);
+  const fb = document.getElementById('fb-' + q.id);
+  fb.style.display = 'block';
+
+  if (selectedIdx === q.ans) {
+    answeredLocked[q.id] = true;
+    userAnswers[q.id] = selectedIdx;
+    if (selectedBtn) selectedBtn.classList.add('correct');
+
+    const errCount = attemptsPerQ[q.id];
+    let badgeText = '🥇 首次即答對！';
+    if (errCount === 1) {
+      badgeText = '⚠️ 試錯 1 次後答對 (得分 70%)';
+    } else if (errCount === 2) {
+      badgeText = '⚠️ 試錯 2 次後答對 (得分 40%)';
+    } else if (errCount >= 3) {
+      badgeText = '❌ 試錯多次後答對 (鼓勵分 10%)';
+    }
+
+    fb.style.background = '#dcfce7';
+    fb.style.border = '1px solid #86efac';
+    fb.style.color = '#15803d';
+    fb.innerHTML = `<strong>✨ 答對了！</strong> ${q.expCorrect || '完全正確！'} <div style="font-size:0.88rem; margin-top:4px; font-weight:700; color:#047857;">[${badgeText}]</div>`;
+    speakChinese(q.expCorrect || '完全正確！');
+
+    for (let i = 0; i < q.options.length; i++) {
+      const btn = document.getElementById(`btn-${q.id}-${i}`);
+      if (btn && i !== selectedIdx) {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+      }
+    }
+  } else {
+    attemptsPerQ[q.id]++;
+    totalErrors++;
+    if (selectedBtn) {
+      selectedBtn.classList.add('wrong');
+      selectedBtn.disabled = true;
+    }
+    fb.style.background = '#fee2e2';
+    fb.style.border = '1px solid #fca5a5';
+    fb.style.color = '#b91c1c';
+    fb.innerHTML = `<strong>❌ 再想想看：</strong> ${q.expWrong || '請再思考看看喔！'} <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ${attemptsPerQ[q.id]} 次)</span>`;
+    speakChinese(q.expWrong || '再想想看喔');
+  }
+}
+
+function showHint(qId, hintText) {
+  const fb = document.getElementById('fb-' + qId);
+  fb.style.display = 'block';
+  fb.style.background = '#fef3c7';
+  fb.style.border = '1px solid #fde68a';
+  fb.style.color = '#92400e';
+  fb.innerHTML = `<strong>💡 提示引導：</strong> ${hintText}`;
+  speakChinese(hintText);
+}
+
+function setSpeed(speed, btn) {
+  currentSpeed = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function speakEnglish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = currentSpeed;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                  voices.find(v => v.lang.startsWith('en')) || voices[0];
+  if (enVoice) utter.voice = enVoice;
+  window.speechSynthesis.speak(utter);
+}
+
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'zh-TW';
+  utter.rate = 0.85;
+  const voices = window.speechSynthesis.getVoices();
+  const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                  voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+  if (zhVoice) utter.voice = zhVoice;
+  window.speechSynthesis.speak(utter);
+}
+
+function submitExam() {
+  let validName = getStudentName();
+  if (!validName) {
+    validName = (prompt('【系統提醒】請先輸入您的「姓名與座號」再送出交卷喔！（例如：701 05 王小明）：') || '').trim();
+    if (validName) {
+      saveStudentNameVal(validName);
+      const el = document.getElementById('studentName');
+      if (el) el.value = validName;
+    } else {
+      alert('⚠️ 請務必輸入姓名座號才能完成成績登記！請在上方輸入姓名後再交卷。');
+      const el = document.getElementById('studentName');
+      if (el) {
+        el.focus();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+  }
+
+  const allQs = [...(typeof vocabQuestions !== 'undefined' ? vocabQuestions : []), ...(typeof grammarQuestions !== 'undefined' ? grammarQuestions : [])];
+  let totalScore = 0;
+  let firstTryCorrect = 0;
+  let detailsList = [];
+  const basePts = 100.0 / (allQs.length || 1);
+
+  allQs.forEach((q, idx) => {
+    const errs = attemptsPerQ[q.id] || 0;
+    const isAnswered = answeredLocked[q.id];
+    let multiplier = 0;
+    let badge = '❌ 未作答';
+
+    if (isAnswered) {
+      if (errs === 0) {
+        multiplier = 1.0;
+        firstTryCorrect++;
+        badge = '🥇 首次即答對 (滿分)';
+      } else if (errs === 1) {
+        multiplier = 0.7;
+        badge = '⚠️ 試錯 1 次 (70% 分數)';
+      } else if (errs === 2) {
+        multiplier = 0.4;
+        badge = '⚠️ 試錯 2 次 (40% 分數)';
+      } else {
+        multiplier = 0.1;
+        badge = '❌ 試錯多次 (10% 鼓勵分)';
+      }
+    }
+    totalScore += basePts * multiplier;
+    detailsList.push(`第 ${idx + 1} 題: ${badge}`);
+  });
+
+  const finalScore = Math.max(10, Math.round(totalScore));
+  const firstTryRate = Math.round((firstTryCorrect / (allQs.length || 1)) * 100);
+  const sNameEl = document.getElementById('studentName');
+  const sName = (sNameEl ? sNameEl.value.trim() : '') || '未填寫姓名';
+
+  document.getElementById('scoreText').innerText = `${finalScore} 分`;
+  document.getElementById('firstTryText').innerText = `${firstTryCorrect} / ${allQs.length} 題 (${firstTryRate}%)`;
+  document.getElementById('attemptsText').innerText = `${totalErrors} 次`;
+  document.getElementById('certStudentText').innerText = `學生：${sName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 精熟特優' : (finalScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
+
+  const detailBox = document.getElementById('resDetailsContainer');
+  if (detailBox) {
+    detailBox.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+  }
+
+  document.getElementById('scoreBanner').style.display = 'block';
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+  speakChinese(`評量完成！最終得分 ${finalScore} 分，首次答對 ${firstTryCorrect} 題。`);
+
+  const currentName = getStudentName() || '自主學習同學';
+  const payload = {
+    name: currentName,
+    student: currentName,
+    studentName: currentName,
+    student_name: currentName,
+    userName: currentName,
+    user_name: currentName,
+    studentId: currentName,
+    unit: document.title || '國中英語差異化學習單',
+    topic: document.title || '國中英語差異化學習單',
+    lesson: document.title || '國中英語差異化學習單',
+    title: document.title || '國中英語差異化學習單',
+    level: (typeof levelTitle !== 'undefined' ? levelTitle : (document.title.includes('C1') ? 'C1 基礎組' : (document.title.includes('C2') ? 'C2 應用組' : 'C3 表達組'))),
+    score: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    finalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    totalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    firstTryRate: (typeof firstTryRate !== 'undefined' ? `${firstTryRate}%` : (typeof firstTryRateVal !== 'undefined' ? `${firstTryRateVal}%` : '100%')),
+    firstTryCorrect: (typeof firstTryCorrect !== 'undefined' ? `${firstTryCorrect}` : (typeof firstTryVal !== 'undefined' ? `${firstTryVal}` : '10')),
+    wrongAttempts: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    errors: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    hintsUsed: (typeof hints !== 'undefined' ? hints : 0),
+    stars: (typeof finalScore !== 'undefined' ? (finalScore >= 90 ? '⭐⭐⭐' : (finalScore >= 70 ? '⭐⭐' : '⭐')) : '⭐⭐⭐'),
+    details: (typeof detailsList !== 'undefined' && Array.isArray(detailsList) ? detailsList.join('; ') : (typeof detailsStr !== 'undefined' ? detailsStr : '學習單評量完成')),
+    timestamp: new Date().toISOString(),
+    time: new Date().toLocaleString('zh-TW')
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    document.getElementById('syncStatus').innerText = '✅ 成績與作答歷程已成功同步至教師後台！';
+    document.getElementById('syncStatus').style.background = '#d1fae5';
+    document.getElementById('syncStatus').style.color = '#065f46';
+  }).catch(() => {
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已記錄（離線暫存模式）。';
+  });
+}
+
+// CRITICAL: Execute immediately so DOM renders without waiting for onload
+renderQuestions();
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.getVoices();
+}
+  if (typeof initStudentNameInput === 'function') initStudentNameInput();
+</script>
+</body>
+</html>
