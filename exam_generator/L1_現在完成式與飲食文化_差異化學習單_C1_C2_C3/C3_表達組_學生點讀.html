@@ -146,7 +146,8 @@
   <div class="header">
     <div class="badge-bar">
       <span class="level-badge">國三 · 九年級 · C3 表達組</span>
-      <span class="student-tag" id="studentDisplay" onclick="promptStudentName()">👤 點此輸入姓名座號</span>
+      <label for="studentName" style="font-weight:700; color:var(--text); margin-right:4px;">👤 學生姓名：</label>
+        <input type="text" id="studentName" placeholder="請輸入姓名與座號 (例：701 05 王小明)" style="padding:6px 12px; font-size:0.95rem; border:2px solid var(--primary); border-radius:8px; outline:none; font-weight:600; background:#ffffff; min-width:240px;">
     </div>
     <h1 style="font-size:1.6rem; color:#b45309;">現在完成式與飲食文化 國中段考標準評量 (7題4選1 ＋ 3題寫作診斷)</h1>
     <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 7題段考選擇題 · 3題中翻英寫作診斷 · 嚴選課本 28 生詞 · 雲端即時記錄</p>
@@ -371,6 +372,31 @@
   </div>
 
 <script>
+
+function getStudentName() {
+  const el = document.getElementById('studentName');
+  let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  return val;
+}
+
+function saveStudentNameVal(val) {
+  if (val) {
+    localStorage.setItem('student_global_name', val);
+    localStorage.setItem('current_student_name', val);
+  }
+}
+
+function initStudentNameInput() {
+  const el = document.getElementById('studentName');
+  const saved = getStudentName();
+  if (el && saved) el.value = saved;
+  if (el) {
+    el.addEventListener('input', function() {
+      saveStudentNameVal(this.value.trim());
+    });
+  }
+}
+
   let studentName = localStorage.getItem('l1_c3_student') || '';
   const mcAnswers = { 1: 'A', 2: 'B', 3: 'A', 4: 'C', 5: 'A', 6: 'B', 7: 'A' };
   const mcFeedback = {
@@ -576,15 +602,33 @@
     banner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
     banner.style.background = '#eff6ff';
 
-    const payload = {
-      timestamp: new Date().toISOString(),
-      unit: '九年級 L1 現在完成式與飲食文化',
-      level: 'C3 表達組',
-      student: name,
-      score: scoreVal,
-      correctCount: `MC:${mcCorrectVal}/7, Write:${Math.round((scoreVal - (mcCorrectVal*10))/10)}/3`,
-      wrongAttempts: 7 - mcCorrectVal
-    };
+    const currentName = getStudentName() || '自主學習同學';
+  const payload = {
+    name: currentName,
+    student: currentName,
+    studentName: currentName,
+    student_name: currentName,
+    userName: currentName,
+    user_name: currentName,
+    studentId: currentName,
+    unit: document.title || '國中英語差異化學習單',
+    topic: document.title || '國中英語差異化學習單',
+    lesson: document.title || '國中英語差異化學習單',
+    title: document.title || '國中英語差異化學習單',
+    level: (typeof levelTitle !== 'undefined' ? levelTitle : (document.title.includes('C1') ? 'C1 基礎組' : (document.title.includes('C2') ? 'C2 應用組' : 'C3 表達組'))),
+    score: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    finalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    totalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    firstTryRate: (typeof firstTryRate !== 'undefined' ? `${firstTryRate}%` : (typeof firstTryRateVal !== 'undefined' ? `${firstTryRateVal}%` : '100%')),
+    firstTryCorrect: (typeof firstTryCorrect !== 'undefined' ? `${firstTryCorrect}` : (typeof firstTryVal !== 'undefined' ? `${firstTryVal}` : '10')),
+    wrongAttempts: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    errors: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    hintsUsed: (typeof hints !== 'undefined' ? hints : 0),
+    stars: (typeof finalScore !== 'undefined' ? (finalScore >= 90 ? '⭐⭐⭐' : (finalScore >= 70 ? '⭐⭐' : '⭐')) : '⭐⭐⭐'),
+    details: (typeof detailsList !== 'undefined' && Array.isArray(detailsList) ? detailsList.join('; ') : (typeof detailsStr !== 'undefined' ? detailsStr : '學習單評量完成')),
+    timestamp: new Date().toISOString(),
+    time: new Date().toLocaleString('zh-TW')
+  };
 
     fetch(gasUrl, {
       method: 'POST',
@@ -618,6 +662,7 @@
   }
 
   updateStudentDisplay();
+  if (typeof initStudentNameInput === 'function') initStudentNameInput();
 </script>
 </body>
 </html>

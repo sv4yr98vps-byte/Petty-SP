@@ -404,14 +404,14 @@
       <p style="margin:4px 0; color:var(--text-muted);">🎯 40 題核心大題庫動態抽題 · 點選立即判定與試錯扣分 · 雲端歷程追蹤</p>
     </div>
 
-    <div class="student-badge-bar">
-      <div>
-        <span>👤 作答學生：</span>
-        <span class="student-name-tag" id="studentDisplay" onclick="promptStudentName()">點此輸入姓名與座號</span>
+    <div class="student-badge-bar" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; background:var(--card-bg); padding:14px 18px; border-radius:12px; border:1px solid var(--border-color); margin-bottom:20px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:280px;">
+        <label for="studentName" style="font-weight:700; color:var(--text-main); white-space:nowrap;">👤 學生姓名與座號：</label>
+        <input type="text" id="studentName" placeholder="請輸入姓名與座號 (例：701 05 王小明)" style="flex:1; max-width:320px; padding:8px 12px; font-size:1rem; border:2px solid var(--primary); border-radius:8px; outline:none; font-family:inherit; font-weight:600; background:rgba(37,99,235,0.03);">
       </div>
-      <div>
-        <span id="bankCountLabel">📊 題庫總數：40 題 (隨機抽選 10 題)</span>
-        <span style="margin-left: 12px;">💯 配分：每題 10 分，滿分 100 分</span>
+      <div style="display:flex; align-items:center; gap:12px; font-size:0.92rem; color:var(--text-muted);">
+        <span id="bankCountLabel">📊 題庫隨機抽選 10 題</span>
+        <span>💯 滿分 100 分</span>
       </div>
     </div>
 
@@ -464,7 +464,8 @@
       </div>
 
       <div style="margin-top:25px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="reshuffleAndRender(); closeReport();" style="padding:10px 24px; font-size:1.05rem;">
+        <button class="btn btn-primary" onclick="initStudentName();
+    reshuffleAndRender(); closeReport();" style="padding:10px 24px; font-size:1.05rem;">
           🎲 換一批新題目重新挑戰
         </button>
         <button class="btn" onclick="closeReport()" style="padding:10px 24px; font-size:1.05rem;">
@@ -698,7 +699,30 @@
       }
     }
 
-    function submitExam() {
+    
+    function getSavedStudentName() {
+      return localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+    }
+
+    function saveStudentName(name) {
+      if (name) {
+        localStorage.setItem('student_global_name', name);
+        localStorage.setItem('current_student_name', name);
+      }
+    }
+
+    function initStudentName() {
+      const sInput = document.getElementById('studentName');
+      const saved = getSavedStudentName();
+      if (sInput && saved) sInput.value = saved;
+      if (sInput) {
+        sInput.addEventListener('input', function() {
+          saveStudentName(this.value.trim());
+        });
+      }
+    }
+
+function submitExam() {
       if (!studentName) {
         promptStudentName();
         if (!studentName) {
@@ -758,7 +782,7 @@
       syncToGoogleSheet(finalScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '));
     }
 
-    function showReportModal(score, correctCount, firstTryRate, detailsList, nowStr, history) {
+    function showReportModal(score, correctCount, firstTryRate, detailsList, nowStr, history, sName) {
       const scoreEl = document.getElementById('reportScore');
       scoreEl.textContent = score + ' 分';
       scoreEl.className = 'score-number ' + (score >= 85 ? 'score-high' : score >= 60 ? 'score-mid' : 'score-low');
@@ -768,7 +792,7 @@
       else if (score < 85) levelText = '⭐⭐ 表現良好！訂正後即可邁向滿分！';
       document.getElementById('reportLevelText').textContent = levelText;
 
-      document.getElementById('reportStudent').textContent = studentName || '未註記同學';
+      document.getElementById('reportStudent').textContent = sName || getSavedStudentName() || '自主學習同學';
       document.getElementById('reportTime').textContent = nowStr;
 
       const historyEl = document.getElementById('reportHistory');
@@ -797,7 +821,7 @@
       document.getElementById('reportModal').classList.remove('active');
     }
 
-    function syncToGoogleSheet(score, correctCount, firstTryRateVal, wrongVal, detailsStr) {
+            function syncToGoogleSheet(score, correctCount, firstTryRateVal, wrongVal, detailsStr, sName) {
       const syncBanner = document.getElementById('syncStatus');
       if (syncBanner) {
         syncBanner.style.background = '#eff6ff';
@@ -807,15 +831,33 @@
       }
 
       const payload = {
-        timestamp: new Date().toISOString(),
+        name: sName,
+        student: sName,
+        studentName: sName,
+        student_name: sName,
+        userName: sName,
+        user_name: sName,
+        studentId: sName,
         unit: document.title || '國中英語差異化隨機抽測',
+        topic: document.title || '國中英語差異化隨機抽測',
+        lesson: document.title || '國中英語差異化隨機抽測',
+        title: document.title || '國中英語差異化隨機抽測',
         level: '10題隨機抽測',
-        student: studentName || '未填寫',
         score: score,
+        finalScore: score,
+        totalScore: score,
+        accuracy: firstTryRateVal + '%',
         firstTryRate: firstTryRateVal + '%',
         firstTryCorrect: correctCount + '/' + currentQuestions.length,
+        firstTryVal: correctCount,
+        totalQuestions: currentQuestions.length,
         wrongAttempts: wrongVal,
-        details: detailsStr
+        errors: wrongVal,
+        hintsUsed: 0,
+        stars: score >= 90 ? '⭐⭐⭐' : (score >= 70 ? '⭐⭐' : '⭐'),
+        details: detailsStr,
+        timestamp: new Date().toISOString(),
+        time: new Date().toLocaleString('zh-TW')
       };
 
       fetch(GAS_ENDPOINT_URL, {
@@ -895,6 +937,7 @@
     }
 
     // Auto-init
+    initStudentName();
     reshuffleAndRender();
 
     window.onload = () => {

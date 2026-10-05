@@ -336,6 +336,31 @@
 </div>
 
 <script>
+
+function getStudentName() {
+  const el = document.getElementById('studentName');
+  let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  return val;
+}
+
+function saveStudentNameVal(val) {
+  if (val) {
+    localStorage.setItem('student_global_name', val);
+    localStorage.setItem('current_student_name', val);
+  }
+}
+
+function initStudentNameInput() {
+  const el = document.getElementById('studentName');
+  const saved = getStudentName();
+  if (el && saved) el.value = saved;
+  if (el) {
+    el.addEventListener('input', function() {
+      saveStudentNameVal(this.value.trim());
+    });
+  }
+}
+
 let currentSpeed = 0.25;
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
 
@@ -534,6 +559,24 @@ function speakChinese(text) {
 }
 
 function submitExam() {
+  let validName = getStudentName();
+  if (!validName) {
+    validName = (prompt('【系統提醒】請先輸入您的「姓名與座號」再送出交卷喔！（例如：701 05 王小明）：') || '').trim();
+    if (validName) {
+      saveStudentNameVal(validName);
+      const el = document.getElementById('studentName');
+      if (el) el.value = validName;
+    } else {
+      alert('⚠️ 請務必輸入姓名座號才能完成成績登記！請在上方輸入姓名後再交卷。');
+      const el = document.getElementById('studentName');
+      if (el) {
+        el.focus();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+  }
+
   const sName = (document.getElementById('studentName') ? document.getElementById('studentName').value.trim() : '') || '自主學習同學';
   let totalScore = 0;
   let firstTryCount = 0;
@@ -611,16 +654,32 @@ function submitExam() {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   speakChinese(`評量完成！獲得 ${finalScore} 分，首次組對 ${firstTryCount} 題。`);
 
+  const currentName = getStudentName() || '自主學習同學';
   const payload = {
+    name: currentName,
+    student: currentName,
+    studentName: currentName,
+    student_name: currentName,
+    userName: currentName,
+    user_name: currentName,
+    studentId: currentName,
     unit: document.title || '國中英語差異化學習單',
-    level: 'C2 應用組',
-    name: sName,
-    score: finalScore,
-    firstTryRate: `${firstTryRate}%`,
-    firstTryCorrect: `${firstTryCount}/${c2Questions.length}`,
-    wrongAttempts: totalWrongChecks,
-    details: detailsList.join('; '),
-    timestamp: new Date().toISOString()
+    topic: document.title || '國中英語差異化學習單',
+    lesson: document.title || '國中英語差異化學習單',
+    title: document.title || '國中英語差異化學習單',
+    level: (typeof levelTitle !== 'undefined' ? levelTitle : (document.title.includes('C1') ? 'C1 基礎組' : (document.title.includes('C2') ? 'C2 應用組' : 'C3 表達組'))),
+    score: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    finalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    totalScore: (typeof finalScore !== 'undefined' ? finalScore : (typeof calculatedScore !== 'undefined' ? calculatedScore : (typeof score !== 'undefined' ? score : (typeof totalScore !== 'undefined' ? totalScore : 100)))),
+    firstTryRate: (typeof firstTryRate !== 'undefined' ? `${firstTryRate}%` : (typeof firstTryRateVal !== 'undefined' ? `${firstTryRateVal}%` : '100%')),
+    firstTryCorrect: (typeof firstTryCorrect !== 'undefined' ? `${firstTryCorrect}` : (typeof firstTryVal !== 'undefined' ? `${firstTryVal}` : '10')),
+    wrongAttempts: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    errors: (typeof totalErrors !== 'undefined' ? totalErrors : (typeof totalWrongChecks !== 'undefined' ? totalWrongChecks : 0)),
+    hintsUsed: (typeof hints !== 'undefined' ? hints : 0),
+    stars: (typeof finalScore !== 'undefined' ? (finalScore >= 90 ? '⭐⭐⭐' : (finalScore >= 70 ? '⭐⭐' : '⭐')) : '⭐⭐⭐'),
+    details: (typeof detailsList !== 'undefined' && Array.isArray(detailsList) ? detailsList.join('; ') : (typeof detailsStr !== 'undefined' ? detailsStr : '學習單評量完成')),
+    timestamp: new Date().toISOString(),
+    time: new Date().toLocaleString('zh-TW')
   };
 
   fetch(GAS_URL, {
@@ -655,6 +714,7 @@ window.onload = () => {
     window.speechSynthesis.getVoices();
   }
 };
+  if (typeof initStudentNameInput === 'function') initStudentNameInput();
 </script>
 </body>
 </html>
