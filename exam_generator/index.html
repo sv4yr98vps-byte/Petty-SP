@@ -1,223 +1,552 @@
-﻿<!DOCTYPE html>
-<html lang="zh-TW">
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎓 英語有聲點讀教材與題庫專屬入口網</title>
-  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+  <title>🌱 皮克敏的英語學習花園 · 國中英語差異化教材與題庫網</title>
+  <!-- Google Fonts: 引入超可愛手繪蠟筆感與圓潤字體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <!-- QRCode.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
+    /* =========================================================
+       🌱 皮克敏蠟筆風格 (Pikmin Crayon / Pastel Hand-drawn Style)
+       ========================================================= */
     :root {
-      --bg-color: #f8fafc;
+      --bg-cream: #fdfaf2;
       --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --border: #e2e8f0;
-      --accent-green: #059669;
-      --accent-orange: #d97706;
-      --accent-purple: #7c3aed;
+      --crayon-soil: #4a3b32;       /* 溫暖泥土可可棕（取代生硬黑色） */
+      --crayon-subtext: #7c6858;    /* 柔和手繪副標題色 */
+      --crayon-border: #e8d8be;     /* 蠟筆淺米黃邊框 */
+      
+      /* 皮克敏經典色系 */
+      --pikmin-red: #ff6b6b;        /* 紅皮克敏（番茄暖紅） */
+      --pikmin-red-light: #ffe3e3;
+      --pikmin-blue: #4dabf7;       /* 藍皮克敏（朝露天空藍） */
+      --pikmin-blue-light: #d0ebff;
+      --pikmin-yellow: #fcc419;     /* 黃皮克敏（向日葵雛菊黃） */
+      --pikmin-yellow-light: #fff3bf;
+      --pikmin-green: #51cf66;      /* 森林嫩芽綠 */
+      --pikmin-green-light: #d3f9d8;
+      --pikmin-purple: #cc5de8;     /* 葡萄漿果紫 */
+      --pikmin-purple-light: #f3d9fa;
+      --pikmin-orange: #ff922b;     /* 暖陽橘 */
+      --pikmin-orange-light: #ffe8cc;
+      --pikmin-wood: #8d735d;       /* 手繪木質棕 */
+      --pikmin-wood-light: #f1ede7;
+
+      --card-shadow: 4px 6px 0px rgba(92, 64, 51, 0.08);
+      --card-shadow-hover: 6px 10px 0px rgba(92, 64, 51, 0.12);
+      --btn-shadow: 0 4px 0 rgba(74, 59, 50, 0.18);
     }
 
     [data-theme="dark"] {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --primary: #60a5fa;
-      --primary-hover: #3b82f6;
-      --border: #334155;
+      --bg-cream: #1e2621;         /* 夜間皮克敏森林暖墨綠 */
+      --card-bg: #28332c;
+      --crayon-soil: #f1f8f3;      /* 螢光米白 */
+      --crayon-subtext: #b5c7ba;
+      --crayon-border: #3d4f43;
+      
+      --pikmin-red-light: #4c2626;
+      --pikmin-blue-light: #203a4c;
+      --pikmin-yellow-light: #49401e;
+      --pikmin-green-light: #1f4325;
+      --pikmin-purple-light: #3e2447;
+      --pikmin-orange-light: #4a321d;
+      --pikmin-wood-light: #36433a;
+
+      --card-shadow: 4px 6px 0px rgba(0, 0, 0, 0.35);
+      --card-shadow-hover: 6px 10px 0px rgba(0, 0, 0, 0.45);
+      --btn-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
     }
+
+    * { box-sizing: border-box; }
 
     body {
-      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
+      font-family: 'Fredoka', 'LXGW WenKai TC', 'Noto Sans TC', sans-serif;
+      background-color: var(--bg-cream);
+      background-image: radial-gradient(rgba(141, 115, 93, 0.08) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      color: var(--crayon-soil);
       margin: 0;
       padding: 0;
-      transition: background-color 0.3s, color 0.3s;
       min-height: 100vh;
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    /* =========================================================
+       🌻 頁首皮克敏花園 Header
+       ========================================================= */
     header {
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-      color: white;
-      padding: 38px 20px 28px;
+      background: linear-gradient(135deg, #74c69d 0%, #52b788 50%, #40916c 100%);
+      color: #ffffff;
+      padding: 38px 20px 32px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 5px solid #2d6a4f;
+      box-shadow: 0 8px 20px rgba(45, 106, 79, 0.2);
+    }
+
+    /* 手繪漂浮小葉子與花花裝飾 */
+    .header-deco {
+      position: absolute;
+      opacity: 0.28;
+      pointer-events: none;
+      animation: floatLeaf 6s ease-in-out infinite alternate;
+    }
+    .deco-1 { top: 12px; left: 5%; font-size: 2.4rem; animation-delay: 0s; }
+    .deco-2 { bottom: 10px; left: 15%; font-size: 1.8rem; animation-delay: 1.5s; }
+    .deco-3 { top: 16px; right: 8%; font-size: 2.6rem; animation-delay: 0.8s; }
+    .deco-4 { bottom: 12px; right: 20%; font-size: 2rem; animation-delay: 2.2s; }
+
+    @keyframes floatLeaf {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(10deg); }
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.22);
+      border: 2px dashed rgba(255, 255, 255, 0.7);
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      backdrop-filter: blur(4px);
     }
 
     header h1 {
       margin: 0 0 10px;
-      font-size: 2.2rem;
+      font-size: 2.35rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      text-shadow: 2px 2px 0px rgba(45, 106, 79, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     header p {
       margin: 0;
       font-size: 1.15rem;
-      opacity: 0.92;
+      font-weight: 500;
+      opacity: 0.96;
+      text-shadow: 1px 1px 0px rgba(45, 106, 79, 0.4);
     }
 
+    /* =========================================================
+       🌱 主容器與控制列 (搜尋 + 年級標籤切換)
+       ========================================================= */
     .container {
-      max-width: 1200px;
-      margin: 25px auto 50px;
+      max-width: 1240px;
+      margin: 30px auto 60px;
       padding: 0 20px;
     }
 
-    .controls-bar {
+    .controls-panel {
+      background-color: var(--card-bg);
+      border: 3px solid var(--crayon-border);
+      border-radius: 24px 20px 26px 18px;
+      padding: 18px 22px;
+      margin-bottom: 28px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .controls-top-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 25px;
-      background-color: var(--card-bg);
-      padding: 15px 20px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      gap: 14px;
     }
 
-    .filter-group {
+    /* 搜尋輸入框（手繪蠟筆質感） */
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background-color: var(--bg-cream);
+      border: 2.5px solid var(--crayon-border);
+      border-radius: 16px;
+      padding: 10px 16px 10px 42px;
+      font-family: inherit;
+      font-size: 1.02rem;
+      color: var(--crayon-soil);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--pikmin-green);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(81, 207, 102, 0.2);
+    }
+
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    /* 年級切換按鈕區 (Grade Filter Pills) */
+    .grade-tabs {
       display: flex;
-      gap: 12px;
-      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
-    input[type="text"], select {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      padding: 9px 15px;
-      border-radius: 8px;
+    .grade-tab-btn {
+      background: var(--bg-cream);
+      color: var(--crayon-soil);
+      border: 2.5px solid var(--crayon-border);
+      border-radius: 16px 14px 18px 12px;
+      padding: 8px 18px;
       font-family: inherit;
       font-size: 1rem;
-    }
-
-    .btn {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.95rem;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 3px 0 rgba(74, 59, 50, 0.1);
+    }
+
+    .grade-tab-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 rgba(74, 59, 50, 0.12);
+    }
+
+    .grade-tab-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 0 rgba(74, 59, 50, 0.12);
+    }
+
+    /* 作用中的年級按鈕（皮克敏蠟筆選中態） */
+    .grade-tab-btn.active[data-grade="all"] {
+      background: #74c69d;
+      color: #ffffff;
+      border-color: #40916c;
+      box-shadow: 0 4px 0 #2d6a4f;
+    }
+
+    .grade-tab-btn.active[data-grade="g7"] {
+      background: var(--pikmin-red);
+      color: #ffffff;
+      border-color: #e03131;
+      box-shadow: 0 4px 0 #c92a2a;
+    }
+
+    .grade-tab-btn.active[data-grade="g8"] {
+      background: #f59f00;
+      color: #ffffff;
+      border-color: #d9480f;
+      box-shadow: 0 4px 0 #b43806;
+    }
+
+    .grade-tab-btn.active[data-grade="g9"] {
+      background: var(--pikmin-blue);
+      color: #ffffff;
+      border-color: #1c7ed6;
+      box-shadow: 0 4px 0 #1864ab;
+    }
+
+    /* 手機端快速下拉選單 */
+    .grade-select-wrapper {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .grade-tabs { display: none; }
+      .grade-select-wrapper { display: block; width: 100%; }
+      .grade-select-wrapper select {
+        width: 100%;
+        background-color: var(--bg-cream);
+        border: 2.5px solid var(--crayon-border);
+        border-radius: 14px;
+        padding: 9px 14px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--crayon-soil);
+      }
+    }
+
+    /* 工具按鈕組（儀表板、夜間模式） */
+    .controls-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-garden {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 16px 14px 18px 14px;
+      border: 2px solid;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
       text-decoration: none;
-      box-sizing: border-box;
+      box-shadow: var(--btn-shadow);
     }
 
-    .btn:hover {
-      background-color: var(--primary-hover);
-      transform: translateY(-1px);
+    .btn-garden:hover {
+      transform: translateY(-2px);
     }
 
-    .btn-secondary {
-      background-color: var(--card-bg);
-      color: var(--text-main);
-      border: 1px solid var(--border);
+    .btn-garden:active {
+      transform: translateY(2px);
+      box-shadow: none !important;
     }
 
-    .btn-secondary:hover {
-      background-color: var(--border);
-      color: var(--text-main);
+    .btn-dashboard {
+      background: var(--pikmin-green);
+      color: #ffffff;
+      border-color: #2f9e44;
+      box-shadow: 0 4px 0 #2b8a3e;
     }
 
-    .btn-green { background-color: #059669; }
-    .btn-green:hover { background-color: #047857; }
+    .btn-dashboard:hover { background: #40c057; }
 
-    .btn-orange { background-color: #d97706; }
-    .btn-orange:hover { background-color: #b45309; }
+    .btn-theme-toggle {
+      background: var(--bg-cream);
+      color: var(--crayon-soil);
+      border-color: var(--crayon-border);
+      box-shadow: 0 4px 0 rgba(74, 59, 50, 0.12);
+    }
 
-    .btn-purple { background-color: #7c3aed; }
-    .btn-purple:hover { background-color: #6d28d9; }
-
+    /* =========================================================
+       🗂️ 教材卡片網格系統 (Grid & Cards)
+       ========================================================= */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 26px;
     }
 
     .exam-card {
       background-color: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      border: 3px solid var(--crayon-border);
+      border-radius: 26px 20px 28px 22px;
       padding: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--card-shadow);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .exam-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
-      border-color: var(--primary);
+      transform: translateY(-6px) rotate(-0.3deg);
+      box-shadow: var(--card-shadow-hover);
     }
 
+    /* 卡片年級色彩區分手繪飾條 */
+    .exam-card[data-grade="g7"] { border-top: 8px solid var(--pikmin-red); }
+    .exam-card[data-grade="g8"] { border-top: 8px solid var(--pikmin-yellow); }
+    .exam-card[data-grade="g9"] { border-top: 8px solid var(--pikmin-blue); }
+
+    /* 年級徽章（蠟筆紙膠帶小貼紙手繪風） */
     .card-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 14px;
+      border-radius: 12px 14px 10px 14px;
+      font-size: 0.88rem;
+      font-weight: 700;
       margin-bottom: 12px;
+      transform: rotate(-1deg);
+      border: 1.5px dashed;
     }
 
-    .badge-quiz { background: #dbeafe; color: #1e40af; }
-    .badge-diff { background: #fef3c7; color: #92400e; }
+    .badge-g7 {
+      background: var(--pikmin-red-light);
+      color: #c92a2a;
+      border-color: #ffa8a8;
+    }
+
+    .badge-g8 {
+      background: var(--pikmin-yellow-light);
+      color: #b45309;
+      border-color: #ffe066;
+    }
+
+    .badge-g9 {
+      background: var(--pikmin-blue-light);
+      color: #1864ab;
+      border-color: #a5d8ff;
+    }
 
     .card-title {
       font-size: 1.35rem;
       font-weight: 700;
       margin: 0 0 10px;
-      line-height: 1.4;
+      line-height: 1.45;
+      color: var(--crayon-soil);
     }
 
     .card-meta {
       font-size: 0.95rem;
-      color: var(--text-muted);
+      color: var(--crayon-subtext);
       margin-bottom: 20px;
-      line-height: 1.5;
+      line-height: 1.6;
+      background: var(--bg-cream);
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1.5px dashed var(--crayon-border);
+    }
+
+    .card-meta strong {
+      color: var(--crayon-soil);
     }
 
     .card-actions {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
+      border-top: 2px dashed var(--crayon-border);
+      padding-top: 18px;
+    }
+
+    .section-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--crayon-subtext);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
     }
 
     .action-row {
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .action-row .btn {
+    /* 手繪特色功能按鈕 */
+    .btn-action {
       flex: 1;
-      justify-content: center;
+      min-width: 90px;
+      padding: 9px 12px;
+      border-radius: 14px 16px 12px 14px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
       text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: 2px solid;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      box-shadow: 0 3px 0 rgba(74, 59, 50, 0.15);
     }
 
-    .section-label {
-      font-size: 0.85rem;
-      font-weight: bold;
-      color: var(--text-muted);
-      margin-bottom: 4px;
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 rgba(74, 59, 50, 0.2);
     }
 
-    /* Modal styles */
+    .btn-action:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    /* 抽測按鈕（草莓紅果實） */
+    .btn-quiz {
+      background: var(--pikmin-red);
+      color: #ffffff;
+      border-color: #fa5252;
+      box-shadow: 0 4px 0 #c92a2a;
+    }
+
+    /* QR 掃描碼按鈕（清澈水藍） */
+    .btn-qr {
+      background: var(--bg-cream);
+      color: var(--crayon-soil);
+      border-color: var(--crayon-border);
+      flex: 0 0 auto;
+      padding: 9px 14px;
+    }
+
+    /* C1 / C2 / C3 分流按鈕 */
+    .btn-c1 {
+      background: var(--pikmin-green-light);
+      color: #2b8a3e;
+      border-color: #69db7c;
+      box-shadow: 0 3px 0 #2f9e44;
+    }
+    .btn-c1:hover { background: #b2f2bb; }
+
+    .btn-c2 {
+      background: var(--pikmin-orange-light);
+      color: #d9480f;
+      border-color: #ffa94d;
+      box-shadow: 0 3px 0 #d9480f;
+    }
+    .btn-c2:hover { background: #ffd8a8; }
+
+    .btn-c3 {
+      background: var(--pikmin-purple-light);
+      color: #862e9c;
+      border-color: #da77f2;
+      box-shadow: 0 3px 0 #862e9c;
+    }
+    .btn-c3:hover { background: #eebefa; }
+
+    /* 教師簡報與 A4 列印 */
+    .btn-resource {
+      background: var(--pikmin-wood-light);
+      color: var(--crayon-soil);
+      border-color: #d4a373;
+      box-shadow: 0 3px 0 #a98467;
+      font-size: 0.88rem;
+    }
+    .btn-resource:hover { background: #e8e0d5; }
+
+    /* =========================================================
+       📱 QR Code 手繪彈窗 & 全班學習歷程儀表板
+       ========================================================= */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -225,8 +554,8 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(45, 35, 28, 0.68);
+      backdrop-filter: blur(5px);
       z-index: 999;
       justify-content: center;
       align-items: center;
@@ -238,55 +567,58 @@
 
     .modal-box {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 4px solid var(--crayon-border);
       padding: 30px;
-      border-radius: 20px;
+      border-radius: 28px 24px 30px 22px;
       text-align: center;
-      max-width: 400px;
+      max-width: 420px;
       width: 90%;
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
-      animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.25);
+      animation: popGarden 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
     }
 
     .dashboard-modal-box {
-      max-width: 960px;
+      max-width: 980px;
       width: 95%;
       max-height: 88vh;
       overflow-y: auto;
       text-align: left;
     }
 
-    @keyframes popIn {
-      from { transform: scale(0.9); opacity: 0; }
+    @keyframes popGarden {
+      from { transform: scale(0.85); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
 
     .qr-container {
       background: white;
       padding: 20px;
-      border-radius: 12px;
+      border-radius: 20px;
       display: inline-block;
-      margin: 15px 0;
-      box-shadow: inset 0 0 0 1px #e2e8f0;
+      margin: 16px 0;
+      border: 3px dashed var(--crayon-border);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
     }
 
     .modal-title {
-      font-size: 1.3rem;
-      font-weight: bold;
+      font-size: 1.45rem;
+      font-weight: 700;
       margin-bottom: 6px;
+      color: var(--crayon-soil);
     }
 
     .modal-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
+      font-size: 0.92rem;
+      color: var(--crayon-subtext);
+      margin-bottom: 14px;
       word-break: break-all;
     }
 
-    /* Table Styles */
+    /* 儀表板表格 */
     .table-responsive {
       overflow-x: auto;
-      margin-top: 15px;
+      margin-top: 16px;
     }
 
     table.styled-table {
@@ -296,412 +628,527 @@
     }
 
     table.styled-table th {
-      background-color: #f1f5f9;
-      color: #334155;
+      background-color: var(--bg-cream);
+      color: var(--crayon-soil);
       text-align: left;
-      padding: 12px 14px;
-      border-bottom: 2px solid var(--border);
+      padding: 13px 14px;
+      border-bottom: 3px solid var(--crayon-border);
+      font-weight: 700;
     }
 
     table.styled-table td {
       padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1.5px dashed var(--crayon-border);
     }
 
     table.styled-table tr:hover {
-      background-color: rgba(0,0,0,0.02);
+      background-color: rgba(116, 198, 157, 0.08);
     }
 
     .score-badge {
       display: inline-block;
-      padding: 3px 10px;
+      padding: 3px 12px;
       border-radius: 12px;
-      font-weight: bold;
+      font-weight: 700;
+      border: 1.5px solid;
     }
-    .score-badge-high { background: #dcfce7; color: #15803d; }
-    .score-badge-mid { background: #fef3c7; color: #b45309; }
-    .score-badge-low { background: #fee2e2; color: #b91c1c; }
+    .score-badge-high { background: #d3f9d8; color: #2b8a3e; border-color: #69db7c; }
+    .score-badge-mid { background: #fff3bf; color: #b45309; border-color: #ffd43b; }
+    .score-badge-low { background: #ffe3e3; color: #c92a2a; border-color: #ffa8a8; }
+
+    /* 空狀態提示 */
+    .empty-message {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--crayon-subtext);
+      font-size: 1.15rem;
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border: 3px dashed var(--crayon-border);
+      border-radius: 20px;
+    }
   </style>
 </head>
 <body>
 
+  <!-- ==================== 🌻 頁首皮克敏花園 ==================== -->
   <header>
-    <h1>🎓 英語教學題庫與有聲點讀教材網</h1>
-    <p>大題庫動態抽題 · 真實鑑別計分 · Google 雲端試算表自動同步</p>
+    <div class="header-deco deco-1">🌱</div>
+    <div class="header-deco deco-2">🍓</div>
+    <div class="header-deco deco-3">🌸</div>
+    <div class="header-deco deco-4">🍄</div>
+
+    <div class="header-content">
+      <div class="header-tag">✨ Pikmin Crayon Garden · 英語有聲學習步道</div>
+      <h1>
+        <span>🌱</span> 皮克敏英語學習花園 <span>🌸</span>
+      </h1>
+      <p>🌻 一起拔出知識的小豆苗！大題庫動態抽題 · 真實鑑別計分 · Google 雲端自動記名同步</p>
+    </div>
   </header>
 
+  <!-- ==================== 🌱 主容器與年級篩選 ==================== -->
   <div class="container">
-    <div class="controls-bar">
-      <div class="filter-group">
-        <input type="text" id="search-input" placeholder="🔍 搜尋課文、單元或關鍵字..." oninput="filterCards()">
-        <select id="type-filter" onchange="filterCards()">
-          <option value="all">全部教材類型</option>
-          <option value="quiz">四合一練習卷</option>
-          <option value="diff">差異化學習單 (C1/C2/C3)</option>
+    
+    <div class="controls-panel">
+      <div class="controls-top-row">
+        
+        <!-- 搜尋框 -->
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="🔍 搜尋課名、單元或關鍵字（例：動物、祈使句、完成式）..." oninput="filterCards()">
+        </div>
+
+        <!-- 儀表板與深色切換 -->
+        <div class="controls-actions">
+          <button class="btn-garden btn-dashboard" onclick="openDashboardModal()">
+            📊 全班學習歷程儀表板
+          </button>
+          <button class="btn-garden btn-theme-toggle" onclick="toggleTheme()">
+            🌓 切換日夜模式
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 快速年級切換標籤 (Grade Filter Pills) -->
+      <div class="grade-tabs">
+        <span style="font-weight:700; color:var(--crayon-subtext); margin-right:4px;">🌿 年級快選：</span>
+        <button class="grade-tab-btn active" data-grade="all" onclick="selectGrade('all')">
+          🌈 全部單元 (9)
+        </button>
+        <button class="grade-tab-btn" data-grade="g7" onclick="selectGrade('g7')">
+          🔴 七年級・國一 (5)
+        </button>
+        <button class="grade-tab-btn" data-grade="g8" onclick="selectGrade('g8')">
+          🟡 八年級・國二 (2)
+        </button>
+        <button class="grade-tab-btn" data-grade="g9" onclick="selectGrade('g9')">
+          🔵 九年級・國三 (2)
+        </button>
+      </div>
+
+      <!-- 手機端年級下拉選單 (自動同步) -->
+      <div class="grade-select-wrapper">
+        <select id="grade-select" onchange="selectGrade(this.value)">
+          <option value="all">🌈 全部年級單元 (共 9 個單元)</option>
+          <option value="g7">🔴 七年級 · 國一 (共 5 個單元)</option>
+          <option value="g8">🟡 八年級 · 國二 (共 2 個單元)</option>
+          <option value="g9">🔵 九年級 · 國三 (共 2 個單元)</option>
         </select>
       </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn btn-green" onclick="openDashboardModal()" style="font-weight:bold;">
-          📊 全班學習歷程管理儀表板 (雲端即時同步)
-        </button>
-        <button class="btn btn-secondary" onclick="toggleTheme()">🌓 切換主題</button>
-      </div>
+
     </div>
 
+    <!-- ==================== 🗂️ 教材卡片網格 (共 9 大單元) ==================== -->
     <div class="grid" id="exam-grid">
-      
-      <!-- Card 1: 國中英語南一七上 L1 單字練習卷 (四合一) -->
-      <div class="exam-card" data-type="quiz" data-title="國中英語 南一版 七上 第一單元 單字評量 練習卷">
+
+      <!-- ==================== 【七年級】Card 1: 南一七上 L1 單字評量 (四合一) ==================== -->
+      <div class="exam-card" data-grade="g7" data-title="國中英語 南一版 七上 第一單元 單字評量 練習卷 國一 七年級">
         <div>
-          <span class="card-badge badge-quiz">📝 【國一 · 七年級】四合一考卷 · 南一七上 L1</span>
-          <h2 class="card-title">國中英語【國一 · 七年級】(南一七上) L1 單字評量練習卷</h2>
+          <span class="card-badge badge-g7">🔴 🌱【七年級 · 國一】四合一考卷 · 南一七上 L1</span>
+          <h2 class="card-title">國中英語【國一】(南一七上) L1 單字評量練習卷</h2>
           <div class="card-meta">
             <div>📌 題數：<strong>45 題核心大題庫</strong> (每次隨機抽選 10 題)</div>
-            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題深度解析、個人成長曲線</div>
-            <div>☁️ 雲端：自動同步至老師 Google 試算表</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題解析、個人成長曲線</div>
+            <div>☁️ 雲端：自動記名同步至老師 Google 試算表</div>
           </div>
         </div>
         <div class="card-actions">
-          <div class="section-label">📱 學生線上隨機抽測與平板 QR Code</div>
+          <div class="section-label">🎲 線上隨機抽測與平板點讀</div>
           <div class="action-row">
-            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html" class="btn" target="_blank">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html" class="btn-action btn-quiz" target="_blank">
               🎧 進入線上抽測
             </a>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 單字 學生抽測', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L1 單字 學生抽測', '南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_學生點讀.html')">
               📱 QR Code
             </button>
           </div>
-          <div class="section-label">👨‍🏫 教師教學與文件下載</div>
+          <div class="section-label">👨‍🏫 教師教學與檔案下載</div>
           <div class="action-row">
-            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_教師簡報.html" class="btn btn-secondary" target="_blank">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_教師簡報.html" class="btn-action btn-resource" target="_blank">
               👨‍🏫 教師簡報
             </a>
-            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_練習卷.pdf" class="btn btn-secondary" target="_blank">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_練習卷.pdf" class="btn-action btn-resource" target="_blank">
               📄 考卷 PDF
             </a>
-            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_解析.pdf" class="btn btn-secondary" target="_blank">
+            <a href="南一國中英語七上L1單字_10題_練習卷/南一國中英語七上L1單字_10題_解析.pdf" class="btn-action btn-resource" target="_blank">
               🔍 解析 PDF
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Card 2: Starter 英語差異化學習單 C1/C2/C3 -->
-      <div class="exam-card" data-type="diff" data-title="國中英語 Starter 英語問候與代名詞 差異化學習單 C1 C2 C3">
+      <!-- ==================== 【七年級】Card 2: Starter 問候與代名詞 ==================== -->
+      <div class="exam-card" data-grade="g7" data-title="國中英語 Starter 英語問候與代名詞 差異化學習單 C1 C2 C3 國一 七年級">
         <div>
-          <span class="card-badge badge-diff">🎯 【國一 · 七年級】差異化學習單 · Starter</span>
-          <h2 class="card-title">國中英語【國一 · 七年級】Starter 問候與代名詞</h2>
+          <span class="card-badge badge-g7">🔴 🌱【七年級 · 國一】差異化學習單 · Starter</span>
+          <h2 class="card-title">國中英語【國一】Starter 問候與代名詞</h2>
           <div class="card-meta">
-            <div>📌 分層：C1 基礎 / C2 應用 / C3 表達</div>
-            <div>🔊 特色：三層分流點讀、Google 語音小姐、A4 排版</div>
+            <div>📌 題庫：<strong>40 題大題庫</strong> (每次隨機挑選 10 題)</div>
+            <div>🔊 特色：C1 基礎 / C2 應用 / C3 表達、三層分流點讀</div>
+            <div>📝 記名：強制姓名彈窗、試錯階梯扣分與即時解析</div>
           </div>
         </div>
         <div class="card-actions">
-          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
           <div class="action-row">
-            <a href="Starter_英語差異化學習單_C1_C2_C3/Starter_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
-              🎲 進入線上抽測 (10題)
+            <a href="Starter_英語差異化學習單_C1_C2_C3/Starter_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
             </a>
-            <button class="btn btn-secondary" onclick="showQrModal('Starter 問候與代名詞 抽測', 'Starter_英語差異化學習單_C1_C2_C3/Starter_10題隨機抽測_學生點讀.html')">
+            <button class="btn-action btn-qr" onclick="showQrModal('Starter 問候與代名詞 抽測', 'Starter_英語差異化學習單_C1_C2_C3/Starter_10題隨機抽測_學生點讀.html')">
               📱 抽測 QR
             </button>
           </div>
           <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
           <div class="action-row">
-            <a href="Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
-            <a href="Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
-            <a href="Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn-action btn-c2" target="_blank">🍊 C2 應用</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
           </div>
           <div class="action-row">
-            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C1 基礎', 'Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C2 應用', 'Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('Starter 學習單 C3 表達', 'Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('Starter 學習單 C1 基礎', 'Starter_英語差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('Starter 學習單 C2 應用', 'Starter_英語差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('Starter 學習單 C3 表達', 'Starter_英語差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
           </div>
-          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
           <div class="action-row">
-            <a href="Starter_英語差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
-            <a href="Starter_英語差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="Starter_英語差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
           </div>
         </div>
       </div>
 
-      <!-- Card 3: Unit 1 天氣與授與動詞 差異化學習單 -->
-      <div class="exam-card" data-type="diff" data-title="國中英語 Unit 1 天氣與授與動詞 差異化學習單 C1 C2 C3">
+      <!-- ==================== 【七年級】Card 3: L1 動物生詞與性狀形容詞 ==================== -->
+      <div class="exam-card" data-grade="g7" data-title="國中英語 七上 L1 動物生詞與形容詞 差異化學習單 C1 C2 C3 國一 七年級">
         <div>
-          <span class="card-badge badge-diff">🎯 【國二 · 八年級】差異化學習單 · 天氣與授與動詞</span>
-          <h2 class="card-title">國中英語【國二 · 八年級】天氣表達與授與動詞</h2>
-          <div class="card-meta">
-            <div>📌 題數：<strong>40 題核心大題庫</strong> (每次隨機抽 10 題)</div>
-            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題解析、Google 試算表同步</div>
-            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
-          <div class="action-row">
-            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/Unit1_天氣與授與動詞_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
-              🎲 進入線上抽測 (10題)
-            </a>
-            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 天氣與授與動詞 抽測', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/Unit1_天氣與授與動詞_10題隨機抽測_學生點讀.html')">
-              📱 抽測 QR
-            </button>
-          </div>
-          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
-          <div class="action-row">
-            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
-            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
-            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
-          </div>
-          <div class="action-row">
-            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C1 基礎', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C2 應用', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('Unit 1 學習單 C3 表達', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
-          </div>
-          <div class="section-label">👨‍🏫 教師資源與列印版</div>
-          <div class="action-row">
-            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
-            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4: L1 現在完成式與飲食文化 差異化學習單 -->
-      <div class="exam-card" data-type="diff" data-title="國中英語 L1 現在完成式與飲食文化 差異化學習單 C1 C2 C3">
-        <div>
-          <span class="card-badge badge-diff">🎯 【國三 · 九年級】差異化學習單 · 完成式與飲食文化</span>
-          <h2 class="card-title">國中英語【國三 · 九年級】現在完成式與多元飲食文化</h2>
-          <div class="card-meta">
-            <div>📌 題數：<strong>40 題核心大題庫</strong> (每次隨機抽 10 題)</div>
-            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題解析、Google 試算表同步</div>
-            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
-          <div class="action-row">
-            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/L1_現在完成式與飲食文化_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
-              🎲 進入線上抽測 (10題)
-            </a>
-            <button class="btn btn-secondary" onclick="showQrModal('現在完成式與飲食文化 抽測', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/L1_現在完成式與飲食文化_10題隨機抽測_學生點讀.html')">
-              📱 抽測 QR
-            </button>
-          </div>
-          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
-          <div class="action-row">
-            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
-            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
-            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
-          </div>
-          <div class="action-row">
-            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C1 基礎', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C2 應用', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('現在完成式 C3 表達', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
-          </div>
-          <div class="section-label">👨‍🏫 教師資源與列印版</div>
-          <div class="action-row">
-            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
-            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5: 七年級 L1 動物生詞與形容詞 差異化學習單 -->
-      <div class="exam-card" data-type="diff" data-title="國中英語 七上 L1 動物生詞與形容詞 差異化學習單 C1 C2 C3">
-        <div>
-          <span class="card-badge badge-diff">🎯 【國一 · 七年級】差異化學習單 · 動物生詞與形容詞</span>
-          <h2 class="card-title">國中英語【國一 · 七年級】L1 動物生詞與性狀形容詞</h2>
+          <span class="card-badge badge-g7">🔴 🌱【七年級 · 國一】差異化學習單 · L1</span>
+          <h2 class="card-title">國中英語【國一】L1 動物生詞與性狀形容詞</h2>
           <div class="card-meta">
             <div>📌 題數：<strong>31 個核心生詞大題庫</strong> (每次隨機抽 10 題)</div>
+            <div>🎯 機制：<strong>高相似誘答選項</strong>、錯題解析、Google 試算表同步</div>
+            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
+          <div class="action-row">
+            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/L1_動物生詞與形容詞_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
+            </a>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L1 動物生詞與形容詞 抽測', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/L1_動物生詞與形容詞_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎</a>
+            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn-action btn-c2" target="_blank">🍊 C2 應用</a>
+            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L1 學習單 C1 基礎', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L1 學習單 C2 應用', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L1 學習單 C3 表達', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
+          <div class="action-row">
+            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 【七年級】Card 4: L2 家庭成員、職業與疑問句 ==================== -->
+      <div class="exam-card" data-grade="g7" data-title="國中英語 七上 L2 家庭職業與問句 差異化學習單 C1 C2 C3 國一 七年級">
+        <div>
+          <span class="card-badge badge-g7">🔴 🌱【七年級 · 國一】差異化學習單 · L2</span>
+          <h2 class="card-title">國中英語【國一】L2 家庭職業與疑問句 (Who/Where/How old)</h2>
+          <div class="card-meta">
+            <div>📌 題數：<strong>28 個核心生詞大題庫</strong> (每次隨機抽 10 題)</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、Who/Where/How old 問答、基數詞 10~99</div>
+            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
+          <div class="action-row">
+            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/L2_家庭職業與問句_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
+            </a>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L2 家庭職業與問句 抽測', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/L2_家庭職業與問句_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎</a>
+            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn-action btn-c2" target="_blank">🍊 C2 應用</a>
+            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L2 學習單 C1 基礎', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L2 學習單 C2 應用', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L2 學習單 C3 表達', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
+          <div class="action-row">
+            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 【七年級】Card 5: L3 餐具飲食與祈使句 (🌟最新上線) ==================== -->
+      <div class="exam-card" data-grade="g7" data-title="國中英語 七上 L3 餐具飲食與祈使句 提議句 差異化學習單 C1 C2 C3 國一 七年級">
+        <div>
+          <span class="card-badge badge-g7" style="background:#ffe3e3; border-color:#fa5252;">🔴 🌱【七年級 · 國一】差異化學習單 · L3 🌟最新</span>
+          <h2 class="card-title">國中英語【國一】L3 餐具飲食與祈使句、提議句 (Let's / Please)</h2>
+          <div class="card-meta">
+            <div>📌 核心：<strong>16 核心生詞 + 祈使句三大核心</strong> (40題大題庫)</div>
+            <div>🎯 亮點：<strong>高相似選項防猜題</strong>、8~10 單字級精細積木重組</div>
+            <div>🔊 點讀：0.25x 雙語慢速發音、強制姓名彈窗與雲端記名</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
+          <div class="action-row">
+            <a href="L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/L3_餐具飲食與祈使句_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
+            </a>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L3 餐具飲食與祈使句 抽測', 'L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/L3_餐具飲食與祈使句_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎</a>
+            <a href="L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn-action btn-c2" target="_blank">🍊 C2 應用</a>
+            <a href="L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/C2_進階組_學生點讀.html" class="btn-action btn-c2" target="_blank">🌻 C2 進階</a>
+            <a href="L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L3 學習單 C1 基礎', 'L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L3 學習單 C2 應用', 'L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('七上 L3 學習單 C3 表達', 'L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
+          <div class="action-row">
+            <a href="L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="L3_餐具飲食與祈使句_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 【八年級】Card 6: Unit 1 天氣表達與授與動詞 ==================== -->
+      <div class="exam-card" data-grade="g8" data-title="國中英語 Unit 1 天氣與授與動詞 差異化學習單 C1 C2 C3 國二 八年級">
+        <div>
+          <span class="card-badge badge-g8">🟡 🌿【八年級 · 國二】差異化學習單 · Unit 1</span>
+          <h2 class="card-title">國中英語【國二】Unit 1 天氣表達與授與動詞</h2>
+          <div class="card-meta">
+            <div>📌 題數：<strong>40 題核心大題庫</strong> (每次隨機抽 10 題)</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題深度解析、Google 試算表同步</div>
+            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/Unit1_天氣與授與動詞_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
+            </a>
+            <button class="btn-action btn-qr" onclick="showQrModal('Unit 1 天氣與授與動詞 抽測', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/Unit1_天氣與授與動詞_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn-action btn-c2" target="_blank">🍊 C2 應用</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn-action btn-qr" onclick="showQrModal('Unit 1 學習單 C1 基礎', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('Unit 1 學習單 C2 應用', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('Unit 1 學習單 C3 表達', 'Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
+          <div class="action-row">
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="Unit1_天氣與授與動詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 【八年級】Card 7: Unit 2 時間連接詞與所有格代名詞 ==================== -->
+      <div class="exam-card" data-grade="g8" data-title="國中英語 八上 Unit 2 時間連接詞與所有格代名詞 差異化學習單 C1 C2 C3 國二 八年級">
+        <div>
+          <span class="card-badge badge-g8">🟡 🌿【八年級 · 國二】差異化學習單 · Unit 2</span>
+          <h2 class="card-title">國中英語【國二】Unit 2 社團電話、時間連接詞與所有格代名詞</h2>
+          <div class="card-meta">
+            <div>📌 題數：<strong>30 個核心題庫</strong> (每次隨機抽 10 題)</div>
+            <div>🎯 機制：<strong>C1 (15題) / C2 (10題)</strong>、When/Before/After 判斷</div>
+            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
+          <div class="action-row">
+            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/Unit2_時間連接詞與所有格代名詞_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
+            </a>
+            <button class="btn-action btn-qr" onclick="showQrModal('八上 Unit 2 連接詞與代名詞 抽測', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/Unit2_時間連接詞與所有格代名詞_10題隨機抽測_學生點讀.html')">
+              📱 抽測 QR
+            </button>
+          </div>
+          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
+          <div class="action-row">
+            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎(15題)</a>
+            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn-action btn-c2" target="_blank">🍊 C2 應用(10題)</a>
+            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
+          </div>
+          <div class="action-row">
+            <button class="btn-action btn-qr" onclick="showQrModal('八上 Unit 2 學習單 C1 基礎', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('八上 Unit 2 學習單 C2 應用', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('八上 Unit 2 學習單 C3 表達', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+          </div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
+          <div class="action-row">
+            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 【九年級】Card 8: L1 現在完成式與飲食文化 ==================== -->
+      <div class="exam-card" data-grade="g9" data-title="國中英語 L1 現在完成式與飲食文化 差異化學習單 C1 C2 C3 國三 九年級">
+        <div>
+          <span class="card-badge badge-g9">🔵 🌸【九年級 · 國三】差異化學習單 · L1</span>
+          <h2 class="card-title">國中英語【國三】L1 現在完成式與多元飲食文化</h2>
+          <div class="card-meta">
+            <div>📌 題數：<strong>40 題核心大題庫</strong> (每次隨機抽 10 題)</div>
             <div>🎯 機制：<strong>真實鑑別計分</strong>、錯題解析、Google 試算表同步</div>
             <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
           </div>
         </div>
         <div class="card-actions">
-          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
           <div class="action-row">
-            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/L1_動物生詞與形容詞_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
-              🎲 進入線上抽測 (10題)
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/L1_現在完成式與飲食文化_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
             </a>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 動物生詞與形容詞 抽測', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/L1_動物生詞與形容詞_10題隨機抽測_學生點讀.html')">
+            <button class="btn-action btn-qr" onclick="showQrModal('現在完成式與飲食文化 抽測', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/L1_現在完成式與飲食文化_10題隨機抽測_學生點讀.html')">
               📱 抽測 QR
             </button>
           </div>
           <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
           <div class="action-row">
-            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
-            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
-            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_進階組_學生點讀.html" class="btn-action btn-c2" target="_blank">🌻 C2 進階</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
           </div>
           <div class="action-row">
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 學習單 C1 基礎', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 學習單 C2 應用', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L1 學習單 C3 表達', 'L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('現在完成式 C1 基礎', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('現在完成式 C2 進階', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C2_進階組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('現在完成式 C3 表達', 'L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
           </div>
-          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
           <div class="action-row">
-            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
-            <a href="L1_動物生詞與形容詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="L1_現在完成式與飲食文化_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
           </div>
         </div>
       </div>
 
-      <!-- Card 6: 九年級 L2 外送平台與情緒形容詞 差異化學習單 -->
-      <div class="exam-card" data-type="diff" data-title="國中英語 九上 L2 外送平台與情緒形容詞 差異化學習單 C1 C2 C3">
+      <!-- ==================== 【九年級】Card 9: L2 外送生活與情緒動詞/形容詞 ==================== -->
+      <div class="exam-card" data-grade="g9" data-title="國中英語 九上 L2 外送平台與情緒形容詞 差異化學習單 C1 C2 C3 國三 九年級">
         <div>
-          <span class="card-badge badge-diff">🎯 【國三 · 九年級】差異化學習單 · 外送平台與情緒形容詞</span>
-          <h2 class="card-title">國中英語【國三 · 九年級】L2 外送生活與情緒動詞/形容詞</h2>
+          <span class="card-badge badge-g9">🔵 🌸【九年級 · 國三】差異化學習單 · L2</span>
+          <h2 class="card-title">國中英語【國三】L2 外送生活與情緒形容詞 (-ed/-ing)</h2>
           <div class="card-meta">
             <div>📌 題數：<strong>29 個核心生詞大題庫</strong> (每次隨機抽 10 題)</div>
-            <div>🎯 機制：<strong>真實鑑別計分</strong>、-ed/-ing 判斷、That名詞子句時態呼應</div>
+            <div>🎯 機制：<strong>真實鑑別計分</strong>、-ed/-ing 判斷、That 名詞子句時態</div>
             <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
           </div>
         </div>
         <div class="card-actions">
-          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
+          <div class="section-label">🎲 線上隨機抽測與平板 QR Code</div>
           <div class="action-row">
-            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/L2_外送平台與情緒形容詞_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
-              🎲 進入線上抽測 (10題)
+            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/L2_外送平台與情緒形容詞_10題隨機抽測_學生點讀.html" class="btn-action btn-quiz" target="_blank">
+              🎲 線上抽測 (10題)
             </a>
-            <button class="btn btn-secondary" onclick="showQrModal('九上 L2 外送平台與情緒形容詞 抽測', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/L2_外送平台與情緒形容詞_10題隨機抽測_學生點讀.html')">
+            <button class="btn-action btn-qr" onclick="showQrModal('九上 L2 外送平台與情緒形容詞 抽測', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/L2_外送平台與情緒形容詞_10題隨機抽測_學生點讀.html')">
               📱 抽測 QR
             </button>
           </div>
           <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
           <div class="action-row">
-            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
-            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
-            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
+            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn-action btn-c1" target="_blank">🌱 C1 基礎</a>
+            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C2_進階組_學生點讀.html" class="btn-action btn-c2" target="_blank">🌻 C2 進階</a>
+            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn-action btn-c3" target="_blank">🍇 C3 表達</a>
           </div>
           <div class="action-row">
-            <button class="btn btn-secondary" onclick="showQrModal('九上 L2 學習單 C1 基礎', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('九上 L2 學習單 C2 應用', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('九上 L2 學習單 C3 表達', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('九上 L2 學習單 C1 基礎', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('九上 L2 學習單 C2 進階', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C2_進階組_學生點讀.html')">📱 C2 QR</button>
+            <button class="btn-action btn-qr" onclick="showQrModal('九上 L2 學習單 C3 表達', 'L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
           </div>
-          <div class="section-label">👨‍🏫 教師資源與列印版</div>
+          <div class="section-label">👨‍🏫 教師資源與紙本列印</div>
           <div class="action-row">
-            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
-            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 7: 七年級 L2 家庭職業與問句 差異化學習單 -->
-      <div class="exam-card" data-type="diff" data-title="國中英語 七上 L2 家庭職業與問句 差異化學習單 C1 C2 C3">
-        <div>
-          <span class="card-badge badge-diff">🎯 【國一 · 七年級】差異化學習單 · 家庭職業與問句</span>
-          <h2 class="card-title">國中英語【國一 · 七年級】L2 家庭成員、職業與疑問句 (Who/Where/How old)</h2>
-          <div class="card-meta">
-            <div>📌 題數：<strong>28 個核心生詞大題庫</strong> (每次隨機抽 10 題)</div>
-            <div>🎯 機制：<strong>真實鑑別計分</strong>、Who/Where/How old 問答、基數詞 10~99 練習</div>
-            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
-          <div class="action-row">
-            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/L2_家庭職業與問句_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
-              🎲 進入線上抽測 (10題)
-            </a>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L2 家庭職業與問句 抽測', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/L2_家庭職業與問句_10題隨機抽測_學生點讀.html')">
-              📱 抽測 QR
-            </button>
-          </div>
-          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
-          <div class="action-row">
-            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎</a>
-            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用</a>
-            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
-          </div>
-          <div class="action-row">
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L2 學習單 C1 基礎', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L2 學習單 C2 應用', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('七上 L2 學習單 C3 表達', 'L2_家庭職業與問句_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
-          </div>
-          <div class="section-label">👨‍🏫 教師資源與列印版</div>
-          <div class="action-row">
-            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
-            <a href="L2_家庭職業與問句_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 8: 八年級 Unit 2 時間連接詞與所有格代名詞 差異化學習單 -->
-      <div class="exam-card" data-type="diff" data-title="國中英語 八上 Unit 2 時間連接詞與所有格代名詞 差異化學習單 C1 C2 C3">
-        <div>
-          <span class="card-badge badge-diff">🎯 【國二 · 八年級】差異化學習單 · 連接詞與代名詞</span>
-          <h2 class="card-title">國中英語【國二 · 八年級】Unit 2 社團電話、時間連接詞與所有格代名詞</h2>
-          <div class="card-meta">
-            <div>📌 題數：<strong>30 個核心題庫</strong> (每次隨機抽 10 題)</div>
-            <div>🎯 機制：<strong>C1 (15題) / C2 (10題)</strong>、When/Before/After 判斷、所有格代名詞矩陣</div>
-            <div>🎧 分層：C1 基礎 / C2 應用 / C3 表達 模組點讀</div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <div class="section-label">🎲 線上隨機抽測與平板 QR Code (大題庫真實計分)</div>
-          <div class="action-row">
-            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/Unit2_時間連接詞與所有格代名詞_10題隨機抽測_學生點讀.html" class="btn" target="_blank">
-              🎲 進入線上抽測 (10題)
-            </a>
-            <button class="btn btn-secondary" onclick="showQrModal('八上 Unit 2 連接詞與代名詞 抽測', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/Unit2_時間連接詞與所有格代名詞_10題隨機抽測_學生點讀.html')">
-              📱 抽測 QR
-            </button>
-          </div>
-          <div class="section-label">🎧 三層次學生點讀版 (分流練習)</div>
-          <div class="action-row">
-            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html" class="btn btn-green" target="_blank">C1 基礎(15題)</a>
-            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html" class="btn btn-orange" target="_blank">C2 應用(10題)</a>
-            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html" class="btn btn-purple" target="_blank">C3 表達</a>
-          </div>
-          <div class="action-row">
-            <button class="btn btn-secondary" onclick="showQrModal('八上 Unit 2 學習單 C1 基礎', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C1_基礎組_學生點讀.html')">📱 C1 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('八上 Unit 2 學習單 C2 應用', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C2_應用組_學生點讀.html')">📱 C2 QR</button>
-            <button class="btn btn-secondary" onclick="showQrModal('八上 Unit 2 學習單 C3 表達', 'Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/C3_表達組_學生點讀.html')">📱 C3 QR</button>
-          </div>
-          <div class="section-label">👨‍🏫 教師資源與列印版</div>
-          <div class="action-row">
-            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn btn-secondary" target="_blank">👨‍🏫 教師簡報</a>
-            <a href="Unit2_時間連接詞與所有格代名詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn btn-secondary" target="_blank">🖨️ A4 列印版</a>
+            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/教師逐題講解簡報.html" class="btn-action btn-resource" target="_blank">👨‍🏫 教師簡報</a>
+            <a href="L2_外送平台與情緒形容詞_差異化學習單_C1_C2_C3/學習單_A4列印專用版.html" class="btn-action btn-resource" target="_blank">🖨️ A4 列印版</a>
           </div>
         </div>
       </div>
 
     </div>
+
+    <!-- 無搜尋結果提示 -->
+    <div id="no-result" class="empty-message" style="display:none;">
+      🍃 找不到符合關鍵字或年級的教材呢！請嘗試更換搜尋詞或切換年級標籤喔～
+    </div>
+
   </div>
 
-  <!-- QR Code Modal -->
+  <!-- ==================== 📱 QR Code 手繪彈窗 ==================== -->
   <div class="modal-backdrop" id="qr-modal" onclick="closeQrModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
+      <div style="font-size:2rem; margin-bottom:4px;">🌱</div>
       <div class="modal-title" id="modal-exam-title">掃描開啟教材</div>
       <div class="modal-subtitle" id="modal-exam-url"></div>
       <div class="qr-container">
         <div id="qrcode"></div>
       </div>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">請使用平板相機對準 QR Code 即可載入</p>
-      <button class="btn btn-secondary close-btn" onclick="closeQrModal()" style="margin-top:15px; width:100%;">關閉</button>
+      <p style="font-size: 0.95rem; color: var(--crayon-subtext); margin: 0 0 16px;">
+        📸 請使用學生平板或手機相機對準 QR Code 即可秒開！
+      </p>
+      <button class="btn-garden btn-theme-toggle" onclick="closeQrModal()" style="width:100%; justify-content:center;">
+        關閉視窗
+      </button>
     </div>
   </div>
 
-  <!-- ==================== 📊 全班學習歷程儀表板 (雲端即時同步) ==================== -->
+  <!-- ==================== 📊 全班學習歷程儀表板 ==================== -->
   <div class="modal-backdrop" id="dashboard-modal" onclick="closeDashboardModal(event)">
     <div class="modal-box dashboard-modal-box" onclick="event.stopPropagation()">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--border); padding-bottom:12px;">
-        <h2 style="margin:0; font-size:1.45rem;">📊 全班學習歷程管理儀表板</h2>
-        <div style="display:flex; gap:8px;">
-          <a href="https://docs.google.com/spreadsheets/d/1byRCJ-axoqN3_EuE4TN62_Ank98Z6UsW39SQjV06rn0/edit" target="_blank" class="btn btn-green">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:3px dashed var(--crayon-border); padding-bottom:14px;">
+        <h2 style="margin:0; font-size:1.45rem; color:var(--crayon-soil); display:flex; align-items:center; gap:8px;">
+          <span>📊</span> 全班學習歷程管理儀表板
+        </h2>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <a href="https://docs.google.com/spreadsheets/d/1byRCJ-axoqN3_EuE4TN62_Ank98Z6UsW39SQjV06rn0/edit" target="_blank" class="btn-garden btn-dashboard" style="text-decoration:none;">
             📑 開啟 Google 雲端試算表
           </a>
-          <button class="btn btn-primary" onclick="loadCloudRecords()">
+          <button class="btn-garden" style="background:var(--pikmin-blue); color:#fff; border-color:#1c7ed6;" onclick="loadCloudRecords()">
             🔄 即時重新整理
           </button>
-          <button class="btn btn-secondary" onclick="closeDashboardModal()">
+          <button class="btn-garden btn-theme-toggle" onclick="closeDashboardModal()">
             ✕ 關閉
           </button>
         </div>
       </div>
 
-      <div style="margin-top:12px; font-size:0.92rem; color:var(--text-muted); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-        <span>📡 <strong>雲端同步狀態：</strong> <span id="cloud-status-text" style="color:#059669; font-weight:bold;">🟢 Google 試算表連線中</span></span>
-        <span id="record-count-text">載入中...</span>
+      <div style="margin-top:14px; font-size:0.95rem; color:var(--crayon-subtext); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <span>📡 <strong>雲端同步狀態：</strong> <span id="cloud-status-text" style="color:#2b8a3e; font-weight:bold;">🟢 Google 試算表連線正常</span></span>
+        <span id="record-count-text" style="font-weight:bold;">讀取中...</span>
       </div>
 
       <div class="table-responsive">
@@ -709,9 +1156,9 @@
           <thead>
             <tr>
               <th>提交時間</th>
-              <th>學生姓名 / 班級座號</th>
+              <th>學生姓名 / 座號</th>
               <th>教材單元</th>
-              <th>組別</th>
+              <th>作答組別</th>
               <th>真實得分</th>
               <th>正確率</th>
               <th>星級評價</th>
@@ -719,7 +1166,7 @@
           </thead>
           <tbody id="dashboard-tbody">
             <tr>
-              <td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">
+              <td colspan="7" style="text-align:center; padding:35px; color:var(--crayon-subtext);">
                 🔄 正在從 Google 雲端試算表載入全班作答紀錄...
               </td>
             </tr>
@@ -732,7 +1179,59 @@
   <script>
     const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec";
     let qrcodeObj = null;
+    let currentGrade = 'all';
 
+    // ==========================================
+    // 🌱 年級篩選核心邏輯 (Tabs 與 Select 雙向連動)
+    // ==========================================
+    function selectGrade(grade) {
+      currentGrade = grade;
+
+      // 更新 Tab 按鈕樣式
+      document.querySelectorAll('.grade-tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-grade') === grade) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // 同步更新手機端 Select
+      const sel = document.getElementById('grade-select');
+      if (sel) sel.value = grade;
+
+      filterCards();
+    }
+
+    function filterCards() {
+      const keyword = (document.getElementById('search-input').value || '').trim().toLowerCase();
+      const cards = document.querySelectorAll('.exam-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const title = (card.getAttribute('data-title') || '').toLowerCase();
+        const cardGrade = card.getAttribute('data-grade');
+
+        const matchGrade = (currentGrade === 'all' || cardGrade === currentGrade);
+        const matchKeyword = (!keyword || title.includes(keyword));
+
+        if (matchGrade && matchKeyword) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const noResult = document.getElementById('no-result');
+      if (noResult) {
+        noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    // ==========================================
+    // 📱 QR Code Modal
+    // ==========================================
     function showQrModal(title, relativeUrl) {
       const fullUrl = new URL(relativeUrl, window.location.href).href;
       document.getElementById('modal-exam-title').textContent = title;
@@ -744,7 +1243,7 @@
         text: fullUrl,
         width: 220,
         height: 220,
-        colorDark : "#000000",
+        colorDark : "#2b2b2b",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.M
       });
@@ -757,7 +1256,7 @@
     }
 
     // ==========================================
-    // 📊 全班儀表板：從 Google Apps Script 抓取
+    // 📊 全班學習歷程儀表板載入
     // ==========================================
     function openDashboardModal() {
       document.getElementById('dashboard-modal').classList.add('active');
@@ -773,14 +1272,14 @@
       const countEl = document.getElementById('record-count-text');
       const statusEl = document.getElementById('cloud-status-text');
 
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">🔄 正在從 Google 雲端試算表載入全班作答紀錄...</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:35px; color:var(--crayon-subtext);">🔄 正在從 Google 雲端試算表載入全班作答紀錄...</td></tr>';
       countEl.textContent = '讀取中...';
 
       fetch(GAS_ENDPOINT_URL)
         .then(res => res.json())
         .then(records => {
           if (!records || records.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:35px; color:#94a3b8;">尚無學生作答紀錄。當學生在平板交卷後，資料將秒送此處！</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:35px; color:var(--crayon-subtext);">🌱 尚無學生作答紀錄。當學生在平板交卷後，資料將秒送此處！</td></tr>';
             countEl.textContent = '共 0 筆作答記錄';
             statusEl.textContent = '🟢 Google 試算表連線正常';
             return;
@@ -800,10 +1299,10 @@
             else if (numScore >= 60) badgeClass = 'score-badge-mid';
 
             tr.innerHTML = `
-              <td style="color:#64748b; font-size:0.9rem;">${r.timestamp || '剛才'}</td>
-              <td style="font-weight:bold;">${r.studentName || '未命名'}</td>
-              <td>${r.unit || '南一國中英語七上 L1'}</td>
-              <td><span style="font-size:0.85rem; color:#6366f1; background:#eef2ff; padding:2px 8px; border-radius:6px;">${r.level || '隨機抽測'}</span></td>
+              <td style="color:var(--crayon-subtext); font-size:0.9rem;">${r.timestamp || '剛才'}</td>
+              <td style="font-weight:bold; color:var(--crayon-soil);">${r.studentName || '未命名'}</td>
+              <td>${r.unit || '英語差異化評量'}</td>
+              <td><span style="font-size:0.85rem; color:#862e9c; background:#f3d9fa; padding:3px 10px; border-radius:10px; font-weight:700;">${r.level || '隨機抽測'}</span></td>
               <td><span class="score-badge ${badgeClass}">${r.score} 分</span></td>
               <td>${r.accuracy || '--'}</td>
               <td>${r.stars || '⭐⭐⭐'}</td>
@@ -813,29 +1312,13 @@
         })
         .catch(err => {
           statusEl.textContent = '⚠️ 雲端讀取稍有延遲，請確認網路連線';
-          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:#b91c1c;">⚠️ 無法取得雲端記錄，請直接點擊上方按鈕「開啟 Google 雲端試算表」查看！</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:#c92a2a;">⚠️ 無法取得雲端記錄，請直接點擊上方按鈕「開啟 Google 雲端試算表」查看！</td></tr>';
         });
     }
 
-    function filterCards() {
-      const keyword = document.getElementById('search-input').value.toLowerCase();
-      const type = document.getElementById('type-filter').value;
-      const cards = document.querySelectorAll('.exam-card');
-
-      cards.forEach(card => {
-        const title = card.getAttribute('data-title').toLowerCase();
-        const cardType = card.getAttribute('data-type');
-        const matchKeyword = title.includes(keyword);
-        const matchType = (type === 'all' || cardType === type);
-
-        if (matchKeyword && matchType) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
+    // ==========================================
+    // 🌓 主題切換 (日夜森林風格)
+    // ==========================================
     function toggleTheme() {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
