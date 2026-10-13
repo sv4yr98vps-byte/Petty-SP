@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L3 餐具飲食與祈使句 差異化學習單｜C3 表達組（任務導向情境表達版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --bg: #eef2ff;
+      --card-bg: #ffffff;
+      --text: #1e1b4b;
+      --text-muted: #64748b;
+      --border: #c7d2fe;
+      --accent: #06b6d4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans TC', 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); color: white; padding: 24px 20px; text-align: center; box-shadow: 0 4px 12px rgba(79,70,229,0.15); }
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+    .container { max-width: 860px; margin: 20px auto; padding: 0 16px; }
+    .info-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .input-name { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: inherit; }
+    .voice-status { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; background: #e0e7ff; padding: 6px 12px; border-radius: 20px; border: 1px solid #c7d2fe; color: #3730a3; font-weight: 600; }
+    .speed-ctrl { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: var(--text-muted); }
+    .speed-btn { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+    .speed-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
+    .mission-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
+    .mission-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #e0e7ff; padding-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+    .mission-title { font-size: 1.25rem; font-weight: 700; color: #3730a3; display: flex; align-items: center; gap: 8px; }
+    .mission-desc { font-size: 0.95rem; color: #475569; margin-bottom: 16px; }
+    .phrase-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .phrase-text { font-size: 1.05rem; font-weight: 600; color: #1e1b4b; }
+    .phrase-zh { font-size: 0.9rem; color: #64748b; margin-top: 2px; }
+    .btn-speak { background: #e0e7ff; border: 1px solid #c7d2fe; color: #3730a3; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .user-input-area { width: 100%; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 14px; font-size: 1rem; font-family: inherit; margin-top: 8px; box-sizing: border-box; }
+    .user-input-area:focus { outline: none; border-color: var(--primary); }
+    .checklist { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .check-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.95rem; color: #334155; }
+    .check-item input[type="checkbox"] { transform: scale(1.2); cursor: pointer; }
+    .submit-bar { margin-top: 30px; text-align: center; }
+    .btn-submit { background: var(--primary); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(79,70,229,0.3); transition: background 0.2s, transform 0.1s; }
+    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .score-banner { display: none; background: #ffffff; border: 2px solid var(--primary); border-radius: 16px; padding: 24px; text-align: center; margin-top: 25px; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<!-- 學生姓名強制彈跳視窗 (Entry Modal) -->
+<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #38bdf8;">
+    <div style="font-size:3.2rem; margin-bottom:12px;">👋 📝</div>
+    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入英語互動學習！</h2>
+    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄學習歷程與成績：</p>
+    
+    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名 (例如: 王小明)" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; transition:border-color 0.2s; box-sizing:border-box;" onfocus="this.style.borderColor='#0284c7'" onblur="this.style.borderColor='#cbd5e1'" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
+    
+    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始作答喔！</div>
+    
+    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer; box-shadow:0 4px 14px rgba(2,132,199,0.35); transition:transform 0.1s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      🚀 確定並開始學習
+    </button>
+  </div>
+</div>
+
+<header>
+  <h1>國中英語【國一 · 七年級】L3 餐具飲食與祈使句</h1>
+  <p>🎯 C3 表達組：任務導向情境表達與句型鷹架實踐（口說點讀與情境產出版）</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" onclick="promptStudentNameModal()" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="voice-status">
+      <span>👩‍🏫 語音鎖定：Google 雙語語音小姐</span>
+    </div>
+    <div class="speed-ctrl">
+      <span>語速:</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+
+  <!-- 任務一：餐桌禮儀廣播宣導 -->
+  <div class="mission-card">
+    <div class="mission-header">
+      <div class="mission-title">🍽️ 任務一：餐桌禮儀宣導大使 (Dining Etiquette Rules)</div>
+      <span style="background:#e0e7ff; color:#3730a3; padding:4px 12px; border-radius:12px; font-weight:700; font-size:0.85rem;">祈使句應用</span>
+    </div>
+    <div class="mission-desc">身為班級生活股長，請運用祈使句向全班宣導 3 項良好的用餐習慣，點擊按鈕可練習語音朗讀：</div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">1. Please use a spoon to drink hot soup.</div>
+        <div class="phrase-zh">請使用湯匙喝熱湯。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Please use a spoon to drink hot soup.')">🔊 練習朗讀</button>
+    </div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">2. Don't put your dirty fork on the table, please.</div>
+        <div class="phrase-zh">吃完請不要把髒叉子隨手放在桌面上，拜託。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Don\'t put your dirty fork on the table, please.')">🔊 練習朗讀</button>
+    </div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">3. Let's use chopsticks to eat the delicious beef noodles.</div>
+        <div class="phrase-zh">讓我們用筷子一起吃美味的牛肉麵吧。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Let\'s use chopsticks to eat the delicious beef noodles.')">🔊 練習朗讀</button>
+    </div>
+
+    <label style="font-weight:700; color:#3730a3; display:block; margin-top:10px;">✍️ 我的宣導練習紀錄（請用英文輸入一句你最喜歡的餐桌禮儀規則）：</label>
+    <input type="text" id="task1_input" class="user-input-area" placeholder="例如：Please put your plate in the sink, please.">
+  </div>
+
+  <!-- 任務二：籌備班級 Potluck 派對 -->
+  <div class="mission-card">
+    <div class="mission-header">
+      <div class="mission-title">🎉 任務二：策劃班級歡樂派對 (Planning a Class Party)</div>
+      <span style="background:#fef3c7; color:#92400e; padding:4px 12px; border-radius:12px; font-weight:700; font-size:0.85rem;">Let's 提議句</span>
+    </div>
+    <div class="mission-desc">下週萬聖節即將到來，請你向好朋友們提出 3 個派對提議與約定：</div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">1. Jason, please bring some delicious cakes and drinks.</div>
+        <div class="phrase-zh">Jason，請帶一些好吃的蛋糕與飲料來。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Jason, please bring some delicious cakes and drinks.')">🔊 練習朗讀</button>
+    </div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">2. Let's invite everyone in our class to join the fun party.</div>
+        <div class="phrase-zh">讓我們邀請全班每個人一起來參加歡樂派對。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Let\'s invite everyone in our class to join the fun party.')">🔊 練習朗讀</button>
+    </div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">3. Don't be late for the party at five o'clock, please.</div>
+        <div class="phrase-zh">下午五點的派對請不要遲到喔，拜託。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Don\'t be late for the party at five o\'clock, please.')">🔊 練習朗讀</button>
+    </div>
+
+    <label style="font-weight:700; color:#3730a3; display:block; margin-top:10px;">✍️ 我的派對邀請函（請用英文寫下一句給同學的派對提議）：</label>
+    <input type="text" id="task2_input" class="user-input-area" placeholder="例如：Let's wear fun clothes to the party!">
+  </div>
+
+  <!-- 任務三：做個溫暖體貼的好朋友 -->
+  <div class="mission-card">
+    <div class="mission-header">
+      <div class="mission-title">🤝 任務三：關懷小天使守則 (Being a Caring Friend)</div>
+      <span style="background:#dcfce7; color:#15803d; padding:4px 12px; border-radius:12px; font-weight:700; font-size:0.85rem;">be 動詞祈使句</span>
+    </div>
+    <div class="mission-desc">請熟讀這 3 句關心朋友的暖心句子，並完成口說練習：</div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">1. Please be nice to your sister and friends every day.</div>
+        <div class="phrase-zh">每天都要對你的妹妹和朋友好一點、友善一點。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Please be nice to your sister and friends every day.')">🔊 練習朗讀</button>
+    </div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">2. Let's not be angry when we lose the ball game.</div>
+        <div class="phrase-zh">球賽輸掉時，我們大家不要生氣。</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Let\'s not be angry when we lose the ball game.')">🔊 練習朗讀</button>
+    </div>
+
+    <div class="phrase-box">
+      <div>
+        <div class="phrase-text">3. Please don't be sad; just give it a shot!</div>
+        <div class="phrase-zh">請不要難過，放膽嘗試看看吧！</div>
+      </div>
+      <button class="btn-speak" onclick="speakEnglish('Please don\'t be sad; just give it a shot!')">🔊 練習朗讀</button>
+    </div>
+
+    <div class="checklist">
+      <div style="font-weight:700; margin-bottom:8px; color:#1e1b4b;">📋 學習自我檢核清單（請勾選完成的項目）：</div>
+      <label class="check-item"><input type="checkbox" id="chk1"> 我能清楚說出 5 個餐具單字（spoon, fork, plate, bowl, chopsticks）。</label>
+      <label class="check-item"><input type="checkbox" id="chk2"> 我知道形容詞前必須使用原形 be（Be quiet, Don't be late）。</label>
+      <label class="check-item"><input type="checkbox" id="chk3"> 我學會 Let's 的否定是「Let's not」，不會誤寫成 don't。</label>
+      <label class="check-item"><input type="checkbox" id="chk4"> 我知道 please 在句尾必須加逗號，稱呼語在句首也要加逗號。</label>
+      <label class="check-item"><input type="checkbox" id="chk5"> 我已經跟著語音朗讀完成以上全部情境例句。</label>
+    </div>
+  </div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出學習歷程並計算成果</button>
+  </div>
+
+  <div class="score-banner" id="scoreBanner">
+    <div style="font-size:3.2rem; line-height:1;">🏆</div>
+    <h2 style="font-size:1.6rem; color:#4338ca; margin:10px 0 4px;">恭喜完成 C3 表達組情境任務！</h2>
+    <div id="certStudentText" style="font-weight:700; color:#334155; margin-bottom:18px; font-size:1.05rem;">學生：未填寫 ｜ 表現評價：⭐⭐⭐</div>
+    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; margin:16px 0;">
+      <div style="background:#eef2ff; border:1px solid #c7d2fe; border-radius:12px; padding:14px;">
+        <div style="font-size:1.8rem; font-weight:800; color:#4f46e5;" id="scoreText">100 分</div>
+        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🏆 情境任務完成總分</div>
+      </div>
+      <div style="background:#eef2ff; border:1px solid #c7d2fe; border-radius:12px; padding:14px;">
+        <div style="font-size:1.8rem; font-weight:800; color:#059669;" id="chkCountText">5 / 5 項</div>
+        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🎯 自我檢核達成率</div>
+      </div>
+    </div>
+    <div id="syncStatus" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+      <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
+      <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentSpeed = 0.25;
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+function setSpeed(spd, btn) {
+  currentSpeed = spd;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function speakEnglish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = currentSpeed;
+  const voices = window.speechSynthesis.getVoices();
+  const gVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'));
+  if (gVoice) u.voice = gVoice;
+  window.speechSynthesis.speak(u);
+}
+
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-TW';
+  u.rate = 1.0;
+  window.speechSynthesis.speak(u);
+}
+
+function getStudentName() {
+  const el = document.getElementById('studentName');
+  let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  return val;
+}
+
+function saveStudentNameVal(val) {
+  if (val) {
+    localStorage.setItem('student_global_name', val);
+    localStorage.setItem('current_student_name', val);
+  }
+}
+
+function submitExam() {
+  const sName = getStudentName();
+  if (!sName || sName === '未填寫' || sName === '自主學習同學') {
+    promptStudentNameModal();
+    return;
+  }
+
+  let chkCount = 0;
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById('chk' + i);
+    if (el && el.checked) chkCount++;
+  }
+
+  const finalScore = Math.max(60, 60 + chkCount * 8);
+
+  document.getElementById('scoreText').innerText = `${finalScore} 分`;
+  document.getElementById('chkCountText').innerText = `${chkCount} / 5 項`;
+  document.getElementById('certStudentText').innerText = `學生：${sName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 精熟特優' : '⭐⭐ 表現良好'}`;
+  document.getElementById('scoreBanner').style.display = 'block';
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+  speakChinese(`恭喜完成 C3 表達任務！達成 ${chkCount} 項自評指標，最終表現優異！`);
+
+  const payload = {
+    name: sName,
+    student: sName,
+    studentName: sName,
+    student_name: sName,
+    userName: sName,
+    user_name: sName,
+    studentId: sName,
+    unit: 'L3 餐具飲食與祈使句',
+    topic: 'L3 餐具飲食與祈使句',
+    lesson: '七上 Lesson 3',
+    title: 'L3 餐具飲食與祈使句 C3 表達組',
+    level: 'C3 表達組',
+    score: finalScore,
+    finalScore: finalScore,
+    totalScore: finalScore,
+    firstTryRate: '100%',
+    firstTryCorrect: `${chkCount}/5`,
+    wrongAttempts: 0,
+    errors: 0,
+    details: `完成任務一寫作、任務二邀請函、自評完成 ${chkCount}/5 項`,
+    timestamp: new Date().toISOString(),
+    time: new Date().toLocaleString('zh-TW')
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    document.getElementById('syncStatus').innerText = '✅ 成績與作答歷程已成功同步至教師 Google 試算表後台！';
+    document.getElementById('syncStatus').style.background = '#d1fae5';
+    document.getElementById('syncStatus').style.color = '#065f46';
+  }).catch(() => {
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已記錄（離線暫存模式）。';
+  });
+}
+
+function initStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var pageInput = document.getElementById('studentName');
+  if (!modal || !modalInput) return;
+
+  var savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  if (savedName) {
+    modalInput.value = savedName;
+    if (pageInput) pageInput.value = savedName;
+  }
+  modal.style.display = 'flex';
+  setTimeout(function() { modalInput.focus(); modalInput.select(); }, 200);
+}
+
+function confirmStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var err = document.getElementById('modalNameError');
+  var pageInput = document.getElementById('studentName');
+  
+  var val = modalInput ? modalInput.value.trim() : '';
+  if (!val) {
+    if (err) err.style.display = 'block';
+    if (modalInput) {
+      modalInput.style.borderColor = '#ef4444';
+      modalInput.focus();
+    }
+    return;
+  }
+  if (err) err.style.display = 'none';
+  localStorage.setItem('student_global_name', val);
+  localStorage.setItem('current_student_name', val);
+  if (pageInput) pageInput.value = val;
+  if (modal) modal.style.display = 'none';
+}
+
+function promptStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var err = document.getElementById('modalNameError');
+  if (err) err.style.display = 'none';
+  var cur = getStudentName();
+  if (modalInput) modalInput.value = cur;
+  if (modal) {
+    modal.style.display = 'flex';
+    setTimeout(function() { modalInput.focus(); modalInput.select(); }, 150);
+  }
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.getVoices();
+}
+window.addEventListener('DOMContentLoaded', initStudentNameModal);
+</script>
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L3 餐具飲食與祈使句 · C1 基礎組（鷹架點讀版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-hover: #047857;
+      --bg: #ecfdf5;
+      --card-bg: #ffffff;
+      --text: #064e3b;
+      --text-muted: #64748b;
+      --border: #a7f3d0;
+      --hint-bg: #fef3c7;
+      --hint-text: #92400e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans TC', 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 24px 20px; text-align: center; box-shadow: 0 4px 12px rgba(5,150,105,0.15); }
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+    .container { max-width: 860px; margin: 20px auto; padding: 0 16px; }
+    .info-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+    .input-name { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: inherit; }
+    .voice-status { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; background: #f0fdf4; padding: 6px 12px; border-radius: 20px; border: 1px solid #bbf7d0; color: #15803d; font-weight: 600; }
+    .speed-ctrl { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: var(--text-muted); }
+    .speed-btn { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; cursor: pointer; font-family: inherit; }
+    .speed-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #065f46; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .module-tag { background: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; }
+    .hint-btn { background: var(--hint-bg); color: var(--hint-text); border: 1px solid #fde68a; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .q-title { font-size: 1.12rem; font-weight: 700; color: #064e3b; line-height: 1.5; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .speaker-btn { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .visual-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; padding: 12px; text-align: center; margin-bottom: 14px; font-size: 1.05rem; font-weight: 600; color: #065f46; }
+    .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .options-grid-3 { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .opt-btn { background: var(--card-bg); border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 14px; font-family: inherit; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.15s; }
+    .opt-btn:hover { border-color: var(--primary); background: #f0fdf4; }
+    .opt-btn.correct { background: #dcfce7 !important; border-color: #10b981 !important; color: #15803d !important; font-weight: bold; }
+    .opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    .feedback-box { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; display: none; }
+    .submit-bar { margin-top: 30px; text-align: center; }
+    .btn-submit { background: var(--primary); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<!-- 學生姓名強制彈跳視窗 (Entry Modal) -->
+<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #38bdf8;">
+    <div style="font-size:3.2rem; margin-bottom:12px;">👋 📝</div>
+    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入英語互動學習！</h2>
+    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄學習歷程與成績：</p>
+    
+    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名 (例如: 王小明)" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; transition:border-color 0.2s; box-sizing:border-box;" onfocus="this.style.borderColor='#0284c7'" onblur="this.style.borderColor='#cbd5e1'" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
+    
+    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始作答喔！</div>
+    
+    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer; box-shadow:0 4px 14px rgba(2,132,199,0.35); transition:transform 0.1s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      🚀 確定並開始學習
+    </button>
+  </div>
+</div>
+
+<header>
+  <h1>L3 餐具飲食與祈使句</h1>
+  <p>🎯 C1 基礎組：核心生詞 4 選 1 ＋ 文法句型 3 選 1（鷹架點讀版）</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" onclick="promptStudentNameModal()" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="voice-status">
+      <span>👩‍🏫 語音鎖定：Google 雙語語音小姐</span>
+    </div>
+    <div class="speed-ctrl">
+      <span>語速:</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+
+  <div class="section-title">🍽️ 第一部分：核心生詞與語境理解（4 選 1 · 高相似度誘答）</div>
+  <div id="vocab-container"></div>
+
+  <div class="section-title">✨ 第二部分：文法句型與情境應用（3 選 1 · 祈使句與提議專攻）</div>
+  <div id="grammar-container"></div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出答案並計算總分</button>
+  </div>
+
+  <div id="scoreBanner" style="display:none; margin-top:30px;">
+    <div class="card" style="border:3px solid #10b981; background:#f0fdf4; text-align:center; padding:28px 20px; border-radius:18px;">
+      <div style="font-size:3.2rem; line-height:1;">🏆</div>
+      <h2 style="font-size:1.6rem; color:#065f46; margin:10px 0 4px;">恭喜完成 C1 基礎組學習任務！</h2>
+      <div id="certStudentText" style="font-weight:700; color:#334155; margin-bottom:18px; font-size:1.05rem;">學生：未填寫 ｜ 表現評價：⭐⭐⭐</div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:16px 0;">
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#059669;" id="scoreText">--</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🏆 結算總分 (含試錯折算)</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#0284c7;" id="firstTryText">-- / --</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🎯 首次即答對率</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#d97706;" id="attemptsText">0 次</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:2px;">🔄 累計試錯次數</div>
+        </div>
+      </div>
+      <div style="text-align:left; background:white; border:1px solid #cbd5e1; border-radius:12px; padding:16px; margin:16px 0;">
+        <div style="font-weight:700; color:#1e293b; margin-bottom:10px; font-size:0.95rem;">📋 逐題作答診斷明細</div>
+        <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:0.85rem; max-height:220px; overflow-y:auto;"></div>
+      </div>
+      <div id="syncStatus" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
+        <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+        <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentSpeed = 0.25;
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+function setSpeed(spd, btn) {
+  currentSpeed = spd;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function speakEnglish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = currentSpeed;
+  const voices = window.speechSynthesis.getVoices();
+  const gVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'));
+  if (gVoice) u.voice = gVoice;
+  window.speechSynthesis.speak(u);
+}
+
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-TW';
+  u.rate = 1.0;
+  window.speechSynthesis.speak(u);
+}
+
+const vocabQuestions = [
+  {
+    id: 'v1',
+    module: 'MODULE A ｜ 餐具餐桌 Tableware',
+    title: '喝熱湯時，我們會使用「🥄 湯匙」，英文是哪個單字？',
+    visual: '🥄 喝湯好幫手 ➔ [sp _ _ n]',
+    audio: 'spoon',
+    options: ['spoon', 'sport', 'space', 'spring'],
+    correct: 0,
+    hint: '開頭是 sp-，結尾是 -oon，例如：The baby can use a spoon.',
+    exp: 'spoon 代表湯匙；sport 是運動；space 是太空；spring 是春天。'
+  },
+  {
+    id: 'v2',
+    module: 'MODULE A ｜ 餐具餐桌 Tableware',
+    title: '吃義大利麵時常搭配的「🍴 叉子」，英文是哪一個？',
+    visual: '🍴 西餐叉子 ➔ [f _ _ k]',
+    audio: 'fork',
+    options: ['food', 'fork', 'foot', 'folk'],
+    correct: 1,
+    hint: '開頭是 f-，結尾是 -ork，例如：Please put your fork on the table.',
+    exp: 'fork 代表叉子；food 是食物；foot 是腳；folk 是民間的。'
+  },
+  {
+    id: 'v3',
+    module: 'MODULE A ｜ 餐具餐桌 Tableware',
+    title: '盛裝食物的大「🍽️ 盤子」，英文是哪一個單字？',
+    visual: '🍽️ 扁平盛盤 ➔ [pl _ _ e]',
+    audio: 'plate',
+    options: ['plane', 'plant', 'plate', 'place'],
+    correct: 2,
+    hint: '開頭是 pl-，中間是 -at-，結尾是 -e，例如：The plate is dirty.',
+    exp: 'plate 代表盤子；plane 是飛機；plant 是植物；place 是地方。'
+  },
+  {
+    id: 'v4',
+    module: 'MODULE A ｜ 餐具餐桌 Tableware',
+    title: '吃牛肉麵裝麵用的大「🥣 碗」，英文是哪一個單字？',
+    visual: '🥣 圓形瓷碗 ➔ [b _ _ l]',
+    audio: 'bowl',
+    options: ['ball', 'blow', 'boil', 'bowl'],
+    correct: 3,
+    hint: '開頭是 b-，中間是 -ow-，結尾是 -l，例如：A bowl of beef noodles.',
+    exp: 'bowl 代表碗；ball 是球；blow 是吹；boil 是煮沸。'
+  },
+  {
+    id: 'v5',
+    module: 'MODULE A ｜ 餐具餐桌 Tableware',
+    title: '吃中式麵食最常使用的雙筷「🥢 筷子」，英文是？',
+    visual: '🥢 成雙餐具 ➔ [ch _ _ _ _ _ cks]',
+    audio: 'chopsticks',
+    options: ['chopsticks', 'champions', 'chocolates', 'chickpeas'],
+    correct: 0,
+    hint: '開頭是 chop-，後面加上 -sticks，通常使用複數形！',
+    exp: 'chopsticks 代表筷子；champions 是冠軍；chocolates 是巧克力。'
+  },
+  {
+    id: 'v6',
+    module: 'MODULE B ｜ 美食料理 Food & Dishes',
+    title: '餐桌上擺滿美味可口的「🍲 菜餚／菜色」，英文是？',
+    visual: '🍲 美味佳餚 ➔ [d _ _ h]',
+    audio: 'dish',
+    options: ['fish', 'dish', 'wish', 'dash'],
+    correct: 1,
+    hint: '開頭是 d-，結尾是 -ish，例如：This is my favorite dish.',
+    exp: 'dish 代表菜餚或盤子；fish 是魚；wish 是願望；dash 是猛衝。'
+  },
+  {
+    id: 'v7',
+    module: 'MODULE B ｜ 美食料理 Food & Dishes',
+    title: '形容剛出爐的蛋糕非常「😋 美味的」，英文是？',
+    visual: '😋 令人垂涎 ➔ [del _ _ _ _ us]',
+    audio: 'delicious',
+    options: ['dangerous', 'delicious', 'December', 'dinosaur'],
+    correct: 1,
+    hint: '發音為 [dɪˈlɪʃəs]，以 d- 開頭，例如：This cake is delicious!',
+    exp: 'delicious 代表美味的；dangerous 是危險的；December 是十二月。'
+  },
+  {
+    id: 'v8',
+    module: 'MODULE B ｜ 餐具容器 Tableware',
+    title: '用來喝果汁或牛奶的「🥛 玻璃杯」，英文是？',
+    visual: '🥛 透明杯子 ➔ [gl _ _ s]',
+    audio: 'glass',
+    options: ['grass', 'gloss', 'glass', 'class'],
+    correct: 2,
+    hint: '以 gl- 開頭，雙寫 -ss 結尾，例如：a glass of water.',
+    exp: 'glass 代表玻璃杯；grass 是草地；gloss 是光澤；class 是班級。'
+  },
+  {
+    id: 'v9',
+    module: 'MODULE C ｜ 核心動作 Action Verbs',
+    title: '派對時請同學「帶」食物或禮物來，動詞是哪一個？',
+    visual: '🎁 攜帶物品前來 ➔ [br _ _ g]',
+    audio: 'bring',
+    options: ['bread', 'brown', 'break', 'bring'],
+    correct: 3,
+    hint: '以 br- 開頭，結尾是 -ing，例如：Bring some cake to the party.',
+    exp: 'bring 代表帶來、攜帶；bread 是麵包；brown 是棕色；break 是打破。'
+  },
+  {
+    id: 'v10',
+    module: 'MODULE C ｜ 核心動作 Action Verbs',
+    title: '邀請大家一起「參加／加入」歡樂的派對，動詞是？',
+    visual: '🤝 一同參與 ➔ [j _ _ n]',
+    audio: 'join',
+    options: ['join', 'jump', 'juice', 'joy'],
+    correct: 0,
+    hint: '以 j- 開頭，中間是 -oi-，例如：Join our party today!',
+    exp: 'join 代表參加、加入；jump 是跳躍；juice 是果汁；joy 是喜悅。'
+  }
+];
+
+const grammarQuestions = [
+  {
+    id: 'g1',
+    module: 'GRAMMAR FOCUS 1 ｜ be 動詞祈使句',
+    title: '老師請全班同學在圖書館「保持安靜」，正確英文句子是？',
+    audio: 'Please be quiet in the library.',
+    options: [
+      'Please be quiet in the library.',
+      'Please is quiet in the library.',
+      'Please quiet in the library.'
+    ],
+    correct: 0,
+    hint: 'quiet 是形容詞，祈使句開頭必須使用原形動詞 be！',
+    exp: '祈使句動詞一律用「原形動詞」，quiet 為形容詞，前面必須搭配 be！不可寫 is quiet 或直接 quiet。'
+  },
+  {
+    id: 'g2',
+    module: 'GRAMMAR FOCUS 1 ｜ be 動詞否定祈使句',
+    title: '班長提醒大家「不要遲到！」，正確的英文是？',
+    audio: 'Don\'t be late!',
+    options: [
+      'Don\'t late!',
+      'Don\'t be late!',
+      'Not be late!'
+    ],
+    correct: 1,
+    hint: 'late 是形容詞，否定祈使句必須用 Don\'t be + 形容詞！',
+    exp: 'late 是形容詞，不能直接接在 Don\'t 後面，必須說 Don\'t be late!。'
+  },
+  {
+    id: 'g3',
+    module: 'GRAMMAR FOCUS 1 ｜ 肯定祈使句與對象',
+    title: '媽媽叮嚀哥哥：「請對你的小妹妹好一點、友善一點。」',
+    audio: 'Please be nice to your sister.',
+    options: [
+      'Please be nice to your sister.',
+      'Please nice to your sister.',
+      'Please are nice to your sister.'
+    ],
+    correct: 0,
+    hint: 'be nice to... 代表對某人友善，祈使句要用原形動詞 be！',
+    exp: 'nice 是形容詞，祈使句原形動詞為 be，因此要用 Please be nice to...。'
+  },
+  {
+    id: 'g4',
+    module: 'GRAMMAR FOCUS 2 ｜ Let\'s not 否定提議',
+    title: '我們在自習課「不要講話」（大家一起提議），英文應該怎麼說？',
+    audio: 'Let\'s not talk.',
+    options: [
+      'Let\'s don\'t talk.',
+      'Don\'t let\'s talk.',
+      'Let\'s not talk.'
+    ],
+    correct: 2,
+    hint: 'Let\'s 的否定形式是「Let\'s not + 原形動詞」，絕對不能加 don\'t！',
+    exp: 'Let\'s 的否定提議句型為「Let\'s not + 原形動詞」，英文中絕沒有 Let\'s don\'t talk 的說法。'
+  },
+  {
+    id: 'g5',
+    module: 'GRAMMAR FOCUS 2 ｜ Let\'s not + be 動詞',
+    title: '雖然比賽輸了，隊長安慰大家：「我們不要生氣！」英文是？',
+    audio: 'Let\'s not be angry.',
+    options: [
+      'Let\'s not be angry.',
+      'Let\'s don\'t angry.',
+      'Let\'s not angry.'
+    ],
+    correct: 0,
+    hint: 'angry 是形容詞，Let\'s not 後面同樣要接原形動詞 be！',
+    exp: 'angry 是形容詞，在 Let\'s not 後面必須接原形動詞 be，故為 Let\'s not be angry。'
+  },
+  {
+    id: 'g6',
+    module: 'GRAMMAR FOCUS 3 ｜ Please 置於句尾加逗號',
+    title: '「請把你的課本合上。」如果把 please 放在「句尾」，正確標點是？',
+    audio: 'Close your book, please.',
+    options: [
+      'Close your book, please.',
+      'Close your book please.',
+      'Please, close your book.'
+    ],
+    correct: 0,
+    hint: 'please 放在句尾時，前面必須加上「逗號」！',
+    exp: 'please 置於句首不用逗號（Please close your book.）；置於句尾則必須加逗號（Close your book, please.）。'
+  },
+  {
+    id: 'g7',
+    module: 'GRAMMAR FOCUS 3 ｜ 稱呼語與逗號規則',
+    title: '老師呼叫 Jason：「Jason，請開門。」稱呼語在最前面時：',
+    audio: 'Jason, please open the door.',
+    options: [
+      'Jason, please open the door.',
+      'Jason please open the door.',
+      'Jason please, open the door.'
+    ],
+    correct: 0,
+    hint: '稱呼語置於句首時，後面必須加上逗號隔開！',
+    exp: '在祈使句中稱呼某人姓名，稱呼語後面要用逗號隔開：Jason, please open the door.'
+  },
+  {
+    id: 'g8',
+    module: 'GRAMMAR FOCUS 1 ｜ 否定祈使句 be 悲傷',
+    title: '好友安慰難過的小美：「請不要難過、不要傷心。」英文是？',
+    audio: 'Please don\'t be sad.',
+    options: [
+      'Please don\'t be sad.',
+      'Please don\'t sad.',
+      'Please not be sad.'
+    ],
+    correct: 0,
+    hint: 'sad 是形容詞，否定祈使句是 Please don\'t be + 形容詞。',
+    exp: 'sad 是形容詞，前面需要有原形動詞 be，故正確為 Please don\'t be sad.'
+  },
+  {
+    id: 'g9',
+    module: 'GRAMMAR FOCUS 2 ｜ Let\'s 肯定提議',
+    title: '中午肚子餓了，提議朋友：「我們一起去吃牛肉麵吧！」英文是？',
+    audio: 'Let\'s eat beef noodles.',
+    options: [
+      'Let\'s eat beef noodles.',
+      'Let\'s eating beef noodles.',
+      'Let\'s to eat beef noodles.'
+    ],
+    correct: 0,
+    hint: 'Let\'s 後面只能接「原形動詞」！',
+    exp: 'Let\'s（讓我們……）後面一律接原形動詞，不可加 -ing 也不可加 to。'
+  },
+  {
+    id: 'g10',
+    module: 'GRAMMAR FOCUS 3 ｜ 否定祈使句生活規範',
+    title: '公車司機提醒乘客：「請不要在公車上喝飲料。」英文是？',
+    audio: 'Please don\'t drink on the bus.',
+    options: [
+      'Please don\'t drink on the bus.',
+      'Please not drink on the bus.',
+      'Don\'t drink on the bus please.'
+    ],
+    correct: 0,
+    hint: '一般否定祈使句用 Please don\'t + 原形動詞；若 please 在句尾必須有逗號。',
+    exp: '否定祈使句以 Please don\'t 開頭加原形動詞 drink；第三個選項句尾缺逗號故錯誤。'
+  }
+];
+
+let attemptsPerQ = {};
+let answeredLocked = {};
+let totalErrors = 0;
+
+function renderQuestions() {
+  const vContainer = document.getElementById('vocab-container');
+  const gContainer = document.getElementById('grammar-container');
+  if (!vContainer || !gContainer) return;
+
+  renderGroup(vocabQuestions, vContainer, '4');
+  renderGroup(grammarQuestions, gContainer, '3');
+}
+
+function renderGroup(qList, container, type) {
+  qList.forEach((q, idx) => {
+    attemptsPerQ[q.id] = 0;
+    answeredLocked[q.id] = false;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-' + q.id;
+
+    const meta = document.createElement('div');
+    meta.className = 'q-meta';
+    meta.innerHTML = `<span class="module-tag">${q.module}</span><button type="button" class="hint-btn" onclick="toggleHint('${q.id}')">💡 提示</button>`;
+    card.appendChild(meta);
+
+    const title = document.createElement('div');
+    title.className = 'q-title';
+    title.innerHTML = `<span>${idx + 1}. ${q.title}</span><button type="button" class="speaker-btn" onclick="speakEnglish('${q.audio}')">🔊 英文朗讀</button>`;
+    card.appendChild(title);
+
+    if (q.visual) {
+      const vis = document.createElement('div');
+      vis.className = 'visual-box';
+      vis.innerText = q.visual;
+      card.appendChild(vis);
+    }
+
+    const grid = document.createElement('div');
+    grid.className = type === '4' ? 'options-grid-4' : 'options-grid-3';
+
+    q.options.forEach((opt, oIdx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'opt-btn';
+      btn.id = `btn-${q.id}-${oIdx}`;
+      btn.innerText = (type === '4' ? ['A', 'B', 'C', 'D'][oIdx] : ['A', 'B', 'C'][oIdx]) + '. ' + opt;
+      btn.onclick = () => handleAnswer(q, oIdx, btn, card);
+      grid.appendChild(btn);
+    });
+    card.appendChild(grid);
+
+    const hintBox = document.createElement('div');
+    hintBox.id = 'hint-' + q.id;
+    hintBox.className = 'feedback-box';
+    hintBox.style.background = '#fef3c7';
+    hintBox.style.color = '#92400e';
+    hintBox.style.border = '1px solid #fde68a';
+    hintBox.innerHTML = `💡 <b>提示指引：</b> ${q.hint}`;
+    card.appendChild(hintBox);
+
+    const fb = document.createElement('div');
+    fb.id = 'fb-' + q.id;
+    fb.className = 'feedback-box';
+    card.appendChild(fb);
+
+    container.appendChild(card);
+  });
+}
+
+function toggleHint(qid) {
+  const h = document.getElementById('hint-' + qid);
+  if (h) h.style.display = h.style.display === 'block' ? 'none' : 'block';
+}
+
+function handleAnswer(q, selectedIdx, btn, card) {
+  if (answeredLocked[q.id]) return;
+
+  const fb = document.getElementById('fb-' + q.id);
+
+  if (selectedIdx === q.correct) {
+    answeredLocked[q.id] = true;
+    btn.classList.add('correct');
+
+    card.querySelectorAll('.opt-btn').forEach((b, idx) => {
+      if (idx !== q.correct) b.style.opacity = '0.5';
+      b.disabled = true;
+    });
+
+    fb.style.display = 'block';
+    fb.style.background = '#dcfce7';
+    fb.style.color = '#15803d';
+    fb.style.border = '1px solid #86efac';
+    fb.innerHTML = `✅ <b>答對了！太棒了！</b><br>📖 <b>名師解析：</b>${q.exp}`;
+
+    speakChinese('答對了！' + q.exp);
+  } else {
+    attemptsPerQ[q.id] = (attemptsPerQ[q.id] || 0) + 1;
+    totalErrors++;
+    btn.classList.add('wrong');
+    btn.disabled = true;
+
+    fb.style.display = 'block';
+    fb.style.background = '#fee2e2';
+    fb.style.color = '#b91c1c';
+    fb.style.border = '1px solid #fca5a5';
+    fb.innerHTML = `❌ <b>再想想看喔！</b> 已經試錯 ${attemptsPerQ[q.id]} 次。<br>💡 <b>提示：</b>${q.hint}`;
+
+    speakChinese('再想想看喔！' + q.hint);
+  }
+}
+
+function getStudentName() {
+  const el = document.getElementById('studentName');
+  let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  return val;
+}
+
+function saveStudentNameVal(val) {
+  if (val) {
+    localStorage.setItem('student_global_name', val);
+    localStorage.setItem('current_student_name', val);
+  }
+}
+
+function submitExam() {
+  const sName = getStudentName();
+  if (!sName || sName === '未填寫' || sName === '自主學習同學') {
+    promptStudentNameModal();
+    return;
+  }
+
+  const allQs = [...vocabQuestions, ...grammarQuestions];
+  let totalScore = 0;
+  let firstTryCorrect = 0;
+  let detailsList = [];
+  const basePts = 100 / allQs.length;
+
+  allQs.forEach((q, idx) => {
+    const errs = attemptsPerQ[q.id] || 0;
+    const isAnswered = answeredLocked[q.id];
+    let multiplier = 0;
+    let badge = '❌ 未作答';
+
+    if (isAnswered) {
+      if (errs === 0) {
+        multiplier = 1.0;
+        firstTryCorrect++;
+        badge = '🥇 首次即答對 (滿分)';
+      } else if (errs === 1) {
+        multiplier = 0.7;
+        badge = '⚠️ 試錯 1 次 (70% 分數)';
+      } else if (errs === 2) {
+        multiplier = 0.4;
+        badge = '⚠️ 試錯 2 次 (40% 分數)';
+      } else {
+        multiplier = 0.1;
+        badge = '❌ 試錯多次 (10% 鼓勵分)';
+      }
+    }
+    totalScore += basePts * multiplier;
+    detailsList.push(`第 ${idx + 1} 題: ${badge}`);
+  });
+
+  const finalScore = Math.max(10, Math.round(totalScore));
+  const firstTryRate = Math.round((firstTryCorrect / (allQs.length || 1)) * 100);
+
+  document.getElementById('scoreText').innerText = `${finalScore} 分`;
+  document.getElementById('firstTryText').innerText = `${firstTryCorrect} / ${allQs.length} 題 (${firstTryRate}%)`;
+  document.getElementById('attemptsText').innerText = `${totalErrors} 次`;
+  document.getElementById('certStudentText').innerText = `學生：${sName} ｜ 表現評價：${finalScore >= 90 ? '⭐⭐⭐ 精熟特優' : (finalScore >= 70 ? '⭐⭐ 表現良好' : '⭐ 需再加強')}`;
+
+  const detailBox = document.getElementById('resDetailsContainer');
+  if (detailBox) {
+    detailBox.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+  }
+
+  document.getElementById('scoreBanner').style.display = 'block';
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+  speakChinese(`評量完成！最終得分 ${finalScore} 分，首次答對 ${firstTryCorrect} 題。`);
+
+  const payload = {
+    name: sName,
+    student: sName,
+    studentName: sName,
+    student_name: sName,
+    userName: sName,
+    user_name: sName,
+    studentId: sName,
+    unit: 'L3 餐具飲食與祈使句',
+    topic: 'L3 餐具飲食與祈使句',
+    lesson: '七上 Lesson 3',
+    title: 'L3 餐具飲食與祈使句 C1 基礎組',
+    level: 'C1 基礎組',
+    score: finalScore,
+    finalScore: finalScore,
+    totalScore: finalScore,
+    firstTryRate: `${firstTryRate}%`,
+    firstTryCorrect: `${firstTryCorrect}`,
+    wrongAttempts: totalErrors,
+    errors: totalErrors,
+    details: detailsList.join('; '),
+    timestamp: new Date().toISOString(),
+    time: new Date().toLocaleString('zh-TW')
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    document.getElementById('syncStatus').innerText = '✅ 成績與作答歷程已成功同步至教師 Google 試算表後台！';
+    document.getElementById('syncStatus').style.background = '#d1fae5';
+    document.getElementById('syncStatus').style.color = '#065f46';
+  }).catch(() => {
+    document.getElementById('syncStatus').innerText = '⚠️ 成績已記錄（離線暫存模式）。';
+  });
+}
+
+function initStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var pageInput = document.getElementById('studentName');
+  if (!modal || !modalInput) return;
+
+  var savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  if (savedName) {
+    modalInput.value = savedName;
+    if (pageInput) pageInput.value = savedName;
+  }
+  modal.style.display = 'flex';
+  setTimeout(function() { modalInput.focus(); modalInput.select(); }, 200);
+}
+
+function confirmStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var err = document.getElementById('modalNameError');
+  var pageInput = document.getElementById('studentName');
+  
+  var val = modalInput ? modalInput.value.trim() : '';
+  if (!val) {
+    if (err) err.style.display = 'block';
+    if (modalInput) {
+      modalInput.style.borderColor = '#ef4444';
+      modalInput.focus();
+    }
+    return;
+  }
+  if (err) err.style.display = 'none';
+  localStorage.setItem('student_global_name', val);
+  localStorage.setItem('current_student_name', val);
+  if (pageInput) pageInput.value = val;
+  if (modal) modal.style.display = 'none';
+}
+
+function promptStudentNameModal() {
+  var modal = document.getElementById('studentNameModal');
+  var modalInput = document.getElementById('modalStudentInput');
+  var err = document.getElementById('modalNameError');
+  if (err) err.style.display = 'none';
+  var cur = getStudentName();
+  if (modalInput) modalInput.value = cur;
+  if (modal) {
+    modal.style.display = 'flex';
+    setTimeout(function() { modalInput.focus(); modalInput.select(); }, 150);
+  }
+}
+
+renderQuestions();
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.getVoices();
+}
+window.addEventListener('DOMContentLoaded', initStudentNameModal);
+</script>
+</body>
+</html>

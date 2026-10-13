@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國一 · 七年級】L3 餐具飲食與祈使句 教師講解簡報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+      --accent-gold: #fbbf24;
+      --border: #334155;
+      --highlight: #fef08a;
+    }
+    body.light-mode {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #059669;
+      --accent-gold: #d97706;
+      --border: #e2e8f0;
+      --highlight: #fde047;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      background: var(--card-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+    }
+    .badge-unit {
+      background: #059669;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-tool, select.tool-select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    body.light-mode .btn-tool, body.light-mode select.tool-select {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .btn-tool:hover { background: var(--accent); color: white; }
+    main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-frame {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow-y: auto;
+    }
+    .slide-frame.active { display: flex; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .slide-page-num { font-size: 0.9rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 8px; }
+    .slide-title { font-size: 1.85rem; font-weight: 800; color: var(--text); margin-bottom: 18px; line-height: 1.3; }
+    .slide-content { font-size: 1.25rem; line-height: 1.8; margin-bottom: 20px; }
+    .ans-box {
+      background: rgba(16,185,129,0.1);
+      border: 2px dashed var(--accent);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 1.15rem;
+      color: var(--text);
+      display: none;
+      margin-top: 15px;
+    }
+    .ans-box.show { display: block; animation: fadeIn 0.3s ease; }
+    #whiteboardCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 50;
+      pointer-events: none;
+    }
+    #whiteboardCanvas.drawing { pointer-events: auto; cursor: crosshair; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span>👩‍🏫 七年級英語 L3 教師逐題講解簡報</span>
+      <span class="badge-unit">大屏投影專用</span>
+    </div>
+
+    <div class="slide-controls">
+      <select id="voiceSpeed" class="tool-select">
+        <option value="0.25">🐢 0.25x 極慢速</option>
+        <option value="0.5">🐢 0.5x 慢速</option>
+        <option value="0.75">0.75x 初學清晰</option>
+        <option value="1.0" selected>1.0x 標準原速</option>
+      </select>
+
+      <button class="btn-tool" onclick="prevSlide()">◀ 上一頁</button>
+      <span id="slideIndicator" style="font-weight:700; padding:0 6px;">1 / 6</span>
+      <button class="btn-tool" onclick="nextSlide()">下一頁 ▶</button>
+      <button class="btn-tool" id="btnAns" onclick="toggleAnswer()">💡 答案解析 (Space)</button>
+      <button class="btn-tool" id="btnBoard" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
+      <button class="btn-tool" onclick="clearWhiteboard()">🧹 清除板書 (C)</button>
+      <button class="btn-tool" onclick="speakCurrentSlide()">🔊 朗讀本頁 (R)</button>
+      <button class="btn-tool" onclick="toggleTheme()">🌓 主題切換</button>
+      <a href="index.html" class="btn-tool" style="text-decoration:none;">🏠 回首頁</a>
+    </div>
+  </header>
+
+  <main>
+    <canvas id="whiteboardCanvas"></canvas>
+
+    <!-- Slide 1: 共同學習核心鎖定 -->
+    <div class="slide-frame active" id="slide-0">
+      <div class="slide-page-num">1 / 6</div>
+      <div class="slide-title">🎯 L3 共同學習核心鎖定 (Common Core Lock)</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong style="color:var(--accent-gold);">【核心高頻單字 16 個】</strong><br>
+          • <strong>餐具飲食：</strong> spoon (湯匙), fork (叉子), plate (盤子), bowl (碗), chopsticks (筷子), dish (菜餚), beef noodles (牛肉麵), delicious (美味的), glass (玻璃杯), knife (刀子)<br>
+          • <strong>核心動作：</strong> put (放), try (嘗試), use (使用), bring (帶), talk (說話), join (參加)<br>
+          • <strong>派對生活：</strong> party (派對), fun (樂趣), please (請), let's (讓我們)
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px;">
+          <strong style="color:var(--accent-gold);">【三大核心文法結構】</strong><br>
+          1. <strong>祈使句肯定/否定：</strong> 原形動詞開頭！be 動詞不能忘（Be quiet. / Don't be late!）<br>
+          2. <strong>提議句型：</strong> Let's + 原形動詞 ➔ 否定為「Let's not + 原形動詞」（絕不可加 don't！）<br>
+          3. <strong>Please 與稱呼語標點：</strong> 句首免逗號，句尾加逗號（Close the door, please.）
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: 餐具生詞與餐桌高相似度誘答 -->
+    <div class="slide-frame" id="slide-1">
+      <div class="slide-page-num">2 / 6</div>
+      <div class="slide-title">🍽️ Slide 2: 餐具單字與特教高相似度誘答解析</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;">
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • <strong>spoon</strong> [spun] 湯匙 ➔ 誘答：sport, space, spring<br>
+            • <strong>fork</strong> [fɔrk] 叉子 ➔ 誘答：food, foot, folk<br>
+            • <strong>plate</strong> [plet] 盤子 ➔ 誘答：plane, plant, place
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • <strong>bowl</strong> [bol] 碗 ➔ 誘答：ball, blow, boil<br>
+            • <strong>chopsticks</strong> 筷子 ➔ 注意恆為複數形！<br>
+            • <strong>delicious</strong> 美味的 ➔ [del _ _ _ _ us]
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+          • <em>Please put your fork and knife on the plate.</em> (請把你的刀叉放在盤子上。)<br>
+          • <em>Let's use chopsticks to eat a bowl of beef noodles.</em> (讓我們用筷子吃這碗牛肉麵。)
+        </div>
+      </div>
+      <div class="ans-box" id="ans-1">
+        💡 <strong>名師引導：</strong> 國中特教學生常以首字母猜答案，因此出題必須配備「同開頭、同字根」高相似選項，訓練字形精確辨識！
+      </div>
+    </div>
+
+    <!-- Slide 3: be 動詞祈使句易錯重點 -->
+    <div class="slide-frame" id="slide-2">
+      <div class="slide-page-num">3 / 6</div>
+      <div class="slide-title">⚠️ Slide 3: 學生易錯第一名！be 動詞祈使句</div>
+      <div class="slide-content">
+        <div style="margin-bottom:16px;">
+          <strong>【為什麼一定要有 be？】</strong><br>
+          • 祈使句一律以<strong>「原形動詞」</strong>開頭！<br>
+          • quiet (安靜的)、late (遲到的)、nice (親切的)、sad (難過的) 都是<strong>「形容詞」</strong>！<br>
+          • 形容詞前面必須有原形動詞 <strong>be</strong> 才能構成合法祈使句！
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+          ❌ 錯誤寫法：<em>Please quiet!</em> &nbsp; / &nbsp; <em>Don't late!</em><br>
+          ✅ <strong>正確寫法：</strong><br>
+          1. <strong>Please be quiet.</strong> (請保持安靜)<br>
+          2. <strong>Don't be late!</strong> (不要遲到！)<br>
+          3. <strong>Please be nice to Annie.</strong> (請對 Annie 友善一點)<br>
+          4. <strong>Please don't be sad.</strong> (請不要難過)
+        </div>
+      </div>
+      <div class="ans-box" id="ans-2">
+        💡 <strong>口訣記憶：</strong> 「見到形容詞，be 動詞不離席！」
+      </div>
+    </div>
+
+    <!-- Slide 4: Let's 與 Let's not 提議句型 -->
+    <div class="slide-frame" id="slide-3">
+      <div class="slide-page-num">4 / 6</div>
+      <div class="slide-title">💡 Slide 4: 提議句型 Let's vs. Let's not</div>
+      <div class="slide-content">
+        <div style="margin-bottom:16px;">
+          <strong>【肯定提議 vs. 否定提議】</strong><br>
+          • <strong>肯定：Let's + 原形動詞</strong><br>
+          &nbsp;&nbsp;➔ <em>Let's eat beef noodles.</em> (我們吃牛肉麵吧。)<br>
+          &nbsp;&nbsp;➔ <em>Let's invite everyone to join the party.</em> (我們邀請大家參加派對吧。)<br><br>
+          • <strong>否定：Let's not + 原形動詞</strong>（⚠️ 極重要！）<br>
+          &nbsp;&nbsp;➔ <em>Let's not talk in the library.</em> (我們不要在圖書館說話。)<br>
+          &nbsp;&nbsp;➔ <em>Let's not be angry.</em> (我們大家不要生氣。)<br>
+          ❌ 絕對沒有 <em>Let's don't talk</em> 或 <em>Don't let's talk</em> 的用法！
+        </div>
+      </div>
+      <div class="ans-box" id="ans-3">
+        💡 <strong>解題關鍵：</strong> 否定提議「not 一定緊跟在 Let's 後面」！
+      </div>
+    </div>
+
+    <!-- Slide 5: Please 逗號規則與稱呼語 -->
+    <div class="slide-frame" id="slide-4">
+      <div class="slide-page-num">5 / 6</div>
+      <div class="slide-title">📝 Slide 5: Please 與稱呼語的標點逗號規則</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:1.15rem;">
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:8px;">
+            <strong>【Please 的位置】</strong><br>
+            • 置於<strong>句首</strong>：<strong>不加逗號</strong><br>
+            &nbsp;&nbsp;➔ <em>Please stand up.</em><br>
+            &nbsp;&nbsp;➔ <em>Please close your book.</em><br><br>
+            • 置於<strong>句尾</strong>：<strong>必須加逗號</strong><br>
+            &nbsp;&nbsp;➔ <em>Stand up, please.</em><br>
+            &nbsp;&nbsp;➔ <em>Close your book, please.</em>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:8px;">
+            <strong>【稱呼語 (人名) 的位置】</strong><br>
+            • 人名置於<strong>句首</strong>：<strong>後加逗號</strong><br>
+            &nbsp;&nbsp;➔ <em>Jason, please open the door.</em><br>
+            &nbsp;&nbsp;➔ <em>Amy, don't sleep in class, please.</em><br><br>
+            • 人名置於<strong>句尾</strong>：<strong>前加逗號</strong><br>
+            &nbsp;&nbsp;➔ <em>Please come in, Mike.</em>
+          </div>
+        </div>
+      </div>
+      <div class="ans-box" id="ans-4">
+        💡 <strong>標點口訣：</strong> 「頭順尾頓逗，稱呼兩邊分！」
+      </div>
+    </div>
+
+    <!-- Slide 6: 節慶派對祝福與交際用語 -->
+    <div class="slide-frame" id="slide-5">
+      <div class="slide-page-num">6 / 6</div>
+      <div class="slide-title">🎉 Slide 6: 節慶祝賀與常用交際片語</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:1.15rem;">
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • <strong>Congratulations!</strong> ➔ 恭喜！(得獎/畢業/婚禮)<br>
+            • <strong>Happy birthday!</strong> ➔ 生日快樂！<br>
+            • <strong>Merry Christmas!</strong> ➔ 聖誕快樂！
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px;">
+            • <strong>Happy Halloween!</strong> ➔ 萬聖節快樂！<br>
+            • <strong>Let's eat!</strong> ➔ 大家開動吧！<br>
+            • <strong>Just give it a shot!</strong> ➔ 試試看吧！嘗試看看！
+          </div>
+        </div>
+      </div>
+      <div class="ans-box" id="ans-5">
+        💡 <strong>生活應用：</strong> 萬聖節即將到來時，常用 <em>Halloween is just around the corner.</em>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let curSlide = 0;
+    const totalSlides = 6;
+    let isDrawing = false;
+    let canvas, ctx;
+
+    function initSlides() {
+      canvas = document.getElementById('whiteboardCanvas');
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+      canvas.addEventListener('mouseleave', stopDraw);
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+        if (e.key === ' ') { e.preventDefault(); toggleAnswer(); }
+        if (e.key.toLowerCase() === 'w') toggleWhiteboard();
+        if (e.key.toLowerCase() === 'c') clearWhiteboard();
+        if (e.key.toLowerCase() === 'r') speakCurrentSlide();
+      });
+    }
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+
+    function showSlide(idx) {
+      if (idx < 0 || idx >= totalSlides) return;
+      document.querySelectorAll('.slide-frame').forEach(f => f.classList.remove('active'));
+      const target = document.getElementById('slide-' + idx);
+      if (target) target.classList.add('active');
+      curSlide = idx;
+      document.getElementById('slideIndicator').innerText = `${idx + 1} / ${totalSlides}`;
+      document.querySelectorAll('.ans-box').forEach(b => b.classList.remove('show'));
+    }
+
+    function nextSlide() { if (curSlide < totalSlides - 1) showSlide(curSlide + 1); }
+    function prevSlide() { if (curSlide > 0) showSlide(curSlide - 1); }
+
+    function toggleAnswer() {
+      const b = document.getElementById('ans-' + curSlide);
+      if (b) b.classList.toggle('show');
+    }
+
+    function toggleWhiteboard() {
+      canvas.classList.toggle('drawing');
+      const btn = document.getElementById('btnBoard');
+      if (canvas.classList.contains('drawing')) {
+        btn.style.background = '#ef4444';
+        btn.innerText = '✏️ 繪圖中... (W關閉)';
+      } else {
+        btn.style.background = '';
+        btn.innerText = '✏️ 電子白板 (W)';
+      }
+    }
+
+    function clearWhiteboard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+
+    function stopDraw() { isDrawing = false; }
+
+    function speakCurrentSlide() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const slide = document.getElementById('slide-' + curSlide);
+      const text = slide.innerText;
+      const u = new SpeechSynthesisUtterance(text);
+      const spd = parseFloat(document.getElementById('voiceSpeed').value || '1.0');
+      u.rate = spd;
+      u.lang = 'zh-TW';
+      window.speechSynthesis.speak(u);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    window.addEventListener('DOMContentLoaded', initSlides);
+  </script>
+</body>
+</html>
