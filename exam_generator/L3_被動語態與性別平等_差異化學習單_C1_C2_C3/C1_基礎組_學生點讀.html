@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國三 · 九年級】Lesson 3 被動語態與性別平等 · C1 基礎組（鷹架點讀版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-hover: #047857;
+      --bg: #ecfdf5;
+      --card-bg: #ffffff;
+      --text: #064e3b;
+      --text-muted: #64748b;
+      --border: #a7f3d0;
+      --hint-bg: #fef3c7;
+      --hint-text: #92400e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans TC', 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 24px 20px; text-align: center; box-shadow: 0 4px 12px rgba(5,150,105,0.15); }
+    header h1 { font-size: 1.65rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+    .container { max-width: 860px; margin: 20px auto; padding: 0 16px; }
+    .info-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+    .input-name { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: inherit; }
+    .voice-status { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; background: #f0fdf4; padding: 6px 12px; border-radius: 20px; border: 1px solid #bbf7d0; color: #15803d; font-weight: 600; }
+    .speed-ctrl { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: var(--text-muted); }
+    .speed-btn { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; cursor: pointer; font-family: inherit; }
+    .speed-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #065f46; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .module-tag { background: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; }
+    .hint-btn { background: var(--hint-bg); color: var(--hint-text); border: 1px solid #fde68a; padding: 3px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .q-title { font-size: 1.12rem; font-weight: 700; color: #064e3b; line-height: 1.5; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .speaker-btn { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .visual-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; padding: 12px; text-align: center; margin-bottom: 14px; }
+    .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .options-grid-3 { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .opt-btn { background: var(--card-bg); border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 14px; font-family: inherit; font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.15s; }
+    .opt-btn:hover { border-color: var(--primary); background: #f0fdf4; }
+    .opt-btn.correct { background: #dcfce7 !important; border-color: #10b981 !important; color: #15803d !important; font-weight: bold; }
+    .opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    .feedback-box { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; display: none; }
+    .submit-bar { margin-top: 30px; text-align: center; }
+    .btn-submit { background: var(--primary); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<!-- 學生姓名強制彈跳視窗 (Entry Modal) -->
+<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #38bdf8;">
+    <div style="font-size:3.2rem; margin-bottom:12px;">👋 📝</div>
+    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入英語互動學習！</h2>
+    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄學習歷程與成績：</p>
+    
+    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名 (例如: 王小明)" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; transition:border-color 0.2s; box-sizing:border-box;" onfocus="this.style.borderColor='#0284c7'" onblur="this.style.borderColor='#cbd5e1'" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
+    
+    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始作答喔！</div>
+    
+    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer; box-shadow:0 4px 14px rgba(2,132,199,0.35); transition:transform 0.1s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      🚀 確定並開始學習
+    </button>
+  </div>
+</div>
+
+<header>
+  <h1>Lesson 3 被動語態與性別平等</h1>
+  <p>🎯 C1 基礎組：16 核心生詞 4 選 1（高相似防猜）＋ 被動語態(70%)與附加問句(30%) 3選1（鷹架點讀版）</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" onclick="promptStudentNameModal()" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="voice-status">
+      <span>👩‍🏫 語音鎖定：Google 雙語語音小姐</span>
+    </div>
+    <div class="speed-ctrl">
+      <span>語速:</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x</button>
+    </div>
+  </div>
+
+  <div class="section-title">👔 第一部分：16 核心生詞辨析（4 選 1 · 高相似度誘答防猜）</div>
+  <div id="vocab-container"></div>
+
+  <div class="section-title">⚖️ 第二部分：核心文法應用（被動語態 70% ＋ 附加問句 30% · 3 選 1）</div>
+  <div id="grammar-container"></div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出答案並計算總分</button>
+  </div>
+
+  <div id="scoreBanner" style="display:none; margin-top:30px;">
+    <div class="card" style="border:3px solid #10b981; background:#f0fdf4; text-align:center; padding:28px 20px; border-radius:18px;">
+      <div style="font-size:3.2rem; line-height:1;">🏆</div>
+      <h2 style="font-size:1.6rem; color:#065f46; margin:10px 0 4px;">恭喜完成 C1 基礎組學習任務！</h2>
+      <div id="certStudentText" style="font-weight:700; color:#334155; margin-bottom:18px; font-size:1.05rem;">學生：未填寫 ｜ 表現評價：⭐⭐⭐</div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:16px 0;">
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#059669;" id="scoreText">--</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🏆 結算總分 (含試錯折算)</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#0284c7;" id="firstTryText">-- / 20</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🎯 首次即答對題數</div>
+        </div>
+        <div style="background:white; border:1px solid #bbf7d0; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#dc2626;" id="attemptsText">0 次</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🔄 累計試錯次數</div>
+        </div>
+      </div>
+      <div id="syncStatus" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
+        <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+        <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentSpeed = 0.25;
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+function setSpeed(spd, btn) {
+  currentSpeed = spd;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function speakEnglish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = currentSpeed;
+  const voices = window.speechSynthesis.getVoices();
+  const gVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'));
+  if (gVoice) u.voice = gVoice;
+  window.speechSynthesis.speak(u);
+}
+
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-TW';
+  u.rate = 0.9;
+  window.speechSynthesis.speak(u);
+}
+
+// 16 核心單字題（含圖案提示 + 字頭字尾鷹架提示 + 高相似度防猜題選項）
+const vocabData = [
+  { id: 'v1', word: 'lawyer', zh: '律師', visual: '⚖️ 法庭辯護 · 法律專家 ➔ [ l _ _ _ _ r ]', options: ['lawyer', 'lower', 'layer', 'leader'], answer: 'lawyer', hint: '以 l 開頭，yer 結尾，意為「律師」。' },
+  { id: 'v2', word: 'engineer', zh: '工程師', visual: '💻 科技研發 · 修理電腦 ➔ [ e _ _ _ _ _ _ r ]', options: ['engineer', 'engine', 'energy', 'explorer'], answer: 'engineer', hint: '以 en 開頭，eer 結尾，意為「工程師」。' },
+  { id: 'v3', word: 'president', zh: '總統；總裁', visual: '🏛️ 國家元首 · 最高領導 ➔ [ p _ _ _ _ _ _ _ t ]', options: ['president', 'present', 'parent', 'patient'], answer: 'president', hint: '以 presi 開頭，dent 結尾，意為「總統；總裁」。' },
+  { id: 'v4', word: 'model', zh: '榜樣；模範', visual: '⭐ 學習榜樣 · 典範標竿 ➔ [ m _ _ _ l ]', options: ['model', 'modern', 'medal', 'modal'], answer: 'model', hint: '以 m 開頭，del 結尾，role model 意為「模範榜樣」。' },
+  { id: 'v5', word: 'company', zh: '公司', visual: '🏢 企業機構 · 玩具品牌 ➔ [ c _ _ _ _ _ y ]', options: ['company', 'country', 'campaign', 'compass'], answer: 'company', hint: '以 comp 開頭，any 結尾，意為「公司」。' },
+  { id: 'v6', word: 'equal', zh: '平等的', visual: '⚖️ 男女均等 · 權利同等 ➔ [ e _ _ _ l ]', options: ['equal', 'easily', 'early', 'earth'], answer: 'equal', hint: '以 eq 開頭，ual 結尾，意為「平等的」。' },
+  { id: 'v7', word: 'hard-working', zh: '勤勉的；努力工作的', visual: '💪 認真勤勞 · 努力奮鬥 ➔ [ h _ _ d - w _ _ _ _ _ g ]', options: ['hard-working', 'hard-looking', 'heart-working', 'hand-making'], answer: 'hard-working', hint: 'hard (努力) + working (工作)，意為「勤勉認真的」。' },
+  { id: 'v8', word: 'public', zh: '公共的；大眾', visual: '👥 公共設施 · 大眾服務 ➔ [ p _ _ _ _ c ]', options: ['public', 'publish', 'pupil', 'purple'], answer: 'public', hint: '以 pub 開頭，lic 結尾，意為「公共的；大眾」。' },
+  { id: 'v9', word: 'form', zh: '形成；建立', visual: '🧱 觀念形成 · 逐漸建立 ➔ [ f _ _ m ]', options: ['form', 'from', 'farm', 'firm'], answer: 'form', hint: '以 f 開頭，orm 結尾 (注意不要與 from 混淆)，意為「形成」。' },
+  { id: 'v10', word: 'childhood', zh: '童年', visual: '🧒 兒時記憶 · 幼年時期 ➔ [ c _ _ _ _ _ _ _ d ]', options: ['childhood', 'children', 'childlike', 'childish'], answer: 'childhood', hint: 'child (兒童) + hood (時期)，意為「童年」。' },
+  { id: 'v11', word: 'relative', zh: '親戚', visual: '👨‍👩‍👧‍👦 家族親友 · 節慶團聚 ➔ [ r _ _ _ _ _ _ e ]', options: ['relative', 'relation', 'relevant', 'release'], answer: 'relative', hint: '以 rela 開頭，tive 結尾，意為「親戚」。' },
+  { id: 'v12', word: 'expect', zh: '期待；預計', visual: '🎯 社會期望 · 預期心理 ➔ [ e _ _ _ _ t ]', options: ['expect', 'except', 'expert', 'export'], answer: 'expect', hint: '以 ex 開頭，pect 結尾 (不是 except 除了)，意為「期待；預期」。' },
+  { id: 'v13', word: 'picture', zh: '想像；描繪', visual: '💭 腦海想像 · 描摹情境 ➔ [ p _ _ _ _ _ e ]', options: ['picture', 'pitcher', 'pick', 'package'], answer: 'picture', hint: '課文作動詞「Picture this (想像一下)」，以 pic 開頭，ture 結尾。' },
+  { id: 'v14', word: 'everywhere', zh: '到處；四處', visual: '🌐 無所不在 · 各個角落 ➔ [ e _ _ _ _ _ _ _ _ e ]', options: ['everywhere', 'everyone', 'everyday', 'everybody'], answer: 'everywhere', hint: 'every + where，意為「到處；四處」。' },
+  { id: 'v15', word: 'allow', zh: '允許；准許', visual: '🟢 許可通行 · 被允許 ➔ [ a _ _ _ w ]', options: ['allow', 'arrow', 'alone', 'alive'], answer: 'allow', hint: '以 al 開頭，low 結尾，be allowed 意為「被允許」。' },
+  { id: 'v16', word: 'brave', zh: '勇敢的', visual: '🦸 勇敢救人 · 無所畏懼 ➔ [ b _ _ _ e ]', options: ['brave', 'brain', 'bread', 'break'], answer: 'brave', hint: '以 br 開頭，ave 結尾，意為「勇敢的」。' }
+];
+
+// 4 題文法題（3 題被動語態 75% + 1 題附加問句 25%，精準體現 70/30 比例）
+const grammarData = [
+  {
+    id: 'g1',
+    title: 'Christmas ______ by many Americans every year.',
+    zh: '每年聖誕節都受到許多美國人的慶祝。',
+    visual: '🎄 每年固定被大眾慶祝 (現在被動 is + p.p.) ➔ [ i s   c _ _ _ _ _ _ _ _ d ]',
+    options: ['is celebrated', 'are celebrated', 'celebrates'],
+    answer: 'is celebrated',
+    hint: '主詞 Christmas 為單數專有名詞，每年固定被慶祝，現在被動式用 is + celebrated。',
+    explain: '💡 Christmas 是不可數/單數名詞，被動語態公式：is + 過去分詞 celebrated。'
+  },
+  {
+    id: 'g2',
+    title: 'The car race ______ on December 2.',
+    zh: '賽車比賽將於十二月二日舉行。',
+    visual: '🏎️ 比賽將在未來被舉行 (助動詞被動 will be + p.p.) ➔ [ w _ _ l   b _   h _ _ d ]',
+    options: ['will be held', 'will hold', 'is holding'],
+    answer: 'will be held',
+    hint: '「比賽」是被舉行，助動詞 will 後面接原形 be + hold 的過去分詞 held。',
+    explain: '💡 助動詞被動語態公式為：will + be + 過去分詞 held。'
+  },
+  {
+    id: 'g3',
+    title: 'These sheep ______ by Mr. Chen since 2015.',
+    zh: '這些羊群自 2015 年起就一直由陳先生飼養。',
+    visual: '🐑 羊群自2015以來一直被飼養 (現在完成被動 have been + p.p.) ➔ [ h _ _ e   b _ _ n   r _ _ _ _ d ]',
+    options: ['have been raised', 'has been raised', 'have raised'],
+    answer: 'have been raised',
+    hint: '主詞 These sheep 是複數名詞，自過去持續到現在被飼養，使用 have been raised。',
+    explain: '💡 sheep 單複數同形，These sheep 為複數，現在完成被動式用 have been raised。'
+  },
+  {
+    id: 'g4',
+    title: 'Barbie is a great role model for many children, ______ she?',
+    zh: '芭比是許多孩子極佳的榜樣，不是嗎？',
+    visual: '🎀 前面是肯定 is，後面附加問句要「前肯後否」 ➔ [ i _ _ \' t ]',
+    options: ["isn't", 'is', "doesn't"],
+    answer: "isn't",
+    hint: '前半句 Barbie is 為肯定句，後方附加問句依據「前肯後否」原則，要用 isn\'t she。',
+    explain: '💡 主要子句有 be 動詞 is，附加問句對應使用否定形式 isn\'t。'
+  }
+];
+
+const totalQuestions = vocabData.length + grammarData.length;
+const attempts = {};
+const answeredCorrectly = {};
+
+function initQuestions() {
+  const vContainer = document.getElementById('vocab-container');
+  vContainer.innerHTML = '';
+  vocabData.forEach((q, idx) => {
+    attempts[q.id] = 0;
+    answeredCorrectly[q.id] = false;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = `card-${q.id}`;
+    card.innerHTML = `
+      <div class="q-meta">
+        <span class="module-tag">題號 ${idx + 1} / ${totalQuestions} · 核心生詞辨析</span>
+        <button class="hint-btn" onclick="showHint('${q.id}', '${q.hint}')">💡 單字提示</button>
+      </div>
+      <div class="q-title">
+        <span>中文語意：<strong>${q.zh}</strong></span>
+        <button class="speaker-btn" onclick="speakEnglish('${q.word}')">🔊 點讀發音</button>
+      </div>
+      <div class="visual-box"><span style="font-size:1.35rem; color:#065f46; letter-spacing:1px; font-weight:700;">${q.visual}</span></div>
+      <div class="options-grid-4" id="opts-${q.id}">
+        ${q.options.map(opt => `
+          <button class="opt-btn" onclick="checkChoice('${q.id}', '${opt}', '${q.answer}', this)">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="feedback-box" id="fb-${q.id}"></div>
+    `;
+    vContainer.appendChild(card);
+  });
+
+  const gContainer = document.getElementById('grammar-container');
+  gContainer.innerHTML = '';
+  grammarData.forEach((q, idx) => {
+    attempts[q.id] = 0;
+    answeredCorrectly[q.id] = false;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = `card-${q.id}`;
+    card.innerHTML = `
+      <div class="q-meta">
+        <span class="module-tag" style="background:#e0f2fe; color:#0369a1;">題號 ${vocabData.length + idx + 1} / ${totalQuestions} · 國三核心文法</span>
+        <button class="hint-btn" onclick="showHint('${q.id}', '${q.hint}')">💡 文法鷹架</button>
+      </div>
+      <div class="q-title">
+        <span>${q.title}</span>
+        <button class="speaker-btn" onclick="speakEnglish('${q.title.replace('______', q.answer)}')">🔊 朗讀例句</button>
+      </div>
+      <div class="visual-box" style="background:#f0f9ff; border-color:#bae6fd;"><span style="font-size:1.25rem; color:#0284c7; letter-spacing:1px; font-weight:700;">${q.visual}</span></div>
+      <div style="font-size:0.92rem; color:#475569; margin-bottom:12px;">中譯：${q.zh}</div>
+      <div class="options-grid-3" id="opts-${q.id}">
+        ${q.options.map(opt => `
+          <button class="opt-btn" onclick="checkChoice('${q.id}', '${opt}', '${q.answer}', this)">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="feedback-box" id="fb-${q.id}"></div>
+    `;
+    gContainer.appendChild(card);
+  });
+}
+
+function showHint(id, hintText) {
+  const fb = document.getElementById(`fb-${id}`);
+  fb.style.display = 'block';
+  fb.style.background = '#fef3c7';
+  fb.style.color = '#92400e';
+  fb.style.border = '1px solid #fde68a';
+  fb.innerHTML = `💡 <strong>鷹架小提示：</strong>${hintText}`;
+  speakChinese(hintText);
+}
+
+function checkChoice(qId, selected, answer, btn) {
+  if (answeredCorrectly[qId]) return;
+  const fb = document.getElementById(`fb-${qId}`);
+  const parent = document.getElementById(`opts-${qId}`);
+  
+  if (selected === answer) {
+    answeredCorrectly[qId] = true;
+    btn.classList.add('correct');
+    parent.querySelectorAll('.opt-btn').forEach(b => {
+      b.disabled = true;
+      if (b !== btn) b.style.opacity = '0.6';
+    });
+    fb.style.display = 'block';
+    fb.style.background = '#dcfce7';
+    fb.style.color = '#15803d';
+    fb.style.border = '1px solid #86efac';
+    fb.innerHTML = `✅ <strong>太棒了，答對了！</strong>正確答案就是 <code>${answer}</code>！`;
+    speakEnglish(answer);
+  } else {
+    attempts[qId]++;
+    btn.classList.add('wrong');
+    btn.disabled = true;
+    fb.style.display = 'block';
+    fb.style.background = '#fee2e2';
+    fb.style.color = '#b91c1c';
+    fb.style.border = '1px solid #fca5a5';
+    fb.innerHTML = `❌ <strong>再想想看喔！</strong> 已嘗試 ${attempts[qId]} 次，點擊上方提示按鈕可以看鷹架線索！`;
+    speakChinese('再想想看喔，加油！');
+  }
+}
+
+function submitExam() {
+  const name = (document.getElementById('studentName').value || '').trim();
+  if (!name) {
+    promptStudentNameModal();
+    return;
+  }
+
+  let totalScore = 0;
+  let firstTryCount = 0;
+  let totalAttempts = 0;
+
+  [...vocabData, ...grammarData].forEach(q => {
+    const isCorrect = answeredCorrectly[q.id];
+    const att = attempts[q.id];
+    totalAttempts += att;
+
+    let qScore = 0;
+    if (isCorrect) {
+      if (att === 0) {
+        qScore = 5; // 每題 5 分，共 20 題滿分 100
+        firstTryCount++;
+      } else if (att === 1) {
+        qScore = 3.5;
+      } else if (att === 2) {
+        qScore = 2;
+      } else {
+        qScore = 1;
+      }
+    }
+    totalScore += qScore;
+  });
+
+  totalScore = Math.round(totalScore);
+  const accuracy = Math.round((firstTryCount / totalQuestions) * 100);
+  const stars = totalScore >= 85 ? '⭐⭐⭐' : (totalScore >= 60 ? '⭐⭐' : '⭐');
+
+  document.getElementById('scoreText').textContent = `${totalScore} 分`;
+  document.getElementById('firstTryText').textContent = `${firstTryCount} / ${totalQuestions}`;
+  document.getElementById('attemptsText').textContent = `${totalAttempts} 次`;
+  document.getElementById('certStudentText').textContent = `學生：${name} ｜ 表現評價：${stars} (${totalScore}分)`;
+
+  document.getElementById('scoreBanner').style.display = 'block';
+  document.getElementById('scoreBanner').scrollIntoView({ behavior: 'smooth' });
+
+  // 同步至 Google Apps Script 儀表板
+  const payload = {
+    timestamp: new Date().toLocaleString(),
+    name: name,
+    student: name,
+    studentName: name,
+    student_name: name,
+    userName: name,
+    user_name: name,
+    studentId: name,
+    unit: '九上 Lesson 3 被動語態與性別平等',
+    level: 'C1 基礎組',
+    score: totalScore,
+    accuracy: accuracy + '%',
+    stars: stars,
+    attempts: totalAttempts
+  };
+
+  const syncStatus = document.getElementById('syncStatus');
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    syncStatus.innerHTML = '🟢 <strong>學習歷程與成績已成功同步至老師的 Google 雲端試算表儀表板！</strong>';
+    syncStatus.style.background = '#dcfce7';
+    syncStatus.style.color = '#15803d';
+    syncStatus.style.borderColor = '#86efac';
+  }).catch(() => {
+    syncStatus.innerHTML = '⚠️ <strong>雲端同步稍有延遲，可點擊下方重新同步按鈕。</strong>';
+  });
+}
+
+function initStudentNameModal() {
+  const savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  if (savedName) {
+    document.getElementById('studentName').value = savedName;
+    document.getElementById('studentNameModal').style.display = 'none';
+  } else {
+    document.getElementById('studentNameModal').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('modalStudentInput').focus();
+    }, 300);
+  }
+}
+
+function confirmStudentNameModal() {
+  const name = (document.getElementById('modalStudentInput').value || '').trim();
+  const err = document.getElementById('modalNameError');
+  if (!name) {
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  localStorage.setItem('student_global_name', name);
+  localStorage.setItem('current_student_name', name);
+  document.getElementById('studentName').value = name;
+  document.getElementById('studentNameModal').style.display = 'none';
+}
+
+function promptStudentNameModal() {
+  const current = document.getElementById('studentName').value || localStorage.getItem('student_global_name') || '';
+  document.getElementById('modalStudentInput').value = current;
+  document.getElementById('studentNameModal').style.display = 'flex';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initStudentNameModal();
+  initQuestions();
+});
+</script>
+</body>
+</html>

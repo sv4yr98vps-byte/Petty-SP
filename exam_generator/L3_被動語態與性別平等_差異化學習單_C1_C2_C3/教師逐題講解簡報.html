@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【九年級 · 國三】Lesson 3 被動語態與性別平等 教師講解簡報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-gold: #fbbf24;
+      --border: #334155;
+      --highlight: #fef08a;
+    }
+    body.light-mode {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-gold: #d97706;
+      --border: #e2e8f0;
+      --highlight: #fde047;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      background: var(--card-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+    }
+    .badge-unit {
+      background: #7c3aed;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-tool {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    body.light-mode .btn-tool {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .btn-tool:hover { background: var(--accent); color: white; }
+    main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-frame {
+      display: none;
+      flex: 1;
+      padding: 36px 40px;
+      overflow-y: auto;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .slide-frame.active { display: block; animation: fadeIn 0.25s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .slide-title { font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: 16px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+    .slide-page-num { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; }
+    .slide-content { font-size: 1.25rem; line-height: 1.8; }
+    .ans-box {
+      margin-top: 24px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 2px dashed var(--accent);
+      color: var(--accent);
+      font-size: 1.15rem;
+      display: none;
+    }
+    .ans-box.show { display: block; }
+    #whiteboardCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+    #whiteboardCanvas.drawing-mode {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span>👩‍🏫 教師逐題講解簡報</span>
+      <span class="badge-unit">九年級 · Lesson 3</span>
+      <span style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">被動語態(70%)與附加問句(30%)</span>
+    </div>
+
+    <div class="slide-controls">
+      <button class="btn-tool" onclick="prevSlide()">◀ 上一頁</button>
+      <span id="pageIndicator" style="font-weight:bold; min-width:60px; text-align:center;">1 / 8</span>
+      <button class="btn-tool" onclick="nextSlide()">下一頁 ▶</button>
+      <button class="btn-tool" onclick="toggleAnswer()">💡 揭曉解析 (Space)</button>
+      <button class="btn-tool" onclick="speakCurrent()">🔊 朗讀重點 (R)</button>
+      <button class="btn-tool" id="btnWb" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
+      <button class="btn-tool" onclick="clearWhiteboard()">🧹 清除白板</button>
+      <button class="btn-tool" onclick="toggleTheme()">🌓 切換日夜</button>
+      <a href="index.html" class="btn-tool" style="text-decoration:none;">🏠 回目錄</a>
+    </div>
+  </header>
+
+  <main>
+    <canvas id="whiteboardCanvas"></canvas>
+
+    <!-- Slide 1: 單元教學架構與 Common Core -->
+    <div class="slide-frame active" id="slide-1">
+      <div class="slide-page-num">投影片 1 / 8 · 單元架構</div>
+      <div class="slide-title">📌 Lesson 3 核心教學架構與會考重點</div>
+      <div class="slide-content">
+        <ul style="margin-left:24px; line-height:2;">
+          <li><strong>課文主題：</strong> <code>Gender Stereotypes About Jobs</code>（打破職場性別刻板印象）</li>
+          <li><strong>16 核心生詞：</strong> <code>lawyer</code>, <code>engineer</code>, <code>president</code>, <code>model</code>, <code>company</code>, <code>equal</code>, <code>hard-working</code>, <code>public</code>, <code>form</code>, <code>childhood</code>, <code>relative</code>, <code>expect</code>, <code>picture</code>, <code>everywhere</code>, <code>allow</code>, <code>brave</code></li>
+          <li><strong>核心語法一 (佔比 70%)：</strong> 被動語態 (Passive Voice)
+            <ul>
+              <li>現在/過去式被動：<code>be + p.p. + (by + 受詞)</code></li>
+              <li>助動詞情態被動：<code>will / can / must / should + be + p.p.</code></li>
+              <li>現在完成式被動：<code>have / has + been + p.p.</code></li>
+            </ul>
+          </li>
+          <li><strong>核心語法二 (佔比 30%)：</strong> 附加問句 (Tag Questions)
+            <ul>
+              <li>口訣：「前肯後否，前否後肯；時態呼應，人稱代換」。</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="ans-box">
+        💡 <strong>教師導讀叮嚀：</strong>九年級被動語態是會考每年必出的前三大文法！引導學生抓出「主詞是執行者（主動）還是承受者（被動）」是解題關鍵！
+      </div>
+    </div>
+
+    <!-- Slide 2: 核心生詞圖像解析 -->
+    <div class="slide-frame" id="slide-2">
+      <div class="slide-page-num">投影片 2 / 8 · 16 核心生詞</div>
+      <div class="slide-title">👔 職業、特質與性別平等核心詞彙</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:1.1rem;">
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>⚖️ lawyer (n. 律師)</strong> / <strong>💻 engineer (n. 工程師)</strong><br>
+            <small style="color:var(--text-muted);">例：She can be a lawyer or an engineer.</small>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>🏛️ president (n. 總統/總裁)</strong> / <strong>⭐ role model (模範)</strong><br>
+            <small style="color:var(--text-muted);">例：Barbie has shown that women can be president.</small>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>⚖️ equal (adj. 平等的)</strong> / <strong>💪 hard-working (勤勉的)</strong><br>
+            <small style="color:var(--text-muted);">例：Make the job market more equal.</small>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>🧱 form (v. 形成)</strong> / <strong>🧒 childhood (n. 童年)</strong><br>
+            <small style="color:var(--text-muted);">例：Stereotypes are formed in childhood.</small>
+          </div>
+        </div>
+      </div>
+      <div class="ans-box">
+        💡 <strong>高頻混淆字辨析：</strong>特別提醒學生注意 <code>form (形成) vs. from (來自)</code> 的字母排列，以及 <code>expect (期待) vs. except (除了)</code> 的語義區別！
+      </div>
+    </div>
+
+    <!-- Slide 3: 被動語態核心公式一 -->
+    <div class="slide-frame" id="slide-3">
+      <div class="slide-page-num">投影片 3 / 8 · 被動語態 (基本式)</div>
+      <div class="slide-title">⚡ 基本被動式：S + be動詞 + p.p. + (by + 受詞)</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:16px;">
+          <strong style="color:var(--accent-gold);">🔄 主動轉被動三步驟：</strong><br>
+          1. 主動句的「受詞」變為被動句的「主詞」。<br>
+          2. 動詞轉換為「be 動詞 + 過去分詞 (p.p.)」，be動詞時態依原動詞而定。<br>
+          3. 主動句的「主詞」變為「by + 受格」（若不明確或非重點可省略）。
+        </div>
+        <p><strong>典範例句：</strong></p>
+        <ul>
+          <li>主動：<code>Many Americans celebrate Christmas.</code></li>
+          <li>被動：<code>Christmas is celebrated by many Americans.</code></li>
+          <li>主動：<code>That brave firefighter saved the baby.</code></li>
+          <li>被動：<code>The baby was saved by that brave firefighter.</code></li>
+        </ul>
+      </div>
+      <div class="ans-box">
+        💡 <strong>會考常考陷阱：</strong>被動語態的 be 動詞必須根據「新主詞」的單複數決定！例如 <code>The windows are cleaned...</code>（複數用 are）。
+      </div>
+    </div>
+
+    <!-- Slide 4: 助動詞情態被動式 -->
+    <div class="slide-frame" id="slide-4">
+      <div class="slide-page-num">投影片 4 / 8 · 被動語態 (助動詞)</div>
+      <div class="slide-title">🚀 助動詞情態被動式：will / can / must / should + be + p.p.</div>
+      <div class="slide-content">
+        <p>當句中含有情態助動詞（will, can, must, should, shouldn't 等）時，後面一律接<strong>原形 be + 過去分詞 (p.p.)</strong>：</p>
+        <ul style="line-height:2.2; margin-left:20px;">
+          <li><code>The car race will be held on December 2.</code>（賽車比賽將於12/2被舉行）</li>
+          <li><code>The broken computer can be fixed today.</code>（故障的電腦今天可以被修好）</li>
+          <li><code>Pets must be left outside the museum.</code>（寵物必須被留在博物館外面）</li>
+          <li><code>Dangerous knives shouldn't be put here.</code>（危險刀子不應該被放在這裡）</li>
+        </ul>
+      </div>
+      <div class="ans-box">
+        💡 <strong>常見扣分盲點：</strong>學生常漏寫原形 <code>be</code>（錯誤寫成 will held 或 can fixed），請再三提醒助動詞後必有原形 <b>be</b>！
+      </div>
+    </div>
+
+    <!-- Slide 5: 現在完成式被動語態 -->
+    <div class="slide-frame" id="slide-5">
+      <div class="slide-page-num">投影片 5 / 8 · 被動語態 (完成式)</div>
+      <div class="slide-title">⏳ 現在完成式被動：have / has + been + p.p.</div>
+      <div class="slide-content">
+        <p>表示動作從過去某個時間點開始，一直被持續執行至今：</p>
+        <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:14px;">
+          <strong>公式：</strong><code>主詞 + have / has + been + 過去分詞 (p.p.) + (since / for / yet)</code>
+        </div>
+        <ul>
+          <li><code>These sheep have been raised by Mr. Chen since 2015.</code></li>
+          <li><code>The inspirational story has been told many times.</code></li>
+          <li><code>The dirty car hasn't been washed by Scott yet.</code></li>
+          <li><code>Since childhood, we have been taught to respect others.</code></li>
+        </ul>
+      </div>
+      <div class="ans-box">
+        💡 <strong>雙重 p.p. 解碼：</strong>完成式的 have + p.p.（這裡用 been）加上被動的 be + p.p.（動詞過去分詞），組合出 <b>have/has been + p.p.</b>！
+      </div>
+    </div>
+
+    <!-- Slide 6: 附加問句精要解析 -->
+    <div class="slide-frame" id="slide-6">
+      <div class="slide-page-num">投影片 6 / 8 · 附加問句 (佔比 30%)</div>
+      <div class="slide-title">🎯 附加問句：前肯後否，前否後肯</div>
+      <div class="slide-content">
+        <table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:1.05rem;">
+          <tr style="border-bottom:2px solid var(--border);">
+            <th style="padding:10px; text-align:left;">動詞類別</th>
+            <th style="padding:10px; text-align:left;">主要子句 (前)</th>
+            <th style="padding:10px; text-align:left;">附加問句 (後)</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px;"><strong>be 動詞</strong></td>
+            <td>The boy is hard-working,</td>
+            <td><strong style="color:var(--accent-gold);">isn't he?</strong></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px;"><strong>一般動詞 (現在)</strong></td>
+            <td>Amy likes snacks,</td>
+            <td><strong style="color:var(--accent-gold);">doesn't she?</strong></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px;"><strong>一般動詞 (過去)</strong></td>
+            <td>He played a devoted husband,</td>
+            <td><strong style="color:var(--accent-gold);">didn't he?</strong></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px;"><strong>助動詞 will</strong></td>
+            <td>They will go to the movies,</td>
+            <td><strong style="color:var(--accent-gold);">won't they?</strong></td>
+          </tr>
+          <tr>
+            <td style="padding:8px;"><strong>現在完成式</strong></td>
+            <td>You haven't seen it yet,</td>
+            <td><strong style="color:var(--accent-gold);">have you?</strong></td>
+          </tr>
+        </table>
+      </div>
+      <div class="ans-box">
+        💡 <strong>解題三步法：</strong>1. 判定正負號（肯➔否，否➔肯）；2. 抓出動詞家族（be動詞/助動詞/一般動詞借 do, does, did）；3. 主詞一律替換為代名詞！
+      </div>
+    </div>
+
+    <!-- Slide 7: 課文情境與會考真題拆解 -->
+    <div class="slide-frame" id="slide-7">
+      <div class="slide-page-num">投影片 7 / 8 · 會考情境閱讀</div>
+      <div class="slide-title">📖 課文長句與會考素養閱讀分析</div>
+      <div class="slide-content">
+        <p><strong>Mattel & Barbie Doll 篇章被動句整合：</strong></p>
+        <blockquote style="border-left:4px solid var(--accent); padding-left:16px; margin:14px 0; color:var(--text-muted);">
+          "Gender stereotypes about jobs <strong>are formed</strong> in childhood. Men <strong>are often expected</strong> to do public service jobs. However, Barbie doll <strong>is known</strong> as one of the most hard-working toys in the world. She <strong>has had</strong> over 250 jobs, such as an engineer and a president. She is a great role model, <strong>isn't she</strong>?"
+        </blockquote>
+      </div>
+      <div class="ans-box">
+        💡 <strong>素養跨領域引導：</strong>結合性別平等議題（SDG 5），引導學生思考職業選擇不應受性別刻板印象限制，同時掌握被動語態在客觀陳述社會現象時的精準運用！
+      </div>
+    </div>
+
+    <!-- Slide 8: 差異化教學引導 -->
+    <div class="slide-frame" id="slide-8">
+      <div class="slide-page-num">投影片 8 / 8 · 差異化策略</div>
+      <div class="slide-title">🌱 C1 / C2 / C3 分流教學指引</div>
+      <div class="slide-content">
+        <ul>
+          <li><strong>🟢 C1 基礎組（補底自信）：</strong> 運用字頭字尾字母鷹架 <code>[ l _ _ _ _ r ]</code> 與 Emoji 圖像，鎖定 16 核心單字與基本 be + p.p. 選擇。</li>
+          <li><strong>🟠 C2 應用/進階組（積木建構）：</strong> 單字級積木自由拼裝，8~12塊單字動手拖曳，實踐「做中學」，建立被動句型順序感。</li>
+          <li><strong>🟣 C3 表達組（拔尖挑戰）：</strong> 7 題會考無提示模擬 ＋ 3 題獨立寫作智慧診斷，訓練中翻英產出能力。</li>
+          <li><strong>🎲 10 題隨機抽測：</strong> 40 題大庫動態抽測，自動同步 Google 雲端試算表掌握班級學習成效。</li>
+        </ul>
+      </div>
+      <div class="ans-box">
+        💡 <strong>課堂評量建議：</strong>先讓全班完成 C1 建立基本詞彙量，再分組進行 C2 積木挑戰，最後以 10 題隨機抽測作為驗收評量！
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+    let isDrawing = false;
+    let whiteboardActive = false;
+
+    const canvas = document.getElementById('whiteboardCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('DOMContentLoaded', resizeCanvas);
+
+    function showSlide(num) {
+      if (num < 1) num = 1;
+      if (num > totalSlides) num = totalSlides;
+      currentSlide = num;
+
+      document.querySelectorAll('.slide-frame').forEach((frame, idx) => {
+        if (idx + 1 === currentSlide) {
+          frame.classList.add('active');
+        } else {
+          frame.classList.remove('active');
+        }
+      });
+      document.getElementById('pageIndicator').textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    function toggleAnswer() {
+      const activeFrame = document.querySelector('.slide-frame.active');
+      if (activeFrame) {
+        const box = activeFrame.querySelector('.ans-box');
+        if (box) box.classList.toggle('show');
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    function toggleWhiteboard() {
+      whiteboardActive = !whiteboardActive;
+      const btn = document.getElementById('btnWb');
+      if (whiteboardActive) {
+        canvas.classList.add('drawing-mode');
+        btn.style.background = '#e11d48';
+        btn.style.color = '#fff';
+      } else {
+        canvas.classList.remove('drawing-mode');
+        btn.style.background = '';
+        btn.style.color = '';
+      }
+    }
+
+    function clearWhiteboard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // 白板畫筆事件
+    canvas.addEventListener('mousedown', (e) => {
+      if (!whiteboardActive) return;
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+      ctx.strokeStyle = document.body.classList.contains('light-mode') ? '#ef4444' : '#fde047';
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!isDrawing || !whiteboardActive) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    });
+
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseleave', () => isDrawing = false);
+
+    // 朗讀當前投影片標題與重點
+    function speakCurrent() {
+      const activeFrame = document.querySelector('.slide-frame.active');
+      if (!activeFrame || !('speechSynthesis' in window)) return;
+      const title = activeFrame.querySelector('.slide-title').innerText;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(title);
+      u.lang = 'zh-TW';
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    }
+
+    // 鍵盤快捷鍵監聽
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.code === 'Space') {
+        e.preventDefault();
+        toggleAnswer();
+      } else if (e.key.toLowerCase() === 'w') {
+        toggleWhiteboard();
+      } else if (e.key.toLowerCase() === 'r') {
+        speakCurrent();
+      }
+    });
+  </script>
+</body>
+</html>

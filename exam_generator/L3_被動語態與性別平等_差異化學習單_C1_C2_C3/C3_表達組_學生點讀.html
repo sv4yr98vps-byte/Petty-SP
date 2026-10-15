@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【國三 · 九年級】Lesson 3 被動語態與性別平等 · C3 表達組 (國中會考與段考標準評量)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-dark: #6d28d9;
+      --primary-light: #f3e8ff;
+      --bg: #faf5ff;
+      --card-bg: #ffffff;
+      --text: #1e1b4b;
+      --text-muted: #64748b;
+      --border: #e9d5ff;
+      --success: #10b981;
+      --error: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 16px;
+      padding-bottom: 60px;
+    }
+    .container { max-width: 860px; margin: 0 auto; }
+    .header {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(124,58,237,0.08);
+      border: 1.5px solid var(--border);
+    }
+    .badge-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .level-badge { background: linear-gradient(135deg, #7c3aed, #9333ea); color: white; padding: 4px 14px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; }
+    .student-box { display: flex; align-items: center; gap: 6px; }
+    .input-name { padding: 6px 14px; border: 2px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-family: inherit; font-weight: 700; color: #4c1d95; outline: none; background: #faf5ff; }
+    .input-name:focus { border-color: var(--primary); background: #ffffff; }
+    .toolbar {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .voice-badge { background: var(--primary-light); color: var(--primary-dark); font-weight: 700; font-size: 0.88rem; padding: 4px 12px; border-radius: 8px; border: 1px solid #d8b4fe; }
+    .speed-ctrl { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-muted); margin-left: auto; }
+    .speed-btn { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; cursor: pointer; font-family: inherit; }
+    .speed-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
+    .section-title { font-size: 1.25rem; font-weight: 800; color: #5b21b6; margin: 26px 0 14px; display: flex; align-items: center; gap: 8px; }
+    .exercise-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .q-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; line-height: 1.6; color: #1e1b4b; }
+    .speaker-btn { background: #f3e8ff; color: #7c3aed; border: 1px solid #d8b4fe; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; flex-shrink: 0; font-weight: 600; }
+    .speaker-btn:hover { background: #ede9fe; }
+    .options-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+    @media (max-width: 600px) {
+      .options-grid-4 { grid-template-columns: 1fr; }
+    }
+    .option-btn {
+      background: var(--card-bg);
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 1.02rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+    }
+    .option-btn:hover { border-color: var(--primary); background: #faf5ff; }
+    .option-btn.selected { border-color: var(--primary); background: #f3e8ff; color: #6d28d9; font-weight: 700; }
+    .writing-box {
+      background: #faf5ff;
+      border: 1.5px dashed var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 12px;
+    }
+    .input-box {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1.12rem;
+      font-family: 'Fredoka', 'Outfit', sans-serif;
+      margin-top: 10px;
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .input-box:focus { border-color: var(--primary); background: white; }
+    .grammar-feedback {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: none;
+      line-height: 1.6;
+    }
+    .btn-check-write {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.15s;
+    }
+    .btn-check-write:hover { background: #6d28d9; }
+    .btn-submit-all {
+      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 14px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      cursor: pointer;
+      width: 100%;
+      margin: 28px 0;
+      box-shadow: 0 10px 20px -3px rgba(124,58,237,0.3);
+      transition: transform 0.1s;
+    }
+    .btn-submit-all:hover { transform: translateY(-2px); }
+    .completion-card { background: var(--card-bg); border-radius: 20px; padding: 32px 20px; text-align: center; border: 3px solid var(--primary); display: none; margin-top: 24px; box-shadow: 0 10px 25px rgba(124,58,237,0.15); }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+    @media (max-width: 600px) {
+      .stat-grid { grid-template-columns: 1fr; }
+    }
+    .stat-box { background: #faf5ff; border: 1.5px solid var(--border); padding: 16px; border-radius: 14px; }
+    .stat-val { font-size: 1.85rem; font-weight: 800; color: var(--primary-dark); }
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+    .sync-status-box { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; padding: 12px 16px; border-radius: 10px; margin: 18px 0; font-size: 0.95rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- 學生姓名強制彈跳視窗 (Entry Modal) -->
+<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #a855f7;">
+    <div style="font-size:3.2rem; margin-bottom:12px;">👋 📝</div>
+    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入 C3 表達組評量！</h2>
+    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄段考會考成績與寫作診斷歷程：</p>
+    
+    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名 (例如: 王小明)" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; transition:border-color 0.2s; box-sizing:border-box;" onfocus="this.style.borderColor='#7c3aed'" onblur="this.style.borderColor='#cbd5e1'" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
+    
+    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始作答喔！</div>
+    
+    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer; box-shadow:0 4px 14px rgba(124,58,237,0.35);">
+      🚀 確定並開始評量
+    </button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="header">
+    <div class="badge-bar">
+      <span class="level-badge">國三 · 九年級 · C3 表達組</span>
+      <div class="student-box">
+        <label for="studentName" style="font-weight:700; color:var(--text);">👤 學生姓名：</label>
+        <input type="text" id="studentName" onclick="promptStudentNameModal()" class="input-name" placeholder="點此輸入姓名">
+      </div>
+    </div>
+    <h1 style="font-size:1.6rem; color:#5b21b6;">被動語態與性別平等 · 國中段考會考標準評量</h1>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-top:4px;">🎯 7 題會考標準選擇題 (無提示) ＋ 3 題中翻英寫作智慧診斷 · 滿分 100 分 · 雲端即時同步</p>
+  </div>
+
+  <div class="toolbar">
+    <span class="voice-badge">🗣️ Google 雙語智慧語音小姐 (已鎖定)</span>
+    <div class="speed-ctrl">
+      <span>語速：</span>
+      <button type="button" class="speed-btn" onclick="setSpeed(1.0, this)">1x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
+      <button type="button" class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
+      <button type="button" class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x 特慢</button>
+    </div>
+  </div>
+
+  <div id="c3Content">
+    <!-- 第一部分：7題 標準 4選1 選擇題 (被動語態 5 題 70% ＋ 附加問句 2 題 30% · 每題 10 分) -->
+    <div class="section-title">📝 第一部分：國中會考與段考標準選擇題 (7 題 4 選 1 · 無題示 · 每題 10 分)</div>
+
+    <!-- Q1 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>1. In Taiwan, Christmas ______ by many young people and couples, but it is not a national holiday.</span>
+        <button class="speaker-btn" onclick="speakEnglish('In Taiwan, Christmas is celebrated by many young people and couples, but it is not a national holiday.')">🔊 朗讀題幹</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(1, 'A', this)">(A) is celebrated</button>
+        <button class="option-btn" onclick="pickChoice(1, 'B', this)">(B) was celebrated</button>
+        <button class="option-btn" onclick="pickChoice(1, 'C', this)">(C) celebrates</button>
+        <button class="option-btn" onclick="pickChoice(1, 'D', this)">(D) has celebrated</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>2. The crying baby was trapped in the burning house, but luckily he ______ by a brave firefighter.</span>
+        <button class="speaker-btn" onclick="speakEnglish('The crying baby was trapped in the burning house, but luckily he was saved by a brave firefighter.')">🔊 朗讀題幹</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(2, 'A', this)">(A) saves</button>
+        <button class="option-btn" onclick="pickChoice(2, 'B', this)">(B) was saved</button>
+        <button class="option-btn" onclick="pickChoice(2, 'C', this)">(C) has saved</button>
+        <button class="option-btn" onclick="pickChoice(2, 'D', this)">(D) is saving</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>3. To protect our ocean, plastic bags and straws ______ used in this store anymore.</span>
+        <button class="speaker-btn" onclick="speakEnglish('To protect our ocean, plastic bags and straws shouldn\'t be used in this store anymore.')">🔊 朗讀題幹</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(3, 'A', this)">(A) shouldn't be</button>
+        <button class="option-btn" onclick="pickChoice(3, 'B', this)">(B) shouldn't</button>
+        <button class="option-btn" onclick="pickChoice(3, 'C', this)">(C) won't have</button>
+        <button class="option-btn" onclick="pickChoice(3, 'D', this)">(D) wasn't been</button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>4. The international robot competition ______ in our school next month. All students can join!</span>
+        <button class="speaker-btn" onclick="speakEnglish('The international robot competition will be held in our school next month. All students can join!')">🔊 朗讀題幹</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(4, 'A', this)">(A) will hold</button>
+        <button class="option-btn" onclick="pickChoice(4, 'B', this)">(B) will be held</button>
+        <button class="option-btn" onclick="pickChoice(4, 'C', this)">(C) is helding</button>
+        <button class="option-btn" onclick="pickChoice(4, 'D', this)">(D) has held</button>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>5. Look at the sheep on the hill! They ______ by the kind farmer for ten years.</span>
+        <button class="speaker-btn" onclick="speakEnglish('Look at the sheep on the hill! They have been raised by the kind farmer for ten years.')">🔊 朗讀題幹</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(5, 'A', this)">(A) have been raised</button>
+        <button class="option-btn" onclick="pickChoice(5, 'B', this)">(B) was raised</button>
+        <button class="option-btn" onclick="pickChoice(5, 'C', this)">(C) have raised</button>
+        <button class="option-btn" onclick="pickChoice(5, 'D', this)">(D) were raising</button>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>6. Barbie has been an engineer, a pilot, and a doctor over the past decades, ______ she?</span>
+        <button class="speaker-btn" onclick="speakEnglish('Barbie has been an engineer, a pilot, and a doctor over the past decades, hasn\'t she?')">🔊 朗讀題幹</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(6, 'A', this)">(A) hasn't</button>
+        <button class="option-btn" onclick="pickChoice(6, 'B', this)">(B) didn't</button>
+        <button class="option-btn" onclick="pickChoice(6, 'C', this)">(C) isn't</button>
+        <button class="option-btn" onclick="pickChoice(6, 'D', this)">(D) doesn't</button>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>7. You haven't watched the new movie about breaking gender stereotypes yet, ______ you?</span>
+        <button class="speaker-btn" onclick="speakEnglish('You haven\'t watched the new movie about breaking gender stereotypes yet, have you?')">🔊 朗讀題幹</button>
+      </div>
+      <div class="options-grid-4">
+        <button class="option-btn" onclick="pickChoice(7, 'A', this)">(A) haven't</button>
+        <button class="option-btn" onclick="pickChoice(7, 'B', this)">(B) do</button>
+        <button class="option-btn" onclick="pickChoice(7, 'C', this)">(C) have</button>
+        <button class="option-btn" onclick="pickChoice(7, 'D', this)">(D) did</button>
+      </div>
+    </div>
+
+    <!-- 第二部分：3題 獨立書寫與智慧文法檢核 (被動語態 2 題 ＋ 附加問句 1 題 · 每題 10 分) -->
+    <div class="section-title">✍️ 第二部分：獨立中翻英寫作與智慧文法診斷 (3 題 · 每題 10 分)</div>
+
+    <!-- W1 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>8. 請將中文翻譯為完整英文句子 (使用現在被動式 is spoken)：<br><strong>「全世界許多國家都在說英語。」</strong></span>
+        <button class="speaker-btn" onclick="speakEnglish('English is spoken in many countries around the world.')">🔊 聽示範句</button>
+      </div>
+      <div class="writing-box">
+        <input type="text" class="input-box" id="w1_input" placeholder="請在此輸入英文句子..." />
+        <button class="btn-check-write" onclick="checkWriting(1)">🔍 檢查文法與拼字</button>
+        <div class="grammar-feedback" id="w1_fb"></div>
+      </div>
+    </div>
+
+    <!-- W2 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>9. 請將中文翻譯為完整英文句子 (使用 can be fixed)：<br><strong>「這台壞掉的電腦今天可以被工程師修好。」</strong></span>
+        <button class="speaker-btn" onclick="speakEnglish('The broken computer can be fixed by the engineer today.')">🔊 聽示範句</button>
+      </div>
+      <div class="writing-box">
+        <input type="text" class="input-box" id="w2_input" placeholder="請在此輸入英文句子..." />
+        <button class="btn-check-write" onclick="checkWriting(2)">🔍 檢查文法與拼字</button>
+        <div class="grammar-feedback" id="w2_fb"></div>
+      </div>
+    </div>
+
+    <!-- W3 -->
+    <div class="exercise-card">
+      <div class="q-title">
+        <span>10. 請將中文翻譯為完整英文句子 (使用 hard-working 與附加問句)：<br><strong>「那位女工程師工作非常認真，不是嗎？」</strong></span>
+        <button class="speaker-btn" onclick="speakEnglish('The female engineer is very hard-working, isn\'t she?')">🔊 聽示範句</button>
+      </div>
+      <div class="writing-box">
+        <input type="text" class="input-box" id="w3_input" placeholder="請在此輸入英文句子..." />
+        <button class="btn-check-write" onclick="checkWriting(3)">🔍 檢查文法與拼字</button>
+        <div class="grammar-feedback" id="w3_fb"></div>
+      </div>
+    </div>
+
+    <button class="btn-submit-all" onclick="submitC3()">🎉 完成並結算 C3 表達成績</button>
+  </div>
+
+  <div class="completion-card" id="completionCard">
+    <div style="font-size:3.2rem; line-height:1;">🏆</div>
+    <h2 style="font-size:1.6rem; color:#5b21b6; margin:10px 0 4px;">恭喜完成 C3 表達組綜合任務！</h2>
+    <div id="certStudentText" style="font-weight:700; color:var(--text); margin-bottom:18px; font-size:1.05rem;">學生：未填寫 ｜ 表現評價：⭐⭐⭐</div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val" id="resScore">-- 分</div>
+        <div class="stat-lbl">🏆 結算總分 (滿分 100)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resMC">-- / 70</div>
+        <div class="stat-lbl">🎯 會考選擇題得分 (7題)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="resWrite">-- / 30</div>
+        <div class="stat-lbl">✍️ 寫作診斷得分 (3題)</div>
+      </div>
+    </div>
+
+    <div class="sync-status-box" id="syncStatusBanner">📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+      <button type="button" style="background:#7c3aed; color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:700; cursor:pointer;" onclick="submitC3()">☁️ 重新同步儀表板</button>
+      <button type="button" style="background:#64748b; color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 重新挑戰</button>
+      <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 20px; border-radius:10px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+let currentSpeed = 0.25;
+
+function setSpeed(spd, btn) {
+  currentSpeed = spd;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function speakEnglish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = currentSpeed;
+  const voices = window.speechSynthesis.getVoices();
+  const gVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'));
+  if (gVoice) u.voice = gVoice;
+  window.speechSynthesis.speak(u);
+}
+
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-TW';
+  u.rate = 0.9;
+  window.speechSynthesis.speak(u);
+}
+
+const userChoices = { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null };
+const correctAnswers = { 1: 'A', 2: 'B', 3: 'A', 4: 'B', 5: 'A', 6: 'A', 7: 'C' };
+const writingPassed = { 1: false, 2: false, 3: false };
+
+function pickChoice(qNum, choice, btn) {
+  userChoices[qNum] = choice;
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function checkWriting(qNum) {
+  const input = document.getElementById(`w${qNum}_input`).value.trim();
+  const fb = document.getElementById(`w${qNum}_fb`);
+  fb.style.display = 'block';
+
+  const clean = input.replace(/\s+/g, ' ').toLowerCase();
+
+  if (qNum === 1) {
+    const hasEnglish = clean.includes('english');
+    const hasSpoken = clean.includes('is spoken') || clean.includes('spoken');
+    const hasWorld = clean.includes('world') || clean.includes('countries');
+
+    if (hasEnglish && hasSpoken && hasWorld) {
+      writingPassed[1] = true;
+      fb.style.background = '#dcfce7';
+      fb.style.color = '#15803d';
+      fb.style.border = '1px solid #86efac';
+      fb.innerHTML = '✅ <strong>太優秀了！現在被動式「English is spoken」使用非常精準！</strong><br>示範句：<code>English is spoken in many countries around the world.</code>';
+      speakEnglish('English is spoken in many countries around the world.');
+    } else {
+      fb.style.background = '#fee2e2';
+      fb.style.color = '#b91c1c';
+      fb.style.border = '1px solid #fca5a5';
+      fb.innerHTML = '💡 <strong>文法診斷提醒：</strong><br>1. 英語是被說的，請使用被動式 <b>English is spoken</b>。<br>2. 全世界許多國家：<b>in many countries around the world</b>。';
+      speakChinese('請檢查 is spoken 被動語態喔！');
+    }
+  } else if (qNum === 2) {
+    const hasComputer = clean.includes('computer');
+    const hasFixed = clean.includes('can be fixed') || clean.includes('be fixed') || clean.includes('will be fixed');
+    const hasEngineer = clean.includes('engineer');
+
+    if (hasComputer && hasFixed && (hasEngineer || clean.includes('broken'))) {
+      writingPassed[2] = true;
+      fb.style.background = '#dcfce7';
+      fb.style.color = '#15803d';
+      fb.style.border = '1px solid #86efac';
+      fb.innerHTML = '✅ <strong>完美！助動詞被動「can be fixed by the engineer」完全正確！</strong><br>示範句：<code>The broken computer can be fixed by the engineer today.</code>';
+      speakEnglish('The broken computer can be fixed by the engineer today.');
+    } else {
+      fb.style.background = '#fee2e2';
+      fb.style.color = '#b91c1c';
+      fb.style.border = '1px solid #fca5a5';
+      fb.innerHTML = '💡 <strong>文法診斷提醒：</strong><br>1. 壞掉的電腦：<b>The broken computer</b>。<br>2. 助動詞被動：<b>can be fixed by the engineer today</b>。';
+      speakChinese('請注意 can be fixed 助動詞被動式喔！');
+    }
+  } else if (qNum === 3) {
+    const hasEngineer = clean.includes('engineer');
+    const hasHardWorking = clean.includes('hard-working') || clean.includes('hard working') || clean.includes('works hard');
+    const hasTag = clean.includes("isn't she") || clean.includes("doesn't she");
+
+    if (hasEngineer && hasHardWorking && hasTag) {
+      writingPassed[3] = true;
+      fb.style.background = '#dcfce7';
+      fb.style.color = '#15803d';
+      fb.style.border = '1px solid #86efac';
+      fb.innerHTML = '✅ <strong>太棒了！形容詞 hard-working 與附加問句 isn\'t she 搭配完美！</strong><br>示範句：<code>The female engineer is very hard-working, isn\'t she?</code>';
+      speakEnglish("The female engineer is very hard-working, isn't she?");
+    } else {
+      fb.style.background = '#fee2e2';
+      fb.style.color = '#b91c1c';
+      fb.style.border = '1px solid #fca5a5';
+      fb.innerHTML = '💡 <strong>文法診斷提醒：</strong><br>1. 女工程師工作認真：<b>The female engineer is very hard-working</b>。<br>2. 附加問句前肯後否：<b>isn\'t she?</b>';
+      speakChinese("請注意附加問句 isn't she 喔！");
+    }
+  }
+}
+
+function submitC3() {
+  const name = (document.getElementById('studentName').value || '').trim();
+  if (!name) {
+    promptStudentNameModal();
+    return;
+  }
+
+  // 1. 計算選擇題得分 (每題 10 分，滿分 70)
+  let mcScore = 0;
+  for (let q = 1; q <= 7; q++) {
+    if (userChoices[q] === correctAnswers[q]) {
+      mcScore += 10;
+    }
+  }
+
+  // 2. 計算寫作診斷得分 (每題 10 分，滿分 30)
+  let writeScore = 0;
+  for (let w = 1; w <= 3; w++) {
+    if (!writingPassed[w]) {
+      checkWriting(w);
+    }
+    if (writingPassed[w]) {
+      writeScore += 10;
+    }
+  }
+
+  const totalScore = mcScore + writeScore;
+  const stars = totalScore >= 90 ? '⭐⭐⭐' : (totalScore >= 60 ? '⭐⭐' : '⭐');
+
+  document.getElementById('resScore').textContent = `${totalScore} 分`;
+  document.getElementById('resMC').textContent = `${mcScore} / 70`;
+  document.getElementById('resWrite').textContent = `${writeScore} / 30`;
+  document.getElementById('certStudentText').textContent = `學生：${name} ｜ 表現評價：${stars} (${totalScore}分)`;
+
+  document.getElementById('completionCard').style.display = 'block';
+  document.getElementById('completionCard').scrollIntoView({ behavior: 'smooth' });
+
+  // 同步至 Google Apps Script 儀表板
+  const payload = {
+    timestamp: new Date().toLocaleString(),
+    name: name,
+    student: name,
+    studentName: name,
+    student_name: name,
+    userName: name,
+    user_name: name,
+    studentId: name,
+    unit: '九上 Lesson 3 被動語態與性別平等',
+    level: 'C3 表達組',
+    score: totalScore,
+    accuracy: totalScore + '%',
+    stars: stars,
+    attempts: 0,
+    mc_score: mcScore,
+    write_score: writeScore
+  };
+
+  const syncBanner = document.getElementById('syncStatusBanner');
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    syncBanner.innerHTML = '🟢 <strong>成績與寫作診斷成果已成功同步至老師的 Google 雲端試算表儀表板！</strong>';
+    syncBanner.style.background = '#dcfce7';
+    syncBanner.style.color = '#15803d';
+    syncBanner.style.borderColor = '#86efac';
+  }).catch(() => {
+    syncBanner.innerHTML = '⚠️ <strong>同步過程遇到網路延遲，請稍後點擊下方「重新同步」按鈕。</strong>';
+  });
+}
+
+function initStudentNameModal() {
+  const savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+  if (savedName) {
+    document.getElementById('studentName').value = savedName;
+    document.getElementById('studentNameModal').style.display = 'none';
+  } else {
+    document.getElementById('studentNameModal').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('modalStudentInput').focus();
+    }, 300);
+  }
+}
+
+function confirmStudentNameModal() {
+  const name = (document.getElementById('modalStudentInput').value || '').trim();
+  const err = document.getElementById('modalNameError');
+  if (!name) {
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  localStorage.setItem('student_global_name', name);
+  localStorage.setItem('current_student_name', name);
+  document.getElementById('studentName').value = name;
+  document.getElementById('studentNameModal').style.display = 'none';
+}
+
+function promptStudentNameModal() {
+  const current = document.getElementById('studentName').value || localStorage.getItem('student_global_name') || '';
+  document.getElementById('modalStudentInput').value = current;
+  document.getElementById('studentNameModal').style.display = 'flex';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initStudentNameModal();
+});
+</script>
+</body>
+</html>
