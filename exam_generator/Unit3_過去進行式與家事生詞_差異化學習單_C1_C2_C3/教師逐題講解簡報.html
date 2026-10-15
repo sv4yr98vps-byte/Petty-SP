@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語【八年級 · 國二】Unit 3 過去進行式與家事生詞 教師講解簡報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-gold: #fbbf24;
+      --border: #334155;
+      --highlight: #fef08a;
+    }
+    body.light-mode {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-gold: #d97706;
+      --border: #e2e8f0;
+      --highlight: #fde047;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      background: var(--card-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+    }
+    .badge-unit {
+      background: #0284c7;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-tool, select.tool-select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    body.light-mode .btn-tool, body.light-mode select.tool-select {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .btn-tool:hover { background: var(--accent); color: white; }
+    main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-frame {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow-y: auto;
+    }
+    .slide-frame.active { display: flex; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .slide-page-num { font-size: 0.9rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 8px; }
+    .slide-title { font-size: 1.85rem; font-weight: 800; color: var(--text); margin-bottom: 18px; line-height: 1.3; }
+    .slide-content { font-size: 1.25rem; line-height: 1.8; margin-bottom: 20px; }
+    .ans-box {
+      background: rgba(56,189,248,0.1);
+      border: 2px dashed var(--accent);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 1.15rem;
+      color: var(--text);
+      display: none;
+      margin-top: 15px;
+    }
+    .ans-box.show { display: block; animation: fadeIn 0.3s ease; }
+    #whiteboardCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 50;
+      pointer-events: none;
+    }
+    #whiteboardCanvas.drawing { pointer-events: auto; cursor: crosshair; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span>👩‍🏫 教師逐題講解簡報</span>
+      <span class="badge-unit">八年級 · Unit 3</span>
+      <span style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">過去進行式與家事生詞</span>
+    </div>
+
+    <div class="slide-controls">
+      <button class="btn-tool" onclick="prevSlide()">◀ 上一頁</button>
+      <span id="pageIndicator" style="font-weight:bold; min-width:60px; text-align:center;">1 / 8</span>
+      <button class="btn-tool" onclick="nextSlide()">下一頁 ▶</button>
+      <button class="btn-tool" onclick="toggleAnswer()">💡 揭曉解析 (Space)</button>
+      <button class="btn-tool" onclick="speakCurrent()">🔊 朗讀例句 (R)</button>
+      <button class="btn-tool" id="btnWb" onclick="toggleWhiteboard()">✏️ 電子白板 (W)</button>
+      <button class="btn-tool" onclick="clearWhiteboard()">🧹 清除白板</button>
+      <button class="btn-tool" onclick="toggleTheme()">🌓 切換日夜</button>
+      <a href="index.html" class="btn-tool" style="text-decoration:none;">🏠 回目錄</a>
+    </div>
+  </header>
+
+  <main>
+    <canvas id="whiteboardCanvas"></canvas>
+
+    <!-- Slide 1: 課程大綱與 Common Core -->
+    <div class="slide-frame active" id="slide-1">
+      <div class="slide-page-num">投影片 1 / 8 · 單元架構</div>
+      <div class="slide-title">📌 Unit 3 核心教學架構與差異化目標</div>
+      <div class="slide-content">
+        <ul style="margin-left:24px; line-height:2;">
+          <li><strong>核心主題：</strong> Mom Was Doing the Dishes at Half Past Twelve</li>
+          <li><strong>核心單字：</strong> <code>do the dishes</code>, <code>sweep</code>, <code>mop</code>, <code>wipe</code>, <code>hang</code>, <code>fix</code>, <code>feed</code>, <code>break</code>, <code>floor</code>, <code>stairs</code>, <code>window</code>, <code>drawer</code>, <code>clothes</code>, <code>half</code>, <code>past</code>, <code>quarter</code></li>
+          <li><strong>核心語法 1：</strong> 過去進行式 (was / were + V-ing) 表示過去某特定時間點正在進行的動作。</li>
+          <li><strong>核心語法 2：</strong> 過去進行式搭配 <code>when</code> + 過去簡單式（突發事件插敘）。</li>
+          <li><strong>差異化分流：</strong> C1 基礎生詞認讀 ➔ C2 單字級積木組句 ➔ C3 情境表達發表。</li>
+        </ul>
+      </div>
+      <div class="ans-box">
+        💡 <strong>教師導讀叮嚀：</strong>引導特教或資源班學生時，強調 was (單數/第一人稱) 與 were (複數/第二人稱) 的口訣與手勢記憶法！
+      </div>
+    </div>
+
+    <!-- Slide 2: 核心家事生詞解析 -->
+    <div class="slide-frame" id="slide-2">
+      <div class="slide-page-num">投影片 2 / 8 · 單字圖解</div>
+      <div class="slide-title">🧹 家事動詞片語記憶技巧</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:1.15rem;">
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>🍽️ do the dishes</strong> 洗碗盤<br>
+            <small style="color:var(--text-muted);">例：I was doing the dishes at seven.</small>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>🧹 sweep the floor</strong> 掃地<br>
+            <small style="color:var(--text-muted);">例：He was sweeping the floor after school.</small>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>🧽 mop the floor</strong> 拖地 (mop -> mopping 重複 p)<br>
+            <small style="color:var(--text-muted);">例：She was mopping the living room floor.</small>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); padding:14px; border-radius:10px;">
+            <strong>🪟 wipe the window</strong> 擦窗戶 (wipe -> wiping 去 e 加 ing)<br>
+            <small style="color:var(--text-muted);">例：Please wipe the table with a clean cloth.</small>
+          </div>
+        </div>
+      </div>
+      <div class="ans-box">
+        💡 <strong>拼字動態陷阱：</strong>特別提醒學生 <code>mop -> mopping</code> 要重複 p，<code>wipe -> wiping</code> 要去掉字尾不發音的 e！
+      </div>
+    </div>
+
+    <!-- Slide 3: 過去進行式語法公式 -->
+    <div class="slide-frame" id="slide-3">
+      <div class="slide-page-num">投影片 3 / 8 · 文法核心</div>
+      <div class="slide-title">⏰ 過去進行式：was / were + V-ing</div>
+      <div class="slide-content">
+        <table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:1.1rem;">
+          <tr style="border-bottom:2px solid var(--border); text-align:left;">
+            <th style="padding:10px;">主詞類別</th>
+            <th style="padding:10px;">助動詞</th>
+            <th style="padding:10px;">現在分詞 (V-ing)</th>
+            <th style="padding:10px;">過去特定時間點</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px;">I, He, She, It, Mr. Rokk (單數)</td>
+            <td style="padding:10px; color:#38bdf8; font-weight:bold;">was</td>
+            <td style="padding:10px;">making breakfast</td>
+            <td style="padding:10px;">at six yesterday morning</td>
+          </tr>
+          <tr>
+            <td style="padding:10px;">We, You, They, Bobbie and the baby (複數)</td>
+            <td style="padding:10px; color:#fbbf24; font-weight:bold;">were</td>
+            <td style="padding:10px;">sleeping</td>
+            <td style="padding:10px;">at that time</td>
+          </tr>
+        </table>
+      </div>
+      <div class="ans-box">
+        💡 <strong>口訣：</strong>「一個人用 was，兩個人用 were；動作進行中，後面加 ing！」
+      </div>
+    </div>
+
+    <!-- Slide 4: when 子句文法 -->
+    <div class="slide-frame" id="slide-4">
+      <div class="slide-page-num">投影片 4 / 8 · 複合子句</div>
+      <div class="slide-title">⚡ 突發事件插敘：was/were V-ing + when + Ved</div>
+      <div class="slide-content">
+        <div style="background:rgba(255,255,255,0.05); border-left:4px solid var(--accent); padding:16px; border-radius:0 12px 12px 0;">
+          <strong>句型結構：</strong><br>
+          <code>[正在進行的長動作 (過去進行式)] + when + [突發短動作 (過去簡單式)]</code>
+        </div>
+        <ul style="margin:16px 0 0 24px; line-height:2;">
+          <li>Kelly <strong>was playing</strong> video games <strong>when</strong> the earthquake <strong>happened</strong>.</li>
+          <li>I <strong>was sleepwalking</strong> <strong>when</strong> I <strong>broke</strong> my cup.</li>
+          <li>Mrs. Baker <strong>was working</strong> at her desk <strong>when</strong> the lights <strong>went</strong> out.</li>
+        </ul>
+      </div>
+      <div class="ans-box">
+        💡 <strong>教學關鍵：</strong>強調 <code>when</code> 後面的動詞必須是「過去簡單式 Ved (如 broke, happened, walked)」，絕對不能兩個都加 ing！
+      </div>
+    </div>
+
+    <!-- Slide 5: 逐題解析範例 1 -->
+    <div class="slide-frame" id="slide-5">
+      <div class="slide-page-num">投影片 5 / 8 · 經典題解析</div>
+      <div class="slide-title">📝 題型解析：單複數主詞辨析</div>
+      <div class="slide-content">
+        <p style="font-size:1.35rem; font-weight:bold;">
+          Q: Bobbie and the baby ______ sleeping when the earthquake happened.
+        </p>
+        <p style="color:var(--text-muted); margin-top:8px;">(A) was &nbsp;&nbsp;&nbsp; (B) were &nbsp;&nbsp;&nbsp; (C) are &nbsp;&nbsp;&nbsp; (D) is</p>
+      </div>
+      <div class="ans-box">
+        ✅ <strong>正確答案：(B) were</strong><br>
+        💡 <strong>深入解析：</strong>主詞是 <code>Bobbie and the baby</code>，由 <code>and</code> 連接兩個人物，屬於「複數主詞」，在過去進行式中必須搭配 <code>were</code>！(A) was 用於單數主詞，(C)(D) 是現在式時態不符。
+      </div>
+    </div>
+
+    <!-- Slide 6: 逐題解析範例 2 -->
+    <div class="slide-frame" id="slide-6">
+      <div class="slide-page-num">投影片 6 / 8 · 經典題解析</div>
+      <div class="slide-title">📝 題型解析：when 子句時態陷阱</div>
+      <div class="slide-content">
+        <p style="font-size:1.35rem; font-weight:bold;">
+          Q: I was sleepwalking when I ______ my favorite cup.
+        </p>
+        <p style="color:var(--text-muted); margin-top:8px;">(A) broke &nbsp;&nbsp;&nbsp; (B) break &nbsp;&nbsp;&nbsp; (C) was breaking &nbsp;&nbsp;&nbsp; (D) am breaking</p>
+      </div>
+      <div class="ans-box">
+        ✅ <strong>正確答案：(A) broke</strong><br>
+        💡 <strong>深入解析：</strong>主要子句是 <code>was sleepwalking</code>（夢遊為長動作），打破杯子是瞬間突發的短動作，在 <code>when</code> 引導的副詞子句中必須使用「過去簡單式」<code>broke</code>！
+      </div>
+    </div>
+
+    <!-- Slide 7: 逐題解析範例 3 -->
+    <div class="slide-frame" id="slide-7">
+      <div class="slide-page-num">投影片 7 / 8 · 經典題解析</div>
+      <div class="slide-title">📝 題型解析：英語時間表達法</div>
+      <div class="slide-content">
+        <p style="font-size:1.35rem; font-weight:bold;">
+          Q: Mom was doing the dishes at half ______ twelve.
+        </p>
+        <p style="color:var(--text-muted); margin-top:8px;">(A) past &nbsp;&nbsp;&nbsp; (B) pass &nbsp;&nbsp;&nbsp; (C) passed &nbsp;&nbsp;&nbsp; (D) to</p>
+      </div>
+      <div class="ans-box">
+        ✅ <strong>正確答案：(A) past</strong><br>
+        💡 <strong>深入解析：</strong>「十二點半」在英語中為 <code>half past twelve</code>，<code>past</code> 作為介系詞表示「經過…時間」；<code>half past</code> 即表示超過整點 30 分鐘。
+      </div>
+    </div>
+
+    <!-- Slide 8: 課堂分流引導 -->
+    <div class="slide-frame" id="slide-8">
+      <div class="slide-page-num">投影片 8 / 8 · 教學分流</div>
+      <div class="slide-title">🚀 學生平板自主練習分流引導</div>
+      <div class="slide-content">
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:10px;">
+          <div style="background:rgba(5,150,105,0.15); border:1px solid #10b981; padding:16px; border-radius:12px;">
+            <h4 style="color:#10b981; margin-bottom:8px;">🟢 C1 基礎組</h4>
+            <p style="font-size:0.95rem;">適合需要單字鷹架與 0.25x 點讀的學生，進行 4 選 1 生詞防猜題練習。</p>
+          </div>
+          <div style="background:rgba(217,119,6,0.15); border:1px solid #f59e0b; padding:16px; border-radius:12px;">
+            <h4 style="color:#f59e0b; margin-bottom:8px;">🟠 C2 應用/進階組</h4>
+            <p style="font-size:0.95rem;">單字級 8~10 塊精細積木重組，即時點擊核對句子正確性與雙語反饋。</p>
+          </div>
+          <div style="background:rgba(124,58,237,0.15); border:1px solid #a855f7; padding:16px; border-radius:12px;">
+            <h4 style="color:#a855f7; margin-bottom:8px;">🟣 C3 表達組</h4>
+            <p style="font-size:0.95rem;">地震情境小記者生活報導，含句型鷹架填空、自我檢核與錄音朗讀。</p>
+          </div>
+        </div>
+      </div>
+      <div class="ans-box">
+        💡 <strong>後台提醒：</strong>學生使用平板交卷後，成績與試錯次數將 100% 自動同步至您的 Google 試算表學習歷程儀表板！
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+    let isDrawingMode = false;
+    let canvas, ctx;
+
+    function updateSlide() {
+      document.querySelectorAll('.slide-frame').forEach((s, idx) => {
+        s.classList.toggle('active', idx + 1 === currentSlide);
+      });
+      document.getElementById('pageIndicator').textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleAnswer() {
+      const activeSlide = document.querySelector('.slide-frame.active');
+      if (activeSlide) {
+        const box = activeSlide.querySelector('.ans-box');
+        if (box) box.classList.toggle('show');
+      }
+    }
+
+    function speakCurrent() {
+      const activeSlide = document.querySelector('.slide-frame.active');
+      if (!activeSlide) return;
+      const text = activeSlide.querySelector('.slide-title').textContent;
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-TW';
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    // 白板功能
+    function initWhiteboard() {
+      canvas = document.getElementById('whiteboardCanvas');
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      let drawing = false;
+      canvas.addEventListener('mousedown', (e) => {
+        if (!isDrawingMode) return;
+        drawing = true;
+        ctx.beginPath();
+        ctx.moveTo(e.clientX, e.clientY - 55);
+      });
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (!drawing || !isDrawingMode) return;
+        ctx.lineTo(e.clientX, e.clientY - 55);
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 3.5;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      });
+
+      canvas.addEventListener('mouseup', () => { drawing = false; });
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function toggleWhiteboard() {
+      isDrawingMode = !isDrawingMode;
+      const btn = document.getElementById('btnWb');
+      if (isDrawingMode) {
+        canvas.classList.add('drawing');
+        btn.style.background = '#f59e0b';
+        btn.style.color = '#000';
+      } else {
+        canvas.classList.remove('drawing');
+        btn.style.background = '';
+        btn.style.color = '';
+      }
+    }
+
+    function clearWhiteboard() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    // 鍵盤快捷鍵
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      else if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggleAnswer(); }
+      else if (e.key === 'w' || e.key === 'W') toggleWhiteboard();
+      else if (e.key === 'r' || e.key === 'R') speakCurrent();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initWhiteboard();
+      updateSlide();
+    });
+  </script>
+</body>
+</html>
