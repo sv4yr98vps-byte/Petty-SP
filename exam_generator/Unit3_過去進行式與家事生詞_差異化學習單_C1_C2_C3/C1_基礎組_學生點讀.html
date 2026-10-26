@@ -168,21 +168,21 @@ function speakChinese(text) {
 
 // 16 核心單字題（含圖案提示 + 字頭字尾鷹架提示 + 高相似度誘答選項）
 const vocabData = [
-  { id: 'v1', word: 'do the dishes', zh: '洗碗盤；清理餐具', visual: '🍽️ 洗碗盤 · 餐後清洗 ➔ [ d _ _   t _ _   d _ _ _ _ s ]', options: ['do the dishes', 'do the homework', 'wash the clothes', 'make the bed'], answer: 'do the dishes', hint: '首字為 d，結尾為 s，意為「洗碗盤；清理餐具」' },
-  { id: 'v2', word: 'sweep', zh: '打掃；清掃 (地板)', visual: '🧹 拿掃帚掃地 · 清理地面 ➔ [ s _ _ _ p ]', options: ['sweep', 'sleep', 'sweet', 'speed'], answer: 'sweep', hint: '以 sw 開頭，p 結尾，意為「用掃帚掃地」' },
-  { id: 'v3', word: 'mop', zh: '拖地；拖把', visual: '🧽 拖把拖地 · 濕拖地板 ➔ [ m _ p ]', options: ['mop', 'map', 'mob', 'mud'], answer: 'mop', hint: '以 m 開頭，p 結尾，意為「拖地；拖把」' },
+  { id: 'v1', word: 'do the dishes', zh: '洗碗盤；清理餐具', visual: '🍽️ 洗碗盤 · 餐後清洗 ➔ [ d _ _   t _ _   d _ _ _ _ s ]', options: ['do the homework', 'wash the clothes', 'do the dishes', 'make the bed'], answer: 'do the dishes', hint: '首字為 d，結尾為 s，意為「洗碗盤；清理餐具」' },
+  { id: 'v2', word: 'sweep', zh: '打掃；清掃 (地板)', visual: '🧹 拿掃帚掃地 · 清理地面 ➔ [ s _ _ _ p ]', options: ['sleep', 'sweep', 'sweet', 'speed'], answer: 'sweep', hint: '以 sw 開頭，p 結尾，意為「用掃帚掃地」' },
+  { id: 'v3', word: 'mop', zh: '拖地；拖把', visual: '🧽 拖把拖地 · 濕拖地板 ➔ [ m _ p ]', options: ['map', 'mob', 'mud', 'mop'], answer: 'mop', hint: '以 m 開頭，p 結尾，意為「拖地；拖把」' },
   { id: 'v4', word: 'wipe', zh: '擦拭；抹乾淨', visual: '🧻 拿布擦拭 · 抹桌子 ➔ [ w _ _ e ]', options: ['wipe', 'wire', 'wide', 'wave'], answer: 'wipe', hint: '以 w 開頭，e 結尾，意為「用布抹乾淨桌面」' },
-  { id: 'v5', word: 'hang', zh: '吊；懸掛 (衣服等)', visual: '👕 吊掛衣服 · 曬衣服 ➔ [ h _ _ g ]', options: ['hang', 'hand', 'hard', 'bang'], answer: 'hang', hint: '以 h 開頭，ng 結尾，意為「懸掛；吊掛」' },
-  { id: 'v6', word: 'fix', zh: '修理；解決', visual: '🔧 修理故障 · 解決問題 ➔ [ f _ x ]', options: ['fix', 'fox', 'mix', 'fit'], answer: 'fix', hint: '以 f 開頭，x 結尾，意為「修理壞掉的東西」' },
-  { id: 'v7', word: 'feed', zh: '餵食；餵養 (寵物)', visual: '🐶 餵食寵物 · 給予飼料 ➔ [ f _ _ d ]', options: ['feed', 'feel', 'feet', 'food'], answer: 'feed', hint: '以 f 開頭，雙 e，d 結尾，意為「餵食寵物」' },
+  { id: 'v5', word: 'hang', zh: '吊；懸掛 (衣服等)', visual: '👕 吊掛衣服 · 曬衣服 ➔ [ h _ _ g ]', options: ['hand', 'hard', 'hang', 'bang'], answer: 'hang', hint: '以 h 開頭，ng 結尾，意為「懸掛；吊掛」' },
+  { id: 'v6', word: 'fix', zh: '修理；解決', visual: '🔧 修理故障 · 解決問題 ➔ [ f _ x ]', options: ['fox', 'fix', 'mix', 'fit'], answer: 'fix', hint: '以 f 開頭，x 結尾，意為「修理壞掉的東西」' },
+  { id: 'v7', word: 'feed', zh: '餵食；餵養 (寵物)', visual: '🐶 餵食寵物 · 給予飼料 ➔ [ f _ _ d ]', options: ['feel', 'feet', 'food', 'feed'], answer: 'feed', hint: '以 f 開頭，雙 e，d 結尾，意為「餵食寵物」' },
   { id: 'v8', word: 'break', zh: '打破；損壞', visual: '💥 打破玻璃杯 · 弄碎 ➔ [ b _ _ _ k ]', options: ['break', 'bread', 'brave', 'brick'], answer: 'break', hint: '以 br 開頭，k 結尾，意為「打碎、弄壞」' },
-  { id: 'v9', word: 'floor', zh: '地板；樓層', visual: '🏠 乾淨地面 · 房屋地板 ➔ [ f _ _ _ r ]', options: ['floor', 'flower', 'flour', 'flood'], answer: 'floor', hint: '以 fl 開頭，雙 o，r 結尾，意為「地板」' },
-  { id: 'v10', word: 'stairs', zh: '樓梯；階梯', visual: '🪜 上下樓梯 · 樓層階梯 ➔ [ s _ _ _ _ s ]', options: ['stairs', 'stars', 'stare', 'story'], answer: 'stairs', hint: '以 st 開頭，rs 結尾，意為「樓梯」' },
-  { id: 'v11', word: 'window', zh: '窗戶', visual: '🪟 打開窗戶 · 保持通風 ➔ [ w _ _ _ _ w ]', options: ['window', 'winter', 'windy', 'widow'], answer: 'window', hint: '以 win 開頭，dow 結尾，意為「窗子」' },
+  { id: 'v9', word: 'floor', zh: '地板；樓層', visual: '🏠 乾淨地面 · 房屋地板 ➔ [ f _ _ _ r ]', options: ['flower', 'floor', 'flour', 'flood'], answer: 'floor', hint: '以 fl 開頭，雙 o，r 結尾，意為「地板」' },
+  { id: 'v10', word: 'stairs', zh: '樓梯；階梯', visual: '🪜 上下樓梯 · 樓層階梯 ➔ [ s _ _ _ _ s ]', options: ['stars', 'stare', 'stairs', 'story'], answer: 'stairs', hint: '以 st 開頭，rs 結尾，意為「樓梯」' },
+  { id: 'v11', word: 'window', zh: '窗戶', visual: '🪟 打開窗戶 · 保持通風 ➔ [ w _ _ _ _ w ]', options: ['winter', 'windy', 'widow', 'window'], answer: 'window', hint: '以 win 開頭，dow 結尾，意為「窗子」' },
   { id: 'v12', word: 'drawer', zh: '抽屜', visual: '🗄️ 拉開抽屜 · 文具收納 ➔ [ d _ _ _ _ r ]', options: ['drawer', 'draw', 'driver', 'dress'], answer: 'drawer', hint: '以 dr 開頭，wer 結尾，意為「抽屜」' },
-  { id: 'v13', word: 'clothes', zh: '衣服；服裝', visual: '👚 身上穿的衣服 · 服飾 ➔ [ c _ _ _ _ _ s ]', options: ['clothes', 'cloud', 'close', 'clock'], answer: 'clothes', hint: '以 clo 開頭，hes 結尾，意為「衣服」' },
-  { id: 'v14', word: 'half', zh: '一半；二分之一', visual: '🍕 一半披薩 · 二分之一 ➔ [ h _ _ f ]', options: ['half', 'hall', 'hard', 'hair'], answer: 'half', hint: '以 h 開頭，lf 結尾 (l 不發音)，意為「一半」' },
-  { id: 'v15', word: 'past', zh: '經過；過去 (的時間)', visual: '⏱️ 經過整點 · 幾點過幾分 ➔ [ p _ _ t ]', options: ['past', 'pass', 'part', 'post'], answer: 'past', hint: '以 p 開頭，st 結尾，half past 意為「～點半」' },
+  { id: 'v13', word: 'clothes', zh: '衣服；服裝', visual: '👚 身上穿的衣服 · 服飾 ➔ [ c _ _ _ _ _ s ]', options: ['cloud', 'clothes', 'close', 'clock'], answer: 'clothes', hint: '以 clo 開頭，hes 結尾，意為「衣服」' },
+  { id: 'v14', word: 'half', zh: '一半；二分之一', visual: '🍕 一半披薩 · 二分之一 ➔ [ h _ _ f ]', options: ['hall', 'hard', 'half', 'hair'], answer: 'half', hint: '以 h 開頭，lf 結尾 (l 不發音)，意為「一半」' },
+  { id: 'v15', word: 'past', zh: '經過；過去 (的時間)', visual: '⏱️ 經過整點 · 幾點過幾分 ➔ [ p _ _ t ]', options: ['pass', 'part', 'post', 'past'], answer: 'past', hint: '以 p 開頭，st 結尾，half past 意為「～點半」' },
   { id: 'v16', word: 'quarter', zh: '十五分鐘；四分之一', visual: '🕒 一刻鐘 · 十五分鐘 ➔ [ q _ _ _ _ _ r ]', options: ['quarter', 'quiet', 'queen', 'question'], answer: 'quarter', hint: '以 qu 開頭，ter 結尾，意為「一刻鐘 (15分鐘)」' }
 ];
 
@@ -193,7 +193,7 @@ const grammarData = [
     title: 'Mr. Rokk ______ breakfast at six o\'clock yesterday morning.',
     zh: '昨晨六點 Rokk 先生正在做早餐。',
     visual: '🍳 昨晨六點特定時刻正在進行 ➔ [ w _ s   m _ _ _ _ g ]',
-    options: ['was making', 'were making', 'is making'],
+    options: ['were making', 'was making', 'is making'],
     answer: 'was making',
     hint: '主詞 Mr. Rokk 為單數第三人稱，過去時間特定點配 was + V-ing。',
     explain: '💡 過去特定時間點（昨晨六點）動作正在進行，第三人稱單數主詞用 was making。'
@@ -203,7 +203,7 @@ const grammarData = [
     title: 'Bobbie and the baby ______ sleeping when the earthquake happened.',
     zh: '地震發生時，Bobbie 和小嬰兒正在睡覺。',
     visual: '👶👶 兩人以上（複數主詞）進行式 ➔ [ w _ _ e ]',
-    options: ['were', 'was', 'are'],
+    options: ['was', 'are', 'were'],
     answer: 'were',
     hint: '主詞是「Bobbie 和嬰兒」兩個人（複數），過去進行式配 were。',
     explain: '💡 主詞 Bobbie and the baby 是複數人稱，過去進行式必須搭配 were sleeping。'
@@ -223,13 +223,12 @@ const grammarData = [
     title: 'Mom was doing the dishes at half ______ twelve.',
     zh: '媽媽在十二點半時正在洗碗盤。',
     visual: '⏰ 十二點半（超過整點30分） ➔ [ p _ _ t ]',
-    options: ['past', 'pass', 'to'],
+    options: ['pass', 'past', 'to'],
     answer: 'past',
     hint: '「～點半」的固定片語為 half past + 鐘點數字。',
     explain: '💡 英語時間「十二點半」表達為 half past twelve（超過十二點半小時）。'
   }
 ];
-
 const totalQuestions = vocabData.length + grammarData.length;
 const attempts = {};
 const answeredCorrectly = {};
