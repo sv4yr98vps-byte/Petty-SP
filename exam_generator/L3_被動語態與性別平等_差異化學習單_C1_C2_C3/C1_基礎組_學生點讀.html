@@ -164,21 +164,21 @@ function speakChinese(text) {
 
 // 16 核心單字題（含圖案提示 + 字頭字尾鷹架提示 + 高相似度防猜題選項）
 const vocabData = [
-  { id: 'v1', word: 'lawyer', zh: '律師', visual: '⚖️ 法庭辯護 · 法律專家 ➔ [ l _ _ _ _ r ]', options: ['lawyer', 'lower', 'layer', 'leader'], answer: 'lawyer', hint: '以 l 開頭，yer 結尾，意為「律師」。' },
-  { id: 'v2', word: 'engineer', zh: '工程師', visual: '💻 科技研發 · 修理電腦 ➔ [ e _ _ _ _ _ _ r ]', options: ['engineer', 'engine', 'energy', 'explorer'], answer: 'engineer', hint: '以 en 開頭，eer 結尾，意為「工程師」。' },
-  { id: 'v3', word: 'president', zh: '總統；總裁', visual: '🏛️ 國家元首 · 最高領導 ➔ [ p _ _ _ _ _ _ _ t ]', options: ['president', 'present', 'parent', 'patient'], answer: 'president', hint: '以 presi 開頭，dent 結尾，意為「總統；總裁」。' },
+  { id: 'v1', word: 'lawyer', zh: '律師', visual: '⚖️ 法庭辯護 · 法律專家 ➔ [ l _ _ _ _ r ]', options: ['lower', 'layer', 'lawyer', 'leader'], answer: 'lawyer', hint: '以 l 開頭，yer 結尾，意為「律師」。' },
+  { id: 'v2', word: 'engineer', zh: '工程師', visual: '💻 科技研發 · 修理電腦 ➔ [ e _ _ _ _ _ _ r ]', options: ['engine', 'engineer', 'energy', 'explorer'], answer: 'engineer', hint: '以 en 開頭，eer 結尾，意為「工程師」。' },
+  { id: 'v3', word: 'president', zh: '總統；總裁', visual: '🏛️ 國家元首 · 最高領導 ➔ [ p _ _ _ _ _ _ _ t ]', options: ['present', 'parent', 'patient', 'president'], answer: 'president', hint: '以 presi 開頭，dent 結尾，意為「總統；總裁」。' },
   { id: 'v4', word: 'model', zh: '榜樣；模範', visual: '⭐ 學習榜樣 · 典範標竿 ➔ [ m _ _ _ l ]', options: ['model', 'modern', 'medal', 'modal'], answer: 'model', hint: '以 m 開頭，del 結尾，role model 意為「模範榜樣」。' },
-  { id: 'v5', word: 'company', zh: '公司', visual: '🏢 企業機構 · 玩具品牌 ➔ [ c _ _ _ _ _ y ]', options: ['company', 'country', 'campaign', 'compass'], answer: 'company', hint: '以 comp 開頭，any 結尾，意為「公司」。' },
-  { id: 'v6', word: 'equal', zh: '平等的', visual: '⚖️ 男女均等 · 權利同等 ➔ [ e _ _ _ l ]', options: ['equal', 'easily', 'early', 'earth'], answer: 'equal', hint: '以 eq 開頭，ual 結尾，意為「平等的」。' },
-  { id: 'v7', word: 'hard-working', zh: '勤勉的；努力工作的', visual: '💪 認真勤勞 · 努力奮鬥 ➔ [ h _ _ d - w _ _ _ _ _ g ]', options: ['hard-working', 'hard-looking', 'heart-working', 'hand-making'], answer: 'hard-working', hint: 'hard (努力) + working (工作)，意為「勤勉認真的」。' },
+  { id: 'v5', word: 'company', zh: '公司', visual: '🏢 企業機構 · 玩具品牌 ➔ [ c _ _ _ _ _ y ]', options: ['country', 'campaign', 'company', 'compass'], answer: 'company', hint: '以 comp 開頭，any 結尾，意為「公司」。' },
+  { id: 'v6', word: 'equal', zh: '平等的', visual: '⚖️ 男女均等 · 權利同等 ➔ [ e _ _ _ l ]', options: ['easily', 'equal', 'early', 'earth'], answer: 'equal', hint: '以 eq 開頭，ual 結尾，意為「平等的」。' },
+  { id: 'v7', word: 'hard-working', zh: '勤勉的；努力工作的', visual: '💪 認真勤勞 · 努力奮鬥 ➔ [ h _ _ d - w _ _ _ _ _ g ]', options: ['hard-looking', 'heart-working', 'hand-making', 'hard-working'], answer: 'hard-working', hint: 'hard (努力) + working (工作)，意為「勤勉認真的」。' },
   { id: 'v8', word: 'public', zh: '公共的；大眾', visual: '👥 公共設施 · 大眾服務 ➔ [ p _ _ _ _ c ]', options: ['public', 'publish', 'pupil', 'purple'], answer: 'public', hint: '以 pub 開頭，lic 結尾，意為「公共的；大眾」。' },
-  { id: 'v9', word: 'form', zh: '形成；建立', visual: '🧱 觀念形成 · 逐漸建立 ➔ [ f _ _ m ]', options: ['form', 'from', 'farm', 'firm'], answer: 'form', hint: '以 f 開頭，orm 結尾 (注意不要與 from 混淆)，意為「形成」。' },
-  { id: 'v10', word: 'childhood', zh: '童年', visual: '🧒 兒時記憶 · 幼年時期 ➔ [ c _ _ _ _ _ _ _ d ]', options: ['childhood', 'children', 'childlike', 'childish'], answer: 'childhood', hint: 'child (兒童) + hood (時期)，意為「童年」。' },
-  { id: 'v11', word: 'relative', zh: '親戚', visual: '👨‍👩‍👧‍👦 家族親友 · 節慶團聚 ➔ [ r _ _ _ _ _ _ e ]', options: ['relative', 'relation', 'relevant', 'release'], answer: 'relative', hint: '以 rela 開頭，tive 結尾，意為「親戚」。' },
+  { id: 'v9', word: 'form', zh: '形成；建立', visual: '🧱 觀念形成 · 逐漸建立 ➔ [ f _ _ m ]', options: ['from', 'form', 'farm', 'firm'], answer: 'form', hint: '以 f 開頭，orm 結尾 (注意不要與 from 混淆)，意為「形成」。' },
+  { id: 'v10', word: 'childhood', zh: '童年', visual: '🧒 兒時記憶 · 幼年時期 ➔ [ c _ _ _ _ _ _ _ d ]', options: ['children', 'childlike', 'childhood', 'childish'], answer: 'childhood', hint: 'child (兒童) + hood (時期)，意為「童年」。' },
+  { id: 'v11', word: 'relative', zh: '親戚', visual: '👨‍👩‍👧‍👦 家族親友 · 節慶團聚 ➔ [ r _ _ _ _ _ _ e ]', options: ['relation', 'relevant', 'release', 'relative'], answer: 'relative', hint: '以 rela 開頭，tive 結尾，意為「親戚」。' },
   { id: 'v12', word: 'expect', zh: '期待；預計', visual: '🎯 社會期望 · 預期心理 ➔ [ e _ _ _ _ t ]', options: ['expect', 'except', 'expert', 'export'], answer: 'expect', hint: '以 ex 開頭，pect 結尾 (不是 except 除了)，意為「期待；預期」。' },
-  { id: 'v13', word: 'picture', zh: '想像；描繪', visual: '💭 腦海想像 · 描摹情境 ➔ [ p _ _ _ _ _ e ]', options: ['picture', 'pitcher', 'pick', 'package'], answer: 'picture', hint: '課文作動詞「Picture this (想像一下)」，以 pic 開頭，ture 結尾。' },
-  { id: 'v14', word: 'everywhere', zh: '到處；四處', visual: '🌐 無所不在 · 各個角落 ➔ [ e _ _ _ _ _ _ _ _ e ]', options: ['everywhere', 'everyone', 'everyday', 'everybody'], answer: 'everywhere', hint: 'every + where，意為「到處；四處」。' },
-  { id: 'v15', word: 'allow', zh: '允許；准許', visual: '🟢 許可通行 · 被允許 ➔ [ a _ _ _ w ]', options: ['allow', 'arrow', 'alone', 'alive'], answer: 'allow', hint: '以 al 開頭，low 結尾，be allowed 意為「被允許」。' },
+  { id: 'v13', word: 'picture', zh: '想像；描繪', visual: '💭 腦海想像 · 描摹情境 ➔ [ p _ _ _ _ _ e ]', options: ['pitcher', 'picture', 'pick', 'package'], answer: 'picture', hint: '課文作動詞「Picture this (想像一下)」，以 pic 開頭，ture 結尾。' },
+  { id: 'v14', word: 'everywhere', zh: '到處；四處', visual: '🌐 無所不在 · 各個角落 ➔ [ e _ _ _ _ _ _ _ _ e ]', options: ['everyone', 'everyday', 'everywhere', 'everybody'], answer: 'everywhere', hint: 'every + where，意為「到處；四處」。' },
+  { id: 'v15', word: 'allow', zh: '允許；准許', visual: '🟢 許可通行 · 被允許 ➔ [ a _ _ _ w ]', options: ['arrow', 'alone', 'alive', 'allow'], answer: 'allow', hint: '以 al 開頭，low 結尾，be allowed 意為「被允許」。' },
   { id: 'v16', word: 'brave', zh: '勇敢的', visual: '🦸 勇敢救人 · 無所畏懼 ➔ [ b _ _ _ e ]', options: ['brave', 'brain', 'bread', 'break'], answer: 'brave', hint: '以 br 開頭，ave 結尾，意為「勇敢的」。' }
 ];
 
@@ -189,7 +189,7 @@ const grammarData = [
     title: 'Christmas ______ by many Americans every year.',
     zh: '每年聖誕節都受到許多美國人的慶祝。',
     visual: '🎄 每年固定被大眾慶祝 (現在被動 is + p.p.) ➔ [ i s   c _ _ _ _ _ _ _ _ d ]',
-    options: ['is celebrated', 'are celebrated', 'celebrates'],
+    options: ['are celebrated', 'is celebrated', 'celebrates'],
     answer: 'is celebrated',
     hint: '主詞 Christmas 為單數專有名詞，每年固定被慶祝，現在被動式用 is + celebrated。',
     explain: '💡 Christmas 是不可數/單數名詞，被動語態公式：is + 過去分詞 celebrated。'
@@ -199,7 +199,7 @@ const grammarData = [
     title: 'The car race ______ on December 2.',
     zh: '賽車比賽將於十二月二日舉行。',
     visual: '🏎️ 比賽將在未來被舉行 (助動詞被動 will be + p.p.) ➔ [ w _ _ l   b _   h _ _ d ]',
-    options: ['will be held', 'will hold', 'is holding'],
+    options: ['will hold', 'is holding', 'will be held'],
     answer: 'will be held',
     hint: '「比賽」是被舉行，助動詞 will 後面接原形 be + hold 的過去分詞 held。',
     explain: '💡 助動詞被動語態公式為：will + be + 過去分詞 held。'
@@ -219,13 +219,12 @@ const grammarData = [
     title: 'Barbie is a great role model for many children, ______ she?',
     zh: '芭比是許多孩子極佳的榜樣，不是嗎？',
     visual: '🎀 前面是肯定 is，後面附加問句要「前肯後否」 ➔ [ i _ _ \' t ]',
-    options: ["isn't", 'is', "doesn't"],
+    options: ['is', "isn't", "doesn't"],
     answer: "isn't",
     hint: '前半句 Barbie is 為肯定句，後方附加問句依據「前肯後否」原則，要用 isn\'t she。',
     explain: '💡 主要子句有 be 動詞 is，附加問句對應使用否定形式 isn\'t。'
   }
 ];
-
 const totalQuestions = vocabData.length + grammarData.length;
 const attempts = {};
 const answeredCorrectly = {};
