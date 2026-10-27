@@ -3,394 +3,948 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>國中英語【國三 · 九年級】Lesson 3 被動語態與性別平等 · 10題線上隨機抽測</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>國中英語【國三 · 九年級】L3 被動語態與性別平等 10題隨機抽測</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=LXGW+WenKai+TC&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0284c7;
-      --primary-hover: #0369a1;
-      --bg: #f0f9ff;
+      --bg-color: #f8fafc;
       --card-bg: #ffffff;
-      --text: #0c4a6e;
+      --text-main: #1e293b;
       --text-muted: #64748b;
-      --border: #bae6fd;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --border-color: #e2e8f0;
+      --toolbar-bg: rgba(255, 255, 255, 0.94);
+      --font-size: 16pt;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Noto Sans TC', 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
-    header { background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); color: white; padding: 26px 20px; text-align: center; box-shadow: 0 4px 12px rgba(2,132,199,0.15); }
-    header h1 { font-size: 1.7rem; margin-bottom: 6px; font-weight: 700; }
-    header p { font-size: 0.95rem; opacity: 0.95; }
-    .container { max-width: 860px; margin: 20px auto; padding: 0 16px; }
-    .info-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
-    .input-name { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: inherit; }
-    .status-pill { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; background: #e0f2fe; padding: 6px 14px; border-radius: 20px; border: 1px solid #7dd3fc; color: #0369a1; font-weight: 700; }
-    .speed-btn { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 14px; font-size: 0.82rem; cursor: pointer; font-family: inherit; font-weight: 600; color: #475569; }
-    .speed-btn.active { background: #0284c7; color: white; border-color: #0284c7; }
-    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
-    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .q-badge { background: #e0f2fe; color: #0284c7; padding: 4px 12px; border-radius: 14px; font-size: 0.85rem; font-weight: 700; }
-    .q-title { font-size: 1.15rem; font-weight: 700; color: #0c4a6e; line-height: 1.5; margin-bottom: 14px; }
-    .speaker-btn { background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
-    .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
-    .opt-btn { background: var(--card-bg); border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; font-family: inherit; font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.15s; }
-    .opt-btn:hover { border-color: var(--primary); background: #f0f9ff; }
-    .opt-btn.correct { background: #dcfce7 !important; border-color: #10b981 !important; color: #15803d !important; font-weight: bold; }
-    .opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
-    .feedback-box { padding: 12px 16px; border-radius: 10px; font-size: 0.95rem; line-height: 1.5; display: none; margin-top: 10px; }
-    .submit-bar { margin-top: 30px; text-align: center; }
-    .btn-submit { background: var(--primary); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; }
+    
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --border-color: #334155;
+      --toolbar-bg: rgba(30, 41, 59, 0.94);
+    }
+    
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'LXGW WenKai TC', 'Microsoft JhengHei', sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: var(--font-size);
+      line-height: 1.6;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    
+    .toolbar {
+      position: sticky;
+      top: 0;
+      background: var(--toolbar-bg);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .btn:hover {
+      background-color: var(--border-color);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      color: white;
+    }
+    
+    select {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    
+    .container {
+      max-width: 920px;
+      margin: 25px auto 60px;
+      padding: 0 20px;
+    }
+    
+    .paper-header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+    
+    .paper-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.85rem;
+      color: var(--text-main);
+    }
+    
+    .student-badge-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: var(--card-bg);
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    
+    .student-name-tag {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px dashed var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .section-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+    }
+    
+    .question-card {
+      margin-bottom: 22px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      transition: background-color 0.2s, border-color 0.2s;
+      border: 1.5px solid var(--border-color);
+      background: var(--card-bg);
+    }
+
+    .question-card.answered {
+      border-color: #93c5fd;
+      background: rgba(59, 130, 246, 0.02);
+    }
+    
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.6;
+    }
+    
+    .speaker-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 20px;
+      line-height: 1;
+      transition: transform 0.1s, background 0.15s;
+      flex-shrink: 0;
+    }
+    
+    .speaker-btn:hover {
+      background: #e2e8f0;
+      transform: scale(1.08);
+    }
+    
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .opt-btn {
+      background-color: var(--card-bg);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background-color: rgba(37, 99, 235, 0.04);
+      transform: translateY(-1px);
+    }
+    
+    .opt-btn.correct {
+      background-color: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: bold;
+    }
+    
+    .opt-btn.wrong {
+      background-color: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+    
+    .feedback-box {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: none;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      animation: fadeIn 0.2s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .submit-bar {
+      position: sticky;
+      bottom: 20px;
+      background: var(--toolbar-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      margin-top: 40px;
+    }
+    
+    /* 彈窗樣式 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 580px;
+      padding: 30px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    @keyframes modalPop {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .score-number {
+      font-size: 3.6rem;
+      font-weight: 800;
+      font-family: 'Fredoka', 'Outfit', sans-serif;
+      text-align: center;
+      line-height: 1.1;
+      margin: 10px 0;
+    }
+    
+    .score-high { color: #16a34a; }
+    .score-mid { color: #d97706; }
+    .score-low { color: #dc2626; }
+    
+    .history-pill {
+      display: inline-block;
+      padding: 3px 8px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin: 2px 4px;
+    }
   </style>
 </head>
 <body>
 
-<!-- 學生姓名強制彈跳視窗 -->
-<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
-  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #38bdf8;">
-    <div style="font-size:3.2rem; margin-bottom:12px;">🎲 📝</div>
-    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入 10 題隨機抽測！</h2>
-    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄抽測成績：</p>
-    
-    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; box-sizing:border-box;" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
-    
-    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始抽測喔！</div>
-    
-    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer;">
-      🚀 確定並開始抽測
-    </button>
-  </div>
-</div>
-
-<header>
-  <h1>Lesson 3 被動語態與性別平等</h1>
-  <p>🎲 40 題核心大題庫（被動語態 70% ＋ 附加問句 30%）· 線上動態隨機抽選 10 題</p>
-</header>
-
-<div class="container">
-  <div class="info-bar">
-    <div>
-      <label>學生姓名：</label>
-      <input type="text" id="studentName" onclick="promptStudentNameModal()" class="input-name" placeholder="請輸入姓名">
+  <!-- 頂部工具列 -->
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <span style="font-weight: 800; font-family: 'Fredoka', sans-serif; color: var(--primary);">⚖️ L3 被動與附加問句 10題抽測</span>
+      <select id="font-size-select" onchange="changeFontSize(this.value)" title="調整字體大小">
+        <option value="14pt">標準字體 (14pt)</option>
+        <option value="16pt" selected>大字體 (16pt)</option>
+        <option value="18pt">特大字體 (18pt)</option>
+        <option value="20pt">超大字體 (20pt)</option>
+      </select>
+      <select id="speech-rate" title="語音朗讀速度">
+        <option value="0.5">0.5x 慢速</option>
+        <option value="0.75">0.75x 稍慢</option>
+        <option value="0.85" selected>0.85x 推薦</option>
+        <option value="1.0">1.0x 正常</option>
+        <option value="1.25">1.25x 快速</option>
+      </select>
     </div>
-    <div style="display:flex; align-items:center; gap:6px;">
-      <span style="font-weight:700; font-size:0.85rem; color:#0369a1;">🐢 朗讀語速：</span>
-      <button class="speed-btn" onclick="setSpeed(1.0, this)">1.0x</button>
-      <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75x</button>
-      <button class="speed-btn" onclick="setSpeed(0.5, this)">0.5x</button>
-      <button class="speed-btn active" onclick="setSpeed(0.25, this)">0.25x 特慢</button>
-    </div>
-    <div class="status-pill">
-      <span>🎲 題庫比例：被動語態 70% ＋ 附加問句 30%</span>
+    <div class="toolbar-group">
+      <button class="btn" onclick="toggleTheme()" title="日夜間模式切換">🌓 模式切換</button>
+      <button class="btn btn-primary" onclick="reshuffleAndRender()" title="隨機換抽另外 10 題">🔄 換一批題目</button>
+      <a href="index.html" class="btn" style="text-decoration:none;">🏠 回單元首頁</a>
     </div>
   </div>
 
-  <div id="questions-container"></div>
+  <div class="container">
+    <div class="paper-header">
+      <h1>國中英語【國三 · 九年級】L3 被動語態與性別平等</h1>
+      <p style="margin: 4px 0 0; color: var(--text-muted);">
+        🎲 40 題大題庫動態抽題 (被動 70% ＋ 附加問句 30%) · 即時試錯鑑別計分 · 點擊語音朗讀 · Google 雲端自動同步
+      </p>
+    </div>
 
-  <div class="submit-bar">
-    <button class="btn-submit" onclick="submitExam()">送出答案並結算成績</button>
+    <!-- 學生身分與狀態列 -->
+    <div class="student-badge-bar">
+      <div>
+        <span>👤 目前作答學生：</span>
+        <span class="student-name-tag" id="studentDisplay" onclick="promptStudentNameModal()" title="點擊修改姓名">點擊設定姓名座號</span>
+      </div>
+      <div>
+        <span style="font-size: 0.95rem; color: var(--text-muted);">🎯 每次隨機抽選 10 題 (被動語態 7 題 + 附加問句 3 題)</span>
+      </div>
+    </div>
+
+    <!-- 題目容器 -->
+    <div id="questions-container"></div>
+
+    <!-- 交卷列 -->
+    <div class="submit-bar">
+      <div>
+        <span style="font-size: 0.95rem; color: var(--text-muted);">作答完畢後請點擊交卷：</span>
+      </div>
+      <button class="btn btn-primary" style="padding: 10px 28px; font-size: 1.1rem;" onclick="submitExam()">
+        🚀 完成交卷並結算總分
+      </button>
+    </div>
   </div>
 
-  <div id="scoreBanner" style="display:none; margin-top:30px;">
-    <div class="card" style="border:3px solid #0284c7; background:#f0f9ff; text-align:center; padding:28px 20px; border-radius:18px;">
-      <div style="font-size:3.2rem; line-height:1;">🏆</div>
-      <h2 style="font-size:1.6rem; color:#0369a1; margin:10px 0 4px;">抽測結算完成！</h2>
-      <div id="certStudentText" style="font-weight:700; color:#0c4a6e; margin-bottom:18px;">學生：未填寫 ｜ 評等：⭐⭐⭐</div>
-      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:16px 0;">
-        <div style="background:white; border:1px solid #bae6fd; border-radius:12px; padding:14px;">
-          <div style="font-size:1.8rem; font-weight:800; color:#0284c7;" id="scoreText">--</div>
-          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🏆 總分 (含試錯折算)</div>
-        </div>
-        <div style="background:white; border:1px solid #bae6fd; border-radius:12px; padding:14px;">
-          <div style="font-size:1.8rem; font-weight:800; color:#059669;" id="firstTryText">-- / 10</div>
-          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🎯 首次即答對題數</div>
-        </div>
-        <div style="background:white; border:1px solid #bae6fd; border-radius:12px; padding:14px;">
-          <div style="font-size:1.8rem; font-weight:800; color:#d97706;" id="attemptsText">0 次</div>
-          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🔄 累計試錯次數</div>
-        </div>
+  <!-- 結算報告彈窗 -->
+  <div id="reportModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2 style="margin:0 0 10px; text-align:center;">🏆 隨機抽測評量成果</h2>
+      <div class="score-number" id="reportScore">-- 分</div>
+      <p id="reportLevelText" style="text-align:center; font-weight:bold; margin-bottom:15px; font-size:1.05rem; color:var(--primary);"></p>
+      
+      <div style="background:var(--bg-color); border:1px solid var(--border-color); border-radius:12px; padding:15px; margin-bottom:15px; font-size:0.95rem;">
+        <div>👤 受測學生：<strong id="reportStudent">--</strong></div>
+        <div>⏱️ 評量時間：<span id="reportTime">--</span></div>
+        <div style="margin-top:6px;">📈 近次測驗歷程：<span id="reportHistory"></span></div>
       </div>
-      <div id="syncStatus" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在同步成績至老師的 Google 雲端學習歷程試算表...</div>
-      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
-        <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
-        <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="location.reload()">🔄 換一組題目測驗</button>
-        <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+
+      <div style="margin-bottom:15px;">
+        <h4 style="margin:0 0 8px;">📋 各題答題診斷：</h4>
+        <div id="diagnosisList" style="max-height:160px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; font-size:0.88rem;"></div>
+      </div>
+
+      <div id="syncStatus" style="font-size:0.9rem; padding:10px; border-radius:8px; margin-bottom:16px; background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; text-align:center; font-weight:bold;">
+        📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
+      </div>
+
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button class="btn btn-primary" onclick="reshuffleAndRender(); closeReport();">🔄 再抽 10 題重新挑戰</button>
+        <button class="btn" onclick="closeReport()">關閉報告</button>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
-
-let currentSpeed = 0.25;
-
-function setSpeed(rate, btn) {
-  currentSpeed = rate;
-  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-}
-
-function speakEnglish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'en-US';
-  u.rate = currentSpeed;
-  const voices = window.speechSynthesis.getVoices();
-  const gVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('Natural')) && v.lang.startsWith('en'));
-  if (gVoice) u.voice = gVoice;
-  window.speechSynthesis.speak(u);
-}
-
-function speakChinese(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'zh-TW';
-  u.rate = 0.9;
-  window.speechSynthesis.speak(u);
-}
-
-// 40 題大題庫（28 題被動語態 70% ＋ 12 題附加問句 30%）
-const questionBank = [
-  // 被動語態 (28 題 · 70%)
-  { category: '被動語態', q: 'English is ______ around the world by millions of people.', options: ['spoken', 'spoke', 'speaking', 'speak'], answer: 'spoken', explain: '💡 現在被動語態：is + 過去分詞 spoken。' },
-  { category: '被動語態', q: 'Christmas is ______ by many Americans with gifts and parties every year.', options: ['celebrated', 'celebrate', 'celebrating', 'celebratory'], answer: 'celebrated', explain: '💡 Christmas 是單數名詞，被動語態為 is celebrated。' },
-  { category: '被動語態', q: 'The classroom windows are ______ by the students every Friday.', options: ['cleaned', 'clean', 'cleaning', 'cleans'], answer: 'cleaned', explain: '💡 複數主詞 windows 搭配 are + 過去分詞 cleaned。' },
-  { category: '被動語態', q: 'The crying baby was ______ from the fire by that brave firefighter.', options: ['saved', 'save', 'saving', 'safe'], answer: 'saved', explain: '💡 過去被動式：was + 過去分詞 saved。' },
-  { category: '被動語態', q: 'The lost dog was ______ in the park by a middle school student yesterday.', options: ['found', 'find', 'finding', 'founded'], answer: 'found', explain: '💡 find 的過去分詞是 found。' },
-  { category: '被動語態', q: 'The cars ______ fixed by Mike yesterday because he caught a cold.', options: ["weren't", "wasn't", "didn't", "aren't"], answer: "weren't", explain: '💡 主詞 The cars 為複數，過去被動否定用 weren\'t fixed。' },
-  { category: '被動語態', q: 'These lovely bamboo baskets were ______ by my grandma last month.', options: ['made', 'make', 'making', 'makes'], answer: 'made', explain: '💡 make 的過去分詞為 made。' },
-  { category: '被動語態', q: 'The delicious chocolate cake ______ eaten by my sister; our pet dog took it.', options: ["wasn't", "weren't", "didn't", "isn't"], answer: "wasn't", explain: '💡 單數主詞 The cake 過去被動否定為 wasn\'t eaten。' },
-  { category: '被動語態', q: 'Was the dirty blanket ______ by Peter yesterday afternoon?', options: ['washed', 'wash', 'washing', 'washes'], answer: 'washed', explain: '💡 被動語態疑問句：Was + 主詞 + 過去分詞 washed?。' },
-  { category: '被動語態', q: 'The exciting international car race will be ______ on December 2.', options: ['held', 'hold', 'holding', 'holds'], answer: 'held', explain: '💡 助動詞被動式：will + be + 過去分詞 held。' },
-  { category: '被動語態', q: 'All the project work will be ______ by Maggie before Friday.', options: ['finished', 'finish', 'finishing', 'finishes'], answer: 'finished', explain: '💡 will be finished 意為「將會被完成」。' },
-  { category: '被動語態', q: 'The tall Taipei 101 building can be ______ from miles away.', options: ['seen', 'see', 'saw', 'seeing'], answer: 'seen', explain: '💡 see 的過去分詞為 seen，can be seen 意為「可以被看見」。' },
-  { category: '被動語態', q: 'Your broken computer can be ______ by my aunt today; she is an engineer.', options: ['fixed', 'fix', 'fixing', 'fixes'], answer: 'fixed', explain: '💡 can be fixed 意為「能被修理好」。' },
-  { category: '被動語態', q: 'The badly hurt man should be ______ to the hospital right away.', options: ['taken', 'take', 'taking', 'took'], answer: 'taken', explain: '💡 should be taken 意為「應該被送往」。' },
-  { category: '被動語態', q: 'According to the museum rules, pets must be ______ outside.', options: ['left', 'leave', 'leaving', 'leaves'], answer: 'left', explain: '💡 leave 的過去分詞是 left，must be left 意為「必須被留在」。' },
-  { category: '被動語態', q: 'The sharp knives shouldn\'t be ______ on the table where kids can reach.', options: ['put', 'putting', 'puts', 'placing'], answer: 'put', explain: '💡 put 的三態同形，shouldn\'t be put 意為「不應該被放置」。' },
-  { category: '被動語態', q: 'These sheep have been ______ by Mr. Chen since 2015.', options: ['raised', 'raise', 'raising', 'raises'], answer: 'raised', explain: '💡 現在完成被動式：have been + 過去分詞 raised。' },
-  { category: '被動語態', q: 'The inspiring story about the doctor has been ______ many times.', options: ['told', 'tell', 'telling', 'tells'], answer: 'told', explain: '💡 has been told 意為「已經被講過很多次」。' },
-  { category: '被動語態', q: 'The dirty car hasn\'t been ______ by Scott yet.', options: ['washed', 'wash', 'washing', 'washes'], answer: 'washed', explain: '💡 現在完成被動否定：hasn\'t been washed。' },
-  { category: '被動語態', q: 'Gender stereotypes about jobs are ______ in early childhood.', options: ['formed', 'form', 'forming', 'forms'], answer: 'formed', explain: '💡 are formed 意為「被形成；逐漸建立」。' },
-  { category: '被動語態', q: 'Men are often ______ to do public service jobs, such as police officers.', options: ['expected', 'expect', 'expecting', 'expects'], answer: 'expected', explain: '💡 are expected to 意為「被期待去做…」。' },
-  { category: '被動語態', q: 'Women are often ______ to be better at teaching and caring jobs.', options: ['thought', 'think', 'thinking', 'thinks'], answer: 'thought', explain: '💡 are thought to be 意為「被認為是…」。' },
-  { category: '被動語態', q: 'Barbie doll is ______ as one of the most hard-working toys in the world.', options: ['known', 'knew', 'know', 'knowing'], answer: 'known', explain: '💡 be known as 意為「被視為；以…為人所知」。' },
-  { category: '被動語態', q: 'Since we were little, we have been ______ that there are jobs for women and men.', options: ['taught', 'teach', 'teaching', 'teaches'], answer: 'taught', explain: '💡 have been taught 意為「一直被教導…」。' },
-  { category: '被動語態', q: 'The wonderful novel was written ______ a famous Taiwanese author.', options: ['by', 'with', 'for', 'on'], answer: 'by', explain: '💡 被動語態的動作執行者前使用介系詞 by。' },
-  { category: '被動語態', q: 'The streets are filled ______ colorful lights during Christmas.', options: ['with', 'by', 'of', 'for'], answer: 'with', explain: '💡 be filled with 意為「充滿著…」。' },
-  { category: '被動語態', q: 'Children under six years old are not ______ to enter the cinema alone.', options: ['allowed', 'allow', 'allowing', 'allows'], answer: 'allowed', explain: '💡 be allowed to 意為「被允許去…」。' },
-  { category: '被動語態', q: 'The lawyers and engineers are ______ their salaries once a month.', options: ['paid', 'pay', 'paying', 'pays'], answer: 'paid', explain: '💡 are paid 意為「領到薪水；被給付薪資」。' },
-
-  // 附加問句 (12 題 · 30%)
-  { category: '附加問句', q: 'The young boy is very hard-working, ______ he?', options: ["isn't", 'is', "doesn't", 'does'], answer: "isn't", explain: '💡 前肯後否：主要子句有 is，附加問句用 isn\'t he。' },
-  { category: '附加問句', q: 'The little boy isn\'t lazy at all, ______ he?', options: ['is', "isn't", 'does', "doesn't"], answer: 'is', explain: '💡 前否後肯：主要子句有 isn\'t，附加問句用 is he。' },
-  { category: '附加問句', q: 'Amy likes sweet snacks and milk tea, ______ she?', options: ["doesn't", 'does', "isn't", 'is'], answer: "doesn't", explain: '💡 主要子句為一般動詞 likes (單數)，附加問句用 doesn\'t she。' },
-  { category: '附加問句', q: 'Amy doesn\'t like spicy food, ______ she?', options: ['does', "doesn't", 'is', "isn't"], answer: 'does', explain: '💡 前否後肯：doesn\'t like 對應 does she。' },
-  { category: '附加問句', q: 'They will go to the movies together this Saturday, ______ they?', options: ["won't", 'will', "don't", "aren't"], answer: "won't", explain: '💡 助動詞 will 的否定為 won\'t they。' },
-  { category: '附加問句', q: 'They won\'t forget our meeting tomorrow, ______ they?', options: ['will', "won't", 'do', "don't"], answer: 'will', explain: '💡 前否後肯：won\'t 對應 will they。' },
-  { category: '附加問句', q: 'You have visited the new science museum, ______ you?', options: ["haven't", 'have', "don't", "didn't"], answer: "haven't", explain: '💡 現在完成式 have visited，附加問句用 haven\'t you。' },
-  { category: '附加問句', q: 'You haven\'t seen the popular drama Good Boy yet, ______ you?', options: ['have', "haven't", 'do', 'did'], answer: 'have', explain: '💡 前否後肯：haven\'t seen 對應 have you。' },
-  { category: '附加問句', q: 'He played a devoted father in that drama, ______ he?', options: ["didn't", 'did', "wasn't", 'was'], answer: "didn't", explain: '💡 過去式一般動詞 played，附加問句用助動詞 didn\'t he。' },
-  { category: '附加問句', q: 'Park Bo Gum was in the famous TV drama, ______ he?', options: ["wasn't", 'was', "didn't", 'did'], answer: "wasn't", explain: '💡 過去式 be 動詞 was，附加問句用 wasn\'t he。' },
-  { category: '附加問句', q: 'Barbie is a great role model for kids around the world, ______ she?', options: ["isn't", 'is', "doesn't", 'does'], answer: "isn't", explain: '💡 Barbie is... 為肯定，附加問句用 isn\'t she。' },
-  { category: '附加問句', q: 'You are thinking of the doctor as a man, ______ you?', options: ["aren't", 'are', "don't", 'do'], answer: "aren't", explain: '💡 You are... 進行式肯定，附加問句用 aren\'t you。' }
-];
-
-let selectedQuestions = [];
-const attempts = {};
-const answeredCorrectly = {};
-
-// 依 70% (7題被動) + 30% (3題附加問句) 隨機抽選 10 題
-function selectQuizQuestions() {
-  const passivePool = questionBank.filter(q => q.category === '被動語態');
-  const tagPool = questionBank.filter(q => q.category === '附加問句');
-
-  const shuffledPassive = [...passivePool].sort(() => 0.5 - Math.random()).slice(0, 7);
-  const shuffledTag = [...tagPool].sort(() => 0.5 - Math.random()).slice(0, 3);
-
-  selectedQuestions = [...shuffledPassive, ...shuffledTag].sort(() => 0.5 - Math.random());
-}
-
-function initQuestions() {
-  selectQuizQuestions();
-  const container = document.getElementById('questions-container');
-  container.innerHTML = '';
-
-  selectedQuestions.forEach((item, idx) => {
-    const qId = `q${idx + 1}`;
-    attempts[qId] = 0;
-    answeredCorrectly[qId] = false;
-
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.id = `card-${qId}`;
-
-    card.innerHTML = `
-      <div class="q-meta">
-        <span class="q-badge">題號 ${idx + 1} / 10 · ${item.category}</span>
-        <button class="speaker-btn" onclick="speakEnglish('${item.q.replace('______', item.answer)}')">🔊 朗讀題幹</button>
+  <!-- 強制姓名輸入彈跳視窗 (Entry Modal) -->
+  <div id="studentNameModal" class="modal-overlay" style="display:none;">
+    <div class="modal-card" style="max-width: 440px; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:8px;">🌱</div>
+      <h2 style="margin:0 0 8px; color:var(--primary);">歡迎進入英語抽測步道</h2>
+      <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:20px;">
+        為確保您的個人平時成績與學習歷程能完整記錄，請先輸入您的「班級、座號與姓名」：
+      </p>
+      <div style="margin-bottom:16px;">
+        <input type="text" id="modalStudentInput" placeholder="例如：901 08 陳郁婷" style="width:100%; box-sizing:border-box; padding:12px 16px; font-size:1.1rem; border:2px solid var(--border-color); border-radius:12px; font-family:inherit; outline:none;" onkeydown="if(event.key==='Enter') confirmStudentNameModal();">
+        <div id="modalNameError" style="color:#ef4444; font-size:0.88rem; margin-top:6px; display:none; font-weight:bold;">⚠️ 請輸入姓名座號才能開始測驗喔！</div>
       </div>
-      <div class="q-title">${idx + 1}. ${item.q}</div>
-      <div class="options-grid" id="opts-${qId}">
-        ${item.options.map(opt => `
-          <button class="opt-btn" onclick="checkAnswer('${qId}', '${opt}', '${item.answer}', '${item.explain.replace(/'/g, "\\'")}', this)">${opt}</button>
-        `).join('')}
-      </div>
-      <div class="feedback-box" id="fb-${qId}"></div>
-    `;
-    container.appendChild(card);
-  });
-}
+      <button class="btn btn-primary" style="width:100%; padding:12px; font-size:1.1rem; justify-content:center;" onclick="confirmStudentNameModal()">
+        🚀 確定並開始學習
+      </button>
+    </div>
+  </div>
 
-function checkAnswer(qId, selected, answer, explain, btn) {
-  if (answeredCorrectly[qId]) return;
-  const fb = document.getElementById(`fb-${qId}`);
-  const parent = document.getElementById(`opts-${qId}`);
+  <script>
+    const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
 
-  if (selected === answer) {
-    answeredCorrectly[qId] = true;
-    btn.classList.add('correct');
-    parent.querySelectorAll('.opt-btn').forEach(b => {
-      b.disabled = true;
-      if (b !== btn) b.style.opacity = '0.6';
-    });
-    fb.style.display = 'block';
-    fb.style.background = '#dcfce7';
-    fb.style.color = '#15803d';
-    fb.style.border = '1px solid #86efac';
-    fb.innerHTML = `✅ <strong>答對了！</strong> ${explain}`;
-    speakChinese('答對了，太棒了！');
-  } else {
-    attempts[qId]++;
-    btn.classList.add('wrong');
-    btn.disabled = true;
-    fb.style.display = 'block';
-    fb.style.background = '#fee2e2';
-    fb.style.color = '#b91c1c';
-    fb.style.border = '1px solid #fca5a5';
-    fb.innerHTML = `❌ <strong>再想想看喔！</strong> 已嘗試 ${attempts[qId]} 次，請再選一次！`;
-    speakChinese('再想想看喔！');
-  }
-}
+    // 40 題大題庫（28 題被動語態 70% ＋ 12 題附加問句 30%；選項在原始題庫中已全面交錯打散，非全為第一個；作答時亦由 Fisher-Yates 動態隨機重組選項）
+    const QUESTION_BANK = [
+      // 被動語態 (28 題 · 70%)
+      {"id":1, "type":"passive", "question":"English is ________ around the world by millions of people.", "options":["spoke", "speaking", "spoken", "speak"], "answerText":"spoken", "explanation":"💡 現在被動語態公式：is + 過去分詞 spoken。"},
+      {"id":2, "type":"passive", "question":"Christmas is ________ by many Americans with gifts and parties every year.", "options":["celebrate", "celebrated", "celebrating", "celebratory"], "answerText":"celebrated", "explanation":"💡 Christmas 是不可數/單數名詞，被動語態為 is celebrated。"},
+      {"id":3, "type":"passive", "question":"The classroom windows are ________ by the students every Friday.", "options":["cleaned", "clean", "cleaning", "cleans"], "answerText":"cleaned", "explanation":"💡 複數主詞 windows 搭配 are + 過去分詞 cleaned。"},
+      {"id":4, "type":"passive", "question":"The crying baby was ________ from the fire by that brave firefighter.", "options":["save", "saving", "safe", "saved"], "answerText":"saved", "explanation":"💡 過去被動式：was + 過去分詞 saved。"},
+      {"id":5, "type":"passive", "question":"The lost dog was ________ in the park by a middle school student yesterday.", "options":["find", "found", "finding", "founded"], "answerText":"found", "explanation":"💡 find 的過去分詞是 found。"},
+      {"id":6, "type":"passive", "question":"The cars ________ fixed by Mike yesterday because he caught a cold.", "options":["wasn't", "weren't", "didn't", "aren't"], "answerText":"weren't", "explanation":"💡 主詞 The cars 為複數，過去被動否定用 weren't fixed。"},
+      {"id":7, "type":"passive", "question":"These lovely bamboo baskets were ________ by my grandma last month.", "options":["make", "making", "made", "makes"], "answerText":"made", "explanation":"💡 make 的過去分詞為 made。"},
+      {"id":8, "type":"passive", "question":"The delicious chocolate cake ________ eaten by my sister; our pet dog took it.", "options":["wasn't", "weren't", "didn't", "isn't"], "answerText":"wasn't", "explanation":"💡 單數主詞 The cake 過去被動否定為 wasn't eaten。"},
+      {"id":9, "type":"passive", "question":"Was the dirty blanket ________ by Peter yesterday afternoon?", "options":["wash", "washing", "washes", "washed"], "answerText":"washed", "explanation":"💡 被動語態疑問句：Was + 主詞 + 過去分詞 washed?。"},
+      {"id":10, "type":"passive", "question":"The exciting international car race will be ________ on December 2.", "options":["hold", "held", "holding", "holds"], "answerText":"held", "explanation":"💡 助動詞被動式：will + be + 過去分詞 held。"},
+      {"id":11, "type":"passive", "question":"All the project work will be ________ by Maggie before Friday.", "options":["finished", "finish", "finishing", "finishes"], "answerText":"finished", "explanation":"💡 will be finished 意為「將會被完成」。"},
+      {"id":12, "type":"passive", "question":"The tall Taipei 101 building can be ________ from miles away.", "options":["see", "saw", "seen", "seeing"], "answerText":"seen", "explanation":"💡 see 的過去分詞為 seen，can be seen 意為「可以被看見」。"},
+      {"id":13, "type":"passive", "question":"Your broken computer can be ________ by my aunt today; she is an engineer.", "options":["fix", "fixed", "fixing", "fixes"], "answerText":"fixed", "explanation":"💡 can be fixed 意為「能被修理好」。"},
+      {"id":14, "type":"passive", "question":"The badly hurt man should be ________ to the hospital right away.", "options":["take", "taking", "took", "taken"], "answerText":"taken", "explanation":"💡 should be taken 意為「應該被送往」。"},
+      {"id":15, "type":"passive", "question":"According to the museum rules, pets must be ________ outside.", "options":["left", "leave", "leaving", "leaves"], "answerText":"left", "explanation":"💡 leave 的過去分詞是 left，must be left 意為「必須被留在」。"},
+      {"id":16, "type":"passive", "question":"The sharp knives shouldn't be ________ on the table where kids can reach.", "options":["putting", "put", "puts", "placing"], "answerText":"put", "explanation":"💡 put 的三態同形，shouldn't be put 意為「不應該被放置」。"},
+      {"id":17, "type":"passive", "question":"These sheep have been ________ by Mr. Chen since 2015.", "options":["raise", "raising", "raised", "raises"], "answerText":"raised", "explanation":"💡 現在完成被動式：have been + 過去分詞 raised。"},
+      {"id":18, "type":"passive", "question":"The inspiring story about the doctor has been ________ many times.", "options":["tell", "telling", "tells", "told"], "answerText":"told", "explanation":"💡 has been told 意為「已經被講過很多次」。"},
+      {"id":19, "type":"passive", "question":"The dirty car hasn't been ________ by Scott yet.", "options":["washed", "wash", "washing", "washes"], "answerText":"washed", "explanation":"💡 現在完成被動否定：hasn't been washed。"},
+      {"id":20, "type":"passive", "question":"Gender stereotypes about jobs are ________ in early childhood.", "options":["form", "formed", "forming", "forms"], "answerText":"formed", "explanation":"💡 are formed 意為「被形成；逐漸建立」。"},
+      {"id":21, "type":"passive", "question":"Men are often ________ to do public service jobs, such as police officers.", "options":["expect", "expecting", "expected", "expects"], "answerText":"expected", "explanation":"💡 are expected to 意為「被期待去做…」。"},
+      {"id":22, "type":"passive", "question":"Women are often ________ to be better at teaching and caring jobs.", "options":["thought", "think", "thinking", "thinks"], "answerText":"thought", "explanation":"💡 are thought to be 意為「被認為是…」。"},
+      {"id":23, "type":"passive", "question":"Barbie doll is ________ as one of the most hard-working toys in the world.", "options":["knew", "know", "knowing", "known"], "answerText":"known", "explanation":"💡 be known as 意為「被視為；以…為人所知」。"},
+      {"id":24, "type":"passive", "question":"Since we were little, we have been ________ that there are jobs for women and men.", "options":["teach", "taught", "teaching", "teaches"], "answerText":"taught", "explanation":"💡 have been taught 意為「一直被教導…」。"},
+      {"id":25, "type":"passive", "question":"The wonderful novel was written ________ a famous Taiwanese author.", "options":["with", "for", "by", "on"], "answerText":"by", "explanation":"💡 被動語態的動作執行者前使用介系詞 by。"},
+      {"id":26, "type":"passive", "question":"The streets are filled ________ colorful lights during Christmas.", "options":["with", "by", "of", "for"], "answerText":"with", "explanation":"💡 be filled with 意為「充滿著…」。"},
+      {"id":27, "type":"passive", "question":"Children under six years old are not ________ to enter the cinema alone.", "options":["allow", "allowed", "allowing", "allows"], "answerText":"allowed", "explanation":"💡 be allowed to 意為「被允許去…」。"},
+      {"id":28, "type":"passive", "question":"The lawyers and engineers are ________ their salaries once a month.", "options":["pay", "paying", "pays", "paid"], "answerText":"paid", "explanation":"💡 are paid 意為「領到薪水；被給付薪資」。"},
 
-function submitExam() {
-  const name = (document.getElementById('studentName').value || '').trim();
-  if (!name) {
-    promptStudentNameModal();
-    return;
-  }
+      // 附加問句 (12 題 · 30%)
+      {"id":29, "type":"tag", "question":"The young boy is very hard-working, ________ he?", "options":["is", "isn't", "doesn't", "does"], "answerText":"isn't", "explanation":"💡 前肯後否：主要子句有 is，附加問句用 isn't he。"},
+      {"id":30, "type":"tag", "question":"The little boy isn't lazy at all, ________ he?", "options":["is", "isn't", "does", "doesn't"], "answerText":"is", "explanation":"💡 前否後肯：主要子句有 isn't，附加問句用 is he。"},
+      {"id":31, "type":"tag", "question":"Amy likes sweet snacks and milk tea, ________ she?", "options":["does", "isn't", "doesn't", "is"], "answerText":"doesn't", "explanation":"💡 主要子句為一般動詞 likes (單數)，附加問句用 doesn't she。"},
+      {"id":32, "type":"tag", "question":"Amy doesn't like spicy food, ________ she?", "options":["doesn't", "is", "isn't", "does"], "answerText":"does", "explanation":"💡 前否後肯：doesn't like 對應 does she。"},
+      {"id":33, "type":"tag", "question":"They will go to the movies together this Saturday, ________ they?", "options":["will", "won't", "don't", "aren't"], "answerText":"won't", "explanation":"💡 助動詞 will 的否定為 won't they。"},
+      {"id":34, "type":"tag", "question":"They won't forget our meeting tomorrow, ________ they?", "options":["will", "won't", "do", "don't"], "answerText":"will", "explanation":"💡 前否後肯：won't 對應 will they。"},
+      {"id":35, "type":"tag", "question":"You have visited the new science museum, ________ you?", "options":["have", "haven't", "don't", "didn't"], "answerText":"haven't", "explanation":"💡 現在完成式 have visited，附加問句用 haven't you。"},
+      {"id":36, "type":"tag", "question":"You haven't seen the popular drama Good Boy yet, ________ you?", "options":["haven't", "do", "have", "did"], "answerText":"have", "explanation":"💡 前否後肯：haven't seen 對應 have you。"},
+      {"id":37, "type":"tag", "question":"He played a devoted father in that drama, ________ he?", "options":["did", "wasn't", "was", "didn't"], "answerText":"didn't", "explanation":"💡 過去式一般動詞 played，附加問句用助動詞 didn't he。"},
+      {"id":38, "type":"tag", "question":"Park Bo Gum was in the famous TV drama, ________ he?", "options":["wasn't", "was", "didn't", "did"], "answerText":"wasn't", "explanation":"💡 過去式 be 動詞 was，附加問句用 wasn't he。"},
+      {"id":39, "type":"tag", "question":"Barbie is a great role model for kids around the world, ________ she?", "options":["is", "isn't", "doesn't", "does"], "answerText":"isn't", "explanation":"💡 Barbie is... 為肯定，附加問句用 isn't she。"},
+      {"id":40, "type":"tag", "question":"You are thinking of the doctor as a man, ________ you?", "options":["are", "don't", "aren't", "do"], "answerText":"aren't", "explanation":"💡 You are... 進行式肯定，附加問句用 aren't you。"}
+    ];
 
-  let totalScore = 0;
-  let firstTryCount = 0;
-  let totalAttempts = 0;
+    let currentQuestions = [];
+    let attemptsPerQ = {};
+    let answeredLocked = {};
+    let totalErrors = 0;
+    let studentName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
 
-  selectedQuestions.forEach((q, idx) => {
-    const qId = `q${idx + 1}`;
-    const isCorrect = answeredCorrectly[qId];
-    const att = attempts[qId];
-    totalAttempts += att;
+    if (studentName) {
+      const el = document.getElementById('studentDisplay');
+      if (el) el.textContent = studentName;
+    }
 
-    let qScore = 0;
-    if (isCorrect) {
-      if (att === 0) {
-        qScore = 10;
-        firstTryCount++;
-      } else if (att === 1) {
-        qScore = 7;
-      } else if (att === 2) {
-        qScore = 4;
+    // 嚴格 Fisher-Yates 洗牌演算法
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // 依 70% (7題被動) + 30% (3題附加問句) 隨機抽選 10 題
+    function reshuffleAndRender() {
+      const passivePool = QUESTION_BANK.filter(q => q.type === 'passive');
+      const tagPool = QUESTION_BANK.filter(q => q.type === 'tag');
+
+      let picked = [];
+      if (passivePool.length >= 7 && tagPool.length >= 3) {
+        picked = [...shuffle(passivePool).slice(0, 7), ...shuffle(tagPool).slice(0, 3)];
       } else {
-        qScore = 2;
+        picked = shuffle(QUESTION_BANK).slice(0, 10);
+      }
+      picked = shuffle(picked);
+
+      const letters = ['A', 'B', 'C', 'D'];
+      currentQuestions = picked.map((q, idx) => {
+        const rawOpts = q.options;
+        const targetAns = q.answerText;
+        const shuffledOpts = shuffle(rawOpts);
+        let correctLetter = 'A';
+
+        const formattedOpts = shuffledOpts.map((opt, oIdx) => {
+          if (opt === targetAns) {
+            correctLetter = letters[oIdx];
+          }
+          return { letter: letters[oIdx], text: opt };
+        });
+
+        return {
+          idx: idx + 1,
+          id: q.id,
+          question: q.question,
+          options: formattedOpts,
+          correctLetter: correctLetter,
+          answerText: targetAns,
+          explanation: q.explanation
+        };
+      });
+
+      attemptsPerQ = {};
+      answeredLocked = {};
+      totalErrors = 0;
+
+      renderQuestionsUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderQuestionsUI() {
+      const container = document.getElementById('questions-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      currentQuestions.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = 'card-' + q.idx;
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'question-title';
+
+        const spkBtn = document.createElement('button');
+        spkBtn.className = 'speaker-btn';
+        spkBtn.innerHTML = '🔊';
+        spkBtn.title = '朗讀題目';
+        spkBtn.onclick = () => speakQuestion(q.question);
+        titleDiv.appendChild(spkBtn);
+
+        const stemSpan = document.createElement('span');
+        stemSpan.className = 'read-sentence';
+        stemSpan.textContent = q.idx + '. ' + q.question;
+        stemSpan.onclick = () => speakSentence(q.question);
+        titleDiv.appendChild(stemSpan);
+
+        card.appendChild(titleDiv);
+
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'options-grid';
+
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'opt-btn';
+          btn.id = 'btn-' + q.idx + '-' + opt.letter;
+          btn.innerHTML = '<span>(' + opt.letter + ')</span> <span>' + opt.text + '</span>';
+          btn.onclick = () => checkOption(q.idx, opt.letter, q.explanation);
+          optsDiv.appendChild(btn);
+        });
+
+        card.appendChild(optsDiv);
+
+        const fb = document.createElement('div');
+        fb.id = 'fb-' + q.idx;
+        fb.className = 'feedback-box';
+        card.appendChild(fb);
+
+        container.appendChild(card);
+      });
+    }
+
+    function checkOption(qIdx, selectedLetter, exp) {
+      if (answeredLocked[qIdx]) return;
+      if (attemptsPerQ[qIdx] === undefined) attemptsPerQ[qIdx] = 0;
+
+      const q = currentQuestions.find(item => item.idx === qIdx);
+      const fb = document.getElementById('fb-' + qIdx);
+      const card = document.getElementById('card-' + qIdx);
+      const btn = document.getElementById('btn-' + qIdx + '-' + selectedLetter);
+      if (!fb || !q) return;
+
+      fb.style.display = 'block';
+
+      if (selectedLetter === q.correctLetter) {
+        answeredLocked[qIdx] = true;
+        card.classList.add('answered');
+        if (btn) btn.classList.add('correct');
+
+        const errs = attemptsPerQ[qIdx];
+        let badge = '🥇 首次即答對！';
+        if (errs === 1) badge = '⚠️ 試錯 1 次後答對 (得分 70%)';
+        else if (errs === 2) badge = '⚠️ 試錯 2 次後答對 (得分 40%)';
+        else if (errs >= 3) badge = '❌ 試錯多次 (鼓勵分 10%)';
+
+        fb.style.background = '#dcfce7';
+        fb.style.border = '1px solid #86efac';
+        fb.style.color = '#15803d';
+        fb.innerHTML = '✅ <strong>答對了！</strong> ' + exp + '<div style="font-size:0.85rem; margin-top:4px; font-weight:700; color:#047857;">[' + badge + ']</div>';
+        speakChinese('答對了！' + exp);
+
+        ['A', 'B', 'C', 'D'].forEach(l => {
+          const b = document.getElementById('btn-' + qIdx + '-' + l);
+          if (b && l !== selectedLetter) {
+            b.disabled = true;
+            b.style.opacity = '0.4';
+          }
+        });
+      } else {
+        attemptsPerQ[qIdx]++;
+        totalErrors++;
+        if (btn) {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+        }
+
+        fb.style.background = '#fee2e2';
+        fb.style.border = '1px solid #fca5a5';
+        fb.style.color = '#b91c1c';
+        fb.innerHTML = '❌ <strong>再想想看：</strong> ' + exp + ' <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ' + attemptsPerQ[qIdx] + ' 次)</span>';
+        speakChinese('再想想看喔。' + exp);
       }
     }
-    totalScore += qScore;
-  });
 
-  const accuracy = Math.round((firstTryCount / 10) * 100);
-  const stars = totalScore >= 85 ? '⭐⭐⭐' : (totalScore >= 60 ? '⭐⭐' : '⭐');
+    function getSavedStudentName() {
+      return localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+    }
 
-  document.getElementById('scoreText').textContent = `${totalScore} 分`;
-  document.getElementById('firstTryText').textContent = `${firstTryCount} / 10`;
-  document.getElementById('attemptsText').textContent = `${totalAttempts} 次`;
-  document.getElementById('certStudentText').textContent = `學生：${name} ｜ 表現評價：${stars} (${totalScore}分)`;
+    function saveStudentName(name) {
+      if (name) {
+        localStorage.setItem('student_global_name', name);
+        localStorage.setItem('current_student_name', name);
+      }
+    }
 
-  document.getElementById('scoreBanner').style.display = 'block';
-  document.getElementById('scoreBanner').scrollIntoView({ behavior: 'smooth' });
+    function submitExam() {
+      studentName = getSavedStudentName();
+      if (!studentName) {
+        promptStudentNameModal();
+        return;
+      }
 
-  // 同步至 Google Apps Script 儀表板
-  const payload = {
-    timestamp: new Date().toLocaleString(),
-    name: name,
-    student: name,
-    studentName: name,
-    student_name: name,
-    userName: name,
-    user_name: name,
-    studentId: name,
-    unit: '九上 Lesson 3 被動語態與性別平等',
-    level: '10題隨機抽測',
-    score: totalScore,
-    accuracy: accuracy + '%',
-    stars: stars,
-    attempts: totalAttempts
-  };
+      let answeredCount = 0;
+      let firstTryCorrect = 0;
+      let totalScore = 0;
+      const basePts = 100.0 / currentQuestions.length;
+      const detailsList = [];
 
-  const syncStatus = document.getElementById('syncStatus');
-  fetch(GAS_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(() => {
-    syncStatus.innerHTML = '🟢 <strong>抽測成果已成功同步至老師的 Google 雲端試算表儀表板！</strong>';
-    syncStatus.style.background = '#dcfce7';
-    syncStatus.style.color = '#15803d';
-    syncStatus.style.borderColor = '#86efac';
-  }).catch(() => {
-    syncStatus.innerHTML = '⚠️ <strong>雲端同步稍有延遲，可點擊下方重新同步按鈕。</strong>';
-  });
-}
+      currentQuestions.forEach(q => {
+        const isAnswered = answeredLocked[q.idx];
+        const errs = attemptsPerQ[q.idx] || 0;
+        let multiplier = 0;
+        let badge = '❌ 未作答';
 
-function initStudentNameModal() {
-  const savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
-  if (savedName) {
-    document.getElementById('studentName').value = savedName;
-    document.getElementById('studentNameModal').style.display = 'none';
-  } else {
-    document.getElementById('studentNameModal').style.display = 'flex';
-    setTimeout(() => {
-      document.getElementById('modalStudentInput').focus();
-    }, 300);
-  }
-}
+        if (isAnswered) {
+          answeredCount++;
+          if (errs === 0) {
+            multiplier = 1.0;
+            firstTryCorrect++;
+            badge = '🥇 首次即答對 (滿分)';
+          } else if (errs === 1) {
+            multiplier = 0.7;
+            badge = '⚠️ 試錯 1 次 (70% 分數)';
+          } else if (errs === 2) {
+            multiplier = 0.4;
+            badge = '⚠️ 試錯 2 次 (40% 分數)';
+          } else {
+            multiplier = 0.1;
+            badge = '❌ 試錯多次 (10% 鼓勵分)';
+          }
+        }
+        totalScore += basePts * multiplier;
+        detailsList.push('第 ' + q.idx + ' 題: ' + badge);
+      });
 
-function confirmStudentNameModal() {
-  const name = (document.getElementById('modalStudentInput').value || '').trim();
-  const err = document.getElementById('modalNameError');
-  if (!name) {
-    err.style.display = 'block';
-    return;
-  }
-  err.style.display = 'none';
-  localStorage.setItem('student_global_name', name);
-  localStorage.setItem('current_student_name', name);
-  document.getElementById('studentName').value = name;
-  document.getElementById('studentNameModal').style.display = 'none';
-}
+      if (answeredCount < currentQuestions.length) {
+        const proceed = confirm('您還有 ' + (currentQuestions.length - answeredCount) + ' 題尚未作答，確定要交卷結算嗎？');
+        if (!proceed) return;
+      }
 
-function promptStudentNameModal() {
-  const current = document.getElementById('studentName').value || localStorage.getItem('student_global_name') || '';
-  document.getElementById('modalStudentInput').value = current;
-  document.getElementById('studentNameModal').style.display = 'flex';
-}
+      const finalScore = Math.max(10, Math.round(totalScore));
+      const firstTryRate = Math.round((firstTryCorrect / currentQuestions.length) * 100);
+      const nowStr = new Date().toLocaleString('zh-TW');
 
-window.addEventListener('DOMContentLoaded', () => {
-  initStudentNameModal();
-  initQuestions();
-});
-</script>
+      const historyKey = 'quiz_history_' + encodeURIComponent(document.title || 'quiz_l3_passive');
+      const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+      history.unshift({ score: finalScore, time: nowStr });
+      localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 10)));
+
+      showReportModal(finalScore, firstTryCorrect, firstTryRate, detailsList, nowStr, history, studentName);
+      syncToGoogleSheet(finalScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '), studentName);
+    }
+
+    function showReportModal(score, correctCount, firstTryRate, detailsList, nowStr, history, sName) {
+      const scoreEl = document.getElementById('reportScore');
+      scoreEl.textContent = score + ' 分';
+      scoreEl.className = 'score-number ' + (score >= 85 ? 'score-high' : score >= 60 ? 'score-mid' : 'score-low');
+
+      let levelText = '⭐⭐⭐ 精熟特優！完美掌握被動語態與附加問句核心！';
+      if (score < 60) levelText = '💪 還需加強，建議仔細檢討錯題後再挑戰一次！';
+      else if (score < 85) levelText = '⭐⭐ 表現良好！訂正後即可邁向滿分！';
+      document.getElementById('reportLevelText').textContent = levelText;
+
+      document.getElementById('reportStudent').textContent = sName || getSavedStudentName() || '自主學習同學';
+      document.getElementById('reportTime').textContent = nowStr;
+
+      const historyEl = document.getElementById('reportHistory');
+      historyEl.innerHTML = '';
+      history.slice(0, 5).reverse().forEach((h, i) => {
+        const span = document.createElement('span');
+        span.className = 'history-pill';
+        span.textContent = '第' + (i+1) + '次: ' + h.score + '分';
+        historyEl.appendChild(span);
+      });
+
+      const diagListEl = document.getElementById('diagnosisList');
+      diagListEl.innerHTML = '';
+      detailsList.forEach(item => {
+        const div = document.createElement('div');
+        div.style.cssText = 'padding:6px 10px; background:rgba(0,0,0,0.03); border:1px solid var(--border-color); border-radius:8px;';
+        div.textContent = item;
+        diagListEl.appendChild(div);
+      });
+
+      document.getElementById('reportModal').classList.add('active');
+      speakChinese('評量完成！獲得 ' + score + ' 分，首次答對 ' + correctCount + ' 題。');
+    }
+
+    function closeReport() {
+      document.getElementById('reportModal').classList.remove('active');
+    }
+
+    function syncToGoogleSheet(score, correctCount, firstTryRateVal, wrongVal, detailsStr, sName) {
+      const syncBanner = document.getElementById('syncStatus');
+      if (syncBanner) {
+        syncBanner.style.background = '#eff6ff';
+        syncBanner.style.borderColor = '#bfdbfe';
+        syncBanner.style.color = '#1e40af';
+        syncBanner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+      }
+
+      const payload = {
+        name: sName,
+        student: sName,
+        studentName: sName,
+        student_name: sName,
+        userName: sName,
+        user_name: sName,
+        studentId: sName,
+        unit: '國中英語【國三】L3 被動語態與性別平等',
+        topic: '被動語態與附加問句',
+        lesson: 'L3 被動語態與性別平等',
+        title: document.title || '國中英語差異化隨機抽測',
+        level: '10題隨機抽測',
+        score: score,
+        finalScore: score,
+        totalScore: score,
+        accuracy: firstTryRateVal + '%',
+        firstTryRate: firstTryRateVal + '%',
+        firstTryCorrect: correctCount + '/' + currentQuestions.length,
+        firstTryVal: correctCount,
+        totalQuestions: currentQuestions.length,
+        wrongAttempts: wrongVal,
+        errors: wrongVal,
+        hintsUsed: 0,
+        stars: score >= 90 ? '⭐⭐⭐' : (score >= 70 ? '⭐⭐' : '⭐'),
+        details: detailsStr,
+        timestamp: new Date().toISOString(),
+        time: new Date().toLocaleString('zh-TW')
+      };
+
+      fetch(GAS_ENDPOINT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        if (syncBanner) {
+          syncBanner.style.background = '#d1fae5';
+          syncBanner.style.borderColor = '#86efac';
+          syncBanner.style.color = '#065f46';
+          syncBanner.textContent = '✅ 成績與作答歷程已成功同步至教師後台！';
+        }
+      }).catch(err => {
+        if (syncBanner) {
+          syncBanner.style.background = '#fef3c7';
+          syncBanner.style.borderColor = '#fde68a';
+          syncBanner.style.color = '#92400e';
+          syncBanner.textContent = '⚠️ 雲端同步完成 (離線暫存模式)';
+        }
+      });
+    }
+
+    function speakEnglish(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const sp = parseFloat(document.getElementById('speech-rate')?.value || '0.85');
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = sp;
+      const voices = window.speechSynthesis.getVoices();
+      const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                      voices.find(v => v.lang.startsWith('en')) || voices[0];
+      if (enVoice) utter.voice = enVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakChinese(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      utter.rate = 0.85;
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                      voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+      if (zhVoice) utter.voice = zhVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakQuestion(text) {
+      if (/[\u4e00-\u9fa5]/.test(text)) {
+        speakChinese(text);
+      } else {
+        speakEnglish(text);
+      }
+    }
+
+    function speakSentence(text) {
+      speakQuestion(text);
+    }
+
+    function toggleTheme() {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    function changeFontSize(size) {
+      document.documentElement.style.setProperty('--font-size', size);
+    }
+
+    function initStudentNameModal() {
+      var modal = document.getElementById('studentNameModal');
+      var modalInput = document.getElementById('modalStudentInput');
+      var pageDisplay = document.getElementById('studentDisplay');
+      if (!modal || !modalInput) return;
+
+      var savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
+      if (savedName) {
+        modalInput.value = savedName;
+        if (pageDisplay) pageDisplay.textContent = savedName;
+      }
+      modal.style.display = 'flex';
+      setTimeout(function() { modalInput.focus(); modalInput.select(); }, 200);
+    }
+
+    function confirmStudentNameModal() {
+      var modal = document.getElementById('studentNameModal');
+      var modalInput = document.getElementById('modalStudentInput');
+      var err = document.getElementById('modalNameError');
+      var pageDisplay = document.getElementById('studentDisplay');
+      
+      var val = modalInput ? modalInput.value.trim() : '';
+      if (!val) {
+        if (err) err.style.display = 'block';
+        if (modalInput) {
+          modalInput.style.borderColor = '#ef4444';
+          modalInput.focus();
+        }
+        return;
+      }
+      if (err) err.style.display = 'none';
+      localStorage.setItem('student_global_name', val);
+      localStorage.setItem('current_student_name', val);
+      studentName = val;
+      if (pageDisplay) pageDisplay.textContent = val;
+      if (modal) modal.style.display = 'none';
+    }
+
+    function promptStudentNameModal() {
+      var modal = document.getElementById('studentNameModal');
+      var modalInput = document.getElementById('modalStudentInput');
+      var err = document.getElementById('modalNameError');
+      if (err) err.style.display = 'none';
+      var cur = getSavedStudentName();
+      if (modalInput) modalInput.value = cur;
+      if (modal) {
+        modal.style.display = 'flex';
+        setTimeout(function() { modalInput.focus(); modalInput.select(); }, 150);
+      }
+    }
+
+    // Auto-init
+    reshuffleAndRender();
+
+    window.onload = () => {
+      if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
+    };
+
+    window.addEventListener('DOMContentLoaded', initStudentNameModal);
+  </script>
 </body>
 </html>
