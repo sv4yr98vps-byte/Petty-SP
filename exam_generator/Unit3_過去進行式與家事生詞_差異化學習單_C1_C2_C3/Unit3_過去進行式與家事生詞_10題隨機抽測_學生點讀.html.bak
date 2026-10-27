@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>八上 Unit 3 過去進行式與家事生詞 · 10題線上隨機抽測</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --bg: #f0f9ff;
+      --card-bg: #ffffff;
+      --text: #0c4a6e;
+      --text-muted: #64748b;
+      --border: #bae6fd;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans TC', 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); color: white; padding: 26px 20px; text-align: center; box-shadow: 0 4px 12px rgba(2,132,199,0.15); }
+    header h1 { font-size: 1.7rem; margin-bottom: 6px; font-weight: 700; }
+    header p { font-size: 0.95rem; opacity: 0.95; }
+    .container { max-width: 860px; margin: 20px auto; padding: 0 16px; }
+    .info-bar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+    .input-name { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: inherit; }
+    .status-pill { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; background: #e0f2fe; padding: 6px 14px; border-radius: 20px; border: 1px solid #7dd3fc; color: #0369a1; font-weight: 700; }
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .q-badge { background: #e0f2fe; color: #0284c7; padding: 4px 12px; border-radius: 14px; font-size: 0.85rem; font-weight: 700; }
+    .q-title { font-size: 1.15rem; font-weight: 700; color: #0c4a6e; line-height: 1.5; margin-bottom: 14px; }
+    .speaker-btn { background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
+    .opt-btn { background: var(--card-bg); border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; font-family: inherit; font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; transition: all 0.15s; }
+    .opt-btn:hover { border-color: var(--primary); background: #f0f9ff; }
+    .opt-btn.correct { background: #dcfce7 !important; border-color: #10b981 !important; color: #15803d !important; font-weight: bold; }
+    .opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    .feedback-box { padding: 12px 16px; border-radius: 10px; font-size: 0.95rem; line-height: 1.5; display: none; margin-top: 10px; }
+    .submit-bar { margin-top: 30px; text-align: center; }
+    .btn-submit { background: var(--primary); color: white; border: none; padding: 14px 40px; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<!-- 學生姓名強制彈跳視窗 -->
+<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #38bdf8;">
+    <div style="font-size:3.2rem; margin-bottom:12px;">🎲 📝</div>
+    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入 10 題隨機抽測！</h2>
+    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄抽測成績：</p>
+    
+    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; box-sizing:border-box;" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
+    
+    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始抽測喔！</div>
+    
+    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer;">
+      🚀 確定並開始抽測
+    </button>
+  </div>
+</div>
+
+<header>
+  <h1>Unit 3 過去進行式與家事生詞</h1>
+  <p>🎲 40 題核心大題庫 · 線上動態隨機抽選 10 題 · 點選立即判定與試錯扣分</p>
+</header>
+
+<div class="container">
+  <div class="info-bar">
+    <div>
+      <label>學生姓名：</label>
+      <input type="text" id="studentName" onclick="promptStudentNameModal()" class="input-name" placeholder="請輸入姓名">
+    </div>
+    <div class="status-pill">
+      <span>🎲 題庫模式：40 題隨機抽 10 題</span>
+    </div>
+  </div>
+
+  <div id="questions-container"></div>
+
+  <div class="submit-bar">
+    <button class="btn-submit" onclick="submitExam()">送出答案並結算成績</button>
+  </div>
+
+  <div id="scoreBanner" style="display:none; margin-top:30px;">
+    <div class="card" style="border:3px solid #0284c7; background:#f0f9ff; text-align:center; padding:28px 20px; border-radius:18px;">
+      <div style="font-size:3.2rem; line-height:1;">🏆</div>
+      <h2 style="font-size:1.6rem; color:#0369a1; margin:10px 0 4px;">抽測結算完成！</h2>
+      <div id="certStudentText" style="font-weight:700; color:#0c4a6e; margin-bottom:18px;">學生：未填寫 ｜ 評等：⭐⭐⭐</div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:16px 0;">
+        <div style="background:white; border:1px solid #bae6fd; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#0284c7;" id="scoreText">--</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🏆 總分 (含試錯折算)</div>
+        </div>
+        <div style="background:white; border:1px solid #bae6fd; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#059669;" id="firstTryText">-- / 10</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🎯 首次即答對題數</div>
+        </div>
+        <div style="background:white; border:1px solid #bae6fd; border-radius:12px; padding:14px;">
+          <div style="font-size:1.8rem; font-weight:800; color:#d97706;" id="attemptsText">0 次</div>
+          <div style="font-size:0.85rem; color:#64748b; font-weight:600;">🔄 累計試錯次數</div>
+        </div>
+      </div>
+      <div style="text-align:left; background:white; border:1px solid #cbd5e1; border-radius:12px; padding:16px; margin:16px 0;">
+        <div style="font-weight:700; color:#1e293b; margin-bottom:10px; font-size:0.95rem;">📋 本次抽測診斷明細</div>
+        <div id="resDetailsContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:0.85rem;"></div>
+      </div>
+      <div id="syncStatus" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:12px; border-radius:10px; font-weight:700; margin:16px 0;">📡 正在同步成績至老師的 Google 雲端學習歷程儀表板...</div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <button type="button" style="background:#0284c7; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="submitExam()">☁️ 重新同步成績</button>
+        <button type="button" style="background:#64748b; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="reshuffleAndRender()">🎲 換一組題目 (重新抽測)</button>
+        <a href="index.html" style="background:#0f172a; color:white; text-decoration:none; padding:10px 18px; border-radius:8px; font-weight:700; display:inline-block;">🏠 回單元首頁</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
+
+function speakEnglish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.8;
+  window.speechSynthesis.speak(u);
+}
+
+function speakChinese(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-TW';
+  u.rate = 0.9;
+  window.speechSynthesis.speak(u);
+}
+
+// 40 題大題庫（20 單字 + 20 文法）
+const questionBank = [
+  // 1~20: 單字題
+  { type: 'vocab', q: 'Mom asked me to ______ after dinner.', options: ['do the dishes', 'do the homework', 'wash the shoes', 'make the table'], answer: 'do the dishes', explain: '💡 do the dishes 是固定片語，意為「洗碗盤」。' },
+  { type: 'vocab', q: 'The students ______ the classroom floor every afternoon.', options: ['sweep', 'sleep', 'sweet', 'speed'], answer: 'sweep', explain: '💡 sweep 意為「打掃；清掃(地板)」。' },
+  { type: 'vocab', q: 'Please use the wet cloth to ______ the dirty table.', options: ['wipe', 'wire', 'wide', 'wave'], answer: 'wipe', explain: '💡 wipe 意為「擦拭；抹乾淨」。' },
+  { type: 'vocab', q: 'Susan is using a ______ to clean the bathroom floor.', options: ['mop', 'map', 'mob', 'mud'], answer: 'mop', explain: '💡 mop 作為名詞是「拖把」，動詞是「拖地」。' },
+  { type: 'vocab', q: 'Let\'s ______ our wet jackets on the chairs.', options: ['hang', 'hand', 'hard', 'bang'], answer: 'hang', explain: '💡 hang 意為「懸掛；吊掛」。' },
+  { type: 'vocab', q: 'Can you ______ my broken computer?', options: ['fix', 'fox', 'mix', 'fit'], answer: 'fix', explain: '💡 fix 意為「修理；解決問題」。' },
+  { type: 'vocab', q: 'When I am not at home, my brother ______ our pet dog.', options: ['feeds', 'feels', 'feet', 'foods'], answer: 'feeds', explain: '💡 feed 意為「餵養；餵食」。' },
+  { type: 'vocab', q: 'She accidentally ______ the glass bowl into pieces.', options: ['broke', 'bread', 'brave', 'brick'], answer: 'broke', explain: '💡 break 的過去式為 broke，意為「打破；損壞」。' },
+  { type: 'vocab', q: 'Don\'t throw trash on the ______.', options: ['floor', 'flower', 'flour', 'flood'], answer: 'floor', explain: '💡 floor 意為「地板」。' },
+  { type: 'vocab', q: 'There is a small bathroom just by the ______.', options: ['stairs', 'stars', 'stare', 'story'], answer: 'stairs', explain: '💡 stairs 意為「樓梯；階梯」。' },
+  { type: 'vocab', q: 'It is very hot here. Please open the ______.', options: ['windows', 'winters', 'widows', 'windy'], answer: 'windows', explain: '💡 window 意為「窗戶」。' },
+  { type: 'vocab', q: 'There are some pencils and pens in the ______.', options: ['drawer', 'draw', 'driver', 'dress'], answer: 'drawer', explain: '💡 drawer 意為「抽屜」。' },
+  { type: 'vocab', q: 'We always buy new ______ for Chinese New Year.', options: ['clothes', 'clouds', 'clocks', 'close'], answer: 'clothes', explain: '💡 clothes 意為「衣服；服裝」。' },
+  { type: 'vocab', q: 'It\'s five ______ twelve. It\'s time for lunch.', options: ['past', 'pass', 'part', 'post'], answer: 'past', explain: '💡 past 搭配時間意為「經過…分；過…點」。' },
+  { type: 'vocab', q: 'Patty ate only ______ of her lunch because she wasn\'t hungry.', options: ['half', 'hall', 'hard', 'hair'], answer: 'half', explain: '💡 half 意為「一半；二分之一」。' },
+  { type: 'vocab', q: 'We were studying at the library at a ______ past ten.', options: ['quarter', 'quiet', 'queen', 'question'], answer: 'quarter', explain: '💡 quarter 搭配時間意為「十五分鐘；一刻鐘」。' },
+  { type: 'vocab', q: 'My sister is ______ of dogs.', options: ['scared', 'score', 'scarf', 'scale'], answer: 'scared', explain: '💡 be scared of 意為「害怕…」。' },
+  { type: 'vocab', q: 'Can we go to the coffee shop later? - No ______!', options: ['problem', 'program', 'promise', 'protect'], answer: 'problem', explain: '💡 No problem! 意為「沒問題！」。' },
+  { type: 'vocab', q: 'I was so tired that I fell ______ on the sofa.', options: ['asleep', 'alone', 'alive', 'almost'], answer: 'asleep', explain: '💡 fall asleep 意為「睡著」。' },
+  { type: 'vocab', q: 'There is ______ in the box; it is completely empty.', options: ['nothing', 'nobody', 'nowhere', 'none'], answer: 'nothing', explain: '💡 nothing 意為「沒什麼；無物」。' },
+
+  // 21~40: 文法題
+  { type: 'grammar', q: 'Kelly ______ video games when the earthquake happened.', options: ['was playing', 'were playing', 'played', 'plays'], answer: 'was playing', explain: '💡 單數主詞 Kelly 搭配過去進行式 was playing。' },
+  { type: 'grammar', q: 'Bobbie and the baby ______ sleeping when the earthquake happened.', options: ['were', 'was', 'are', 'is'], answer: 'were', explain: '💡 複數主詞 Bobbie and the baby 搭配 were sleeping。' },
+  { type: 'grammar', q: 'What ______ you doing at seven o\'clock yesterday morning?', options: ['were', 'was', 'are', 'did'], answer: 'were', explain: '💡 主詞 you 搭配過去進行式助動詞 were。' },
+  { type: 'grammar', q: 'Mr. Rokk was making breakfast and Mrs. Rokk ______ her hair at that time.', options: ['was brushing', 'were brushing', 'brushed', 'is brushing'], answer: 'was brushing', explain: '💡 過去特定時間點兩件動作同時進行，Mrs. Rokk 單數用 was brushing。' },
+  { type: 'grammar', q: 'They ______ the clothes when it started to rain.', options: ['were hanging', 'was hanging', 'hung', 'hang'], answer: 'were hanging', explain: '💡 They 複數搭配 were hanging。' },
+  { type: 'grammar', q: 'I was sleepwalking when I ______ my favorite cup.', options: ['broke', 'break', 'was breaking', 'am breaking'], answer: 'broke', explain: '💡 when 引導突發短動作，使用過去簡單式 broke。' },
+  { type: 'grammar', q: 'The phone rang while my mother ______ the floor.', options: ['was mopping', 'mops', 'mopped', 'is mopping'], answer: 'was mopping', explain: '💡 while 引導持續進行的長動作，用 was mopping。' },
+  { type: 'grammar', q: 'Mr. Job ______ up the stairs when the lights suddenly went out.', options: ['was climbing', 'were climbing', 'climbed', 'is climbing'], answer: 'was climbing', explain: '💡 Mr. Job 單數主詞搭配 was climbing。' },
+  { type: 'grammar', q: 'At half ______ six yesterday, we were eating dinner.', options: ['past', 'pass', 'passed', 'to'], answer: 'past', explain: '💡 英語時間「六點半」為 half past six。' },
+  { type: 'grammar', q: 'A: What was Tim doing at that time? B: He ______ his dog.', options: ['was feeding', 'were feeding', 'fed', 'feeds'], answer: 'was feeding', explain: '💡 回答過去進行式問句，He 單數用 was feeding。' },
+  { type: 'grammar', q: 'When the teacher walked in, the students ______ English loudly.', options: ['were reading', 'was reading', 'read', 'are reading'], answer: 'were reading', explain: '💡 複數主詞 students 搭配 were reading。' },
+  { type: 'grammar', q: 'I ______ the bathroom when you knocked on the door.', options: ['was using', 'were using', 'used', 'am using'], answer: 'was using', explain: '💡 I 搭配過去進行式 was using。' },
+  { type: 'grammar', q: 'Mrs. Baker was working at her desk ______ the earthquake happened.', options: ['when', 'what', 'which', 'who'], answer: 'when', explain: '💡 連接詞 when 連接突然發生的過去事件。' },
+  { type: 'grammar', q: 'A: Were you sleeping at ten last night? B: No, I ______.', options: ['wasn\'t', 'weren\'t', 'didn\'t', 'am not'], answer: 'wasn\'t', explain: '💡 簡答第一人稱單數：No, I wasn\'t.' },
+  { type: 'grammar', q: 'The children ______ in the tree when their mother called them.', options: ['were playing', 'was playing', 'played', 'are playing'], answer: 'were playing', explain: '💡 children 為複數名詞，搭配 were playing。' },
+  { type: 'grammar', q: 'At a quarter ______ eight, the school bell was ringing.', options: ['past', 'passed', 'passing', 'passes'], answer: 'past', explain: '💡 a quarter past eight 意為「八點十五分」。' },
+  { type: 'grammar', q: 'She was wiping the window ______ she saw a cute bird outside.', options: ['when', 'where', 'why', 'who'], answer: 'when', explain: '💡 動作進行中「這時…」，使用連接詞 when。' },
+  { type: 'grammar', q: 'My brother and I ______ a cartoon at that time.', options: ['were watching', 'was watching', 'watched', 'are watching'], answer: 'were watching', explain: '💡 My brother and I (兩個人) 搭配 were watching。' },
+  { type: 'grammar', q: 'A: ______ was Mom doing at noon? B: She was cooking noodles.', options: ['What', 'Where', 'When', 'Who'], answer: 'What', explain: '💡 詢問「正在做什麼事情」，疑問詞用 What。' },
+  { type: 'grammar', q: 'Someone ______ calling your name outside when you were sleeping.', options: ['was', 'were', 'is', 'are'], answer: 'was', explain: '💡 不定代名詞 Someone 視為單數，搭配 was calling。' }
+];
+
+let selectedQuestions = [];
+const attempts = {};
+const answeredCorrectly = {};
+
+function reshuffleAndRender() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+  document.getElementById('scoreBanner').style.display = 'none';
+
+  // 隨機抽選 10 題
+  const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+  selectedQuestions = shuffled.slice(0, 10);
+
+  selectedQuestions.forEach((q, idx) => {
+    attempts[idx] = 0;
+    answeredCorrectly[idx] = false;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = `card-${idx}`;
+
+    const typeName = q.type === 'vocab' ? '核心生詞題' : '過去進行式語法題';
+
+    card.innerHTML = `
+      <div class="q-meta">
+        <span class="q-badge">第 ${idx + 1} 題 · ${typeName}</span>
+        <button class="speaker-btn" onclick="speakEnglish('${q.q.replace(/'/g, "\\'")}')">🔊 朗讀題目</button>
+      </div>
+      <div class="q-title">${q.q}</div>
+      <div class="options-grid" id="opts-${idx}">
+        ${q.options.map(opt => `
+          <button class="opt-btn" onclick="checkChoice(${idx}, '${opt.replace(/'/g, "\\'")}', '${q.answer.replace(/'/g, "\\'")}', this)">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="feedback-box" id="fb-${idx}"></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function checkChoice(qIdx, selected, answer, btn) {
+  if (answeredCorrectly[qIdx]) return;
+  const q = selectedQuestions[qIdx];
+  const fb = document.getElementById(`fb-${qIdx}`);
+  const parent = document.getElementById(`opts-${qIdx}`);
+
+  if (selected === answer) {
+    answeredCorrectly[qIdx] = true;
+    btn.classList.add('correct');
+    parent.querySelectorAll('.opt-btn').forEach(b => {
+      b.disabled = true;
+      if (b !== btn) b.style.opacity = '0.6';
+    });
+    fb.style.display = 'block';
+    fb.style.background = '#dcfce7';
+    fb.style.color = '#15803d';
+    fb.style.border = '1px solid #86efac';
+    fb.innerHTML = `✅ <strong>答對了！</strong> ${q.explain}`;
+    speakEnglish(answer);
+  } else {
+    attempts[qIdx]++;
+    btn.classList.add('wrong');
+    btn.disabled = true;
+    fb.style.display = 'block';
+    fb.style.background = '#fee2e2';
+    fb.style.color = '#b91c1c';
+    fb.style.border = '1px solid #fca5a5';
+    fb.innerHTML = `❌ <strong>再想想看喔！</strong> (已試錯 ${attempts[qIdx]} 次)<br>${q.explain}`;
+    speakChinese('再想想看喔！');
+  }
+}
+
+function submitExam() {
+  const name = (document.getElementById('studentName').value || '').trim();
+  if (!name) {
+    promptStudentNameModal();
+    return;
+  }
+
+  let totalScore = 0;
+  let firstTryCount = 0;
+  let totalAttemptsCount = 0;
+  const details = [];
+
+  selectedQuestions.forEach((q, idx) => {
+    const isCorrect = answeredCorrectly[idx];
+    const att = attempts[idx] || 0;
+    totalAttemptsCount += att;
+
+    let qScore = 0;
+    if (isCorrect) {
+      if (att === 0) {
+        qScore = 10;
+        firstTryCount++;
+      } else if (att === 1) {
+        qScore = 7;
+      } else if (att === 2) {
+        qScore = 4;
+      } else {
+        qScore = 1;
+      }
+    }
+    totalScore += qScore;
+    details.push(`第${idx+1}題: ${isCorrect ? '✅ 答對' : '❌ 未作答'} (試錯${att}次, 得${qScore}分)`);
+  });
+
+  const finalScore = Math.round(totalScore);
+  const accuracy = Math.round((firstTryCount / 10) * 100) + '%';
+  let stars = '⭐⭐⭐';
+  if (finalScore < 60) stars = '⭐';
+  else if (finalScore < 80) stars = '⭐⭐';
+
+  document.getElementById('scoreText').textContent = finalScore + ' 分';
+  document.getElementById('firstTryText').textContent = `${firstTryCount} / 10`;
+  document.getElementById('attemptsText').textContent = totalAttemptsCount + ' 次';
+  document.getElementById('certStudentText').textContent = `學生：${name} ｜ 表現評價：${stars}`;
+  
+  const detContainer = document.getElementById('resDetailsContainer');
+  detContainer.innerHTML = details.map(d => `<div style="padding:4px 8px; background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">${d}</div>`).join('');
+  
+  document.getElementById('scoreBanner').style.display = 'block';
+  document.getElementById('scoreBanner').scrollIntoView({ behavior: 'smooth' });
+
+  // 雲端同步
+  const payload = {
+    timestamp: new Date().toLocaleString(),
+    name: name,
+    student: name,
+    studentName: name,
+    student_name: name,
+    userName: name,
+    user_name: name,
+    studentId: name,
+    unit: '八上 Unit 3 過去進行式與家事生詞',
+    level: '10題線上隨機抽測',
+    score: finalScore,
+    accuracy: accuracy,
+    stars: stars,
+    attempts: totalAttemptsCount
+  };
+
+  const syncStatus = document.getElementById('syncStatus');
+  syncStatus.textContent = '📡 正在同步成績至老師的 Google 雲端學習歷程試算表...';
+  
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    syncStatus.innerHTML = '🟢 <strong>成績已成功同步至老師的雲端試算表儀表板！</strong>';
+    syncStatus.style.background = '#dcfce7';
+    syncStatus.style.color = '#15803d';
+    syncStatus.style.borderColor = '#86efac';
+  }).catch(() => {
+    syncStatus.innerHTML = '⚠️ 雲端連線稍有延遲，本地成績已完成結算。';
+  });
+}
+
+function initStudentNameModal() {
+  const savedName = localStorage.getItem('student_global_name') || '';
+  if (savedName) {
+    document.getElementById('studentName').value = savedName;
+    document.getElementById('studentNameModal').style.display = 'none';
+  } else {
+    document.getElementById('studentNameModal').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('modalStudentInput').focus();
+    }, 300);
+  }
+}
+
+function confirmStudentNameModal() {
+  const name = (document.getElementById('modalStudentInput').value || '').trim();
+  const err = document.getElementById('modalNameError');
+  if (!name) {
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  localStorage.setItem('student_global_name', name);
+  document.getElementById('studentName').value = name;
+  document.getElementById('studentNameModal').style.display = 'none';
+}
+
+function promptStudentNameModal() {
+  const current = document.getElementById('studentName').value || '';
+  document.getElementById('modalStudentInput').value = current;
+  document.getElementById('studentNameModal').style.display = 'flex';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  reshuffleAndRender();
+  initStudentNameModal();
+});
+</script>
+</body>
+</html>

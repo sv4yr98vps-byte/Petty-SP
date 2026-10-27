@@ -17,6 +17,7 @@
       --toolbar-bg: rgba(255, 255, 255, 0.94);
       --font-size: 16pt;
     }
+    
     [data-theme="dark"] {
       --bg-color: #0f172a;
       --card-bg: #1e293b;
@@ -27,6 +28,7 @@
       --border-color: #334155;
       --toolbar-bg: rgba(30, 41, 59, 0.94);
     }
+    
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
@@ -37,6 +39,7 @@
       line-height: 1.6;
       transition: background-color 0.2s, color 0.2s;
     }
+    
     .toolbar {
       position: sticky;
       top: 0;
@@ -52,12 +55,14 @@
       z-index: 1000;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
+    
     .toolbar-group {
       display: flex;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
+    
     .btn {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -73,213 +78,461 @@
       align-items: center;
       gap: 6px;
     }
-    .btn:hover { background-color: var(--border-color); transform: translateY(-1px); }
-    .btn-primary { background-color: var(--primary); color: white; border: none; font-weight: 700; }
-    .btn-primary:hover { background-color: var(--primary-hover); color: white; }
-    select { background-color: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 5px 10px; border-radius: 8px; font-family: inherit; font-size: 0.9rem; }
-    .container { max-width: 860px; margin: 24px auto; padding: 0 16px; }
-    .exam-header { text-align: center; margin-bottom: 24px; }
-    .exam-header h1 { font-size: 1.85rem; margin: 0 0 8px; color: var(--primary); }
-    .exam-header p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
-    .student-bar { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 18px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-    .student-badge { background: rgba(37,99,235,0.08); color: var(--primary); font-weight: bold; padding: 5px 12px; border-radius: 20px; font-size: 0.95rem; cursor: pointer; border: 1px dashed var(--primary); }
-    .section-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 22px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-    .question-card { border-bottom: 1px dashed var(--border-color); padding: 16px 0; transition: background-color 0.2s; }
-    .question-card:last-child { border-bottom: none; }
-    .question-title { display: flex; align-items: flex-start; gap: 8px; font-weight: 700; margin-bottom: 12px; line-height: 1.5; font-size: 1.12rem; }
-    .speaker-btn { background: rgba(37,99,235,0.08); border: none; color: var(--primary); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; font-size: 1.1rem; }
-    .speaker-btn:hover { background: var(--primary); color: white; }
-    .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-bottom: 10px; }
-    .opt-btn { background: var(--card-bg); border: 1.5px solid var(--border-color); border-radius: 10px; padding: 10px 14px; text-align: left; font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
-    .opt-btn:hover { border-color: var(--primary); background: rgba(37,99,235,0.04); }
-    .opt-btn.correct { background: #dcfce7 !important; border-color: #10b981 !important; color: #15803d !important; font-weight: bold; }
-    .opt-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
-    .feedback-box { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; display: none; }
-    .submit-area { text-align: center; margin-top: 30px; }
-    .btn-submit { font-size: 1.25rem; padding: 14px 40px; border-radius: 14px; box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); }
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(6px); z-index: 2000; justify-content: center; align-items: center; overflow-y: auto; padding: 20px; box-sizing: border-box; }
-    .modal-overlay.active { display: flex; }
-    .report-card { background: var(--card-bg); border-radius: 20px; max-width: 780px; width: 100%; padding: 30px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 1px solid var(--border-color); max-height: 90vh; overflow-y: auto; }
-    .score-circle { text-align: center; margin: 15px 0 25px; }
-    .score-number { font-family: 'Outfit', sans-serif; font-size: 4.2rem; font-weight: 800; line-height: 1; margin-bottom: 6px; }
-    .sync-banner { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; padding: 10px 16px; border-radius: 10px; margin-bottom: 20px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+    
+    .btn:hover {
+      background-color: var(--border-color);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      color: white;
+    }
+    
+    select {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    
+    .container {
+      max-width: 920px;
+      margin: 25px auto 60px;
+      padding: 0 20px;
+    }
+    
+    .paper-header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+    
+    .paper-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.85rem;
+      color: var(--text-main);
+    }
+    
+    .student-badge-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: var(--card-bg);
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    
+    .student-name-tag {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px dashed var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .section-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+    }
+    
+    .question-card {
+      margin-bottom: 22px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      transition: background-color 0.2s, border-color 0.2s;
+      border: 1.5px solid var(--border-color);
+      background: var(--card-bg);
+    }
+
+    .question-card.answered {
+      border-color: #93c5fd;
+      background: rgba(59, 130, 246, 0.02);
+    }
+    
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.6;
+    }
+    
+    .speaker-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 20px;
+      line-height: 1;
+      transition: transform 0.1s, background 0.15s;
+      flex-shrink: 0;
+    }
+    
+    .speaker-btn:hover {
+      background: #e2e8f0;
+      transform: scale(1.08);
+    }
+    
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .opt-btn {
+      background-color: var(--card-bg);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background-color: rgba(37, 99, 235, 0.04);
+      transform: translateY(-1px);
+    }
+    
+    .opt-btn.correct {
+      background-color: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: bold;
+    }
+    
+    .opt-btn.wrong {
+      background-color: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+    
+    .feedback-box {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: none;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      animation: fadeIn 0.2s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .submit-bar {
+      position: sticky;
+      bottom: 20px;
+      background: var(--toolbar-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      margin-top: 40px;
+    }
+    
+    /* 彈窗樣式 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 580px;
+      padding: 30px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    @keyframes modalPop {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .score-number {
+      font-size: 3.6rem;
+      font-weight: 800;
+      font-family: 'Fredoka', 'Outfit', sans-serif;
+      text-align: center;
+      line-height: 1.1;
+      margin: 10px 0;
+    }
+    
+    .score-high { color: #16a34a; }
+    .score-mid { color: #d97706; }
+    .score-low { color: #dc2626; }
+    
+    .history-pill {
+      display: inline-block;
+      padding: 3px 8px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin: 2px 4px;
+    }
   </style>
 </head>
 <body>
 
-<!-- 學生姓名強制彈跳視窗 (Entry Modal) -->
-<div id="studentNameModal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.8); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
-  <div style="background:#ffffff; border-radius:24px; padding:36px 30px; width:90%; max-width:450px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.4); text-align:center; border:2px solid #38bdf8;">
-    <div style="font-size:3.2rem; margin-bottom:12px;">👋 📝</div>
-    <h2 style="font-size:1.5rem; color:#0f172a; margin-bottom:8px; font-weight:800;">歡迎進入英語互動學習！</h2>
-    <p style="color:#64748b; font-size:0.95rem; margin-bottom:22px; line-height:1.5;">請先輸入您的<b>「學生姓名」</b>以記錄學習歷程與成績：</p>
-    
-    <input type="text" id="modalStudentInput" placeholder="請在此輸入姓名 (例如: 王小明)" style="width:100%; padding:14px 16px; border:2px solid #cbd5e1; border-radius:12px; font-size:1.15rem; text-align:center; font-weight:700; outline:none; transition:border-color 0.2s; box-sizing:border-box;" onfocus="this.style.borderColor='#0284c7'" onblur="this.style.borderColor='#cbd5e1'" onkeydown="if(event.key==='Enter') confirmStudentNameModal()">
-    
-    <div id="modalNameError" style="color:#ef4444; font-size:0.9rem; font-weight:700; margin-top:10px; display:none;">⚠️ 請輸入姓名才能開始作答喔！</div>
-    
-    <button type="button" onclick="confirmStudentNameModal()" style="width:100%; margin-top:20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; padding:15px; border-radius:12px; font-size:1.2rem; font-weight:800; cursor:pointer; box-shadow:0 4px 14px rgba(2,132,199,0.35); transition:transform 0.1s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-      🚀 確定並開始學習
-    </button>
-  </div>
-</div>
-
+  <!-- 頂部工具列 -->
   <div class="toolbar">
     <div class="toolbar-group">
-      <button class="btn" onclick="toggleTheme()">🌓 切換深色</button>
-      <button class="btn btn-primary" onclick="initStudentName(); reshuffleAndRender();">🎲 重新抽 10 題</button>
+      <span style="font-weight: 800; font-family: 'Fredoka', sans-serif; color: var(--primary);">🍽️ L3 祈使句 10題抽測</span>
+      <select id="font-size-select" onchange="changeFontSize(this.value)" title="調整字體大小">
+        <option value="14pt">標準字體 (14pt)</option>
+        <option value="16pt" selected>大字體 (16pt)</option>
+        <option value="18pt">特大字體 (18pt)</option>
+        <option value="20pt">超大字體 (20pt)</option>
+      </select>
+      <select id="speech-rate" title="語音朗讀速度">
+        <option value="0.5">0.5x 慢速</option>
+        <option value="0.75">0.75x 稍慢</option>
+        <option value="0.85" selected>0.85x 推薦</option>
+        <option value="1.0">1.0x 正常</option>
+        <option value="1.25">1.25x 快速</option>
+      </select>
     </div>
     <div class="toolbar-group">
-      <label>⚡ 語速：</label>
-      <select id="speechSpeed">
-        <option value="0.25" selected>0.25x (極慢音素)</option>
-        <option value="0.5">0.5x (慢速解碼)</option>
-        <option value="0.75">0.75x (清楚清晰)</option>
-        <option value="1.0">1.0x (標準語速)</option>
-      </select>
+      <button class="btn" onclick="toggleTheme()" title="日夜間模式切換">🌓 模式切換</button>
+      <button class="btn btn-primary" onclick="reshuffleAndRender()" title="隨機換抽另外 10 題">🔄 換一批題目</button>
+      <a href="index.html" class="btn" style="text-decoration:none;">🏠 回單元首頁</a>
     </div>
   </div>
 
   <div class="container">
-    <div class="exam-header">
-      <h1>🍽️ 七上 Lesson 3 餐具飲食與祈使句</h1>
-      <p>🎯 10 題隨機線上抽測 · 點選立即判定與試錯扣分反饋</p>
+    <div class="paper-header">
+      <h1>國中英語【國一 · 七年級】L3 餐具飲食與祈使句</h1>
+      <p style="margin: 4px 0 0; color: var(--text-muted);">
+        🎲 40 題大題庫動態抽題 · 即時試錯鑑別計分 · 點擊語音朗讀 · Google 雲端自動同步
+      </p>
     </div>
 
-    <div class="student-bar">
+    <!-- 學生身分與狀態列 -->
+    <div class="student-badge-bar">
       <div>
-        <label style="font-weight:700; color:#0369a1;">👤 學生姓名：</label>
-        <input type="text" id="studentName" onclick="promptStudentNameModal()" style="border:1px solid #bae6fd; border-radius:6px; padding:5px 10px; font-weight:bold; font-family:inherit;" placeholder="請輸入姓名">
+        <span>👤 目前作答學生：</span>
+        <span class="student-name-tag" id="studentDisplay" onclick="promptStudentNameModal()" title="點擊修改姓名">點擊設定姓名座號</span>
       </div>
-      <div style="display:flex; align-items:center; gap:12px; font-size:0.92rem; color:var(--text-muted);">
-        <span id="bankCountLabel">📊 40題大題庫隨機抽選 10 題</span>
-        <span>💯 滿分 100 分</span>
+      <div>
+        <span style="font-size: 0.95rem; color: var(--text-muted);">🎯 每次測驗隨機抽選 10 題 (餐具生詞 4 題 + 祈使與提議句 6 題)</span>
       </div>
     </div>
 
-    <div class="section-card">
-      <h2 style="margin-top:0; border-bottom: 2px solid var(--primary); padding-bottom:8px; font-size:1.35rem;">
-        ✍️ 單元線上隨機測驗 (共 10 題 · 點選立即回饋)
-      </h2>
-      <div id="questions-container"></div>
-      <div class="submit-area">
-        <button class="btn btn-primary btn-submit" onclick="submitExam()">
-          📝 繳交試卷並計算成績
-        </button>
+    <!-- 題目容器 -->
+    <div id="questions-container"></div>
+
+    <!-- 交卷列 -->
+    <div class="submit-bar">
+      <div>
+        <span style="font-size: 0.95rem; color: var(--text-muted);">作答完畢後請點擊交卷：</span>
+      </div>
+      <button class="btn btn-primary" style="padding: 10px 28px; font-size: 1.1rem;" onclick="submitExam()">
+        🚀 完成交卷並結算總分
+      </button>
+    </div>
+  </div>
+
+  <!-- 結算報告彈窗 -->
+  <div id="reportModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2 style="margin:0 0 10px; text-align:center;">🏆 隨機抽測評量成果</h2>
+      <div class="score-number" id="reportScore">-- 分</div>
+      <p id="reportLevelText" style="text-align:center; font-weight:bold; margin-bottom:15px; font-size:1.05rem; color:var(--primary);"></p>
+      
+      <div style="background:var(--bg-color); border:1px solid var(--border-color); border-radius:12px; padding:15px; margin-bottom:15px; font-size:0.95rem;">
+        <div>👤 受測學生：<strong id="reportStudent">--</strong></div>
+        <div>⏱️ 評量時間：<span id="reportTime">--</span></div>
+        <div style="margin-top:6px;">📈 近次測驗歷程：<span id="reportHistory"></span></div>
+      </div>
+
+      <div style="margin-bottom:15px;">
+        <h4 style="margin:0 0 8px;">📋 各題答題診斷：</h4>
+        <div id="diagnosisList" style="max-height:160px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; font-size:0.88rem;"></div>
+      </div>
+
+      <div id="syncStatus" style="font-size:0.9rem; padding:10px; border-radius:8px; margin-bottom:16px; background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; text-align:center; font-weight:bold;">
+        📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...
+      </div>
+
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button class="btn btn-primary" onclick="reshuffleAndRender(); closeReport();">🔄 再抽 10 題重新挑戰</button>
+        <button class="btn" onclick="closeReport()">關閉報告</button>
       </div>
     </div>
   </div>
 
-  <!-- 成果診斷報告彈窗 -->
-  <div class="modal-overlay" id="reportModal">
-    <div class="report-card">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-        <h2 style="margin:0; font-size:1.6rem; color:var(--text-main);">📊 學習成果診斷報告</h2>
-        <button class="btn" onclick="closeReport()">✕ 關閉</button>
+  <!-- 強制姓名輸入彈跳視窗 (Entry Modal) -->
+  <div id="studentNameModal" class="modal-overlay" style="display:none;">
+    <div class="modal-card" style="max-width: 440px; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:8px;">🌱</div>
+      <h2 style="margin:0 0 8px; color:var(--primary);">歡迎進入英語抽測步道</h2>
+      <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:20px;">
+        為確保您的個人平時成績與學習歷程能完整記錄，請先輸入您的「班級、座號與姓名」：
+      </p>
+      <div style="margin-bottom:16px;">
+        <input type="text" id="modalStudentInput" placeholder="例如：701 05 王小明" style="width:100%; box-sizing:border-box; padding:12px 16px; font-size:1.1rem; border:2px solid var(--border-color); border-radius:12px; font-family:inherit; outline:none;" onkeydown="if(event.key==='Enter') confirmStudentNameModal();">
+        <div id="modalNameError" style="color:#ef4444; font-size:0.88rem; margin-top:6px; display:none; font-weight:bold;">⚠️ 請輸入姓名座號才能開始測驗喔！</div>
       </div>
-      <div class="score-circle">
-        <div class="score-number" id="reportScore" style="color:#059669;">--</div>
-        <div style="font-size:1.15rem; font-weight:bold;" id="reportLevelText">評語載入中...</div>
-      </div>
-      <div class="sync-banner" id="syncStatus">
-        📡 正在同步成績至老師的 Google 雲端學習歷程儀表板...
-      </div>
-      <div style="background:rgba(0,0,0,0.03); padding:16px; border-radius:12px; margin-bottom:20px; font-size:0.95rem;">
-        <div>👤 <strong>作答學生：</strong> <span id="reportStudent"></span></div>
-        <div>📅 <strong>完成時間：</strong> <span id="reportTime"></span></div>
-        <div style="margin-top:4px;">🎯 <strong>首次即答對率：</strong> <span id="reportFirstTry"></span></div>
-        <div style="margin-top:4px;">🔄 <strong>累計試錯次數：</strong> <span id="reportErrors"></span></div>
-      </div>
-      <div id="diagnosisSection" style="margin-top:15px;">
-        <h3 style="font-size:1.1rem; border-bottom:1.5px solid var(--border-color); padding-bottom:6px; margin-bottom:10px;">
-          📋 逐題作答診斷明細
-        </h3>
-        <div id="diagnosisList" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:0.88rem;"></div>
-      </div>
-      <div style="margin-top:25px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="reshuffleAndRender(); closeReport();" style="padding:10px 24px; font-size:1.05rem;">
-          🎲 換一批新題目重新挑戰
-        </button>
-        <button class="btn" onclick="closeReport()" style="padding:10px 24px; font-size:1.05rem;">
-          👀 查看目前作答考卷
-        </button>
-      </div>
+      <button class="btn btn-primary" style="width:100%; padding:12px; font-size:1.1rem; justify-content:center;" onclick="confirmStudentNameModal()">
+        🚀 確定並開始學習
+      </button>
     </div>
   </div>
 
   <script>
     const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbz9DwqtUX3HliNfYeWu5eb1nnNfE_MfLGw6Jp5NqgQDOia34ld789O6VonfTjkh_rqE/exec';
 
+    // 40 題大題庫（選項在原始題庫中已全面交錯打散，非全為第一個；作答時亦由 Fisher-Yates 動態隨機重組選項）
     const QUESTION_BANK = [
       // 1~10: 餐具與飲食核心單字
-      {"id":1, "type":"vocab", "question":"喝湯使用的「湯匙」英文是哪一個單字？", "options":["spoon", "sport", "space", "spring"], "answerText":"spoon", "explanation":"spoon 代表湯匙；sport 代表運動。"},
+      {"id":1, "type":"vocab", "question":"喝湯使用的「湯匙」英文是哪一個單字？", "options":["sport", "space", "spoon", "spring"], "answerText":"spoon", "explanation":"spoon 代表湯匙；sport 代表運動。"},
       {"id":2, "type":"vocab", "question":"吃牛排時使用的「叉子」英文是哪一個單字？", "options":["fork", "food", "foot", "folk"], "answerText":"fork", "explanation":"fork 代表叉子；food 是食物。"},
-      {"id":3, "type":"vocab", "question":"盛裝食物的「盤子」英文是哪一個單字？", "options":["plate", "plane", "plant", "place"], "answerText":"plate", "explanation":"plate 代表盤子；plane 是飛機。"},
-      {"id":4, "type":"vocab", "question":"盛裝牛肉麵的大「碗」英文是哪一個單字？", "options":["bowl", "blow", "boil", "ball"], "answerText":"bowl", "explanation":"bowl 代表碗；ball 是球。"},
-      {"id":5, "type":"vocab", "question":"吃中式餐點常用的雙筷「筷子」英文是？", "options":["chopsticks", "champions", "chocolates", "chickpeas"], "answerText":"chopsticks", "explanation":"chopsticks 代表筷子，常用複數形。"},
+      {"id":3, "type":"vocab", "question":"盛裝食物的「盤子」英文是哪一個單字？", "options":["plane", "plant", "place", "plate"], "answerText":"plate", "explanation":"plate 代表盤子；plane 是飛機。"},
+      {"id":4, "type":"vocab", "question":"盛裝牛肉麵的大「碗」英文是哪一個單字？", "options":["blow", "bowl", "boil", "ball"], "answerText":"bowl", "explanation":"bowl 代表碗；ball 是球。"},
+      {"id":5, "type":"vocab", "question":"吃中式餐點常用的雙筷「筷子」英文是？", "options":["champions", "chocolates", "chopsticks", "chickpeas"], "answerText":"chopsticks", "explanation":"chopsticks 代表筷子，常用複數形。"},
       {"id":6, "type":"vocab", "question":"餐桌上美味可口的「菜餚、料理」英文是？", "options":["dish", "fish", "wish", "dash"], "answerText":"dish", "explanation":"dish 代表菜餚或盤子。"},
-      {"id":7, "type":"vocab", "question":"形容食物「美味的、好吃的」英文是？", "options":["delicious", "dangerous", "December", "dinosaur"], "answerText":"delicious", "explanation":"delicious 代表美味好吃的。"},
-      {"id":8, "type":"vocab", "question":"用來喝果汁牛奶的「玻璃杯」英文是？", "options":["glass", "grass", "gloss", "class"], "answerText":"glass", "explanation":"glass 代表玻璃杯。"},
-      {"id":9, "type":"vocab", "question":"切蛋糕時使用的「刀子」英文是？", "options":["knife", "knight", "kitchen", "kite"], "answerText":"knife", "explanation":"knife 代表刀子，複數形為 knives。"},
-      {"id":10, "type":"vocab", "question":"派對時請大家「攜帶、帶來」食物的動詞是？", "options":["bring", "break", "brown", "bread"], "answerText":"bring", "explanation":"bring 代表帶來、拿來。"},
+      {"id":7, "type":"vocab", "question":"形容食物「美味的、好吃的」英文是？", "options":["dangerous", "delicious", "December", "dinosaur"], "answerText":"delicious", "explanation":"delicious 代表美味好吃的。"},
+      {"id":8, "type":"vocab", "question":"用來喝果汁牛奶的「玻璃杯」英文是？", "options":["grass", "gloss", "class", "glass"], "answerText":"glass", "explanation":"glass 代表玻璃杯。"},
+      {"id":9, "type":"vocab", "question":"切蛋糕時使用的「刀子」英文是？", "options":["knight", "knife", "kitchen", "kite"], "answerText":"knife", "explanation":"knife 代表刀子，複數形為 knives。"},
+      {"id":10, "type":"vocab", "question":"派對時請大家「攜帶、帶來」食物的動詞是？", "options":["break", "brown", "bring", "bread"], "answerText":"bring", "explanation":"bring 代表帶來、拿來。"},
 
       // 11~20: be 動詞祈使句
-      {"id":11, "type":"grammar", "question":"老師請大家在圖書館保持安靜：________ quiet in the library, please.", "options":["Be", "Is", "Are", "Being"], "answerText":"Be", "explanation":"quiet 是形容詞，祈使句開頭必須使用原形動詞 Be！"},
-      {"id":12, "type":"grammar", "question":"明天早上有考試，千萬「不要遲到」！：Don't ________ late tomorrow morning!", "options":["be", "is", "are", "do"], "answerText":"be", "explanation":"late 是形容詞，否定祈使句要用 Don't be + 形容詞。"},
+      {"id":11, "type":"grammar", "question":"老師請大家在圖書館保持安靜：________ quiet in the library, please.", "options":["Is", "Be", "Are", "Being"], "answerText":"Be", "explanation":"quiet 是形容詞，祈使句開頭必須使用原形動詞 Be！"},
+      {"id":12, "type":"grammar", "question":"明天早上有考試，千萬「不要遲到」！：Don't ________ late tomorrow morning!", "options":["is", "are", "be", "do"], "answerText":"be", "explanation":"late 是形容詞，否定祈使句要用 Don't be + 形容詞。"},
       {"id":13, "type":"grammar", "question":"媽媽提醒哥哥：「請對你的妹妹好一點、友善一點。」：Please ________ nice to your sister.", "options":["be", "is", "are", "do"], "answerText":"be", "explanation":"nice 為形容詞，祈使句需搭配原形動詞 be。"},
-      {"id":14, "type":"grammar", "question":"好友安慰小明：「不要難過、不要傷心。」：Please don't ________ sad.", "options":["be", "is", "are", "do"], "answerText":"be", "explanation":"sad 是形容詞，否定祈使句結構為 Please don't be + 形容詞。"},
-      {"id":15, "type":"grammar", "question":"過馬路時要小心！：________ careful when you cross the street.", "options":["Be", "Do", "Is", "Are"], "answerText":"Be", "explanation":"careful 是形容詞，祈使句開頭必須使用原形動詞 Be。"},
-      {"id":16, "type":"grammar", "question":"上課時間請不要吵鬧！：Please don't ________ noisy in class.", "options":["be", "is", "do", "are"], "answerText":"be", "explanation":"noisy 為形容詞，前面要加上原形動詞 be。"},
-      {"id":17, "type":"grammar", "question":"請準時到校！：Please ________ on time for school.", "options":["be", "is", "are", "do"], "answerText":"be", "explanation":"on time 是形容詞片語，前面使用原形動詞 be。"},
+      {"id":14, "type":"grammar", "question":"好友安慰小明：「不要難過、不要傷心。」：Please don't ________ sad.", "options":["is", "are", "do", "be"], "answerText":"be", "explanation":"sad 是形容詞，否定祈使句結構為 Please don't be + 形容詞。"},
+      {"id":15, "type":"grammar", "question":"過馬路時要小心！：________ careful when you cross the street.", "options":["Do", "Be", "Is", "Are"], "answerText":"Be", "explanation":"careful 是形容詞，祈使句開頭必須使用原形動詞 Be。"},
+      {"id":16, "type":"grammar", "question":"上課時間請不要吵鬧！：Please don't ________ noisy in class.", "options":["is", "be", "do", "are"], "answerText":"be", "explanation":"noisy 為形容詞，前面要加上原形動詞 be。"},
+      {"id":17, "type":"grammar", "question":"請準時到校！：Please ________ on time for school.", "options":["is", "are", "be", "do"], "answerText":"be", "explanation":"on time 是形容詞片語，前面使用原形動詞 be。"},
       {"id":18, "type":"grammar", "question":"不要害怕，試試看吧！：Don't ________ afraid. Just give it a shot!", "options":["be", "is", "do", "are"], "answerText":"be", "explanation":"afraid 為形容詞，否定祈使句為 Don't be afraid。"},
-      {"id":19, "type":"grammar", "question":"做個乖孩子！：________ a good boy, Tom.", "options":["Be", "Is", "Are", "Do"], "answerText":"Be", "explanation":"祈使句用原形動詞 Be 開頭。"},
-      {"id":20, "type":"grammar", "question":"每天保持快樂的心情！：________ happy every day!", "options":["Be", "Is", "Are", "Being"], "answerText":"Be", "explanation":"happy 是形容詞，祈使句用 Be 開頭。"},
+      {"id":19, "type":"grammar", "question":"做個乖孩子！：________ a good boy, Tom.", "options":["Is", "Are", "Do", "Be"], "answerText":"Be", "explanation":"祈使句用原形動詞 Be 開頭。"},
+      {"id":20, "type":"grammar", "question":"每天保持快樂的心情！：________ happy every day!", "options":["Is", "Be", "Are", "Being"], "answerText":"Be", "explanation":"happy 是形容詞，祈使句用 Be 開頭。"},
 
       // 21~30: Let's / Let's not 提議句型
-      {"id":21, "type":"grammar", "question":"肚子餓了，提議大家：「我們一起吃牛肉麵吧！」：________ eat beef noodles.", "options":["Let's", "Let", "Lets", "Let's not"], "answerText":"Let's", "explanation":"提議對方一起做某事使用「Let's + 原形動詞」。"},
-      {"id":22, "type":"grammar", "question":"在圖書館裡，提議大家「不要說話」：________ talk in the library.", "options":["Let's not", "Let's don't", "Don't let's", "Not let's"], "answerText":"Let's not", "explanation":"Let's 的否定提議結構為「Let's not + 原形動詞」，不可用 don't。"},
-      {"id":23, "type":"grammar", "question":"面對比賽輸球，隊長提議大家「不要生氣」：Let's not ________ angry.", "options":["be", "is", "are", "do"], "answerText":"be", "explanation":"angry 是形容詞，Let's not 後面同樣要搭配原形動詞 be。"},
+      {"id":21, "type":"grammar", "question":"肚子餓了，提議大家：「我們一起吃牛肉麵吧！」：________ eat beef noodles.", "options":["Let", "Lets", "Let's", "Let's not"], "answerText":"Let's", "explanation":"提議對方一起做某事使用「Let's + 原形動詞」。"},
+      {"id":22, "type":"grammar", "question":"在圖書館裡，提議大家「不要說話」：________ talk in the library.", "options":["Let's don't", "Let's not", "Don't let's", "Not let's"], "answerText":"Let's not", "explanation":"Let's 的否定提議結構為「Let's not + 原形動詞」，不可用 don't。"},
+      {"id":23, "type":"grammar", "question":"面對比賽輸球，隊長提議大家「不要生氣」：Let's not ________ angry.", "options":["is", "are", "do", "be"], "answerText":"be", "explanation":"angry 是形容詞，Let's not 後面同樣要搭配原形動詞 be。"},
       {"id":24, "type":"grammar", "question":"週末到了，提議一起去動物園：________ go to the zoo this Sunday.", "options":["Let's", "Let", "Don't", "Let not"], "answerText":"Let's", "explanation":"肯定提議用 Let's + 原形動詞 go。"},
-      {"id":25, "type":"grammar", "question":"看電影時，提議大家「不要遲到」：Let's not ________ late for the movie.", "options":["be", "is", "are", "do"], "answerText":"be", "explanation":"late 是形容詞，Let's not 後接原形動詞 be late。"},
-      {"id":26, "type":"grammar", "question":"這碗牛肉麵很美味，讓我們用筷子吃吧：Let's ________ chopsticks to eat it.", "options":["use", "uses", "using", "to use"], "answerText":"use", "explanation":"Let's 後面一律接「原形動詞」use。"},
+      {"id":25, "type":"grammar", "question":"看電影時，提議大家「不要遲到」：Let's not ________ late for the movie.", "options":["is", "be", "are", "do"], "answerText":"be", "explanation":"late 是形容詞，Let's not 後接原形動詞 be late。"},
+      {"id":26, "type":"grammar", "question":"這碗牛肉麵很美味，讓我們用筷子吃吧：Let's ________ chopsticks to eat it.", "options":["uses", "using", "use", "to use"], "answerText":"use", "explanation":"Let's 後面一律接「原形動詞」use。"},
       {"id":27, "type":"grammar", "question":"我們一起邀請全班參加派對吧：Let's ________ everyone to our party.", "options":["invite", "invites", "inviting", "to invite"], "answerText":"invite", "explanation":"Let's 後面搭配原形動詞 invite。"},
-      {"id":28, "type":"grammar", "question":"讓我們今天一起好好玩個痛快！：Let's ________ fun today!", "options":["have", "has", "having", "to have"], "answerText":"have", "explanation":"have fun 代表玩得開心，Let's 後接原形動詞 have。"},
-      {"id":29, "type":"grammar", "question":"上課時間，我們「不要打瞌睡」：________ sleep in class.", "options":["Let's not", "Let's don't", "Don't let's", "Not let"], "answerText":"Let's not", "explanation":"否定提議標準句型為 Let's not + 原形動詞。"},
-      {"id":30, "type":"grammar", "question":"我們不要喝太多冰水：Let's not ________ too much cold water.", "options":["drink", "drinks", "drinking", "drank"], "answerText":"drink", "explanation":"Let's not 後面接原形動詞 drink。"},
+      {"id":28, "type":"grammar", "question":"讓我們今天一起好好玩個痛快！：Let's ________ fun today!", "options":["has", "having", "to have", "have"], "answerText":"have", "explanation":"have fun 代表玩得開心，Let's 後接原形動詞 have。"},
+      {"id":29, "type":"grammar", "question":"上課時間，我們「不要打瞌睡」：________ sleep in class.", "options":["Let's don't", "Don't let's", "Let's not", "Not let"], "answerText":"Let's not", "explanation":"否定提議標準句型為 Let's not + 原形動詞。"},
+      {"id":30, "type":"grammar", "question":"我們不要喝太多冰水：Let's not ________ too much cold water.", "options":["drinks", "drink", "drinking", "drank"], "answerText":"drink", "explanation":"Let's not 後面接原形動詞 drink。"},
 
       // 31~40: Please 逗號規則、稱呼語與派對交際用語
-      {"id":31, "type":"grammar", "question":"「請把書合上。」若 please 置於「句尾」，正確書寫為？", "options":["Close your book, please.", "Close your book please.", "Please, close your book.", "Close, your book please."], "answerText":"Close your book, please.", "explanation":"please 置於句尾時，前方必須加「逗號」隔開。"},
-      {"id":32, "type":"grammar", "question":"稱呼 Jason 請他開門（稱呼語在句首）：________ please open the door.", "options":["Jason,", "Jason", "Jason.", "Jason;"], "answerText":"Jason,", "explanation":"稱呼語放在句首時，後面必須加上逗號隔開。"},
-      {"id":33, "type":"grammar", "question":"在公車上請勿飲食（否定祈使句）：Please ________ drink on the bus.", "options":["don't", "not", "no", "doesn't"], "answerText":"don't", "explanation":"祈使句的否定一律使用 don't，主詞無論如何都不可用 doesn't。"},
+      {"id":31, "type":"grammar", "question":"「請把書合上。」若 please 置於「句尾」，正確書寫為？", "options":["Close your book please.", "Close your book, please.", "Please, close your book.", "Close, your book please."], "answerText":"Close your book, please.", "explanation":"please 置於句尾時，前方必須加「逗號」隔開。"},
+      {"id":32, "type":"grammar", "question":"稱呼 Jason 請他開門（稱呼語在句首）：________ please open the door.", "options":["Jason", "Jason.", "Jason,", "Jason;"], "answerText":"Jason,", "explanation":"稱呼語放在句首時，後面必須加上逗號隔開。"},
+      {"id":33, "type":"grammar", "question":"在公車上請勿飲食（否定祈使句）：Please ________ drink on the bus.", "options":["not", "no", "doesn't", "don't"], "answerText":"don't", "explanation":"祈使句的否定一律使用 don't，主詞無論如何都不可用 doesn't。"},
       {"id":34, "type":"grammar", "question":"朋友婚禮或得獎時，最合適的祝賀語是？", "options":["Congratulations!", "Happy birthday!", "Merry Christmas!", "Happy Halloween!"], "answerText":"Congratulations!", "explanation":"Congratulations! 代表「恭喜！」用在各類喜訊或成就祝賀。"},
-      {"id":35, "type":"grammar", "question":"聖誕節慶祝派對上，大家會互相祝福：", "options":["Merry Christmas!", "Congratulations!", "Happy birthday!", "Happy Halloween!"], "answerText":"Merry Christmas!", "explanation":"Merry Christmas! 代表聖誕快樂。"},
-      {"id":36, "type":"grammar", "question":"萬聖節變裝派對時，彼此打招呼用語為：", "options":["Happy Halloween!", "Merry Christmas!", "Happy birthday!", "Happy New Year!"], "answerText":"Happy Halloween!", "explanation":"Happy Halloween! 代表萬聖節快樂。"},
-      {"id":37, "type":"grammar", "question":"餐點剛端上桌，大家準備開動時常說：", "options":["Let's eat!", "Let's sleep!", "Let's not eat!", "Don't eat!"], "answerText":"Let's eat!", "explanation":"Let's eat! 代表「大家開動吧！」"},
+      {"id":35, "type":"grammar", "question":"聖誕節慶祝派對上，大家會互相祝福：", "options":["Congratulations!", "Merry Christmas!", "Happy birthday!", "Happy Halloween!"], "answerText":"Merry Christmas!", "explanation":"Merry Christmas! 代表聖誕快樂。"},
+      {"id":36, "type":"grammar", "question":"萬聖節變裝派對時，彼此打招呼用語為：", "options":["Merry Christmas!", "Happy birthday!", "Happy Halloween!", "Happy New Year!"], "answerText":"Happy Halloween!", "explanation":"Happy Halloween! 代表萬聖節快樂。"},
+      {"id":37, "type":"grammar", "question":"餐點剛端上桌，大家準備開動時常說：", "options":["Let's sleep!", "Let's not eat!", "Don't eat!", "Let's eat!"], "answerText":"Let's eat!", "explanation":"Let's eat! 代表「大家開動吧！」"},
       {"id":38, "type":"grammar", "question":"鼓勵朋友放手一試、嘗試看看的常用成語是？", "options":["Just give it a shot!", "Around the corner.", "Be quiet.", "Don't be sad."], "answerText":"Just give it a shot!", "explanation":"Just give it a shot! 代表「試試看吧！嘗試看看！」"},
-      {"id":39, "type":"grammar", "question":"「Amy，請進來。」（稱呼語在前，please 在後）：Amy, ________", "options":["come in, please.", "come in please.", "please come in,", "please, come in."], "answerText":"come in, please.", "explanation":"Amy, 之後接祈使句 come in，please 在句尾時前面要再加逗號。"},
-      {"id":40, "type":"grammar", "question":"萬聖節「即將到來」，常用片語是：Halloween is just ________.", "options":["around the corner", "on the corner", "in the corner", "at the corner"], "answerText":"around the corner", "explanation":"around the corner 代表即將到來、在轉角處。"}
+      {"id":39, "type":"grammar", "question":"「Amy，請進來。」（稱呼語在前，please 在後）：Amy, ________", "options":["come in please.", "please come in,", "come in, please.", "please, come in."], "answerText":"come in, please.", "explanation":"Amy, 之後接祈使句 come in，please 在句尾時前面要再加逗號。"},
+      {"id":40, "type":"grammar", "question":"萬聖節「即將到來」，常用片語是：Halloween is just ________.", "options":["on the corner", "around the corner", "in the corner", "at the corner"], "answerText":"around the corner", "explanation":"around the corner 代表即將到來、在轉角處。"}
     ];
 
     let currentQuestions = [];
     let attemptsPerQ = {};
     let answeredLocked = {};
     let totalErrors = 0;
+    let studentName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
 
-    function shuffle(arr) {
-      const a = [...arr];
-      for (let i = a.length - 1; i > 0; i--) {
+    if (studentName) {
+      const el = document.getElementById('studentDisplay');
+      if (el) el.textContent = studentName;
+    }
+
+    // 嚴格 Fisher-Yates 洗牌演算法
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-      return a;
+      return arr;
     }
 
     function reshuffleAndRender() {
-      const vQs = QUESTION_BANK.filter(q => q.type === 'vocab');
-      const gQs = QUESTION_BANK.filter(q => q.type === 'grammar');
-      const pickedV = shuffle(vQs).slice(0, 4);
-      const pickedG = shuffle(gQs).slice(0, 6);
-      let picked = shuffle([...pickedV, ...pickedG]);
+      const vocabList = QUESTION_BANK.filter(q => q.type === 'vocab');
+      const grammarList = QUESTION_BANK.filter(q => q.type === 'grammar');
+
+      let picked = [];
+      if (vocabList.length >= 4 && grammarList.length >= 6) {
+        picked = [...shuffle(vocabList).slice(0, 4), ...shuffle(grammarList).slice(0, 6)];
+      } else {
+        picked = shuffle(QUESTION_BANK).slice(0, 10);
+      }
+      picked = shuffle(picked);
 
       const letters = ['A', 'B', 'C', 'D'];
       currentQuestions = picked.map((q, idx) => {
@@ -289,7 +542,9 @@
         let correctLetter = 'A';
 
         const formattedOpts = shuffledOpts.map((opt, oIdx) => {
-          if (opt === targetAns) correctLetter = letters[oIdx];
+          if (opt === targetAns) {
+            correctLetter = letters[oIdx];
+          }
           return { letter: letters[oIdx], text: opt };
         });
 
@@ -318,9 +573,6 @@
       container.innerHTML = '';
 
       currentQuestions.forEach(q => {
-        attemptsPerQ[q.idx] = 0;
-        answeredLocked[q.idx] = false;
-
         const card = document.createElement('div');
         card.className = 'question-card';
         card.id = 'card-' + q.idx;
@@ -331,12 +583,16 @@
         const spkBtn = document.createElement('button');
         spkBtn.className = 'speaker-btn';
         spkBtn.innerHTML = '🔊';
-        spkBtn.onclick = () => speakText(q.question);
+        spkBtn.title = '朗讀題目';
+        spkBtn.onclick = () => speakQuestion(q.question);
         titleDiv.appendChild(spkBtn);
 
         const stemSpan = document.createElement('span');
+        stemSpan.className = 'read-sentence';
         stemSpan.textContent = q.idx + '. ' + q.question;
+        stemSpan.onclick = () => speakSentence(q.question);
         titleDiv.appendChild(stemSpan);
+
         card.appendChild(titleDiv);
 
         const optsDiv = document.createElement('div');
@@ -345,117 +601,107 @@
         q.options.forEach(opt => {
           const btn = document.createElement('button');
           btn.className = 'opt-btn';
-          btn.id = `btn-${q.idx}-${opt.letter}`;
-          btn.textContent = `(${opt.letter}) ${opt.text}`;
-          btn.onclick = () => handleChoice(q, opt, btn, card);
+          btn.id = 'btn-' + q.idx + '-' + opt.letter;
+          btn.innerHTML = '<span>(' + opt.letter + ')</span> <span>' + opt.text + '</span>';
+          btn.onclick = () => checkOption(q.idx, opt.letter, q.explanation);
           optsDiv.appendChild(btn);
         });
+
         card.appendChild(optsDiv);
 
         const fb = document.createElement('div');
-        fb.className = 'feedback-box';
         fb.id = 'fb-' + q.idx;
+        fb.className = 'feedback-box';
         card.appendChild(fb);
 
         container.appendChild(card);
       });
     }
 
-    function handleChoice(q, opt, btn, card) {
-      if (answeredLocked[q.idx]) return;
+    function checkOption(qIdx, selectedLetter, exp) {
+      if (answeredLocked[qIdx]) return;
+      if (attemptsPerQ[qIdx] === undefined) attemptsPerQ[qIdx] = 0;
 
-      const fb = document.getElementById('fb-' + q.idx);
-      const isCorrect = (opt.letter === q.correctLetter);
+      const q = currentQuestions.find(item => item.idx === qIdx);
+      const fb = document.getElementById('fb-' + qIdx);
+      const card = document.getElementById('card-' + qIdx);
+      const btn = document.getElementById('btn-' + qIdx + '-' + selectedLetter);
+      if (!fb || !q) return;
 
-      if (isCorrect) {
-        answeredLocked[q.idx] = true;
-        btn.classList.add('correct');
+      fb.style.display = 'block';
 
-        card.querySelectorAll('.opt-btn').forEach(b => {
-          if (!b.classList.contains('correct')) b.style.opacity = '0.5';
-          b.disabled = true;
-        });
+      if (selectedLetter === q.correctLetter) {
+        answeredLocked[qIdx] = true;
+        card.classList.add('answered');
+        if (btn) btn.classList.add('correct');
 
-        fb.style.display = 'block';
+        const errs = attemptsPerQ[qIdx];
+        let badge = '🥇 首次即答對！';
+        if (errs === 1) badge = '⚠️ 試錯 1 次後答對 (得分 70%)';
+        else if (errs === 2) badge = '⚠️ 試錯 2 次後答對 (得分 40%)';
+        else if (errs >= 3) badge = '❌ 試錯多次 (鼓勵分 10%)';
+
         fb.style.background = '#dcfce7';
-        fb.style.color = '#15803d';
         fb.style.border = '1px solid #86efac';
-        fb.innerHTML = `✅ <b>答對了！太棒了！</b><br>📖 <b>名師解析：</b>${q.explanation}`;
+        fb.style.color = '#15803d';
+        fb.innerHTML = '✅ <strong>答對了！</strong> ' + exp + '<div style="font-size:0.85rem; margin-top:4px; font-weight:700; color:#047857;">[' + badge + ']</div>';
+        speakChinese('答對了！' + exp);
 
-        speakChinese('答對了！' + q.explanation);
+        ['A', 'B', 'C', 'D'].forEach(l => {
+          const b = document.getElementById('btn-' + qIdx + '-' + l);
+          if (b && l !== selectedLetter) {
+            b.disabled = true;
+            b.style.opacity = '0.4';
+          }
+        });
       } else {
-        attemptsPerQ[q.idx] = (attemptsPerQ[q.idx] || 0) + 1;
+        attemptsPerQ[qIdx]++;
         totalErrors++;
-        btn.classList.add('wrong');
-        btn.disabled = true;
+        if (btn) {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+        }
 
-        fb.style.display = 'block';
         fb.style.background = '#fee2e2';
-        fb.style.color = '#b91c1c';
         fb.style.border = '1px solid #fca5a5';
-        fb.innerHTML = `❌ <b>再想想看喔！</b> 已經試錯 ${attemptsPerQ[q.idx]} 次。<br>💡 <b>名師引導：</b>${q.explanation}`;
-
-        speakChinese('再想想看喔！' + q.explanation);
+        fb.style.color = '#b91c1c';
+        fb.innerHTML = '❌ <strong>再想想看：</strong> ' + exp + ' <span style="font-size:0.85rem; color:#b91c1c;">(已試錯 ' + attemptsPerQ[qIdx] + ' 次)</span>';
+        speakChinese('再想想看喔。' + exp);
       }
     }
 
-    function speakText(text) {
-      if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      const spd = parseFloat(document.getElementById('speechSpeed').value || '0.25');
-      u.rate = spd;
-      const isEnglish = /^[A-Za-z0-9\s.,?!'"\-_]+$/.test(text);
-      u.lang = isEnglish ? 'en-US' : 'zh-TW';
-      window.speechSynthesis.speak(u);
+    function getSavedStudentName() {
+      return localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
     }
 
-    function speakChinese(text) {
-      if (!('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'zh-TW';
-      u.rate = 1.0;
-      window.speechSynthesis.speak(u);
-    }
-
-    function toggleTheme() {
-      const cur = document.documentElement.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
-    }
-
-    function getStudentName() {
-      const el = document.getElementById('studentName');
-      let val = (el ? el.value.trim() : '') || localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
-      return val;
-    }
-
-    function saveStudentNameVal(val) {
-      if (val) {
-        localStorage.setItem('student_global_name', val);
-        localStorage.setItem('current_student_name', val);
+    function saveStudentName(name) {
+      if (name) {
+        localStorage.setItem('student_global_name', name);
+        localStorage.setItem('current_student_name', name);
       }
     }
 
     function submitExam() {
-      const sName = getStudentName();
-      if (!sName || sName === '未填寫' || sName === '自主學習同學') {
+      studentName = getSavedStudentName();
+      if (!studentName) {
         promptStudentNameModal();
         return;
       }
 
-      let totalScore = 0;
+      let answeredCount = 0;
       let firstTryCorrect = 0;
-      let detailsList = [];
-      const basePts = 100 / currentQuestions.length;
+      let totalScore = 0;
+      const basePts = 100.0 / currentQuestions.length;
+      const detailsList = [];
 
-      currentQuestions.forEach((q, idx) => {
-        const errs = attemptsPerQ[q.idx] || 0;
+      currentQuestions.forEach(q => {
         const isAnswered = answeredLocked[q.idx];
+        const errs = attemptsPerQ[q.idx] || 0;
         let multiplier = 0;
         let badge = '❌ 未作答';
 
         if (isAnswered) {
+          answeredCount++;
           if (errs === 0) {
             multiplier = 1.0;
             firstTryCorrect++;
@@ -472,27 +718,74 @@
           }
         }
         totalScore += basePts * multiplier;
-        detailsList.push(`第 ${idx + 1} 題: ${badge}`);
+        detailsList.push('第 ' + q.idx + ' 題: ' + badge);
       });
 
-      const finalScore = Math.max(10, Math.round(totalScore));
-      const firstTryRate = Math.round((firstTryCorrect / (currentQuestions.length || 1)) * 100);
-
-      document.getElementById('reportScore').innerText = `${finalScore} 分`;
-      document.getElementById('reportLevelText').innerText = finalScore >= 90 ? '⭐⭐⭐ 精熟特優！' : (finalScore >= 70 ? '⭐⭐ 表現良好！' : '⭐ 需再加強！');
-      document.getElementById('reportStudent').innerText = sName;
-      document.getElementById('reportTime').innerText = new Date().toLocaleString('zh-TW');
-      document.getElementById('reportFirstTry').innerText = `${firstTryCorrect} / ${currentQuestions.length} 題 (${firstTryRate}%)`;
-      document.getElementById('reportErrors').innerText = `${totalErrors} 次`;
-
-      const diagList = document.getElementById('diagnosisList');
-      if (diagList) {
-        diagList.innerHTML = detailsList.map(item => `<div style="padding:6px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">${item}</div>`).join('');
+      if (answeredCount < currentQuestions.length) {
+        const proceed = confirm('您還有 ' + (currentQuestions.length - answeredCount) + ' 題尚未作答，確定要交卷結算嗎？');
+        if (!proceed) return;
       }
 
-      document.getElementById('reportModal').classList.add('active');
+      const finalScore = Math.max(10, Math.round(totalScore));
+      const firstTryRate = Math.round((firstTryCorrect / currentQuestions.length) * 100);
+      const nowStr = new Date().toLocaleString('zh-TW');
 
-      speakChinese(`評量完成！最終得分 ${finalScore} 分，首次答對 ${firstTryCorrect} 題。`);
+      const historyKey = 'quiz_history_' + encodeURIComponent(document.title || 'quiz_l3');
+      const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+      history.unshift({ score: finalScore, time: nowStr });
+      localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 10)));
+
+      showReportModal(finalScore, firstTryCorrect, firstTryRate, detailsList, nowStr, history, studentName);
+      syncToGoogleSheet(finalScore, firstTryCorrect, firstTryRate, totalErrors, detailsList.join('; '), studentName);
+    }
+
+    function showReportModal(score, correctCount, firstTryRate, detailsList, nowStr, history, sName) {
+      const scoreEl = document.getElementById('reportScore');
+      scoreEl.textContent = score + ' 分';
+      scoreEl.className = 'score-number ' + (score >= 85 ? 'score-high' : score >= 60 ? 'score-mid' : 'score-low');
+
+      let levelText = '⭐⭐⭐ 精熟特優！完美掌握祈使句核心！';
+      if (score < 60) levelText = '💪 還需加強，建議仔細檢討錯題後再挑戰一次！';
+      else if (score < 85) levelText = '⭐⭐ 表現良好！訂正後即可邁向滿分！';
+      document.getElementById('reportLevelText').textContent = levelText;
+
+      document.getElementById('reportStudent').textContent = sName || getSavedStudentName() || '自主學習同學';
+      document.getElementById('reportTime').textContent = nowStr;
+
+      const historyEl = document.getElementById('reportHistory');
+      historyEl.innerHTML = '';
+      history.slice(0, 5).reverse().forEach((h, i) => {
+        const span = document.createElement('span');
+        span.className = 'history-pill';
+        span.textContent = '第' + (i+1) + '次: ' + h.score + '分';
+        historyEl.appendChild(span);
+      });
+
+      const diagListEl = document.getElementById('diagnosisList');
+      diagListEl.innerHTML = '';
+      detailsList.forEach(item => {
+        const div = document.createElement('div');
+        div.style.cssText = 'padding:6px 10px; background:rgba(0,0,0,0.03); border:1px solid var(--border-color); border-radius:8px;';
+        div.textContent = item;
+        diagListEl.appendChild(div);
+      });
+
+      document.getElementById('reportModal').classList.add('active');
+      speakChinese('評量完成！獲得 ' + score + ' 分，首次答對 ' + correctCount + ' 題。');
+    }
+
+    function closeReport() {
+      document.getElementById('reportModal').classList.remove('active');
+    }
+
+    function syncToGoogleSheet(score, correctCount, firstTryRateVal, wrongVal, detailsStr, sName) {
+      const syncBanner = document.getElementById('syncStatus');
+      if (syncBanner) {
+        syncBanner.style.background = '#eff6ff';
+        syncBanner.style.borderColor = '#bfdbfe';
+        syncBanner.style.color = '#1e40af';
+        syncBanner.textContent = '📡 正在自動同步成績至老師的 Google 雲端學習歷程儀表板...';
+      }
 
       const payload = {
         name: sName,
@@ -502,19 +795,24 @@
         userName: sName,
         user_name: sName,
         studentId: sName,
-        unit: 'L3 餐具飲食與祈使句 10題抽測',
-        topic: 'L3 餐具飲食與祈使句',
-        lesson: '七上 Lesson 3',
-        title: 'L3 餐具飲食與祈使句 10題隨機抽測',
+        unit: '國中英語【國一】L3 餐具飲食與祈使句',
+        topic: '餐具飲食與祈使句提議句',
+        lesson: 'L3 餐具飲食與祈使句',
+        title: document.title || '國中英語差異化隨機抽測',
         level: '10題隨機抽測',
-        score: finalScore,
-        finalScore: finalScore,
-        totalScore: finalScore,
-        firstTryRate: `${firstTryRate}%`,
-        firstTryCorrect: `${firstTryCorrect}`,
-        wrongAttempts: totalErrors,
-        errors: totalErrors,
-        details: detailsList.join('; '),
+        score: score,
+        finalScore: score,
+        totalScore: score,
+        accuracy: firstTryRateVal + '%',
+        firstTryRate: firstTryRateVal + '%',
+        firstTryCorrect: correctCount + '/' + currentQuestions.length,
+        firstTryVal: correctCount,
+        totalQuestions: currentQuestions.length,
+        wrongAttempts: wrongVal,
+        errors: wrongVal,
+        hintsUsed: 0,
+        stars: score >= 90 ? '⭐⭐⭐' : (score >= 70 ? '⭐⭐' : '⭐'),
+        details: detailsStr,
         timestamp: new Date().toISOString(),
         time: new Date().toLocaleString('zh-TW')
       };
@@ -525,28 +823,82 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       }).then(() => {
-        document.getElementById('syncStatus').innerText = '✅ 成績與作答歷程已成功同步至教師 Google 試算表儀表板！';
-        document.getElementById('syncStatus').style.background = '#d1fae5';
-        document.getElementById('syncStatus').style.color = '#065f46';
-      }).catch(() => {
-        document.getElementById('syncStatus').innerText = '⚠️ 成績已記錄（離線暫存模式）。';
+        if (syncBanner) {
+          syncBanner.style.background = '#d1fae5';
+          syncBanner.style.borderColor = '#86efac';
+          syncBanner.style.color = '#065f46';
+          syncBanner.textContent = '✅ 成績與作答歷程已成功同步至教師後台！';
+        }
+      }).catch(err => {
+        if (syncBanner) {
+          syncBanner.style.background = '#fef3c7';
+          syncBanner.style.borderColor = '#fde68a';
+          syncBanner.style.color = '#92400e';
+          syncBanner.textContent = '⚠️ 雲端同步完成 (離線暫存模式)';
+        }
       });
     }
 
-    function closeReport() {
-      document.getElementById('reportModal').classList.remove('active');
+    function speakEnglish(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const sp = parseFloat(document.getElementById('speech-rate')?.value || '0.85');
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = sp;
+      const voices = window.speechSynthesis.getVoices();
+      const enVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && v.lang.includes('US')) ||
+                      voices.find(v => v.lang.startsWith('en')) || voices[0];
+      if (enVoice) utter.voice = enVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakChinese(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      utter.rate = 0.85;
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(v => (v.name.includes('Google') || v.name.includes('google')) && (v.lang.includes('zh') || v.lang.includes('TW'))) ||
+                      voices.find(v => v.lang.includes('zh-TW') || v.lang.includes('cmn-Hant-TW') || v.lang.includes('TW')) || voices[0];
+      if (zhVoice) utter.voice = zhVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakQuestion(text) {
+      if (/[\u4e00-\u9fa5]/.test(text)) {
+        speakChinese(text);
+      } else {
+        speakEnglish(text);
+      }
+    }
+
+    function speakSentence(text) {
+      speakQuestion(text);
+    }
+
+    function toggleTheme() {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    function changeFontSize(size) {
+      document.documentElement.style.setProperty('--font-size', size);
     }
 
     function initStudentNameModal() {
       var modal = document.getElementById('studentNameModal');
       var modalInput = document.getElementById('modalStudentInput');
-      var pageInput = document.getElementById('studentName');
+      var pageDisplay = document.getElementById('studentDisplay');
       if (!modal || !modalInput) return;
 
       var savedName = localStorage.getItem('student_global_name') || localStorage.getItem('current_student_name') || '';
       if (savedName) {
         modalInput.value = savedName;
-        if (pageInput) pageInput.value = savedName;
+        if (pageDisplay) pageDisplay.textContent = savedName;
       }
       modal.style.display = 'flex';
       setTimeout(function() { modalInput.focus(); modalInput.select(); }, 200);
@@ -556,7 +908,7 @@
       var modal = document.getElementById('studentNameModal');
       var modalInput = document.getElementById('modalStudentInput');
       var err = document.getElementById('modalNameError');
-      var pageInput = document.getElementById('studentName');
+      var pageDisplay = document.getElementById('studentDisplay');
       
       var val = modalInput ? modalInput.value.trim() : '';
       if (!val) {
@@ -570,7 +922,8 @@
       if (err) err.style.display = 'none';
       localStorage.setItem('student_global_name', val);
       localStorage.setItem('current_student_name', val);
-      if (pageInput) pageInput.value = val;
+      studentName = val;
+      if (pageDisplay) pageDisplay.textContent = val;
       if (modal) modal.style.display = 'none';
     }
 
@@ -579,7 +932,7 @@
       var modalInput = document.getElementById('modalStudentInput');
       var err = document.getElementById('modalNameError');
       if (err) err.style.display = 'none';
-      var cur = getStudentName();
+      var cur = getSavedStudentName();
       if (modalInput) modalInput.value = cur;
       if (modal) {
         modal.style.display = 'flex';
@@ -587,16 +940,13 @@
       }
     }
 
-    function initStudentName() {
-      const cur = getStudentName();
-      const pageInput = document.getElementById('studentName');
-      if (pageInput && cur) pageInput.value = cur;
-    }
-
+    // Auto-init
     reshuffleAndRender();
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.getVoices();
-    }
+
+    window.onload = () => {
+      if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
+    };
+
     window.addEventListener('DOMContentLoaded', initStudentNameModal);
   </script>
 </body>
